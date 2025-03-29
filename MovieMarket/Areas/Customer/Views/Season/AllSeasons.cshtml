@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Season>
+
+@{
+    ViewData["Title"] = "All Seasons";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">📅 All Seasons</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning text-center">
+            ❌ No seasons available for this TV series.
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+
+                            <h5 class="card-title fw-bold">📺 @item.Title</h5>
+                            <h5 class="card-title fw-bold">@item.ReleaseYear</h5>
+                            @* <p class="card-text text-muted"> *@
+                            @*     @if (!string.IsNullOrEmpty(item.Description)) *@
+                            @*     { *@
+                            @*         @item.Description *@
+                            @*     } *@
+                            @*     else *@
+                            @*     { *@
+                            @*         <span>No description available.</span> *@
+                            @*     } *@
+                            @* </p> *@
+
+                            <a asp-area="Customer" asp-controller="Episode" asp-action="AllEpisode" asp-route-Id="@item.Id"
+                               class="btn btn-outline-primary fw-bold shadow-sm w-100">🎬 View Episodes</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

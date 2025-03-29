@@ -1,0 +1,134 @@
+﻿@section Scripts
+{
+<script>
+    $(document).ready(function ()
+    {
+    // Read the data stored in TempData and remove the extra spaces
+    var message = '@TempData["notifiction"]'.trim();
+    var messageType = '@TempData["MessageType"]'.trim();
+
+    // Check if there is an actual message to be displayed
+    if (message && message !== 'null' && message !== 'undefined' && message !== '')
+    {
+    // Determine the message type based on its value in TempData
+    switch (messageType.toLowerCase())
+    {
+         case 'success': // If the message indicates a successful operation
+            toastr.success(message, 'Success');
+                break;
+         case 'error': // If the message indicates an error
+            toastr.error(message, 'Error');
+                 break;
+         case 'warning': // If the message is a warning
+            toaster.warning(message, 'Warning');
+                break;
+         default: // Any other status is displayed as public information
+            toaster.info(message, 'Notice');
+    }
+    }
+    });
+</script>
+}
+
+@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Category";
+}
+
+<div class="container mt-3">
+
+    <h2>Managment Category</h2>
+
+    <!-- Control buttons -->
+
+    <div class="mb-3 d-flex justify-content-between">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Back to Home</a>
+        <a asp-action="Create" class="btn btn-secondary">Add New Category</a>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="row mb-3">
+        <div class="col-12 d-sm-flex justify-content-center">
+            <form class="input-group w-50" method="get" action="@Url.Action("Index", "Category")">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                <input type="text" class="form-control" id="query" name="query" placeholder="Search users..." value="@Context.Request.Query["query"]" />
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+
+                            <!-- Delete Button -->
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-@item.Id">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Delete Confirmation Modal -->
+                <div class="modal fade" id="deleteModal-@item.Id" tabindex="-1" aria-labelledby="deleteModalLabel-@item.Id" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger text-white">
+                                <h5 class="modal-title" id="deleteModalLabel-@item.Id">Confirm Deletion</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete "<strong>@item.Name</strong>"? This action cannot be undone.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i> Yes, Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+        </tbody>
+    </table>
+
+    <div class="row">
+        <nav aria-label="...">
+            <ul class="pagination">
+                @for (int i = 1; i <= ViewBag.totalPages; i++)
+                {
+                    <li class="page-item @(i == ViewBag.currentPage ? "active" : "")">
+                        <a class="page-link" href="/Admin/Category/Index?page=@i">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+
+</div>
+

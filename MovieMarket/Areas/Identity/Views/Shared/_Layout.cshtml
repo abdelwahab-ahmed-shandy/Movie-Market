@@ -1,0 +1,155 @@
+﻿﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="MovieMart Registration Page" />
+    <meta name="author" content="Abdelwahab Shandy" />
+    <title>@ViewData["Title"] - MovieMart</title>
+
+    <link rel="stylesheet" href="~/assets/dashboard/css/styles.css" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background: #212529;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+            nav a:hover {
+                color: #ffc107;
+            }
+
+        footer {
+            background: #212529;
+            color: white;
+        }
+
+        .footer-icons a img {
+            filter: brightness(0) invert(1);
+            transition: transform 0.3s;
+        }
+
+        .footer-icons a:hover img {
+            transform: scale(1.2);
+        }
+    </style>
+
+    <!-- Toastr CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <header class="py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h3 class="text-white m-0">MovieMart</h3>
+            <nav class="d-flex align-items-center">
+                <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="text-white mx-3">Home</a>
+                <a asp-area="Customer" asp-controller="Movie" asp-action="Index" class="text-white mx-3">See Movies</a>
+                <a asp-area="Customer" asp-controller="TvSerie" asp-action="Index" class="text-white mx-3">See TV Series</a>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <!-- Hello User -->
+                    <li class="nav-item d-flex align-items-center">
+                        <a id="manage" class="nav-link d-flex align-items-center px-3 rounded"
+                           style="background-color: #343a40; color: #f8f9fa; font-weight: bold;"
+                           asp-area="Identity" asp-controller="Settings" asp-action="Profile" aria-label="Manage Account">
+                            Hello, @User.Identity.Name
+                        </a>
+                    </li>
+
+                    <!-- User Dropdown -->
+                    <li class="nav-item dropdown d-flex align-items-center ms-3">
+                        <img src="~/Assets/Users/user.png" alt="User Avatar" class="rounded-circle me-2" width="35" height="35">
+
+                        <a class="nav-link dropdown-toggle text-white bg-dark px-2 py-1 rounded border-light"
+                           id="userDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="userDropdown">
+                            <li>
+                                <a class="dropdown-item" asp-area="Identity" asp-controller="Settings" asp-action="Profile">
+                                    <i class="fas fa-user me-2"></i> Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="Identity" asp-controller="Settings" asp-action="Manage">
+                                    <i class="fas fa-cog me-2"></i> Manage
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" asp-area="Identity" asp-controller="Account" asp-action="Logout">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+            </nav>
+        </div>
+    </header>
+
+    <div class="container mt-4">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-4 mt-5 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+            <span class="text-muted">© 2025 MovieMart - Abdelwahab Shandy</span>
+        </div>
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex footer-icons">
+            <li class="ms-3">
+                <a href="https://www.linkedin.com/in/abdelwahab-shandy" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" width="24" height="24">
+                </a>
+            </li>
+
+            <li class="ms-3">
+                <a href="https://github.com/abdelwahab-ahmed-shandy" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub" width="24" height="24">
+                </a>
+            </li>
+        </ul>
+    </footer>
+
+
+    <!-- jQuery (Must be loaded first) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+
+    <!-- Simple DataTables -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+
+    <!-- Toastr JS (Loaded AFTER jQuery) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="~/assets/dashboard/js/scripts.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

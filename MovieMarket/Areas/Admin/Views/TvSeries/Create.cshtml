@@ -1,0 +1,69 @@
+﻿@model TvSeries
+@{
+    ViewData["Title"] = "Create Tv Series";
+}
+
+<div class="container mt-3">
+    <h2>Create New Tv Series</h2>
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+
+
+        <div class="mb-3">
+            <label for="Title" class="form-label">Title</label>
+            <input asp-for="Title" class="form-control" value="@Model.Title" required />
+            <span asp-validation-for="Title" class="text-danger"></span>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="Author" class="form-label">Author</label>
+            <input asp-for="Author" class="form-control" value="@Model.Author" required />
+            <span asp-validation-for="Author" class="text-danger"></span>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="ImgUrl" class="form-label">Tv Series Img</label>
+            <input type="file" class="form-control" id="ImgUrl" name="file" accept=".jpg, .jpeg, .png" value="@Model.ImgUrl">
+
+            <span class="text-danger" asp-validation-for="ImgUrl"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="ReleaseYear" class="form-label">Release Year</label>
+            <input asp-for="ReleaseYear" type="number" class="form-control" value="@Model.ReleaseYear" required />
+            <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="Rating" class="form-label">Rating</label>
+            <input asp-for="Rating" type="number" class="form-control" step="0.1" value="@Model.Rating" />
+            <span asp-validation-for="Rating" class="text-danger"></span>
+
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-plus-circle"></i> Create Movie
+            </button>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,65 @@
+﻿@model Character
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+
+<div class="container mt-5">
+    <div class="row">
+        
+        <div class="col-md-8">
+            <h2 class="fw-bold">🎭 @Model.Name</h2>
+            <p class="text-muted">@Model.Description</p>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h4 class="fw-bold">🎬 Movies & TV Series</h4>
+
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+
+            @foreach (var movie in Model.CharacterMovies.Select(cm => cm.Movie))
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">@movie.Title</h5>
+                            <h5 class="card-title fw-bold">@movie.Author</h5>
+                            <h5 class="card-title fw-bold">@movie.Category</h5>
+
+
+                            <a asp-area="Customer" asp-controller="Movie" asp-action="MoreDetils" asp-route-Id="@movie.Id"
+                               class="btn btn-outline-success w-100">📺 View Movie</a>
+
+                            <a asp-area="Customer" asp-controller="Category" asp-action="MoreMovieWithCategory" asp-route-Id="@movie.CategoryId"
+                               class="btn btn-outline-success w-100">📺 View Category</a>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @foreach (var tvSeries in Model.CharacterTvSeries.Select(cts => cts.TvSeries))
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold">Tv-Series </h4>
+                            <h5 class="card-title fw-bold">@tvSeries.Title</h5>
+                            
+                            <p class="card-text">📅 Released: @tvSeries.ReleaseYear</p>
+                            <p class="card-text"> Author: @tvSeries.Author</p>
+
+                            <a asp-area="Customer" asp-controller="Season" asp-action="AllSeasons" asp-route-Id="@tvSeries.Id"
+                               class="btn btn-outline-success w-100">📺 View Series</a>
+
+                            <a asp-area="Customer" asp-controller="Episode" asp-action="AllEpisode" asp-route-Id="@tvSeries.Id"
+                               class="btn btn-outline-success w-100">📺 View Episodes</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Episode>
+
+@{
+    ViewData["Title"] = "Episode Page";
+}
+
+<div class="container mt-5">
+    <h3 class="breadcrumb">
+        🎬 Episodes
+    </h3>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card border-0 shadow-lg rounded-3 h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-row align-items-center">
+                                <div class="ms-2">
+                                    <h6 class="mb-1 text-secondary text-truncate" style="max-width: 200px;">
+                                        @item.Season.Title
+                                    </h6>
+                                    <span class="badge bg-warning text-dark">Season @item.Season.SeasonNumber</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <h5 class="text-dark fw-bold">@item.Title</h5>
+                            <p class="text-muted">
+                                📺 Episode @item.EpisodeNumber | ⏳ @item.Duration mins
+                            </p>
+
+                            @if (!string.IsNullOrEmpty(item.VideoUrl))
+                            {
+                                <a href="@item.VideoUrl"
+                                   class="btn btn-danger w-100 fw-bold shadow-sm mt-3">
+                                    🎥 Watch Episode
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

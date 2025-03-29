@@ -1,0 +1,349 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MovieMarket.bundle.scp.css",
+      "PackagePath": "staticwebassets\\MovieMarket.wn3y22vfmf.bundle.scp.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\94e95d09-ef58-418d-b346-06abc4f55530.png",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\MoviesPhoto\\94e95d09-ef58-418d-b346-06abc4f55530.png"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\akira.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\MoviesPhoto\\akira.jpg"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\spiritedaway.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\MoviesPhoto\\spiritedaway.jpg"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\yourname.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\MoviesPhoto\\yourname.jpg"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\346f377e-ca61-4d2d-b318-dda603dc5cec.png",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\TvSeries\\346f377e-ca61-4d2d-b318-dda603dc5cec.png"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\7b1e3b3e-98d4-489c-833f-522c92e238d9.png",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\TvSeries\\7b1e3b3e-98d4-489c-833f-522c92e238d9.png"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\aot.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\TvSeries\\aot.jpg"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\naruto.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\TvSeries\\naruto.jpg"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\onepiece.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\TvSeries\\onepiece.jpg"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\imag\\favicon.png",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\imag\\favicon.png"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-area-demo.js",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\assets\\demo\\chart-area-demo.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-bar-demo.js",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\assets\\demo\\chart-bar-demo.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-pie-demo.js",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\assets\\demo\\chart-pie-demo.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\datatables-demo.js",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\assets\\demo\\datatables-demo.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-404-monochrome.svg",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\assets\\img\\error-404-monochrome.svg"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-500.png",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\assets\\img\\error-500.png"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\css\\styles.css",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\css\\styles.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\datatables-simple-demo.js",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\js\\datatables-simple-demo.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\scripts.js",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\js\\scripts.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Users\\user.png",
+      "PackagePath": "staticwebassets\\Assets\\Users\\user.png"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.MovieMarket.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.MovieMarket.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.MovieMarket.props",
+      "PackagePath": "build\\MovieMarket.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.MovieMarket.props",
+      "PackagePath": "buildMultiTargeting\\MovieMarket.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.MovieMarket.props",
+      "PackagePath": "buildTransitive\\MovieMarket.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

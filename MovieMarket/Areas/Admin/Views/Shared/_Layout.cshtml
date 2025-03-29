@@ -1,0 +1,183 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Dashboard for managing Movie Mart" />
+    <meta name="author" content="Movie Mart Team" />
+    <title>@ViewData["Title"] - MovieMart</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" />
+
+    <link href="~/assets/dashboard/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- FontAwesome -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+    <!-- Toastr CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand -->
+        <a class="navbar-brand ps-3" asp-area="Customer" asp-controller="Home" asp-action="Index">Movie Mart</a>
+
+        <!-- Sidebar Toggle Button -->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+
+        <!-- Search Bar -->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search..." aria-label="Search" aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <!-- Hello User -->
+            <li class="nav-item d-flex align-items-center">
+                <a id="manage" class="nav-link d-flex align-items-center text-white fw-bold px-3 rounded" style="background-color: #343a40;"
+                asp-area="Identity" asp-controller="Settings" asp-action="Profile" aria-label="Manage Account">
+                    Hello, @User.Identity.Name
+                </a>
+            </li>
+
+            <!-- User Dropdown -->
+            <li class="nav-item dropdown d-flex align-items-center">
+                <img src="~/Assets/Users/user.png" alt="User Avatar" class="rounded-circle me-2" width="35" height="35">
+                <a class="nav-link dropdown-toggle text-white bg-dark px-2 py-1 rounded cursor-pointer border-light" id="userDropdown"
+                href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User Menu">
+
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" asp-area="Identity" asp-controller="Settings" asp-action="Profile"><i class="fas fa-user me-2"></i> Profile</a></li>
+                    <li><a class="dropdown-item" asp-area="Identity" asp-controller="Settings" asp-action="Manage"><i class="fas fa-cog me-2"></i> Manage</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item text-danger" asp-area="Identity" asp-controller="Account" asp-action="Logout">
+                            <i class="fas fa-sign-out-alt me-2"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }
+
+    </nav>
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+
+                        <div class="sb-sidenav-menu-heading">Core</div>
+
+                        <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+
+                        @if (User.IsInRole("SuberAdmin") || User.IsInRole("Admin") )
+                        {
+                            <div class="sb-sidenav-menu-heading">All User</div>
+                            @if (User.IsInRole("SuberAdmin"))
+                            {
+                                <a class="nav-link" asp-area="Admin" asp-controller="SuperAdmins" asp-action="AllSuperAdmins">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-user-crown"></i></div>
+                                    Super Admins
+                                </a>
+
+                                <a class="nav-link" asp-area="Admin" asp-controller="Admins" asp-action="AllAdmins">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-user-shield"></i></div>
+                                    Admins
+                                </a>
+                            }
+
+
+                            <a class="nav-link" asp-area="Admin" asp-controller="Customers" asp-action="AllCustomers">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                Customers
+                            </a>
+                        }
+
+
+
+                        <div class="sb-sidenav-menu-heading">Management</div>
+                        <a class="nav-link" asp-area="Admin" asp-controller="Movie" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-video"></i></div>
+                            Movies
+                        </a>
+                        <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+                            Categories
+                        </a>
+                        <a class="nav-link" asp-area="Admin" asp-controller="Season" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-film"></i></div>
+                            Seasons
+                        </a>
+                        <a class="nav-link" asp-area="Admin" asp-controller="Character" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-video"></i></div>
+                            Characters
+                        </a>
+
+                        <a class="nav-link" asp-area="Admin" asp-controller="TvSeries" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-video"></i></div>
+                            TV Series
+                        </a>
+
+                        <a class="nav-link" asp-area="Admin" asp-controller="Episode" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-video"></i></div>
+                            Episodes
+                        </a>
+
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    Movie Mart Admin
+                </div>
+            </nav>
+        </div>
+
+        <div id="layoutSidenav_content">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">&copy; 2025 Movie Mart</div>
+                        <div>
+
+                            <a asp-controller="Home" asp-action="Abdelwahab">Abdelwahab Shandy</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/assets/dashboard/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/assets/dashboard/assets/demo/chart-area-demo.js"></script>
+    <script src="~/assets/dashboard/assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="~/assets/dashboard/js/datatables-simple-demo.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- jQuery (Toastr) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

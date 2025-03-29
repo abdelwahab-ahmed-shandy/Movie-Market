@@ -1,0 +1,63 @@
+﻿@model Episode
+
+@{
+    ViewData["Title"] = "Edit Episode";
+}
+
+<div class="container mt-3">
+    <h2>Edit Movie</h2>
+    <form asp-action="Edit" >
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label for="Title" class="form-label">Title</label>
+            <input asp-for="Title" class="form-control" required />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        
+
+        <div class="mb-3">
+            <label for="Duration" class="form-label">Duration</label>
+            <input asp-for="Duration" type="time" step="1" class="form-control" value="@(Model.Duration.ToString(@"hh\:mm\:ss"))" required />
+            <span asp-validation-for="Duration" class="text-danger"></span>
+        </div>
+
+        
+
+        <div class="mb-3">
+            <label for="EpisodeNumber" class="form-label">Episode Number </label>
+            <input asp-for="EpisodeNumber" type="number" class="form-control" required />
+            <span asp-validation-for="EpisodeNumber" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="VideoUrl" class="form-label">VideoUrl</label>
+            <input asp-for="VideoUrl" type="url" class="form-control"/>
+            <span asp-validation-for="VideoUrl" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Season Name</label>
+            <select asp-for="SeasonId" class="form-control" asp-items="ViewBag.Seasons" required>
+                <option value="">Select Season</option>
+            </select>
+            <span asp-validation-for="SeasonId" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save Changes
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

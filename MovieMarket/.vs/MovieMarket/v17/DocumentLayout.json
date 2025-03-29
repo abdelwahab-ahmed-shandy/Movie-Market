@@ -1,0 +1,117 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\vidoes\\all-task-in-eraasoft\\task-18\\moviemarket\\areas\\admin\\controllers\\episodecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\admin\\controllers\\episodecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\vidoes\\all-task-in-eraasoft\\task-18\\moviemarket\\areas\\admin\\views\\episode\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\admin\\views\\episode\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\vidoes\\all-task-in-eraasoft\\task-18\\moviemarket\\areas\\admin\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\admin\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\vidoes\\all-task-in-eraasoft\\task-18\\moviemarket\\areas\\admin\\views\\customers\\allcustomers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\admin\\views\\customers\\allcustomers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 1416,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\Areas\\Admin\\Views\\Episode\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Episode\\Index.cshtml",
+              "ToolTip": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\Areas\\Admin\\Views\\Episode\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Episode\\Index.cshtml",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAwD0AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-29T03:04:19.993Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EpisodeController.cs",
+              "DocumentMoniker": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\Areas\\Admin\\Controllers\\EpisodeController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\EpisodeController.cs",
+              "ToolTip": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\Areas\\Admin\\Controllers\\EpisodeController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\EpisodeController.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAiwGkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-29T02:55:06.409Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "ec709fc8-c01c-457e-a590-a4a27ceb4e00",
+        "Display": 1,
+        "X": 1,
+        "Y": 1,
+        "Width": 1364,
+        "Height": 718,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomersController.cs",
+              "DocumentMoniker": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\Areas\\Admin\\Controllers\\CustomersController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\CustomersController.cs",
+              "ToolTip": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\Areas\\Admin\\Controllers\\CustomersController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\CustomersController.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAwCwAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T19:14:31.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AllCustomers.cshtml",
+              "DocumentMoniker": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\Areas\\Admin\\Views\\Customers\\AllCustomers.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Customers\\AllCustomers.cshtml",
+              "ToolTip": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\Areas\\Admin\\Views\\Customers\\AllCustomers.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Customers\\AllCustomers.cshtml",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAxwH4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-25T15:34:40.139Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

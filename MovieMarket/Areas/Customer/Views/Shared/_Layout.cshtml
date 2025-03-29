@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MovieMart</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MovieMart.styles.css" asp-append-version="true" />
+    <!-- Toastr CSS -->
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" asp-area="Customer" asp-controller="Home" asp-action="Index">
+                    <img src="~/Assets/Customer/imag/favicon.png" asp-append-version="true" alt="Logo" class="me-2" width="30" height="30">
+                    MovieMart
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"><a class="nav-link text-dark" asp-controller="Movie" asp-action="Index">Movies</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" asp-controller="Category" asp-action="Index">Categories</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" asp-controller="Character" asp-action="Index">Characters</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" asp-controller="Season" asp-action="Index">Seasons</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" asp-controller="TvSerie" asp-action="Index">Tv Series</a></li>
+
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("SuberAdmin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark fw-semibold d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-cogs me-2"></i> Management
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end shadow-sm rounded border-0">
+
+                                    <a class="dropdown-item d-flex align-items-center" asp-area="Admin" asp-controller="Category" asp-action="Index">
+                                        <i class="fas fa-wrench me-2 text-primary"></i> Category
+                                    </a>
+
+                                    <a class="dropdown-item d-flex align-items-center" asp-area="Admin" asp-controller="Movie" asp-action="Index">
+                                        <i class="fas fa-wrench me-2 text-primary"></i> Movie
+                                    </a>
+
+                                    <a class="dropdown-item d-flex align-items-center" asp-area="Admin" asp-controller="Season" asp-action="Index">
+                                        <i class="fas fa-wrench me-2 text-primary"></i> Season
+                                    </a>
+
+                                    <a class="dropdown-item d-flex align-items-center" asp-area="Admin" asp-controller="Character" asp-action="Index">
+                                        <i class="fas fa-wrench me-2 text-primary"></i> Character
+                                    </a>
+
+                                    <a class="dropdown-item d-flex align-items-center" asp-area="Admin" asp-controller="TvSeries" asp-action="Index">
+                                        <i class="fas fa-wrench me-2 text-primary"></i> TvSeries
+                                    </a>
+
+                                    <a class="dropdown-item d-flex align-items-center" asp-area="Admin" asp-controller="Episode" asp-action="Index">
+                                        <i class="fas fa-wrench me-2 text-primary"></i> Episode
+                                    </a>
+
+
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item d-flex align-items-center" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                                        <i class="fas fa-link me-2 text-danger"></i> Dashboard
+                                    </a>
+                                </div>
+                            </li>
+                        }
+
+
+                        @if (User.IsInRole("SuberAdmin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark fw-semibold d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-cogs me-2"></i> All Users
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end shadow-sm rounded border-0">
+
+                                    <a class="dropdown-item d-flex align-items-center" asp-area="Admin" asp-controller="Customers" asp-action="AllCustomers">
+                                        <i class="fas fa-wrench me-2 text-primary"></i> Customers
+                                    </a>
+
+                                    <a class="dropdown-item d-flex align-items-center" asp-area="Admin" asp-controller="Admins" asp-action="AllAdmins">
+                                        <i class="fas fa-wrench me-2 text-primary"></i> Admins
+                                    </a>
+
+                                    <a class="dropdown-item d-flex align-items-center" asp-area="Admin" asp-controller="SuperAdmins" asp-action="AllSuperAdmins">
+                                        <i class="fas fa-wrench me-2 text-primary"></i> Super Admins
+                                    </a>
+
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item d-flex align-items-center" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                                        <i class="fas fa-link me-2 text-danger"></i> Dashboard
+                                    </a>
+                                </div>
+                            </li>
+                        }
+
+
+                    </ul>
+
+
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search">
+                        <button class="btn btn-secondary" type="submit">Search</button>
+                    </form>
+
+                    <ul class="navbar-nav ms-3">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item d-flex align-items-center">
+                                <a id="manage" class="nav-link d-flex align-items-center text-dark fw-bold" asp-area="Identity" asp-controller="Settings" asp-action="Profile">
+                                    <i class="fas fa-user-circle me-2"></i> Hello, @User.Identity.Name
+                                </a>
+                            </li>
+
+                            <!-- User Dropdown -->
+                            <li class="nav-item dropdown d-flex align-items-center">
+                                <img src="~/Assets/Users/user.png" alt="User Avatar" class="rounded-circle me-2" width="35" height="35">
+                                <a class="nav-link dropdown-toggle text-dark" id="userDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" asp-area="Identity" asp-controller="Settings" asp-action="Profile"><i class="fas fa-user me-2"></i> Profile</a></li>
+                                    <li><a class="dropdown-item" asp-area="Identity" asp-controller="Settings" asp-action="Manage"><i class="fas fa-cog me-2"></i> Manage</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form id="logoutForm" method="post" asp-area="Identity" asp-controller="Account" asp-action="Logout">
+                                            <button type="submit" class="dropdown-item text-danger">
+                                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary fw-bold" asp-area="Identity" asp-controller="Account" asp-action="Register">
+                                    <i class="fas fa-user-plus me-2"></i> Register
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fw-bold" asp-area="Identity" asp-controller="Account" asp-action="Login">
+                                    <i class="fas fa-sign-in-alt me-2"></i> Login
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+            <span class="text-muted">© 2025 MovieMart - Abdelwahab Shandy</span>
+        </div>
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-muted" href="https://www.linkedin.com/in/abdelwahab-shandy" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="24" height="24"></a></li>
+            <li class="ms-3"><a class="text-muted" href="https://github.com/abdelwahab-ahmed-shandy" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" width="24" height="24"></a></li>
+        </ul>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Site Scripts -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/assets/dashboard/js/scripts.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+
+    <!-- Simple DataTables -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+
+    <!-- Toastr JS (Loaded AFTER jQuery) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

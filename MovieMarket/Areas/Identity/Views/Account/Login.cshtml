@@ -1,0 +1,87 @@
+﻿@model MovieMarket.Models.ViewModels.LoginVM
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h4>Login</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" type="email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <input class="form-check-input" asp-for="RememberMe" />
+                <label class="form-check-label" asp-for="RememberMe">Remember Me</label>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <span>Don't have an account?</span>
+            <a asp-area="Identity" asp-controller="Account" asp-action="Register" class="btn btn-link">Register here</a>
+        </div>
+
+        <div class="text-center mt-3">
+            <p>Or Login using:</p>
+            <a asp-area="Identity" asp-controller="ExternalLogin" asp-action="GoogleLogin" class="btn btn-danger">
+                <i class="fab fa-google"></i> Login with Google
+            </a>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            var message = '@TempData["notifiction"]'.trim();
+            var messageType = '@TempData["MessageType"]';
+
+            console.log("Notification Message:", message);
+            console.log("Notification Type:", messageType);
+
+            if (message && message !== 'null' && message !== 'undefined' && message !== '') {
+                if (messageType) {
+                    messageType = messageType.trim().toLowerCase();
+                } else {
+                    messageType = 'info'; 
+                }
+
+                switch (messageType) {
+                    case 'success':
+                        toastr.success(message, 'Success');
+                        break;
+                    case 'error':
+                        toastr.error(message, 'Error');
+                        break;
+                    case 'warning':
+                        toastr.warning(message, 'Warning');
+                        break;
+                    default:
+                        toastr.info(message, 'Notice');
+                }
+            }
+        });
+    </script>
+}

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Character>
+
+@{
+    ViewData["Title"] = "Characters";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center"> TV & Movie Characters</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning text-center">
+            ❌ No characters found.
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">🎭 @item.Name</h5>
+                            <p class="card-text text-muted">
+                                @if (!string.IsNullOrEmpty(item.Description))
+                                {
+                                    @item.Description
+                                }
+                                else
+                                {
+                                    <span>No description available.</span>
+                                }
+                            </p>
+
+                            <a asp-area="Customer" asp-controller="Character" asp-action="Details" asp-route-Id="@item.Id"
+                               class="btn btn-outline-primary fw-bold shadow-sm w-100">📖 View Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

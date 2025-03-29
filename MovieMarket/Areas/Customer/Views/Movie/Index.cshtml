@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Movie>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card shadow-lg border-0 rounded-3 overflow-hidden">
+                    <div class="position-relative">
+                        <img src="~/Assets/Customer/MoviesPhoto/@item.ImgUrl" class="card-img-top img-fluid movie-img" alt="@item.Title">
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-primary fw-bold">@item.Title</h5>
+                        <p class="card-text text-muted text-truncate" style="max-height: 3rem;">@item.Description</p>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Price:</strong> <span class="text-success fw-semibold">@item.Price.ToString("C")</span></li>
+                            <li class="list-group-item"><strong>Author:</strong> @item.Author</li>
+                            <li class="list-group-item"><strong>Duration:</strong> @item.Duration</li>
+                            <li class="list-group-item"><strong>Release Year:</strong> @item.ReleaseYear</li>
+                            <li class="list-group-item"><strong>Rating:</strong> @(item.Rating?.ToString("0.0") ?? "Not Found") ⭐⭐⭐⭐⭐</li>
+                            <li class="list-group-item"><strong>Category:</strong> @item.Category.Name</li>
+                        </ul>
+
+                        <a asp-area="Customer" asp-controller="Movie" asp-action="MoreDetils" asp-route-Id="@item.Id" class="btn btn-primary mt-3 fw-bold shadow-sm">More Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .movie-img {
+        height: 250px;
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .movie-img:hover {
+            transform: scale(1.05);
+        }
+
+    .card {
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+    .text-success {
+        color: #28a745 !important;
+        font-weight: bold;
+    }
+</style>

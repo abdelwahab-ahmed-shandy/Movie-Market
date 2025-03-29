@@ -1,0 +1,52 @@
+﻿@model Season
+
+@{
+    ViewData["Title"] = "Create Season";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Add New Season</h2>
+
+    <form asp-action="Create" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Title</label>
+            <input asp-for="Title" class="form-control" required>
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ReleaseYear" class="form-label">Release Year</label>
+            <input asp-for="ReleaseYear" type="number" class="form-control" required>
+            <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SeasonNumber" class="form-label">Season Number</label>
+            <input asp-for="SeasonNumber" type="number" class="form-control" required>
+            <span asp-validation-for="SeasonNumber" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Tv Series Name</label>
+            <select asp-for="TvSeriesId" class="form-control" asp-items="ViewBag.TvSeries" required>
+                <option value="">Select Tv Series</option>
+            </select>
+            <span asp-validation-for="TvSeriesId" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Save Season
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

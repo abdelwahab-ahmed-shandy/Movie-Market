@@ -1,0 +1,17 @@
+﻿﻿@{
+	ViewData["Title"] = "Access Denied";
+}
+
+<div class="container">
+	<div class="d-flex align-items-center justify-content-center vh-100">
+		<div class="text-center">
+			<i class="fas fa-exclamation-triangle fa-5x text-danger mb-3"></i>
+			<h1 class="display-1 fw-bold">401</h1>
+			<p class="lead text-danger fw-semibold">Unauthorized</p>
+			<p class="text-muted">Sorry, you do not have permission to access this resource.</p>
+			<a class="btn btn-primary btn-lg mt-3" asp-area="Customer" asp-controller="Home" asp-action="Index">
+				<i class="fas fa-home me-2"></i> Return to Home
+			</a>
+		</div>
+	</div>
+</div>

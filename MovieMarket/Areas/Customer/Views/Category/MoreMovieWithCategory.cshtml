@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Movie>
+@{
+    ViewData["Title"] = "Category Page";
+    var categoryName = Model.FirstOrDefault()?.Category?.Name ?? "Unknown Category";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center text-primary fw-bold mb-4">Category: @categoryName</h1>
+
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                    <div class="image-container">
+                        <img src="~/Assets/Customer/MoviesPhoto/@item.ImgUrl" class="card-img-top movie-img" alt="@item.Title">
+                    </div>
+
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-primary fw-bold">@item.Title</h5>
+                        <p class="card-text text-muted">@item.Description</p>
+                        <a asp-area="Customer" asp-controller="Movie" asp-action="MoreDetils" asp-route-Id="@item.Id"
+                           class="btn btn-outline-primary fw-bold shadow-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
