@@ -7881,11 +7881,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\MovieMarket.csproj",
+      "projectUniqueName": "E:\\4-Git\\Movie-Market\\MovieMarket\\MovieMarket.csproj",
       "projectName": "MovieMarket",
-      "projectPath": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\MovieMarket.csproj",
+      "projectPath": "E:\\4-Git\\Movie-Market\\MovieMarket\\MovieMarket.csproj",
       "packagesPath": "C:\\Users\\FM\\.nuget\\packages\\",
-      "outputPath": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\obj\\",
+      "outputPath": "E:\\4-Git\\Movie-Market\\MovieMarket\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

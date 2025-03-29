@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Gb9+el2uHqRZ/oK2PPlu4NrSx8Ei59kz1LmjBGeUDGM=",
+  "Hash": "ucveJGrpz8Gn/XNfjqjC9V51qyjZeJhjeJTB9ZbtzbM=",
   "Source": "MovieMarket",
   "BasePath": "_content/MovieMarket",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "MovieMarket\\wwwroot",
       "Source": "MovieMarket",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\bundle\\MovieMarket.styles.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\bundle\\MovieMarket.styles.css",
       "SourceId": "MovieMarket",
       "SourceType": "Computed",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "MovieMarket#[.{fingerprint}]?.styles.css",
       "AssetKind": "All",
@@ -35,13 +35,13 @@
       "Integrity": "DIG7794jOIIAoN/8YjGCVakGbe8ir0QYF1bRL2T2/J4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\bundle\\MovieMarket.styles.css"
+      "OriginalItemSpec": "E:\\4-Git\\Movie-Market\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\bundle\\MovieMarket.styles.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MovieMarket.bundle.scp.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MovieMarket.bundle.scp.css",
       "SourceId": "MovieMarket",
       "SourceType": "Computed",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "MovieMarket#[.{fingerprint}]!.bundle.scp.css",
       "AssetKind": "All",
@@ -56,13 +56,13 @@
       "Integrity": "DIG7794jOIIAoN/8YjGCVakGbe8ir0QYF1bRL2T2/J4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MovieMarket.bundle.scp.css"
+      "OriginalItemSpec": "E:\\4-Git\\Movie-Market\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MovieMarket.bundle.scp.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\imag\\favicon.png",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\imag\\favicon.png",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Customer/imag/favicon#[.{fingerprint}]?.png",
       "AssetKind": "All",
@@ -80,10 +80,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Customer\\imag\\favicon.png"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\94e95d09-ef58-418d-b346-06abc4f55530.png",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\94e95d09-ef58-418d-b346-06abc4f55530.png",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Customer/MoviesPhoto/94e95d09-ef58-418d-b346-06abc4f55530#[.{fingerprint}]?.png",
       "AssetKind": "All",
@@ -101,10 +101,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Customer\\MoviesPhoto\\94e95d09-ef58-418d-b346-06abc4f55530.png"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\akira.jpg",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\akira.jpg",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Customer/MoviesPhoto/akira#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
@@ -122,10 +122,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Customer\\MoviesPhoto\\akira.jpg"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\spiritedaway.jpg",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\spiritedaway.jpg",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Customer/MoviesPhoto/spiritedaway#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
@@ -143,10 +143,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Customer\\MoviesPhoto\\spiritedaway.jpg"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\yourname.jpg",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\yourname.jpg",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Customer/MoviesPhoto/yourname#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
@@ -164,10 +164,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Customer\\MoviesPhoto\\yourname.jpg"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\346f377e-ca61-4d2d-b318-dda603dc5cec.png",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\346f377e-ca61-4d2d-b318-dda603dc5cec.png",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Customer/TvSeries/346f377e-ca61-4d2d-b318-dda603dc5cec#[.{fingerprint}]?.png",
       "AssetKind": "All",
@@ -185,10 +185,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Customer\\TvSeries\\346f377e-ca61-4d2d-b318-dda603dc5cec.png"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\7b1e3b3e-98d4-489c-833f-522c92e238d9.png",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\7b1e3b3e-98d4-489c-833f-522c92e238d9.png",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Customer/TvSeries/7b1e3b3e-98d4-489c-833f-522c92e238d9#[.{fingerprint}]?.png",
       "AssetKind": "All",
@@ -206,10 +206,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Customer\\TvSeries\\7b1e3b3e-98d4-489c-833f-522c92e238d9.png"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\aot.jpg",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\aot.jpg",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Customer/TvSeries/aot#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
@@ -227,10 +227,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Customer\\TvSeries\\aot.jpg"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\naruto.jpg",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\naruto.jpg",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Customer/TvSeries/naruto#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
@@ -248,10 +248,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Customer\\TvSeries\\naruto.jpg"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\onepiece.jpg",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\onepiece.jpg",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Customer/TvSeries/onepiece#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
@@ -269,10 +269,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Customer\\TvSeries\\onepiece.jpg"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-area-demo.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-area-demo.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Dashboard/assets/demo/chart-area-demo#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -290,10 +290,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-area-demo.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-bar-demo.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-bar-demo.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Dashboard/assets/demo/chart-bar-demo#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -311,10 +311,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-bar-demo.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-pie-demo.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-pie-demo.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Dashboard/assets/demo/chart-pie-demo#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -332,10 +332,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-pie-demo.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\datatables-demo.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\datatables-demo.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Dashboard/assets/demo/datatables-demo#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -353,10 +353,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Dashboard\\assets\\demo\\datatables-demo.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-404-monochrome.svg",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-404-monochrome.svg",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Dashboard/assets/img/error-404-monochrome#[.{fingerprint}]?.svg",
       "AssetKind": "All",
@@ -374,10 +374,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Dashboard\\assets\\img\\error-404-monochrome.svg"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-500.png",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-500.png",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Dashboard/assets/img/error-500#[.{fingerprint}]?.png",
       "AssetKind": "All",
@@ -395,10 +395,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Dashboard\\assets\\img\\error-500.png"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\css\\styles.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\css\\styles.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Dashboard/css/styles#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -416,10 +416,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Dashboard\\css\\styles.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\datatables-simple-demo.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\datatables-simple-demo.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Dashboard/js/datatables-simple-demo#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -437,10 +437,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Dashboard\\js\\datatables-simple-demo.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\scripts.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\scripts.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Dashboard/js/scripts#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -458,10 +458,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Dashboard\\js\\scripts.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Users\\user.png",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Users\\user.png",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "Assets/Users/user#[.{fingerprint}]?.png",
       "AssetKind": "All",
@@ -479,10 +479,10 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Users\\user.png"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\css\\site.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\css\\site.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "css/site#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -500,10 +500,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\favicon.ico",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\favicon.ico",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "favicon#[.{fingerprint}]?.ico",
       "AssetKind": "All",
@@ -521,10 +521,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\js\\site.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\js\\site.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "js/site#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -542,10 +542,10 @@
       "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -563,10 +563,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -584,10 +584,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -605,10 +605,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -626,10 +626,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -647,10 +647,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -668,10 +668,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -689,10 +689,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -710,10 +710,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -731,10 +731,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -752,10 +752,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -773,10 +773,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -794,10 +794,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -815,10 +815,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -836,10 +836,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -857,10 +857,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -878,10 +878,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -899,10 +899,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -920,10 +920,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -941,10 +941,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -962,10 +962,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -983,10 +983,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1004,10 +1004,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -1025,10 +1025,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1046,10 +1046,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -1067,10 +1067,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1088,10 +1088,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -1109,10 +1109,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1130,10 +1130,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -1151,10 +1151,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1172,10 +1172,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -1193,10 +1193,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1214,10 +1214,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1235,10 +1235,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1256,10 +1256,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1277,10 +1277,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1298,10 +1298,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1319,10 +1319,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1340,10 +1340,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1361,10 +1361,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1382,10 +1382,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1403,10 +1403,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1424,10 +1424,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1445,10 +1445,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1466,10 +1466,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\LICENSE",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/bootstrap/LICENSE#[.{fingerprint}]?",
       "AssetKind": "All",
@@ -1487,10 +1487,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/jquery/dist/jquery#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1508,10 +1508,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1529,10 +1529,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1550,10 +1550,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/jquery/LICENSE#[.{fingerprint}]?.txt",
       "AssetKind": "All",
@@ -1571,10 +1571,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/jquery-validation/dist/additional-methods#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1592,10 +1592,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1613,10 +1613,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1634,10 +1634,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1655,10 +1655,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/jquery-validation/LICENSE#[.{fingerprint}]?.md",
       "AssetKind": "All",
@@ -1676,10 +1676,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1697,10 +1697,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1718,10 +1718,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Identity": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Identity": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "SourceId": "MovieMarket",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\",
+      "ContentRoot": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\",
       "BasePath": "_content/MovieMarket",
       "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE#[.{fingerprint}]?.txt",
       "AssetKind": "All",
@@ -1742,7 +1742,7 @@
   "Endpoints": [
     {
       "Route": "Assets/Customer/imag/favicon.jymj602o92.png",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\imag\\favicon.png",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\imag\\favicon.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1787,7 +1787,7 @@
     },
     {
       "Route": "Assets/Customer/imag/favicon.png",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\imag\\favicon.png",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\imag\\favicon.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1824,7 +1824,7 @@
     },
     {
       "Route": "Assets/Customer/MoviesPhoto/94e95d09-ef58-418d-b346-06abc4f55530.kuekjzn48l.png",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\94e95d09-ef58-418d-b346-06abc4f55530.png",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\94e95d09-ef58-418d-b346-06abc4f55530.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1869,7 +1869,7 @@
     },
     {
       "Route": "Assets/Customer/MoviesPhoto/94e95d09-ef58-418d-b346-06abc4f55530.png",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\94e95d09-ef58-418d-b346-06abc4f55530.png",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\94e95d09-ef58-418d-b346-06abc4f55530.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1906,7 +1906,7 @@
     },
     {
       "Route": "Assets/Customer/MoviesPhoto/akira.86smsnf32k.jpg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\akira.jpg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\akira.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1951,7 +1951,7 @@
     },
     {
       "Route": "Assets/Customer/MoviesPhoto/akira.jpg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\akira.jpg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\akira.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1988,7 +1988,7 @@
     },
     {
       "Route": "Assets/Customer/MoviesPhoto/spiritedaway.hsdvolj1cx.jpg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\spiritedaway.jpg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\spiritedaway.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2033,7 +2033,7 @@
     },
     {
       "Route": "Assets/Customer/MoviesPhoto/spiritedaway.jpg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\spiritedaway.jpg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\spiritedaway.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2070,7 +2070,7 @@
     },
     {
       "Route": "Assets/Customer/MoviesPhoto/yourname.6cqsc86h7t.jpg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\yourname.jpg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\yourname.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2115,7 +2115,7 @@
     },
     {
       "Route": "Assets/Customer/MoviesPhoto/yourname.jpg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\yourname.jpg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\MoviesPhoto\\yourname.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2152,7 +2152,7 @@
     },
     {
       "Route": "Assets/Customer/TvSeries/346f377e-ca61-4d2d-b318-dda603dc5cec.kuekjzn48l.png",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\346f377e-ca61-4d2d-b318-dda603dc5cec.png",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\346f377e-ca61-4d2d-b318-dda603dc5cec.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2197,7 +2197,7 @@
     },
     {
       "Route": "Assets/Customer/TvSeries/346f377e-ca61-4d2d-b318-dda603dc5cec.png",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\346f377e-ca61-4d2d-b318-dda603dc5cec.png",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\346f377e-ca61-4d2d-b318-dda603dc5cec.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2234,7 +2234,7 @@
     },
     {
       "Route": "Assets/Customer/TvSeries/7b1e3b3e-98d4-489c-833f-522c92e238d9.aam3xz8how.png",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\7b1e3b3e-98d4-489c-833f-522c92e238d9.png",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\7b1e3b3e-98d4-489c-833f-522c92e238d9.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2279,7 +2279,7 @@
     },
     {
       "Route": "Assets/Customer/TvSeries/7b1e3b3e-98d4-489c-833f-522c92e238d9.png",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\7b1e3b3e-98d4-489c-833f-522c92e238d9.png",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\7b1e3b3e-98d4-489c-833f-522c92e238d9.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2316,7 +2316,7 @@
     },
     {
       "Route": "Assets/Customer/TvSeries/aot.jpg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\aot.jpg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\aot.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2353,7 +2353,7 @@
     },
     {
       "Route": "Assets/Customer/TvSeries/aot.xa8j6gpn9l.jpg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\aot.jpg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\aot.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2398,7 +2398,7 @@
     },
     {
       "Route": "Assets/Customer/TvSeries/naruto.cjxe7izce5.jpg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\naruto.jpg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\naruto.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2443,7 +2443,7 @@
     },
     {
       "Route": "Assets/Customer/TvSeries/naruto.jpg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\naruto.jpg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\naruto.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2480,7 +2480,7 @@
     },
     {
       "Route": "Assets/Customer/TvSeries/onepiece.2x3h8v3nhq.jpg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\onepiece.jpg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\onepiece.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2525,7 +2525,7 @@
     },
     {
       "Route": "Assets/Customer/TvSeries/onepiece.jpg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\onepiece.jpg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Customer\\TvSeries\\onepiece.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2562,7 +2562,7 @@
     },
     {
       "Route": "Assets/Dashboard/assets/demo/chart-area-demo.8flq4k35dk.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-area-demo.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-area-demo.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2607,7 +2607,7 @@
     },
     {
       "Route": "Assets/Dashboard/assets/demo/chart-area-demo.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-area-demo.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-area-demo.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2644,7 +2644,7 @@
     },
     {
       "Route": "Assets/Dashboard/assets/demo/chart-bar-demo.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-bar-demo.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-bar-demo.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2681,7 +2681,7 @@
     },
     {
       "Route": "Assets/Dashboard/assets/demo/chart-bar-demo.qbt6h4ox5y.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-bar-demo.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-bar-demo.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2726,7 +2726,7 @@
     },
     {
       "Route": "Assets/Dashboard/assets/demo/chart-pie-demo.hw7eaup9v4.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-pie-demo.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-pie-demo.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2771,7 +2771,7 @@
     },
     {
       "Route": "Assets/Dashboard/assets/demo/chart-pie-demo.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-pie-demo.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-pie-demo.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2808,7 +2808,7 @@
     },
     {
       "Route": "Assets/Dashboard/assets/demo/datatables-demo.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\datatables-demo.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\datatables-demo.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2845,7 +2845,7 @@
     },
     {
       "Route": "Assets/Dashboard/assets/demo/datatables-demo.w9gruc5uo1.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\datatables-demo.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\demo\\datatables-demo.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2890,7 +2890,7 @@
     },
     {
       "Route": "Assets/Dashboard/assets/img/error-404-monochrome.svg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-404-monochrome.svg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-404-monochrome.svg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2927,7 +2927,7 @@
     },
     {
       "Route": "Assets/Dashboard/assets/img/error-404-monochrome.yp87i3fbss.svg",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-404-monochrome.svg",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-404-monochrome.svg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2972,7 +2972,7 @@
     },
     {
       "Route": "Assets/Dashboard/assets/img/error-500.5i0wrzj9m8.png",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-500.png",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-500.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3017,7 +3017,7 @@
     },
     {
       "Route": "Assets/Dashboard/assets/img/error-500.png",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-500.png",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-500.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3054,7 +3054,7 @@
     },
     {
       "Route": "Assets/Dashboard/css/styles.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\css\\styles.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\css\\styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3091,7 +3091,7 @@
     },
     {
       "Route": "Assets/Dashboard/css/styles.mf45fbw2f4.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\css\\styles.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\css\\styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3136,7 +3136,7 @@
     },
     {
       "Route": "Assets/Dashboard/js/datatables-simple-demo.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\datatables-simple-demo.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\datatables-simple-demo.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3173,7 +3173,7 @@
     },
     {
       "Route": "Assets/Dashboard/js/datatables-simple-demo.xnqwbb6zwd.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\datatables-simple-demo.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\datatables-simple-demo.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3218,7 +3218,7 @@
     },
     {
       "Route": "Assets/Dashboard/js/scripts.dqle62frat.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\scripts.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\scripts.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3263,7 +3263,7 @@
     },
     {
       "Route": "Assets/Dashboard/js/scripts.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\scripts.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Dashboard\\js\\scripts.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3300,7 +3300,7 @@
     },
     {
       "Route": "Assets/Users/user.iijq6ndfgs.png",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Users\\user.png",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Users\\user.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3345,7 +3345,7 @@
     },
     {
       "Route": "Assets/Users/user.png",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\Assets\\Users\\user.png",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\Assets\\Users\\user.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3382,7 +3382,7 @@
     },
     {
       "Route": "css/site.c2tiyv64ts.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\css\\site.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3427,7 +3427,7 @@
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\css\\site.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3464,7 +3464,7 @@
     },
     {
       "Route": "favicon.ico",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\favicon.ico",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\favicon.ico",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3501,7 +3501,7 @@
     },
     {
       "Route": "favicon.jymj602o92.ico",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\favicon.ico",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\favicon.ico",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3546,7 +3546,7 @@
     },
     {
       "Route": "js/site.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\js\\site.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\js\\site.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3583,7 +3583,7 @@
     },
     {
       "Route": "js/site.xtxxf3hu2r.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\js\\site.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\js\\site.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3628,7 +3628,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3665,7 +3665,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.css.73kdqttayv.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3710,7 +3710,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3747,7 +3747,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.bpk8xqwxhs.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3792,7 +3792,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3829,7 +3829,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.css.8inm30yfxf.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3874,7 +3874,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3911,7 +3911,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.mpyigms19s.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3956,7 +3956,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3993,7 +3993,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.css.4gxs3k148c.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4038,7 +4038,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4075,7 +4075,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.9b9oa1qrmt.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4120,7 +4120,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4157,7 +4157,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.fctod5rc9n.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4202,7 +4202,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4239,7 +4239,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.ve6x09088i.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4284,7 +4284,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.agp80tu62r.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4329,7 +4329,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4366,7 +4366,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4403,7 +4403,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.css.st1cbwfwo5.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4448,7 +4448,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4485,7 +4485,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.css.5vj65cig9w.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4530,7 +4530,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4567,7 +4567,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.unj9p35syc.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4612,7 +4612,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4649,7 +4649,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.2q4vfeazbq.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4694,7 +4694,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4731,7 +4731,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4768,7 +4768,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4805,7 +4805,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.o371a8zbv2.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4850,7 +4850,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.n1oizzvkh6.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4895,7 +4895,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.q2ku51ktnl.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4940,7 +4940,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.7na4sro3qu.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4985,7 +4985,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5022,7 +5022,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.css.jeal3x0ldm.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5067,7 +5067,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5104,7 +5104,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5141,7 +5141,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5178,7 +5178,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.okkk44j0xs.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5223,7 +5223,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.f8imaxxbri.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5268,7 +5268,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.0wve5yxp74.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5313,7 +5313,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5350,7 +5350,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.cwzlr5n8x4.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5395,7 +5395,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5432,7 +5432,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5469,7 +5469,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5506,7 +5506,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.wmug9u23qg.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5551,7 +5551,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.npxfuf8dg6.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5596,7 +5596,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5633,7 +5633,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.css.j75batdsum.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5678,7 +5678,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5715,7 +5715,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.16095smhkz.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5760,7 +5760,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5797,7 +5797,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5834,7 +5834,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.vy0bq9ydhf.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5879,7 +5879,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.b4skse8du6.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5924,7 +5924,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5961,7 +5961,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.ab1c3rmv7g.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6006,7 +6006,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6043,7 +6043,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6080,7 +6080,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.56d2bn4wt9.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6125,7 +6125,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6162,7 +6162,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.u3xrusw2ol.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6207,7 +6207,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.tey0rigmnh.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6252,7 +6252,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6289,7 +6289,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js.kbynt5jhd9.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6334,7 +6334,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6371,7 +6371,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.l2av4jpuoj.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6416,7 +6416,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.25iw1kog22.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6461,7 +6461,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6498,7 +6498,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.c2nslu3uf3.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6543,7 +6543,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6580,7 +6580,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6617,7 +6617,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.js.2lgwfvgpvi.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6662,7 +6662,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6699,7 +6699,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.m39kt2b5c9.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6744,7 +6744,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6781,7 +6781,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6818,7 +6818,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.js.wsezl0heh6.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6863,7 +6863,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.um2aeqy4ik.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6908,7 +6908,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6945,7 +6945,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.js.6ukhryfubh.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6990,7 +6990,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.js.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7027,7 +7027,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7064,7 +7064,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.js.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7101,7 +7101,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.js.u33ctipx7g.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7146,7 +7146,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.zwph15dxgs.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7191,7 +7191,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.o4kw7cc6tf.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7236,7 +7236,7 @@
     },
     {
       "Route": "lib/bootstrap/LICENSE",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\LICENSE",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7273,7 +7273,7 @@
     },
     {
       "Route": "lib/bootstrap/LICENSE.81b7ukuj9c",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\bootstrap\\LICENSE",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7318,7 +7318,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.fwhahm2icz.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7363,7 +7363,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7400,7 +7400,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.5pze98is44.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7445,7 +7445,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.dd6z7egasc.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7490,7 +7490,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7527,7 +7527,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.map",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7564,7 +7564,7 @@
     },
     {
       "Route": "lib/jquery/LICENSE.mlv21k5csn.txt",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7609,7 +7609,7 @@
     },
     {
       "Route": "lib/jquery/LICENSE.txt",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7646,7 +7646,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.ay5nd8zt9x.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7691,7 +7691,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7728,7 +7728,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.min.9oaff4kq20.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7773,7 +7773,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.min.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7810,7 +7810,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7847,7 +7847,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.min.b7iojwaux1.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7892,7 +7892,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.min.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7929,7 +7929,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.pzqfkb6aqo.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7974,7 +7974,7 @@
     },
     {
       "Route": "lib/jquery-validation/LICENSE.md",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8011,7 +8011,7 @@
     },
     {
       "Route": "lib/jquery-validation/LICENSE.x0q3zqp4vz.md",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8056,7 +8056,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.47otxtyo56.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8101,7 +8101,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8138,7 +8138,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.4v8eqarkd7.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8183,7 +8183,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8220,7 +8220,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/LICENSE.356vix0kms.txt",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8265,7 +8265,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/LICENSE.txt",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8302,7 +8302,7 @@
     },
     {
       "Route": "MovieMarket.bundle.scp.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MovieMarket.bundle.scp.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MovieMarket.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8339,7 +8339,7 @@
     },
     {
       "Route": "MovieMarket.styles.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\bundle\\MovieMarket.styles.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\bundle\\MovieMarket.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8376,7 +8376,7 @@
     },
     {
       "Route": "MovieMarket.wn3y22vfmf.bundle.scp.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MovieMarket.bundle.scp.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MovieMarket.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8421,7 +8421,7 @@
     },
     {
       "Route": "MovieMarket.wn3y22vfmf.styles.css",
-      "AssetFile": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\bundle\\MovieMarket.styles.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\obj\\Debug\\net8.0\\scopedcss\\bundle\\MovieMarket.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {

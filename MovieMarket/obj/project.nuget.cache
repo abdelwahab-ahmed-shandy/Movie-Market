@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UogUJ7S3wLo=",
+  "dgSpecHash": "ibMHXqXitgk=",
   "success": true,
-  "projectFilePath": "E:\\4-Git\\Vidoes\\ALL-TASK-In-EraaSoft\\Task-18\\MovieMarket\\MovieMarket.csproj",
+  "projectFilePath": "E:\\4-Git\\Movie-Market\\MovieMarket\\MovieMarket.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\FM\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\FM\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
