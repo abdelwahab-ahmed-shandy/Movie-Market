@@ -1,4 +1,4 @@
-# Movie Market
+# 🎬 Movie Market
 
 ## 📌 Introduction
 **Movie Market** is a web application designed to manage and share movies. Users can browse movies, view their details, and add them to their watchlists. The project is based on **ASP.NET Core** and **Entity Framework** to provide a smooth and efficient user experience.
@@ -22,17 +22,17 @@
 
 ## 📂 Project Structure
 MovieMarket/
-│-- 📂 Areas/                  # Project divisions (areas)
-│-- 📂 DataAccess/             # Data access layer
-│-- 📂 Migrations/             # Database update management
-│-- 📂 Models/                 # Model and entity definitions
-│-- 📂 Repositories/           # CRUD transaction management
-│-- 📂 Services/               # Business logic layer
-│-- 📂 Views/                  # User interfaces
-│-- 📂 wwwroot/                # Static files (CSS, JS, Images)
-│-- 📄 appsettings.json        # Project settings
-│-- 📄 Program.cs              # Main entry point
-│-- 📄 MovieMarket.sln         # Solution file
+│-- 📂 Areas/                 
+│-- 📂 DataAccess/             
+│-- 📂 Migrations/             
+│-- 📂 Models/                 
+│-- 📂 Repositories/           
+│-- 📂 Services/               
+│-- 📂 Views/                  
+│-- 📂 wwwroot/                
+│-- 📄 appsettings.json        
+│-- 📄 Program.cs              
+│-- 📄 MovieMarket.sln        
 
 ---
 ## 📞 Contact
