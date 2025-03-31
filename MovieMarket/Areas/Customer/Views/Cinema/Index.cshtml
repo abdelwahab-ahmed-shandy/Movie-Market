@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MovieMarket.Models.Cinema>
+@{
+    ViewData["Title"] = "Cinema Page";
+}
+
+<div class="container mt-4">
+    <div class="row g-3 justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-primary fw-bold">@item.Name</h5>
+                        <p class="card-text text-muted">@item.Description</p>
+                        <h6 class="card-title text-primary fw-bold">@item.Location</h6>
+                        <a asp-area="Customer" asp-controller="Cinema" asp-action="MoreMovieWithCinema" asp-route-Id="@item.Id"
+                           class="btn btn-outline-primary fw-bold shadow-sm">View More Movies</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+    .btn {
+        transition: background-color 0.3s ease-in-out;
+    }
+
+        .btn:hover {
+            background-color: #007bff !important;
+            color: white !important;
+        }
+</style>

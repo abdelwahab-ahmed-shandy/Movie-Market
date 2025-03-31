@@ -19,6 +19,7 @@ namespace MovieMarket.DataAccess
         public DbSet<Character> Characters { get; set; }
         public DbSet<CharacterMovie> CharacterMovies { get; set; }
         public DbSet<CharacterTvSeries> CharacterTvSeries { get; set; }
+        public DbSet<CinemaMovie> CinemaMovies { get; set; }
 
         #endregion
 
@@ -267,14 +268,6 @@ namespace MovieMarket.DataAccess
 
             #endregion
         }
-
-        //public DbSet<MovieMarket.Models.ViewModels.RegisterVM> RegisterVM { get; set; } = default!;
-        //public DbSet<MovieMarket.Models.ViewModels.LoginVM> LoginVM { get; set; } = default!;
-        //public DbSet<MovieMarket.Models.ViewModels.ManageProfileVM> ManageProfileVM { get; set; } = default!;
-
-
-
-
 
     }
 }

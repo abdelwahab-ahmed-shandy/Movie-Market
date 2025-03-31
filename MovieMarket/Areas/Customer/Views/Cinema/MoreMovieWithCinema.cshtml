@@ -1,0 +1,33 @@
+﻿@model MovieMarket.Models.Cinema
+
+@{
+    ViewData["Title"] = "Cinema Page";
+    var categoryName = Model.CinemaMovies.FirstOrDefault()?.Movie?.Category?.Name ?? "Unknown Category";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center text-primary fw-bold mb-4">Category: @categoryName</h1>
+    <h2 class="text-center text-primary fw-bold mb-4">Cinema: @Model.Name</h2>
+
+    <div class="row g-4">
+        @foreach (var cinemaMovie in Model.CinemaMovies)
+        {
+            var movie = cinemaMovie.Movie;
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                    <div class="image-container">
+                        <img src="~/Assets/Customer/MoviesPhoto/@movie.ImgUrl" class="card-img-top movie-img" alt="@movie.Title">
+                    </div>
+
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-primary fw-bold">@movie.Title</h5>
+                        <p class="card-text text-muted">@movie.Description</p>
+                        <h6 class="card-title text-secondary">Show Time: @cinemaMovie.ShowTime.ToString("hh:mm tt")</h6>
+                        <a asp-area="Customer" asp-controller="Movie" asp-action="MoreDetils" asp-route-Id="@movie.Id"
+                           class="btn btn-outline-primary fw-bold shadow-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
