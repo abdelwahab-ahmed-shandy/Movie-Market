@@ -21,7 +21,9 @@
 ---
 
 ## 📂 Project Structure
+
 MovieMarket/
+
 │-- 📂 Areas/                 
 │-- 📂 DataAccess/             
 │-- 📂 Migrations/             
