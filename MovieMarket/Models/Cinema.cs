@@ -2,7 +2,6 @@
 
 namespace MovieMarket.Models
 {
-    // todo :Edit
     public class Cinema
     {
         public int Id { get; set; }
@@ -16,6 +15,8 @@ namespace MovieMarket.Models
         [Required]
         [StringLength(200)]
         public string Location { get; set; } = string.Empty;
+
+        // Many-to-Many relationship with Movie via CinemaMovies
 
         [ValidateNever]
         public ICollection<CinemaMovie> CinemaMovies { get; set; } = new List<CinemaMovie>();

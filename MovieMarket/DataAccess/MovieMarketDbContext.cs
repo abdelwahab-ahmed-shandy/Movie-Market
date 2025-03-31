@@ -2,6 +2,7 @@
 using MovieMart.Models;
 using Microsoft.EntityFrameworkCore;
 using MovieMarket.Models.ViewModels;
+using MovieMarket.Models;
 
 namespace MovieMarket.DataAccess
 {
@@ -9,6 +10,7 @@ namespace MovieMarket.DataAccess
     {
         #region Entities definition :
 
+        public DbSet<Cinema> Cinemas { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<TvSeries> TvSeries { get; set; }
@@ -52,6 +54,21 @@ namespace MovieMarket.DataAccess
             modelBuilder.Entity<CharacterMovie>()
                 .HasOne(cm => cm.Movie)
                 .WithMany(m => m.CharacterMovies)
+                .HasForeignKey(cm => cm.MovieId);
+
+
+            // Many-to-Many: Cinema <-> Movie
+            modelBuilder.Entity<CinemaMovie>()
+                .HasKey(cm => new { cm.CinemaId, cm.MovieId });
+
+            modelBuilder.Entity<CinemaMovie>()
+                .HasOne(cm => cm.Cinema)
+                .WithMany(c => c.CinemaMovies)
+                .HasForeignKey(cm => cm.CinemaId);
+
+            modelBuilder.Entity<CinemaMovie>()
+                .HasOne(cm => cm.Movie)
+                .WithMany(m => m.CinemaMovies)
                 .HasForeignKey(cm => cm.MovieId);
 
             // Many-to-Many: Character <-> TvSeries
@@ -240,11 +257,20 @@ namespace MovieMarket.DataAccess
                  new Episode { Id = 9, SeasonId = 3, EpisodeNumber = 3, Title = "Morgan vs. Luffy! Who's This Beautiful Young Girl?", Duration = TimeSpan.FromMinutes(24) }
 
              );
+
+            //  Add Seed Data in  Cinema 
+            modelBuilder.Entity<Cinema>().HasData(
+                new Cinema { Id = 1, Name = "IMAX Theater", Description = "A premium large-screen cinema experience.", Location = "Downtown" },
+                new Cinema { Id = 2, Name = "Grand Cineplex", Description = "A modern cinema with multiple screening rooms.", Location = "City Center" },
+                new Cinema { Id = 3, Name = "Classic Movie House", Description = "A nostalgic theater with vintage decor.", Location = "Old Town" }
+            );
+
             #endregion
         }
-        public DbSet<MovieMarket.Models.ViewModels.RegisterVM> RegisterVM { get; set; } = default!;
-        public DbSet<MovieMarket.Models.ViewModels.LoginVM> LoginVM { get; set; } = default!;
-        public DbSet<MovieMarket.Models.ViewModels.ManageProfileVM> ManageProfileVM { get; set; } = default!;
+
+        //public DbSet<MovieMarket.Models.ViewModels.RegisterVM> RegisterVM { get; set; } = default!;
+        //public DbSet<MovieMarket.Models.ViewModels.LoginVM> LoginVM { get; set; } = default!;
+        //public DbSet<MovieMarket.Models.ViewModels.ManageProfileVM> ManageProfileVM { get; set; } = default!;
 
 
 
