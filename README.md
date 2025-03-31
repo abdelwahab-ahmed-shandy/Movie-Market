@@ -22,17 +22,17 @@
 
 ## 📂 Project Structure
 MovieMarket/
-│-- Areas/ # Project partitions
-│-- DataAccess/ # Data access layer
-│-- Migrations/ # Database update management
-│-- Models/ # Model and entity definitions
-│-- Repositories/ # CRUD transaction management
-│-- Services/ # Business logic
-│-- Views/ # User interfaces
-│-- wwwroot/ # Static files (CSS, JS, Images)
-│-- appsettings.json # Project settings
-│-- Program.cs # Main entry point
-│-- MovieMarket.sln # Solution file
+│-- 📂 Areas/                  # Project divisions (areas)
+│-- 📂 DataAccess/             # Data access layer
+│-- 📂 Migrations/             # Database update management
+│-- 📂 Models/                 # Model and entity definitions
+│-- 📂 Repositories/           # CRUD transaction management
+│-- 📂 Services/               # Business logic layer
+│-- 📂 Views/                  # User interfaces
+│-- 📂 wwwroot/                # Static files (CSS, JS, Images)
+│-- 📄 appsettings.json        # Project settings
+│-- 📄 Program.cs              # Main entry point
+│-- 📄 MovieMarket.sln         # Solution file
 
 ---
 ## 📞 Contact
