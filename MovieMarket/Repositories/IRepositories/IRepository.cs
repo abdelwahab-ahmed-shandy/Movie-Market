@@ -48,7 +48,7 @@ namespace MovieMart.Repositories.IRepositories
         /// Removes multiple entities from the database.
         /// </summary>
         /// <param name="entities">The list of entities to remove.</param>
-        public void DeleteAll(List<T> entities);
+        public void DeleteAll(IEnumerable<T> entities);
 
         #endregion
 

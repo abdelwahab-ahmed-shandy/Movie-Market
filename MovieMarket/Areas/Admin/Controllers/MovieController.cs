@@ -35,8 +35,8 @@ namespace MovieMart.Areas.Admin.Controllers
             }
 
             int pageSize = 5;
-            int totalCustomers = movie.Count();
-            int totalPages = (int)Math.Ceiling((double)totalCustomers / pageSize);
+            int totalmovie = movie.Count();
+            int totalPages = (int)Math.Ceiling((double)totalmovie / pageSize);
 
             if (page > totalPages && totalPages > 0)
                 return NotFound();

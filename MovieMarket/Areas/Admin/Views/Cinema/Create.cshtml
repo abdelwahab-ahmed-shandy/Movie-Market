@@ -1,0 +1,68 @@
+﻿@model MovieMarket.Models.ViewModels.CinemaViewModel
+@{
+    ViewData["Title"] = "Create Cinema";
+}
+
+<div class="container mt-3">
+    <h2>Create New Cinema</h2>
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="Name" class="form-label">Cinema Name</label>
+            <input asp-for="Name" class="form-control" value="@Model.Name" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="Location" class="form-label">Location</label>
+            <input asp-for="Location" class="form-control" value="@Model.Location" required />
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="Movies" class="form-label">Select Movies</label>
+            <div>
+                @foreach (var movie in (IEnumerable<SelectListItem>)ViewBag.Movies)
+                {
+                    <div class="form-check">
+                        <input type="checkbox" name="SelectedMovieIds" value="@movie.Value" class="form-check-input" id="movie_@movie.Value" />
+                        <label class="form-check-label" for="movie_@movie.Value">@movie.Text</label>
+                    </div>
+                }
+            </div>
+            <span asp-validation-for="SelectedMovieIds" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-plus-circle"></i> Create Cinema
+            </button>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+
+
+
+
+
+
+
+

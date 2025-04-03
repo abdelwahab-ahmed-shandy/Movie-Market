@@ -3,19 +3,35 @@
   "WorkspaceRootPath": "E:\\4-Git\\Movie-Market\\MovieMarket\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/./Movie_Market/True/SqlTable/dbo.CinemaMovies.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\areas\\admin\\controllers\\cinemacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\admin\\controllers\\cinemacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\areas\\customer\\views\\cinema\\moremoviewithcinema.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\customer\\views\\cinema\\moremoviewithcinema.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\areas\\customer\\views\\cinema\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\customer\\views\\cinema\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\areas\\customer\\controllers\\cinemacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\customer\\controllers\\cinemacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\repositories\\irepositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:repositories\\irepositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\areas\\admin\\views\\cinema\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\admin\\views\\cinema\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\areas\\admin\\views\\cinema\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\admin\\views\\cinema\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/./Movie_Market/True/SqlTable/dbo.Cinemas.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\areas\\admin\\views\\cinema\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\admin\\views\\cinema\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -25,8 +41,96 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1416,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 9,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Program.cs*",
+              "RelativeToolTip": "Program.cs*",
+              "ViewState": "AgIAADYAAAAAAAAAAAAxwEIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T19:25:13.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Repositories\\Repository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Repository.cs",
+              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Repositories\\Repository.cs",
+              "RelativeToolTip": "Repositories\\Repository.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAswEwAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T19:06:14.904Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Repositories\\IRepositories\\IRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\IRepositories\\IRepository.cs",
+              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Repositories\\IRepositories\\IRepository.cs",
+              "RelativeToolTip": "Repositories\\IRepositories\\IRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T18:57:53.595Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "dbo.Cinemas [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/./Movie_Market/True/SqlTable/dbo.Cinemas.sql",
+              "ToolTip": "dbo.Cinemas [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-04-02T02:37:20.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Views\\Cinema\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Cinema\\Edit.cshtml",
+              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Views\\Cinema\\Edit.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Cinema\\Edit.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAUwAoAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-02T02:27:17.105Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Views\\Cinema\\Create.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Cinema\\Create.cshtml",
+              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Views\\Cinema\\Create.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Cinema\\Create.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAA0wCAAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-01T20:05:07.365Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Views\\Cinema\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Cinema\\Index.cshtml",
+              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Views\\Cinema\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Cinema\\Index.cshtml",
+              "ViewState": "AgIAACsAAAAAAAAAAAAQwIEAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-01T07:52:37.617Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -38,49 +142,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "dbo.CinemaMovies [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/./Movie_Market/True/SqlTable/dbo.CinemaMovies.sql",
-              "ToolTip": "dbo.CinemaMovies [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-03-31T22:37:37.934Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MoreMovieWithCinema.cshtml",
-              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Customer\\Views\\Cinema\\MoreMovieWithCinema.cshtml",
-              "RelativeDocumentMoniker": "Areas\\Customer\\Views\\Cinema\\MoreMovieWithCinema.cshtml",
-              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Customer\\Views\\Cinema\\MoreMovieWithCinema.cshtml",
-              "RelativeToolTip": "Areas\\Customer\\Views\\Cinema\\MoreMovieWithCinema.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-31T22:00:48.925Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Customer\\Views\\Cinema\\Index.cshtml",
-              "RelativeDocumentMoniker": "Areas\\Customer\\Views\\Cinema\\Index.cshtml",
-              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Customer\\Views\\Cinema\\Index.cshtml",
-              "RelativeToolTip": "Areas\\Customer\\Views\\Cinema\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-31T02:31:55.918Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "CinemaController.cs",
-              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Customer\\Controllers\\CinemaController.cs",
-              "RelativeDocumentMoniker": "Areas\\Customer\\Controllers\\CinemaController.cs",
-              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Customer\\Controllers\\CinemaController.cs",
-              "RelativeToolTip": "Areas\\Customer\\Controllers\\CinemaController.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAywCkAAAAJAAAAAAAAAA==",
+              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Controllers\\CinemaController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\CinemaController.cs",
+              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Controllers\\CinemaController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\CinemaController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAALkAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T02:27:13.725Z"
+              "WhenOpened": "2025-04-01T07:29:01.662Z",
+              "EditorCaption": ""
             }
           ]
         }

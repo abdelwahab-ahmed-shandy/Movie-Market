@@ -8,6 +8,7 @@ using MovieMarket.Repositories.IRepositories;
 using MovieMarket.Repositories;
 using MovieMarket.Services;
 using System.Configuration;
+using MovieMarket.Models;
 
 namespace MovieMarket
 {
@@ -62,6 +63,7 @@ namespace MovieMarket
             builder.Services.AddScoped<ISeasonRepository, SeasonRepository>();
             builder.Services.AddScoped<ITvSeriesRepository, TvSeriesRepository>();
             builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            builder.Services.AddScoped<IRepository<CinemaMovie>, Repository<CinemaMovie>>();
 
             // Email Sender .
             builder.Services.AddTransient<IEmailSender, EmailSender>();
