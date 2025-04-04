@@ -1,31 +1,28 @@
 ﻿@section Scripts
 {
 <script>
-    $(document).ready(function ()
-    {
-    // Read the data stored in TempData and remove the extra spaces
-    var message = '@TempData["notifiction"]'.trim();
-    var messageType = '@TempData["MessageType"]'.trim();
+    $(document).ready(function () {
+        // Read the data stored in TempData and remove the extra spaces
+        var message = '@TempData["Message"]'.trim();
+        var messageType = '@TempData["MessageType"]'.trim();
 
-    // Check if there is an actual message to be displayed
-    if (message && message !== 'null' && message !== 'undefined' && message !== '')
-    {
-    // Determine the message type based on its value in TempData
-    switch (messageType.toLowerCase())
-    {
-    case 'success': // If the message indicates a successful operation
-    toastr.success(message, 'Success');
-    break;
-    case 'error': // If the message indicates an error
-    toastr.error(message, 'Error');
-    break;
-    case 'warning': // If the message is a warning
-    toaster.warning(message, 'Warning');
-    break;
-    default: // Any other status is displayed as public information
-    toaster.info(message, 'Notice');
-    }
-    }
+        // Check if there is an actual message to be displayed
+        if (message && message !== 'null' && message !== 'undefined' && message !== '') {
+            // Determine the message type based on its value in TempData
+            switch (messageType?.toLowerCase()) {
+                case 'success':
+                    toastr.success(message, 'Success');
+                    break;
+                case 'error':
+                    toastr.error(message, 'Error');
+                    break;
+                case 'warning':
+                    toastr.warning(message, 'Warning'); 
+                    break;
+                default:
+                    toastr.info(message, 'Notice'); 
+            }
+        }
     });
 </script>
 }
@@ -84,41 +81,28 @@
                         <td>@item.UserName</td>
                         <td>@item.Email</td>
                         <td>@item.Address</td>
+                        
                         <td>
                             <div class="btn-group btn-group-sm" role="group">
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning me-1">
-                                    <i class="fas fa-edit"></i> Edit
-                                </a>
-                                <a asp-action="Block" asp-route-id="@item.Id" class="btn btn-info me-1">
-                                    <i class="fas fa-user-slash"></i> Block
-                                </a>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@item.Id">
-                                    <i class="fas fa-trash-alt"></i> Delete
-                                </button>
+                                @if (item.IsBlocked)
+                                {
+                                    <a asp-action="Unblock" asp-route-id="@item.Id" class="btn btn-success me-1">
+                                        <i class="fas fa-user-check"></i> Unblock
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-action="Block" asp-route-id="@item.Id" class="btn btn-warning me-1">
+                                        <i class="fas fa-user-slash"></i> Block
+                                    </a>
+                                }
                             </div>
+
                         </td>
+
                     </tr>
 
-                    <!-- Delete Confirmation Modal -->
-                    <div class="modal fade" id="deleteModal-@item.Id" tabindex="-1" aria-labelledby="deleteModalLabel-@item.Id" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header bg-danger text-white">
-                                    <h5 class="modal-title" id="deleteModalLabel-@item.Id">Confirm Deletion</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    Are you sure you want to delete "<strong>@item.Email</strong>"? This action cannot be undone.
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">
-                                        <i class="fas fa-trash-alt"></i> Yes, Delete
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 }
             </tbody>
         </table>

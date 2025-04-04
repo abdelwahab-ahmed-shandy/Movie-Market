@@ -118,7 +118,6 @@ namespace MovieMarket.Areas.Identity.Controllers
         #endregion
 
 
-
         #region Login
 
         // Display the login page when requested via HTTP GET
@@ -126,7 +125,9 @@ namespace MovieMarket.Areas.Identity.Controllers
 
         public async Task<IActionResult> Login()
         {
-            return View(); // Display the login interface
+            // Display the login interface
+
+            return View();
         }
 
         // Process login data when sent via HTTP POST
@@ -142,6 +143,13 @@ namespace MovieMarket.Areas.Identity.Controllers
 
                 if (user != null)
                 {
+                    //
+                    if (user.IsBlocked)
+                    {
+                        ModelState.AddModelError("", "Your account is blocked. Please contact support.");
+                        return View(loginVM);
+                    }
+
                     // Validate the entered password
                     var checkPassByUser = await _userManager.CheckPasswordAsync(user, loginVM.Password);
 
@@ -150,8 +158,19 @@ namespace MovieMarket.Areas.Identity.Controllers
                         // User login successfully
                         await _signInManager.SignInAsync(user, loginVM.RememberMe);
 
-                        // Redirect the user to the home page in the "Customer" area
-                        return RedirectToAction("Index", "Home", new { area = "Customer" });
+                        //
+                        if (await _userManager.IsInRoleAsync(user, "Admin") || await _userManager.IsInRoleAsync(user, "SuberAdmin"))
+                        {
+
+                            // Redirect the user to the home page in the "Admin" area
+                            return RedirectToAction("Index", "Home", new { area = "Admin" });
+                        }
+                        else
+                        {
+                            // Redirect the user to the home page in the "Customer" area
+                            return RedirectToAction("Index", "Home", new { area = "Customer" });
+                        }
+
                     }
                     else
                     {
@@ -202,7 +221,6 @@ namespace MovieMarket.Areas.Identity.Controllers
         #endregion
 
 
-
         /*
         Services:
         */
@@ -247,8 +265,6 @@ namespace MovieMarket.Areas.Identity.Controllers
             return View("Error");
         }
         #endregion // End of the email confirmation section
-
-
 
 
     }

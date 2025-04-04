@@ -10,11 +10,15 @@ namespace MovieMarket.Areas.Admin.Controllers
     {
         private readonly IApplicationUserRepository _applicationUserRepository;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger<AdminsController> _logger;
 
-        public SuperAdminsController(IApplicationUserRepository applicationUserRepository, UserManager<ApplicationUser> userManager)
+        public SuperAdminsController(IApplicationUserRepository applicationUserRepository,
+                                        UserManager<ApplicationUser> userManager,
+                                        ILogger<AdminsController> logger)
         {
             this._userManager = userManager;
             this._applicationUserRepository = applicationUserRepository;
+            this._logger = logger;
         }
 
         #region View Super Admin
@@ -68,6 +72,7 @@ namespace MovieMarket.Areas.Admin.Controllers
         }
         #endregion
 
+
         #region New Super Admin
 
         // Display the new Super Admin creation form
@@ -108,6 +113,101 @@ namespace MovieMarket.Areas.Admin.Controllers
 
         #endregion
 
+
+        #region Block Customer Account :
+
+        // This action is responsible for blocking a customer's account based on their ID
+        public async Task<IActionResult> Block(string Id)
+        {
+            // Attempt to retrieve the user from the database using the provided ID
+            var userDB = await _userManager.FindByIdAsync(Id);
+
+            // Check if the user was found
+            if (userDB != null)
+            {
+                // Set the 'IsBlocked' flag to true to block the user
+                userDB.IsBlocked = true;
+
+                // Update the user data in the database
+                var result = await _userManager.UpdateAsync(userDB);
+
+                // Check if the update was successful
+                if (result.Succeeded)
+                {
+                    // Display a success message to the admin
+                    TempData["Message"] = "The SuberAdmin's account has been successfully banned.";
+                    TempData["MessageType"] = "Warning";
+
+                    // Optional: Log the blocking action for auditing and security tracking
+                    _logger.LogInformation($"User {userDB.Email} has been blocked.");
+                }
+                else
+                {
+                    // If update failed, show an error message
+                    TempData["Message"] = "An error occurred while blocking the account.";
+                    TempData["MessageType"] = "error";
+                }
+
+                // Redirect back to the list of all customers
+                return RedirectToAction("AllSuperAdmins");
+            }
+
+            // If the user was not found, display an appropriate error message
+            TempData["Message"] = "Client not found?!";
+            TempData["MessageType"] = "error";
+
+            // Redirect to the customers list even if the user wasn't found
+            return RedirectToAction("AllSuperAdmins");
+        }
+
+        #endregion
+
+
+        #region Un Block Customer Account :
+
+        // This action is responsible for unblocking a customer's account based on their ID
+        public async Task<IActionResult> UnBlock(string Id)
+        {
+            // Attempt to retrieve the user from the database using the provided ID
+            var userDB = await _userManager.FindByIdAsync(Id);
+
+            // Check if the user was found
+            if (userDB != null)
+            {
+                // Set the 'IsBlocked' flag to false to unblock the user
+                userDB.IsBlocked = false;
+
+                // Update the user data in the database 
+                var result = await _userManager.UpdateAsync(user: userDB);
+
+                // Check if the update was successful
+                if (result.Succeeded)
+                {
+                    // Display a success message to the admin
+                    TempData["Message"] = "The SuberAdmins's account has been successfully unblocked.";
+                    TempData["MessageType"] = "Success";
+
+                    // Optional: Log the unblocking action for auditing and security tracking
+                    _logger.LogInformation($"User {userDB.Email} has been unblocked.");
+                }
+                else
+                {
+                    // If update failed, show an error message
+                    TempData["Message"] = "An error occurred while unblocking the account.";
+                    TempData["MessageType"] = "error";
+                }
+                // Redirect back to the list of all customers
+                return RedirectToAction("AllSuperAdmins");
+            }
+            // If the user was not found, display an appropriate error message
+            TempData["Message"] = "Client not found?!";
+            TempData["MessageType"] = "error";
+
+            // Redirect to the customers list even if the user wasn't found
+            return RedirectToAction("AllSuperAdmins");
+        }
+
+        #endregion
 
 
     }

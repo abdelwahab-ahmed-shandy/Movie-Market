@@ -8,9 +8,13 @@ namespace MovieMart.Models
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Address { get; set; }
-        //[ValidateNever]
-        //public ICollection<IdentityUserRole<string>> UserRoles { get; set; }
 
+        // Add IsBlocked
+        public bool IsBlocked { get; set; }
+
+        //// Add Permissions
+        //public bool IsAdmin { get; set; }
+        //public bool IsSuberAdmin { get; set; }
 
     }
 }

@@ -14,10 +14,14 @@ namespace MovieMarket.Areas.Admin.Controllers
     {
         private readonly IApplicationUserRepository _applicationUserRepository;
         private readonly UserManager<ApplicationUser> _userManager;
-        public CustomersController(IApplicationUserRepository applicationUserRepository, UserManager<ApplicationUser> userManager)
+        private readonly ILogger<CustomersController> _logger;
+        public CustomersController(IApplicationUserRepository applicationUserRepository,
+                                    UserManager<ApplicationUser> userManager,
+                                    ILogger<CustomersController> logger)
         {
             this._applicationUserRepository = applicationUserRepository;
             this._userManager = userManager;
+            this._logger = logger;
         }
 
         #region View All Customers
@@ -75,6 +79,7 @@ namespace MovieMarket.Areas.Admin.Controllers
         }
         #endregion
 
+
         #region Create Customer
 
         // Display the new customer creation form
@@ -114,6 +119,103 @@ namespace MovieMarket.Areas.Admin.Controllers
         }
 
         #endregion
+
+
+        #region Block Customer Account :
+
+        // This action is responsible for blocking a customer's account based on their ID
+        public async Task<IActionResult> Block(string Id)
+        {
+            // Attempt to retrieve the user from the database using the provided ID
+            var userDB = await _userManager.FindByIdAsync(Id);
+
+            // Check if the user was found
+            if (userDB != null)
+            {
+                // Set the 'IsBlocked' flag to true to block the user
+                userDB.IsBlocked = true;
+
+                // Update the user data in the database
+                var result = await _userManager.UpdateAsync(userDB);
+
+                // Check if the update was successful
+                if (result.Succeeded)
+                {
+                    // Display a success message to the admin
+                    TempData["Message"] = "The customer's account has been successfully banned.";
+                    TempData["MessageType"] = "Warning";
+
+                    // Optional: Log the blocking action for auditing and security tracking
+                    _logger.LogInformation($"User {userDB.Email} has been blocked.");
+                }
+                else
+                {
+                    // If update failed, show an error message
+                    TempData["Message"] = "An error occurred while blocking the account.";
+                    TempData["MessageType"] = "error";
+                }
+
+                // Redirect back to the list of all customers
+                return RedirectToAction("AllCustomers");
+            }
+
+            // If the user was not found, display an appropriate error message
+            TempData["Message"] = "Client not found?!";
+            TempData["MessageType"] = "error";
+
+            // Redirect to the customers list even if the user wasn't found
+            return RedirectToAction("AllCustomers");
+        }
+
+        #endregion
+
+
+        #region Un Block Customer Account :
+
+        // This action is responsible for unblocking a customer's account based on their ID
+        public async Task<IActionResult> UnBlock(string Id)
+        {
+            // Attempt to retrieve the user from the database using the provided ID
+            var userDB = await _userManager.FindByIdAsync(Id);
+
+            // Check if the user was found
+            if (userDB != null)
+            {
+                // Set the 'IsBlocked' flag to false to unblock the user
+                userDB.IsBlocked = false;
+
+                // Update the user data in the database 
+                var result = await _userManager.UpdateAsync(user: userDB);
+
+                // Check if the update was successful
+                if (result.Succeeded)
+                {
+                    // Display a success message to the admin
+                    TempData["Message"] = "The customer's account has been successfully unblocked.";
+                    TempData["MessageType"] = "Success";
+
+                    // Optional: Log the unblocking action for auditing and security tracking
+                    _logger.LogInformation($"User {userDB.Email} has been unblocked.");
+                }
+                else
+                {
+                    // If update failed, show an error message
+                    TempData["Message"] = "An error occurred while unblocking the account.";
+                    TempData["MessageType"] = "error";
+                }
+                // Redirect back to the list of all customers
+                return RedirectToAction("AllCustomers");
+            }
+            // If the user was not found, display an appropriate error message
+            TempData["Message"] = "Client not found?!";
+            TempData["MessageType"] = "error";
+
+            // Redirect to the customers list even if the user wasn't found
+            return RedirectToAction("AllCustomers");
+        }
+
+        #endregion
+
 
         #region Edit Customer (I stopped trying this action because I found it unreasonable for someone to modify someone else's file )
 
@@ -167,27 +269,5 @@ namespace MovieMarket.Areas.Admin.Controllers
         //    return RedirectToAction(nameof(Index));
         //}
         #endregion
-
-        // todo:here......
-        // #region Delete Customer Account :
-
-        //[HttpDelete"{id}"]
-        //public async Task<IActionResult> Delete(int Id)
-        //{
-        //    var userDelete = await _applicationUserRepository.Get(u => u.Id == Id);
-
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _applicationUserRepository.Delete(userDelete);
-        //    _applicationUserRepository.SaveDB();
-
-        //    return RedirectToAction("AllCustomers", "Customers", new { area = "Admin" });
-        //}
-
-        //#endregion
-
     }
 }
