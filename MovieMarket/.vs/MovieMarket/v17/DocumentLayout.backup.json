@@ -1,28 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\4-Git\\Movie-Market\\MovieMarket\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\areas\\admin\\views\\superadmins\\allsuperadmins.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\admin\\views\\superadmins\\allsuperadmins.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\areas\\admin\\views\\admins\\alladmins.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\admin\\views\\admins\\alladmins.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\areas\\admin\\controllers\\superadminscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\admin\\controllers\\superadminscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\areas\\admin\\controllers\\adminscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:areas\\admin\\controllers\\adminscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|e:\\4-git\\movie-market\\moviemarket\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB3C5B86-3EE1-470C-A6C6-8EE133D54EA5}|MovieMarket.csproj|solutionrelative:models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -30,73 +9,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1416,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SuperAdminsController.cs",
-              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Controllers\\SuperAdminsController.cs",
-              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\SuperAdminsController.cs",
-              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Controllers\\SuperAdminsController.cs",
-              "RelativeToolTip": "Areas\\Admin\\Controllers\\SuperAdminsController.cs",
-              "ViewState": "AgIAAK4AAAAAAAAAAAAswL0AAABSAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-04T00:40:28.5Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AllSuperAdmins.cshtml",
-              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Views\\SuperAdmins\\AllSuperAdmins.cshtml",
-              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\SuperAdmins\\AllSuperAdmins.cshtml",
-              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Views\\SuperAdmins\\AllSuperAdmins.cshtml",
-              "RelativeToolTip": "Areas\\Admin\\Views\\SuperAdmins\\AllSuperAdmins.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-04T00:37:30.12Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ApplicationUser.cs",
-              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Models\\ApplicationUser.cs",
-              "RelativeDocumentMoniker": "Models\\ApplicationUser.cs",
-              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Models\\ApplicationUser.cs",
-              "RelativeToolTip": "Models\\ApplicationUser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-04T00:23:18.298Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AllAdmins.cshtml",
-              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Views\\Admins\\AllAdmins.cshtml",
-              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Admins\\AllAdmins.cshtml",
-              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Views\\Admins\\AllAdmins.cshtml",
-              "RelativeToolTip": "Areas\\Admin\\Views\\Admins\\AllAdmins.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-03T23:37:35.174Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AdminsController.cs",
-              "DocumentMoniker": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Controllers\\AdminsController.cs",
-              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\AdminsController.cs",
-              "ToolTip": "E:\\4-Git\\Movie-Market\\MovieMarket\\Areas\\Admin\\Controllers\\AdminsController.cs",
-              "RelativeToolTip": "Areas\\Admin\\Controllers\\AdminsController.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAwHIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T23:34:34.075Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
