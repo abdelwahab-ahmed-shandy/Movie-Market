@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MovieMart.styles.css" asp-append-version="true" />
-    <!-- Toastr CSS -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-xXxX..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 </head>
 <body>
     <header>
@@ -108,7 +112,6 @@
 
                     </ul>
 
-
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search">
                         <button class="btn btn-secondary" type="submit">Search</button>
@@ -141,6 +144,7 @@
                                     </li>
                                 </ul>
                             </li>
+
                         }
                         else
                         {
@@ -155,6 +159,34 @@
                                 </a>
                             </li>
                         }
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item d-flex align-items-center">
+                                <a class="nav-link text-dark position-relative" asp-controller="Cart" asp-action="Index">
+                                    <i class="fas fa-shopping-cart fa-lg me-1"></i> 
+                                    <span>Cart</span>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        0
+                                        <span class="visually-hidden">items in cart</span>
+                                    </span>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item d-flex align-items-center">
+                                <a class="nav-link text-dark position-relative" asp-area="Identity" asp-controller="Account" asp-action="Login" asp-route-returnUrl="/Cart/Index">
+                                    <i class="fas fa-shopping-cart fa-lg me-1"></i> 
+                                    <span>Cart</span>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        0
+                                        <span class="visually-hidden">items in cart</span>
+                                    </span>
+                                </a>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>

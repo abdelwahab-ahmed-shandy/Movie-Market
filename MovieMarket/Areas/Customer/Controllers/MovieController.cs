@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MovieMarket.Repositories.IRepositories;
 using MovieMart.Repositories;
 using MovieMart.Repositories.IRepositories;
 
@@ -8,10 +10,11 @@ namespace MovieMart.Areas.Users.Views.Customer.Controllers
     public class MovieController : Controller
     {
         private readonly IMovieRepository movieRepository;
-
-        public MovieController(IMovieRepository movieRepository)
+        private readonly ICinemaRepository _cinemaRepository;
+        public MovieController(IMovieRepository movieRepository, ICinemaRepository cinemaRepository)
         {
             this.movieRepository = movieRepository;
+            this._cinemaRepository = cinemaRepository;
         }
 
         public IActionResult Index()
@@ -22,17 +25,23 @@ namespace MovieMart.Areas.Users.Views.Customer.Controllers
             return View(movies);
         }
 
-        public IActionResult MoreDetils(int Id)
+        public async Task<IActionResult> MoreDetils(int Id)
         {
 
             var ViewMovie = movieRepository.Get()
                 .Include(M => M.Category)
+                .Include(m => m.CinemaMovies)
+                    .ThenInclude(cm => cm.Cinema)
                 .FirstOrDefault(M => M.Id == Id);
 
             if (ViewMovie == null)
-            {
-                return RedirectToAction("NotFound", "Home");
-            }
+                return NotFound();
+
+            var cinemas = ViewMovie.CinemaMovies
+                        .Select(cm => cm.Cinema)
+                        .ToList();
+
+            ViewBag.Cinemas = cinemas;
 
             return View(ViewMovie);
         }

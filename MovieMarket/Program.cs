@@ -62,6 +62,7 @@ namespace MovieMarket
             builder.Services.AddScoped<ICinemaRepository, CinemaRepository>();
             builder.Services.AddScoped<ISeasonRepository, SeasonRepository>();
             builder.Services.AddScoped<ITvSeriesRepository, TvSeriesRepository>();
+            builder.Services.AddScoped<ICartRepository, CartRepository>();
             builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             builder.Services.AddScoped<IRepository<CinemaMovie>, Repository<CinemaMovie>>();
 

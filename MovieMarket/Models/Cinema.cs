@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace MovieMarket.Models
+namespace MovieMart.Models
 {
     public class Cinema
     {

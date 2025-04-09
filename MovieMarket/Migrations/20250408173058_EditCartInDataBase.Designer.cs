@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieMarket.DataAccess;
 
@@ -11,9 +12,11 @@ using MovieMarket.DataAccess;
 namespace MovieMarket.Migrations
 {
     [DbContext(typeof(MovieMarketDbContext))]
-    partial class MovieMarketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250408173058_EditCartInDataBase")]
+    partial class EditCartInDataBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,6 +158,100 @@ namespace MovieMarket.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("MovieMarket.Models.Cart", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CinemaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.HasKey("MovieId", "CinemaId", "ApplicationUserId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("CinemaId");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("MovieMarket.Models.Cinema", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cinemas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "A premium large-screen cinema experience.",
+                            Location = "Downtown",
+                            Name = "IMAX Theater"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "A modern cinema with multiple screening rooms.",
+                            Location = "City Center",
+                            Name = "Grand Cineplex"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "A nostalgic theater with vintage decor.",
+                            Location = "Old Town",
+                            Name = "Classic Movie House"
+                        });
+                });
+
+            modelBuilder.Entity("MovieMarket.Models.CinemaMovie", b =>
+                {
+                    b.Property<int>("CinemaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ShowTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("CinemaId", "MovieId");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("CinemaMovies");
+                });
+
             modelBuilder.Entity("MovieMart.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -230,32 +327,6 @@ namespace MovieMarket.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("MovieMart.Models.Cart", b =>
-                {
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CinemaId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ShowDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("MovieId", "CinemaId", "ApplicationUserId");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("CinemaId");
-
-                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("MovieMart.Models.Category", b =>
@@ -417,77 +488,6 @@ namespace MovieMarket.Migrations
                             CharacterId = 4,
                             TvSeriesId = 2
                         });
-                });
-
-            modelBuilder.Entity("MovieMart.Models.Cinema", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cinemas");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "A premium large-screen cinema experience.",
-                            Location = "Downtown",
-                            Name = "IMAX Theater"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "A modern cinema with multiple screening rooms.",
-                            Location = "City Center",
-                            Name = "Grand Cineplex"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "A nostalgic theater with vintage decor.",
-                            Location = "Old Town",
-                            Name = "Classic Movie House"
-                        });
-                });
-
-            modelBuilder.Entity("MovieMart.Models.CinemaMovie", b =>
-                {
-                    b.Property<int>("CinemaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ShowTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("CinemaId", "MovieId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("CinemaMovies");
                 });
 
             modelBuilder.Entity("MovieMart.Models.Episode", b =>
@@ -889,7 +889,7 @@ namespace MovieMarket.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MovieMart.Models.Cart", b =>
+            modelBuilder.Entity("MovieMarket.Models.Cart", b =>
                 {
                     b.HasOne("MovieMart.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
@@ -897,7 +897,7 @@ namespace MovieMarket.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MovieMart.Models.Cinema", "Cinema")
+                    b.HasOne("MovieMarket.Models.Cinema", "Cinema")
                         .WithMany()
                         .HasForeignKey("CinemaId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -910,6 +910,25 @@ namespace MovieMarket.Migrations
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
+
+                    b.Navigation("Cinema");
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("MovieMarket.Models.CinemaMovie", b =>
+                {
+                    b.HasOne("MovieMarket.Models.Cinema", "Cinema")
+                        .WithMany("CinemaMovies")
+                        .HasForeignKey("CinemaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieMart.Models.Movie", "Movie")
+                        .WithMany("CinemaMovies")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Cinema");
 
@@ -954,25 +973,6 @@ namespace MovieMarket.Migrations
                     b.Navigation("TvSeries");
                 });
 
-            modelBuilder.Entity("MovieMart.Models.CinemaMovie", b =>
-                {
-                    b.HasOne("MovieMart.Models.Cinema", "Cinema")
-                        .WithMany("CinemaMovies")
-                        .HasForeignKey("CinemaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MovieMart.Models.Movie", "Movie")
-                        .WithMany("CinemaMovies")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cinema");
-
-                    b.Navigation("Movie");
-                });
-
             modelBuilder.Entity("MovieMart.Models.Episode", b =>
                 {
                     b.HasOne("MovieMart.Models.Season", "Season")
@@ -1006,6 +1006,11 @@ namespace MovieMarket.Migrations
                     b.Navigation("TvSeries");
                 });
 
+            modelBuilder.Entity("MovieMarket.Models.Cinema", b =>
+                {
+                    b.Navigation("CinemaMovies");
+                });
+
             modelBuilder.Entity("MovieMart.Models.Category", b =>
                 {
                     b.Navigation("Movies");
@@ -1016,11 +1021,6 @@ namespace MovieMarket.Migrations
                     b.Navigation("CharacterMovies");
 
                     b.Navigation("CharacterTvSeries");
-                });
-
-            modelBuilder.Entity("MovieMart.Models.Cinema", b =>
-                {
-                    b.Navigation("CinemaMovies");
                 });
 
             modelBuilder.Entity("MovieMart.Models.Movie", b =>

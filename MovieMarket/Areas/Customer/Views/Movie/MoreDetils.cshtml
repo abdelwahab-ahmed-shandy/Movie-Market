@@ -1,6 +1,8 @@
 ﻿@model Movie
+
 @{
     ViewData["Title"] = "More Movie Details";
+    var cinemas = ViewBag.Cinemas as List<Cinema>; 
 }
 
 <div class="container mt-5">
@@ -16,30 +18,37 @@
                     <p class="card-text text-muted">@Model.Description</p>
 
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <strong>Price:</strong>
-                            <span class="text-success fw-semibold">@Model.Price.ToString("C")</span>
-                        </li>
+                        <li class="list-group-item"><strong>Price:</strong> <span class="text-success fw-semibold">@Model.Price.ToString("C")</span></li>
                         <li class="list-group-item"><strong>Author:</strong> @Model.Author</li>
                         <li class="list-group-item"><strong>Duration:</strong> @Model.Duration</li>
                         <li class="list-group-item"><strong>Release Year:</strong> @Model.ReleaseYear</li>
-                        <li class="list-group-item">
-                            <strong>Rating:</strong>
-                            <span class="text-warning fw-bold"> @(Model.Rating?.ToString("0.0") ?? "N/A") ⭐</span>
-                        </li>
-                        <li class ="list-group-item"><strong>Author:</strong> @Model.Category.Name</li>
+                        <li class="list-group-item"><strong>Rating:</strong> <span class="text-warning fw-bold"> @(Model.Rating?.ToString("0.0") ?? "N/A") ⭐</span></li>
+                        <li class="list-group-item"><strong>Category:</strong> @Model.Category.Name</li>
                     </ul>
 
-                    <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mt-4">
-                        <a asp-area="" asp-controller="" asp-action="" asp-route-Id=""
-                           class="btn btn-primary fw-bold shadow-sm flex-fill">🎟️ Book Movie</a>
+                    <form action="/Customer/Cart/AddToCart" method="post" class="mt-4">
+                        <input type="hidden" name="MovieId" value="@Model.Id" />
+                        <div class="mb-3">
+                            <label for="CinemaId" class="form-label fw-bold">🎬 Choose Cinema:</label>
+                            <select name="CinemaId" id="CinemaId" class="form-select" required>
+                                <option value="" disabled selected>-- Select Cinema --</option>
+                                @foreach (var cinema in cinemas)
+                                {
+                                    <option value="@cinema.Id">@cinema.Name - @cinema.Location</option>
+                                }
+                            </select>
+                        </div>
 
-                        <a asp-area="Customer" asp-controller="Movie" asp-action="Index"
-                           class="btn btn-outline-primary fw-bold shadow-sm flex-fill">🎬 More Movies</a>
+                        <div class="mb-3">
+                            <label for="TicketCount" class="form-label fw-bold">🎫 Number of Tickets:</label>
+                            <input type="number" name="count" id="count" class="form-control" min="1" max="10" value="1" required />
+                        </div>
 
-                        <a asp-area="Customer" asp-controller="Category" asp-action="Index"
-                           class="btn btn-outline-secondary fw-bold shadow-sm flex-fill">📂 Go To Categories</a>
-                    </div>
+                        <button type="submit" class="btn btn-primary w-100 fw-bold shadow-sm">
+                            🛒 Add to Cart
+                        </button>
+                    </form>
+
 
                 </div>
             </div>
@@ -48,7 +57,6 @@
 </div>
 
 <style>
-    /* تحسين حاوية الصورة */
     .image-container {
         position: relative;
         width: 100%;
@@ -64,7 +72,6 @@
         transition: transform 0.3s ease-in-out;
     }
 
-    /* تحسين الصورة */
     .movie-img {
         width: 100%;
         height: auto;
@@ -74,13 +81,11 @@
         transition: transform 0.4s ease-in-out, filter 0.3s ease-in-out;
     }
 
-    /* تأثير عند تمرير الماوس */
     .image-container:hover .movie-img {
         transform: scale(1.05);
         filter: brightness(1.2);
     }
 
-    /* فقاعة التصنيف */
     .category-bubble {
         position: absolute;
         top: 15px;
@@ -97,13 +102,11 @@
         transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     }
 
-    /* عند تمرير الماوس، تظهر الفقاعة */
     .image-container:hover .category-bubble {
         opacity: 1;
         transform: scale(1);
     }
 
-    /* تحسين شكل الأزرار */
     .btn {
         transition: all 0.3s ease-in-out;
     }

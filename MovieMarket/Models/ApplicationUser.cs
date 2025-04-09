@@ -11,10 +11,5 @@ namespace MovieMart.Models
 
         // Add IsBlocked
         public bool IsBlocked { get; set; }
-
-        //// Add Permissions
-        //public bool IsAdmin { get; set; }
-        //public bool IsSuberAdmin { get; set; }
-
     }
 }

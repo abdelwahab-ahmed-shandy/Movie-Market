@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ucveJGrpz8Gn/XNfjqjC9V51qyjZeJhjeJTB9ZbtzbM=",
+  "Hash": "+sQ0Yre6Nrm44QchinzcGfXXAb3xBjGlpVWqGxIgHYc=",
   "Source": "MovieMarket",
   "BasePath": "_content/MovieMarket",
   "Mode": "Default",
@@ -493,8 +493,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "c2tiyv64ts",
-      "Integrity": "pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0=",
+      "Fingerprint": "gxe01kdq5n",
+      "Integrity": "bPNZj9rANsm6ywYXaw1SsIrRFubpwPO6M2g+L2iKBN0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -3381,51 +3381,6 @@
       ]
     },
     {
-      "Route": "css/site.c2tiyv64ts.css",
-      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "362"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 18 Mar 2025 19:41:03 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "c2tiyv64ts"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0="
-        }
-      ]
-    },
-    {
       "Route": "css/site.css",
       "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -3436,7 +3391,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "362"
+          "Value": "382"
         },
         {
           "Name": "Content-Type",
@@ -3444,11 +3399,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0=\""
+          "Value": "\"bPNZj9rANsm6ywYXaw1SsIrRFubpwPO6M2g+L2iKBN0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 18 Mar 2025 19:41:03 GMT"
+          "Value": "Mon, 07 Apr 2025 17:55:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3458,7 +3413,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0="
+          "Value": "sha256-bPNZj9rANsm6ywYXaw1SsIrRFubpwPO6M2g+L2iKBN0="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.gxe01kdq5n.css",
+      "AssetFile": "E:\\4-Git\\Movie-Market\\MovieMarket\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "382"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bPNZj9rANsm6ywYXaw1SsIrRFubpwPO6M2g+L2iKBN0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 07 Apr 2025 17:55:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gxe01kdq5n"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bPNZj9rANsm6ywYXaw1SsIrRFubpwPO6M2g+L2iKBN0="
         }
       ]
     },
@@ -8323,7 +8323,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 13:43:44 GMT"
+          "Value": "Wed, 09 Apr 2025 19:36:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8360,7 +8360,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 13:43:44 GMT"
+          "Value": "Wed, 09 Apr 2025 19:36:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8397,7 +8397,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 13:43:44 GMT"
+          "Value": "Wed, 09 Apr 2025 19:36:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8442,7 +8442,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 13:43:44 GMT"
+          "Value": "Wed, 09 Apr 2025 19:36:43 GMT"
         },
         {
           "Name": "Cache-Control",

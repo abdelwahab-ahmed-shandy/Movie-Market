@@ -1,4 +1,4 @@
-﻿namespace MovieMarket.Models
+﻿namespace MovieMart.Models
 {
     public class CinemaMovie
     {

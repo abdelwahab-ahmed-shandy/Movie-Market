@@ -20,6 +20,7 @@ namespace MovieMarket.DataAccess
         public DbSet<CharacterMovie> CharacterMovies { get; set; }
         public DbSet<CharacterTvSeries> CharacterTvSeries { get; set; }
         public DbSet<CinemaMovie> CinemaMovies { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         #endregion
 

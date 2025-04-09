@@ -1,0 +1,114 @@
+﻿@section Scripts
+{
+<script>
+    $(document).ready(function ()
+    {
+    // Read the data stored in TempData and remove the extra spaces
+    var message = '@TempData["notifiction"]'.trim();
+    var messageType = '@TempData["MessageType"]'.trim();
+
+    // Check if there is an actual message to be displayed
+    if (message && message !== 'null' && message !== 'undefined' && message !== '')
+    {
+    // Determine the message type based on its value in TempData
+    switch (messageType.toLowerCase())
+    {
+         case 'success': // If the message indicates a successful operation
+            toastr.success(message, 'Success');
+                break;
+         case 'error': // If the message indicates an error
+            toastr.error(message, 'Error');
+                 break;
+         case 'warning': // If the message is a warning
+            toaster.warning(message, 'Warning');
+                break;
+         default: // Any other status is displayed as public information
+            toaster.info(message, 'Notice');
+    }
+    }
+    });
+</script>
+}
+@model List<Cart>
+@{
+    ViewData["Title"] = "Cart Page";
+}
+<form method="post">
+    <div class="card shadow border-0">
+        <div class="card-body my-4">
+            <div class="row mb-3 pb-3">
+                <div class="col-md-2 offset-md-1">
+                    <a href="/Customer/Movie" class="btn btn-outline-primary text-uppercase mb-5 btn-sm"><small>Continue Shopping</small></a>
+                </div>
+                <div class="col-md-10 offset-md-1">
+                    @foreach (var item in Model)
+                    {
+                        <div class="row border-bottom pb-3">
+                            <!-- Movie Image Section -->
+                            <div class="d-none d-lg-block col-lg-2 text-center py-2">
+                                <img src="~/Assets/Customer/MoviesPhoto/@item.Movie.ImgUrl" class="img-fluid rounded" alt="@item.Movie.Title" />
+                            </div>
+
+                            <!-- Movie Details Section -->
+                            <div class="col-12 col-lg-6 pt-md-3">
+                                <h5 class="text-uppercase text-secondary fw-bold">Movie : @item.Movie.Title</h5>
+                                <h6 class="text-uppercase text-secondary fw-bold">Cinema: @item.Cinema.Name</h6>
+                                <p class="text-muted"><small>@item.Movie.Description</small></p>
+                            </div>
+
+                            <!-- Price & Controls Section -->
+                            <div class="col-12 col-lg-4 text-center row align-items-center">
+                                <div class="col-6 text-md-right pt-2 pt-md-4">
+                                    <h6 class="fw-semibold">
+                                        @item.Movie.Price
+                                        <span class="text-muted">&nbsp;x&nbsp;</span>@item.Count
+                                    </h6>
+                                </div>
+
+                                <div class="col-6 col-sm-4 col-lg-5 pt-2">
+                                    <div class="w-75 btn-group" role="group">
+                                        <a href="/Customer/Cart/Increment?movieId=@item.Movie.Id" class="btn btn-outline-primary py-2">
+                                            <i class="bi bi-plus-square"></i>
+                                        </a>
+                                        <a href="/Customer/Cart/Decrement?movieId=@item.Movie.Id" class="btn btn-outline-primary py-2">
+                                            <i class="bi bi-dash-square"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Delete Button -->
+                                <div class="col-3 col-sm-4 col-lg-1 text-right pt-2">
+                                    <a href="/Customer/Cart/DeleteOnCart?movieId=@item.Movie.Id" class="btn btn-danger bg-gradient py-2">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Total Price Section -->
+            <div class="card-footer bg-white border-0">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4">
+                        <ul class="list-group mb-4">
+                            <li class="d-flex justify-content-between align-items-center">
+                                <h5 class="text-dark fw-semibold text-uppercase">Total (EGP)</h5>
+                                <h4 class="text-dark fw-bolder">@ViewBag.Total</h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pay Button -->
+                <div class="row">
+                    <div class="col-md-2 offset-md-5">
+                        <a href="/Customer/Cart/Pay" class="btn btn-primary border-0 bg-gradient w-100 py-2">Pay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
