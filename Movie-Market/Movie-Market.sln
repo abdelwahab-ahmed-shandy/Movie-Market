@@ -5,6 +5,8 @@ VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieMarket", "MovieMarket.csproj", "{86280736-BE50-41B3-B5D3-6DF3EAC55553}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "..\BLL\BLL.csproj", "{2EB37683-492C-44AE-860B-755458E25F33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{86280736-BE50-41B3-B5D3-6DF3EAC55553}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86280736-BE50-41B3-B5D3-6DF3EAC55553}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86280736-BE50-41B3-B5D3-6DF3EAC55553}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EB37683-492C-44AE-860B-755458E25F33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EB37683-492C-44AE-860B-755458E25F33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EB37683-492C-44AE-860B-755458E25F33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EB37683-492C-44AE-860B-755458E25F33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
