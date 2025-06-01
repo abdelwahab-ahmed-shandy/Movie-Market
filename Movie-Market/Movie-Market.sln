@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35806.99 d17.13
+VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movie-Market", "Movie-Market.csproj", "{86280736-BE50-41B3-B5D3-6DF3EAC55553}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieMarket", "MovieMarket.csproj", "{86280736-BE50-41B3-B5D3-6DF3EAC55553}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\01-Projects\\Movie-Market\\Movie-Market\\Movie-Market.csproj",
-      "projectName": "Movie-Market",
-      "projectPath": "E:\\01-Projects\\Movie-Market\\Movie-Market\\Movie-Market.csproj",
+      "projectUniqueName": "E:\\01-Projects\\Movie-Market\\Movie-Market\\MovieMarket.csproj",
+      "projectName": "MovieMarket",
+      "projectPath": "E:\\01-Projects\\Movie-Market\\Movie-Market\\MovieMarket.csproj",
       "packagesPath": "C:\\Users\\FM\\.nuget\\packages\\",
       "outputPath": "E:\\01-Projects\\Movie-Market\\Movie-Market\\obj\\",
       "projectStyle": "PackageReference",
