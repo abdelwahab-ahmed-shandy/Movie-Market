@@ -12,14 +12,6 @@
 
 ---
 
-## 🏗️ Technologies Used
-- **Back-end**: ASP.NET Core MVC
-- **Front-end**: Razor Pages, HTML, CSS, JavaScript
-- **Database**: Microsoft SQL Server + Entity Framework Core
-- **Data Management**: Repository Pattern + Migrations
-
----
-
 ## 📂 Project Structure
 
 Movie-Market/
