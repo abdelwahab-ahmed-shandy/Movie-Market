@@ -24,17 +24,9 @@
 
 Movie-Market/
 
-│-- 📂 Areas/                 
-│-- 📂 DataAccess/             
-│-- 📂 Migrations/             
-│-- 📂 Models/                 
-│-- 📂 Repositories/           
-│-- 📂 Services/               
-│-- 📂 Views/                  
-│-- 📂 wwwroot/                
-│-- 📄 appsettings.json        
-│-- 📄 Program.cs              
-│-- 📄 MovieMarket.sln        
+│-- 📂 Presentation Layer "Movie-Market"/                 
+│-- 📂 Business Logic Layer "BLL"/                 
+│-- 📂 Data Access Layer "DAL"/                       
 
 ---
 ## 📞 Contact
