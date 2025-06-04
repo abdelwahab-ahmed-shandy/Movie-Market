@@ -13,10 +13,10 @@
 ---
 
 ## 📂 Project Structure
-
+```
 Movie-Market/
 │
-├── 📂 Presentation Layer       
+├── 📂 Presentation Layer
 │   └── Areas/
 │       ├── Admin/
 │       │   ├── Controllers/
@@ -24,7 +24,7 @@ Movie-Market/
 │       ├── Customer/
 │       │   ├── Controllers/
 │       │   └── Views/
-│       └── Identity/           
+│       └── Identity/
 │           ├── Controllers/
 │           └── Views/
 │
@@ -36,13 +36,14 @@ Movie-Market/
 │
 ├── 📂 Data Access Layer (DAL)
 │   ├── ApplicationDbContext.cs
-│   ├── Models/             
+│   ├── Models/
 │   ├── Repositories/
 │   │   ├── Interfaces/
 │   │   └── Implementations/
 │   └── Migrations/
 │
 └── Movie-Market.sln
+```
                  
 
 ---
