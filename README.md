@@ -25,14 +25,14 @@ Movie-Market/
 │       │   ├── Controllers/
 │       │   └── Views/
 │       └── Identity/           
-│       │   ├── Controllers/
-│       │   └── Views/
+│           ├── Controllers/
+│           └── Views/
 │
 ├── 📂 Business Logic Layer (BLL)
 │   ├── Services/
 │   │   ├── Interfaces/
 │   │   └── Implementations/
-│   
+│   └── ViewModels/
 │
 ├── 📂 Data Access Layer (DAL)
 │   ├── ApplicationDbContext.cs
@@ -40,9 +40,10 @@ Movie-Market/
 │   ├── Repositories/
 │   │   ├── Interfaces/
 │   │   └── Implementations/
-│   └── Migrations/           
+│   └── Migrations/
 │
-└── Movie-Market.sln                      
+└── Movie-Market.sln
+                 
 
 ---
 ## 📞 Contact
