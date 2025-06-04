@@ -6,10 +6,10 @@ namespace Models
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        public CurrentState? CurrentState { get; set; }
+        public CurrentState? CurrentState { get; set; } = DAL.Enums.CurrentState.Inactive;
 
         [MaxLength(100)]
-        public string? CreatedBy { get; set; }
+        public string CreatedBy { get; set; } = "System";
         public DateTime CreatedDateUtc { get; set; } = DateTime.UtcNow;
 
         [MaxLength(100)]

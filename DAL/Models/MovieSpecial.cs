@@ -2,8 +2,8 @@
 {
     public class MovieSpecial : BaseModel
     {
-        public Guid MovieId { get; set; }
-        public Movie Movie { get; set; } = null!;
+        public Guid ParentMovieId { get; set; }
+        public Movie ParentMovie { get; set; } = null!;
 
         public Guid SpecialId { get; set; }
         public Special Special { get; set; } = null!;

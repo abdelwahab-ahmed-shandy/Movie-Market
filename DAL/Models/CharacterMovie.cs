@@ -1,6 +1,6 @@
 ﻿namespace MovieMart.Models
 {
-    public class CharacterMovie : Movie
+    public class CharacterMovie : BaseModel
     {
         // Many-to-Many: Character <-> Movie
         public Guid CharacterId { get; set; }

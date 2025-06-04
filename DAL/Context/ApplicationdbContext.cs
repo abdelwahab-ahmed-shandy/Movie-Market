@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using MovieMart.Models;
 
 namespace DAL.Context
@@ -49,20 +50,35 @@ namespace DAL.Context
             {
                 optionsBuilder
                     .UseLazyLoadingProxies()
-                    .UseSqlServer("DefaultConnection");
+                    .UseSqlServer("YourConnectionString");
+
             }
         }
 
 
+
+        /// <summary>
+        /// Configures the model for the database context, including global filters, initial data seeding, relationships, and indexes.
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            #region Filter automatically deleted records (Soft Delete)
+            ConfigureGlobalFilters(modelBuilder);
+            ConfigureRelationships(modelBuilder);
+            ConfigureIndexes(modelBuilder);
+        }
 
+
+
+        #region Private Configuration Methods
+        private void ConfigureGlobalFilters(ModelBuilder modelBuilder)
+        {
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
-                if (typeof(BaseModel).IsAssignableFrom(entityType.ClrType))
+                if (typeof(BaseModel).IsAssignableFrom(entityType.ClrType) &&
+                    entityType.BaseType == null)
                 {
                     var parameter = Expression.Parameter(entityType.ClrType, "e");
                     var body = Expression.Equal(
@@ -73,23 +89,78 @@ namespace DAL.Context
                     modelBuilder.Entity(entityType.ClrType).HasQueryFilter(lambda);
                 }
             }
+        }
 
-            #endregion
-
-
-            #region Define the relationship
-
+        private void ConfigureRelationships(ModelBuilder modelBuilder)
+        {
+            // AuditRecord ↔ User
             modelBuilder.Entity<AuditRecord>()
                 .HasOne(a => a.User)
                 .WithMany(u => u.AuditRecords)
-                .HasForeignKey(a => a.UserId);
+                .HasForeignKey(a => a.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            // Movie ↔ Category
+            modelBuilder.Entity<Movie>()
+                .HasOne(m => m.Category)
+                .WithMany(c => c.Movies)
+                .HasForeignKey(m => m.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
 
+            // Season ↔ TvSeries
+            modelBuilder.Entity<Season>()
+                .HasOne(s => s.TvSeries)
+                .WithMany(t => t.Seasons)
+                .HasForeignKey(s => s.TvSeriesId)
+                .OnDelete(DeleteBehavior.Cascade);
 
+            // Character ↔ Movie (Many-to-Many)
+            modelBuilder.Entity<CharacterMovie>()
+                .HasKey(cm => new { cm.CharacterId, cm.MovieId });
 
-
+            // Character ↔ TvSeries (Many-to-Many)
+            modelBuilder.Entity<CharacterTvSeries>()
+                .HasKey(ct => new { ct.CharacterId, ct.TvSeriesId });
         }
+
+        private void ConfigureIndexes(ModelBuilder modelBuilder)
+        {
+            // Episode
+            modelBuilder.Entity<Episode>()
+                .Property(e => e.Rating)
+                .HasPrecision(5, 2);
+
+            // Special
+            modelBuilder.Entity<Special>()
+                .Property(s => s.DiscountPercentage)
+                .HasPrecision(5, 2);
+
+            // CharacterMovie
+            modelBuilder.Entity<CharacterMovie>()
+                .HasIndex(cm => cm.CharacterId);
+            modelBuilder.Entity<CharacterMovie>()
+                .HasIndex(cm => cm.MovieId);
+
+            // CinemaMovie
+            modelBuilder.Entity<CinemaMovie>()
+                .HasIndex(cm => new { cm.CinemaId, cm.MovieId, cm.ShowTime })
+                .IsUnique();
+
+            // Movie
+            modelBuilder.Entity<Movie>()
+                .HasIndex(m => m.Title);
+
+            // User
+            modelBuilder.Entity<ApplicationUser>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+        }
+
+
+
+        #endregion
+
+
 
     }
 
