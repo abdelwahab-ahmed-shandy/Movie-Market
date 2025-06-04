@@ -18,7 +18,7 @@ namespace DAL.Repositories
 
         #region Get By Id 
 
-        public async Task<T> GetByIdAsync(int Id)
+        public async Task<T> GetByIdAsync(Guid Id)
         {
             return await _dbSet.AsTracking().Where(e => e.Id == Id).FirstOrDefaultAsync();
         }
@@ -86,7 +86,7 @@ namespace DAL.Repositories
         private string? GetCurrentUserName()
             => _httpContextAccessor.HttpContext?.User?.Identity?.Name;
 
-        private async Task<T?> FindByIdAsync(int id)
+        private async Task<T?> FindByIdAsync(Guid id)
             => await _dbSet.FindAsync(id);
 
         private void MarkAsDeleted(T entity, string deletedBy)
@@ -105,10 +105,10 @@ namespace DAL.Repositories
 
         #endregion
 
-        public async Task Delete(int id)
+        public async Task Delete(Guid id)
             => await SoftDeleteAsync(id);
 
-        public async Task SoftDeleteAsync(int id)
+        public async Task SoftDeleteAsync(Guid id)
         {
             var entity = await FindByIdAsync(id);
             if (entity != null && !entity.IsDeleted)
@@ -119,7 +119,7 @@ namespace DAL.Repositories
             }
         }
 
-        public async Task RestoreAsync(int id)
+        public async Task RestoreAsync(Guid id)
         {
             var entity = await FindByIdAsync(id);
             if (entity != null && entity.IsDeleted)

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models
 {
-    public class AuditRecord
+    public class AuditRecord : BaseModel
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
+
+        [ForeignKey(nameof(UserId))]
+        public virtual ApplicationUser User { get; set; }
 
         [Required]
         [MaxLength(100)]

@@ -9,7 +9,7 @@ namespace DAL.Repositories.IRepositories
 
         #region Get By Id 
 
-        Task<T?> GetByIdAsync(int id);
+        Task<T?> GetByIdAsync(Guid id);
 
         #endregion
 
@@ -35,9 +35,9 @@ namespace DAL.Repositories.IRepositories
 
         #region Soft Delete 
 
-        Task Delete(int id);
-        Task SoftDeleteAsync(int id);
-        Task RestoreAsync(int id);
+        Task Delete(Guid id);
+        Task SoftDeleteAsync(Guid id);
+        Task RestoreAsync(Guid id);
         #endregion
 
         #endregion

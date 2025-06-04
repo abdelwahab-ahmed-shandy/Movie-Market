@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Dashboard for managing Movie Mart" />
+    <meta name="author" content="Movie Mart Team" />
+    <title>@ViewData["Title"] - MovieMart</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="~/Assets/Customer/imag/favicon.png">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" />
+    <link rel="stylesheet" href="~/assets/dashboard/css/styles.css" />
+
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --accent-color: #fd79a8;
+            --dark-color: #2d3436;
+            --light-color: #f5f6fa;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .sb-topnav {
+            background: linear-gradient(135deg, var(--dark-color) 0%, var(--primary-color) 100%) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        #sidebarToggle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+            #sidebarToggle:hover {
+                color: white;
+            }
+
+        .sb-sidenav {
+            background-color: var(--dark-color);
+            transition: all 0.3s ease;
+        }
+
+            .sb-sidenav .nav-link {
+                color: rgba(255, 255, 255, 0.8);
+                font-weight: 500;
+                border-left: 3px solid transparent;
+                transition: all 0.2s ease;
+            }
+
+                .sb-sidenav .nav-link:hover {
+                    color: white;
+                    background-color: rgba(255, 255, 255, 0.1);
+                    border-left: 3px solid var(--accent-color);
+                }
+
+                .sb-sidenav .nav-link.active {
+                    color: white;
+                    background-color: rgba(255, 255, 255, 0.1);
+                    border-left: 3px solid var(--primary-color);
+                }
+
+            .sb-sidenav .sb-nav-link-icon {
+                color: var(--secondary-color);
+            }
+
+        .sb-sidenav-menu-heading {
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .sb-sidenav-footer {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+        }
+
+        footer {
+            background-color: white;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-results-container {
+            position: absolute;
+            width: 100%;
+            max-height: 400px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .search-group-header {
+            padding: 8px 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-result {
+            display: block;
+            padding: 10px 12px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+        }
+
+            .search-result:hover {
+                background-color: #f8f9fa;
+            }
+
+        .search-result-title {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .search-result-desc {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .search-loading,
+        .search-no-results,
+        .search-error {
+            padding: 12px;
+            text-align: center;
+        }
+
+        /* Add this inside your Razor View or _Layout.cshtml */
+        @@media (max-width: 768px) {
+            .search-box {
+                min-width: 200px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="sb-topnav navbar navbar-expand navbar-dark">
+        <!-- Navbar Brand -->
+        <a class="navbar-brand ps-3 d-flex align-items-center" asp-area="Customer" asp-controller="Home" asp-action="Index">
+            <i class="bi bi-camera-reels-fill me-2"></i>
+            <span>MovieMart</span>
+        </a>
+
+        <!-- Sidebar Toggle Button -->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Search Bar -->
+        <form id="searchForm" class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group search-box">
+                <input id="searchInput" class="form-control" type="text" placeholder="Search movies, cinemas..." aria-label="Search" />
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <!-- Item to display search results -->
+            <div id="searchResults" class="search-results-container"></div>
+        </form>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <!-- User Navigation -->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4 d-flex align-items-center">
+                <!-- Notification Bell -->
+                <li class="nav-item dropdown mx-2">
+                    <a class="nav-link dropdown-toggle position-relative" id="notificationDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bell fs-5"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            3
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-notifications p-0" aria-labelledby="notificationDropdown">
+                        <li class="dropdown-header bg-light py-2 px-3">
+                            <strong>You have 3 notifications</strong>
+                        </li>
+                        <li><hr class="dropdown-divider m-0"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2 px-3" href="#">
+                                <div class="me-3 bg-primary bg-opacity-10 rounded-circle p-2">
+                                    <i class="bi bi-cart-check text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="small text-muted">10 minutes ago</div>
+                                    <span>New order received</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider m-0"></li>
+                        <li>
+                            <a class="dropdown-item text-center py-2 small" href="#">
+                                View all notifications
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- User Profile -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" id="userDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="~/Assets/Users/user.png" alt="User Avatar" class="user-avatar rounded-circle me-2">
+                        <span class="d-none d-lg-inline">@User.Identity.Name</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" asp-area="Identity" asp-controller="Settings" asp-action="Profile">
+                                <i class="bi bi-person me-2"></i> Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" asp-area="Identity" asp-controller="Settings" asp-action="Manage">
+                                <i class="bi bi-gear me-2"></i> Settings
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center text-danger" asp-area="Identity" asp-controller="Account" asp-action="Logout">
+                                <i class="bi bi-box-arrow-right me-2"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        }
+    </nav>
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+
+                        @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+                        {
+                            <div class="sb-sidenav-menu-heading">User Management</div>
+                            @if (User.IsInRole("SuperAdmin"))
+                            {
+                                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "SuperAdmins" ? "active" : "")" asp-area="Admin" asp-controller="SuperAdmins" asp-action="AllSuperAdmins">
+                                    <div class="sb-nav-link-icon">
+                                        <i class="fas fa-crown text-warning"> </i>
+
+                                    </div>
+                                    Super Admins
+                                </a>
+
+                                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Admins" ? "active" : "")" asp-area="Admin" asp-controller="Admins" asp-action="AllAdmins">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-user-shield"></i></div>
+                                    Admins
+                                </a>
+                            }
+
+                            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Customers" ? "active" : "")" asp-area="Admin" asp-controller="Customers" asp-action="AllCustomers">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                Customers
+                            </a>
+                        }
+
+                        <div class="sb-sidenav-menu-heading">Content Management</div>
+
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Cinema" ? "active" : "")" asp-area="Admin" asp-controller="Cinema" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="bi bi-building"></i></div>
+                            Cinemas
+                        </a>
+
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Movie" ? "active" : "")" asp-area="Admin" asp-controller="Movie" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="bi bi-film"></i></div>
+                            Movies
+                        </a>
+
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Category" ? "active" : "")" asp-area="Admin" asp-controller="Category" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="bi bi-collection"></i></div>
+                            Categories
+                        </a>
+
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Character" ? "active" : "")" asp-area="Admin" asp-controller="Character" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="bi bi-people"></i></div>
+                            Characters
+                        </a>
+
+                        <div class="sb-sidenav-menu-heading">TV Series</div>
+
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "TvSeries" ? "active" : "")" asp-area="Admin" asp-controller="TvSeries" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="bi bi-tv"></i></div>
+                            TV Series
+                        </a>
+
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Season" ? "active" : "")" asp-area="Admin" asp-controller="Season" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="bi bi-collection-play"></i></div>
+                            Seasons
+                        </a>
+
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Episode" ? "active" : "")" asp-area="Admin" asp-controller="Episode" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="bi bi-play-circle"></i></div>
+                            Episodes
+                        </a>
+
+                        <div class="sb-sidenav-menu-heading">Subscribers</div>
+
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Newsletter" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")"
+                           asp-area="Admin" asp-controller="Newsletter" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="bi bi-envelope"></i></div>
+                            Newsletter Subscribers
+                        </a>
+
+
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Newsletter" && ViewContext.RouteData.Values["Action"]?.ToString() == "SendEmail" ? "active" : "")"
+                           asp-area="Admin" asp-controller="Newsletter" asp-action="SendEmail">
+                            <div class="sb-nav-link-icon"><i class="bi bi-send-check-fill"></i></div>
+                            Send Email to Subscribers
+                        </a>
+
+
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Newsletter" && ViewContext.RouteData.Values["Action"]?.ToString() == "EmailHistory" ? "active" : "")"
+                           asp-area="Admin" asp-controller="Newsletter" asp-action="EmailHistory">
+                            <div class="sb-nav-link-icon"><i class="bi bi-clock-history"></i></div>
+                            Sent Emails History
+                        </a>
+
+
+                        <div class="sb-sidenav-menu-heading">Orders</div>
+
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "AllOrders" ? "active" : "")" asp-area="Admin" asp-controller="Order" asp-action="AllOrders">
+                            <div class="sb-nav-link-icon"><i class="bi bi-receipt"></i></div>
+                            All Orders
+                        </a>
+
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "TrackOrders" ? "active" : "")" asp-area="Admin" asp-controller="Order" asp-action="TrackOrders">
+                            <div class="sb-nav-link-icon"><i class="bi bi-truck"></i></div>
+                            Track Orders
+                        </a>
+
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Order" && ViewContext.RouteData.Values["Action"].ToString() == "CancelRequests" ? "active" : "")" asp-area="Admin" asp-controller="Order" asp-action="CancelRequests">
+                            <div class="sb-nav-link-icon"><i class="bi bi-x-circle"></i></div>
+                            Cancel Requests
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer bg-dark">
+                    <div class="small">Logged in as:</div>
+                    <span class="text-warning">@User.Identity.Name</span>
+                </div>
+            </nav>
+        </div>
+
+        <div id="layoutSidenav_content">
+            <main role="main" class="pb-3">
+                <div class="container-fluid px-4 mt-4">
+                    @RenderBody()
+                </div>
+            </main>
+
+            <footer class="py-4 bg-white mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">
+                            © 2025 <strong class="text-dark">MovieMart</strong> — Created with <i class="fas fa-heart text-danger"></i> by
+                            <a href="#" class="text-decoration-none">Abdelwahab Shandy</a>
+                        </div>
+                        <div>
+                            <a href="https://www.linkedin.com/in/abdelwahab-shandy" target="_blank" class="text-decoration-none me-3">
+                                <i class="bi bi-linkedin text-primary"></i>
+                            </a>
+                            <a href="https://github.com/abdelwahab-ahmed-shandy" target="_blank" class="text-decoration-none">
+                                <i class="bi bi-github text-dark"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/dashboard/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="~/assets/dashboard/assets/demo/chart-area-demo.js"></script>
+    <script src="~/assets/dashboard/assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
+    <script src="~/assets/dashboard/js/datatables-simple-demo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    @await Html.PartialAsync("_NotificationAdmin")
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

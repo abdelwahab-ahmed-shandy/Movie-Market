@@ -15,10 +15,34 @@
 ## 📂 Project Structure
 
 Movie-Market/
-
-│-- 📂 Presentation Layer "Movie-Market"/                 
-│-- 📂 Business Logic Layer "BLL"/                 
-│-- 📂 Data Access Layer "DAL"/                       
+│
+├── 📂 Presentation Layer       
+│   └── Areas/
+│       ├── Admin/
+│       │   ├── Controllers/
+│       │   └── Views/
+│       ├── Customer/
+│       │   ├── Controllers/
+│       │   └── Views/
+│       └── Identity/           
+│       │   ├── Controllers/
+│       │   └── Views/
+│
+├── 📂 Business Logic Layer (BLL)
+│   ├── Services/
+│   │   ├── Interfaces/
+│   │   └── Implementations/
+│   
+│
+├── 📂 Data Access Layer (DAL)
+│   ├── ApplicationDbContext.cs
+│   ├── Models/             
+│   ├── Repositories/
+│   │   ├── Interfaces/
+│   │   └── Implementations/
+│   └── Migrations/           
+│
+└── Movie-Market.sln                      
 
 ---
 ## 📞 Contact

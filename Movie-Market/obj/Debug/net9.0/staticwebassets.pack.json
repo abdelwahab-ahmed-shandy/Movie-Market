@@ -1,8 +1,92 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\MovieMarket.bundle.scp.css",
-      "PackagePath": "staticwebassets\\MovieMarket.3kkrv2dq91.bundle.scp.css"
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Customer\\Home\\hero-moviemart-banner.png",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\Home\\hero-moviemart-banner.png"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Customer\\MoviesPhoto\\akira.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\MoviesPhoto\\akira.jpg"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Customer\\MoviesPhoto\\spiritedaway.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\MoviesPhoto\\spiritedaway.jpg"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Customer\\MoviesPhoto\\thelast.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\MoviesPhoto\\thelast.jpg"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Customer\\MoviesPhoto\\yourname.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\MoviesPhoto\\yourname.jpg"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Customer\\TvSeries\\aot.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\TvSeries\\aot.jpg"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Customer\\TvSeries\\naruto.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\TvSeries\\naruto.jpg"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Customer\\TvSeries\\onepiece.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\TvSeries\\onepiece.jpg"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Customer\\imag\\app.png",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\imag\\app.png"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Customer\\imag\\appstore.png",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\imag\\appstore.png"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Customer\\imag\\favicon.png",
+      "PackagePath": "staticwebassets\\Assets\\Customer\\imag\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-area-demo.js",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\assets\\demo\\chart-area-demo.js"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-bar-demo.js",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\assets\\demo\\chart-bar-demo.js"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Dashboard\\assets\\demo\\chart-pie-demo.js",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\assets\\demo\\chart-pie-demo.js"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Dashboard\\assets\\demo\\datatables-demo.js",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\assets\\demo\\datatables-demo.js"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-404-monochrome.svg",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\assets\\img\\error-404-monochrome.svg"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Dashboard\\assets\\img\\error-500.png",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\assets\\img\\error-500.png"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Dashboard\\css\\styles.css",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\css\\styles.css"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Dashboard\\js\\datatables-simple-demo.js",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\js\\datatables-simple-demo.js"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\Dashboard\\js\\scripts.js",
+      "PackagePath": "staticwebassets\\Assets\\Dashboard\\js\\scripts.js"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\identity\\css\\identity.css",
+      "PackagePath": "staticwebassets\\Assets\\identity\\css\\identity.css"
+    },
+    {
+      "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\Assets\\identity\\user.png",
+      "PackagePath": "staticwebassets\\Assets\\identity\\user.png"
     },
     {
       "Id": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\wwwroot\\css\\site.css",
@@ -257,24 +341,24 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.MovieMarket.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.MovieMart.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.MovieMarket.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.MovieMart.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.MovieMarket.props",
-      "PackagePath": "build\\MovieMarket.props"
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.MovieMart.props",
+      "PackagePath": "build\\MovieMart.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.MovieMarket.props",
-      "PackagePath": "buildMultiTargeting\\MovieMarket.props"
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.MovieMart.props",
+      "PackagePath": "buildMultiTargeting\\MovieMart.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.MovieMarket.props",
-      "PackagePath": "buildTransitive\\MovieMarket.props"
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.MovieMart.props",
+      "PackagePath": "buildTransitive\\MovieMart.props"
     }
   ],
   "ElementsToRemove": []

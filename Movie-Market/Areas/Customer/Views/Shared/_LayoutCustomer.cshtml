@@ -1,0 +1,376 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MovieMart | Your Ultimate Movie Destination</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="~/Assets/Customer/imag/favicon.png" type="image/png">
+
+    <!-- Primary CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MovieMart.styles.css" asp-append-version="true" />
+
+    <!-- Icon Libraries -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- UI Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" asp-fallback-href="~/css/local-fonts/poppins.css" />
+
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="MovieMart - Your ultimate destination for movies, TV series and cinema tickets. Browse, book and enjoy the latest entertainment.">
+    <meta name="keywords" content="movies, cinema, TV series, entertainment, booking">
+    <meta name="author" content="Abdelwahab Shandy">
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header class="sticky-top shadow-sm">
+        <!-- Main Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container position-relative">
+                <!-- Added position-relative here -->
+                <!-- Brand Logo with Animation -->
+                <a class="navbar-brand d-flex align-items-center fw-bold" asp-area="Customer" asp-controller="Home" asp-action="Index">
+                    <img src="~/Assets/Customer/imag/favicon.png" alt="MovieMart Logo" class="me-2 animate__animated animate__pulse" width="40" height="40">
+                    <span class="text-gradient">MovieMart</span>
+                </a>
+
+                <!-- Mobile Toggle Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Main Navigation Content -->
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Movie" asp-action="Index">
+                                <i class="fas fa-film me-1"></i> Movies
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="TvSerie" asp-action="Index">
+                                <i class="fas fa-tv me-1"></i> TV Series
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Cinema" asp-action="Index">
+                                <i class="fas fa-map-marker-alt me-1"></i> Cinemas
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Search Bar -->
+                    <form class="d-flex me-3 search-form" role="search" method="get" action="/Customer/Home/GlobalSearch">
+                        <div class="input-group">
+                            <input class="form-control search-input" type="search" placeholder="Search movies, series..."
+                                   aria-label="Search" id="globalSearch" name="query">
+                            <button class="btn btn-primary search-btn" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="search-results dropdown-menu w-100 p-2 d-none"></div>
+                    </form>
+
+
+                    <!-- User Section -->
+                    <ul class="navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <!-- User Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
+                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="~/Assets/Users/user.png" alt="User Avatar"
+                                         class="rounded-circle me-2 border border-2 border-primary" width="36" height="36">
+                                    <span class="d-none d-lg-inline">@User.Identity.Name</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-lg mt-2" aria-labelledby="userDropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-area="Identity" asp-controller="Settings" asp-action="Profile">
+                                            <i class="fas fa-user-circle me-2"></i> Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="Identity" asp-controller="Settings" asp-action="Manage">
+                                            <i class="fas fa-cog me-2"></i> Settings
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li>
+                                            <a class="dropdown-item text-warning" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                                                <i class="fas fa-tachometer-alt me-2"></i> Admin Dashboard
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (User.IsInRole("SuperAdmin"))
+                                    {
+                                        <li>
+                                            <a class="dropdown-item text-danger" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                                                <i class="fas fa-shield-alt me-2"></i> Super Admin
+                                            </a>
+                                        </li>
+                                    }
+                                    <li>
+                                        <form id="logoutForm" method="post" asp-area="Identity" asp-controller="Account" asp-action="Logout">
+                                            <button type="submit" class="dropdown-item text-danger">
+                                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <!-- Cart Dropdown -->
+                            @await Component.InvokeAsync("CartDropdown")
+
+
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login">
+                                    <i class="fas fa-sign-in-alt me-1"></i> Login
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Register">
+                                    <i class="fas fa-user-plus me-1"></i> Register
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link position-relative" asp-area="Identity" asp-controller="Account" asp-action="Login"
+                                   asp-route-returnUrl="/Cart" aria-label="Shopping cart">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        0
+                                        <span class="visually-hidden">items in cart</span>
+                                    </span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <!-- Toggle Secondary Bar Button - Improved Design -->
+            <button id="toggleSecondaryBarBtn" class="btn btn-sm position-absolute end-0 me-3"
+                    style="bottom: -20px; z-index: 1030; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 50%; width: 32px; height: 32px;"
+                    onclick="toggleSecondaryBar()"
+                    title="Toggle Secondary Navigation">
+                <i class="fas fa-chevron-up text-dark"></i>
+            </button>
+
+        </nav>
+
+        <!-- Secondary Navigation -->
+        <nav id="secondaryNavbar" class="navbar navbar-expand-lg navbar-light bg-light border-bottom" aria-label="Secondary navigation">
+            <div class="container">
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-list me-1"></i> Categories
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                                <li><a class="dropdown-item" href="/Customer/Category/MoreMovieWithCategory/1">Shonen</a></li>
+                                <li><a class="dropdown-item" href="/Customer/Category/MoreMovieWithCategory/2">Seinen</a></li>
+                                <li><a class="dropdown-item" href="/Customer/Category/MoreMovieWithCategory/3">Fantasy</a></li>
+                                <li><a class="dropdown-item" href="/Customer/Category/MoreMovieWithCategory/4">Sci-Fi</a></li>
+
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" asp-controller="Category" asp-action="Index">All Categories</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Character" asp-action="Index">Characters</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Season" asp-action="Index">Seasons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Episode" asp-action="Index">Episodes</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex">
+                        <a href="/Home/Specials" class="btn btn-sm btn-outline-danger me-2">
+                            <i class="fas fa-fire me-1"></i> Special Offers
+                        </a>
+                        <a href="/Home/NewReleases" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-star me-1"></i> New Releases
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main role="main" class="flex-shrink-0">
+        <!-- Toast Notifications Container -->
+        <div aria-live="polite" aria-atomic="true" class="position-relative">
+            <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100">
+                <!-- Toast messages will be inserted here -->
+            </div>
+        </div>
+
+        @RenderBody()
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-dark text-white pt-5 pb-4" style="margin-bottom: 0;">
+        <div class="container">
+            <div class="row">
+                <!-- Company Info -->
+                <div class="col-md-3 mb-4">
+                    <h2 class="h5 text-uppercase fw-bold mb-4">
+                        <img src="~/Assets/Customer/imag/favicon.png" alt="MovieMart Logo" width="30" height="30" class="me-2">
+                        MovieMart
+                    </h2>
+                    <p>Your ultimate destination for movies, TV series and cinema experiences.</p>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="text-white me-2" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-2" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-2" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-md-3 mb-4">
+                    <h3 class="h5 text-uppercase fw-bold mb-4">Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="/Customer" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="/Customer" class="text-white text-decoration-none">Movies</a></li>
+                        <li class="mb-2"><a href="/Customer/TvSerie" class="text-white text-decoration-none">TV Series</a></li>
+                        <li class="mb-2"><a href="/Customer/Cinema" class="text-white text-decoration-none">Cinemas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support Links -->
+                <div class="col-md-3 mb-4">
+                    <h3 class="h5 text-uppercase fw-bold mb-4">Support</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="https://github.com/abdelwahab-ahmed-shandy" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-md-3 mb-4">
+                    <h3 class="h5 text-uppercase fw-bold mb-4">Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest updates.</p>
+                    <form asp-action="Subscribe" asp-controller="Newsletter" asp-area="Customer" method="post" class="mt-3">
+                        @Html.AntiForgeryToken()
+                        <div class="input-group mb-3">
+                            <input type="email" name="email" class="form-control" placeholder="Your Email" aria-label="Your Email" required>
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                    <div class="mt-3">
+                        <h4 class="h6 fw-bold">Download Our App</h4>
+                        <div class="d-flex mt-2">
+                            <a href="#" class="me-2" aria-label="Download on App Store">
+                                <img src="~/Assets/Customer/imag/appstore.png" alt="App Store" class="img-fluid" style="height: 40px;">
+                            </a>
+                            <a href="#" aria-label="Download on Google Play">
+                                <img src="/Assets/Customer/imag/app.png" alt="Google Play" class="img-fluid" style="height: 40px;">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <hr class="my-4">
+
+            <!-- Copyright -->
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 MovieMart. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Made with <i class="fas fa-heart text-danger"></i> by <a href="https://github.com/abdelwahab-ahmed-shandy" class="text-decoration-none">Abdelwahab Shandy</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Third Party Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/theme.js" asp-append-version="true"></script>
+    <script src="~/js/search.js" asp-append-version="true"></script>
+    <script src="~/js/cart.js" asp-append-version="true"></script>
+
+    @await Html.PartialAsync("_NotificationCustomer")
+
+    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("Styles", required: false)
+
+
+    <script>
+        // Function to toggle secondary navbar
+        function toggleSecondaryBar() {
+            const secondaryNav = document.getElementById('secondaryNavbar');
+            const toggleBtn = document.getElementById('toggleSecondaryBarBtn');
+
+            if (secondaryNav.style.display === 'none') {
+                // Show with animation
+                secondaryNav.style.display = '';
+                secondaryNav.classList.remove('animate__fadeOutUp');
+                secondaryNav.classList.add('animate__animated', 'animate__fadeInDown');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-up text-dark"></i>';
+            } else {
+                // Hide with animation
+                secondaryNav.classList.remove('animate__fadeInDown');
+                secondaryNav.classList.add('animate__animated', 'animate__fadeOutUp');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-down text-dark"></i>';
+
+                // Hide after animation completes
+                setTimeout(() => {
+                    secondaryNav.style.display = 'none';
+                }, 500);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,20 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using MovieMart.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Context
 {
-    public class ApplicationdbContext : DbContext
+    public class ApplicationdbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
 
 
-        #region Entities definition :
+        #region Entities Definition :
 
         public virtual DbSet<Cinema> Cinemas { get; set; }
         public virtual DbSet<Movie> Movies { get; set; }
@@ -30,10 +24,9 @@ namespace DAL.Context
         public virtual DbSet<CinemaMovie> CinemaMovies { get; set; }
         public virtual DbSet<Subscriber> Subscribers { get; set; }
         public virtual DbSet<SentEmail> SentEmails { get; set; }
-
+        public virtual DbSet<AuditRecord> AuditRecords { get; set; }
 
         #endregion
-
 
 
         /// <summary>
@@ -45,7 +38,6 @@ namespace DAL.Context
             : base(options)
         {
         }
-
 
 
         /// <summary>
@@ -61,8 +53,10 @@ namespace DAL.Context
             }
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
 
             #region Filter automatically deleted records (Soft Delete)
 
@@ -83,10 +77,20 @@ namespace DAL.Context
             #endregion
 
 
+            #region Define the relationship
+
+            modelBuilder.Entity<AuditRecord>()
+                .HasOne(a => a.User)
+                .WithMany(u => u.AuditRecords)
+                .HasForeignKey(a => a.UserId);
+
+            #endregion
+
+
 
 
         }
 
-
     }
+
 }

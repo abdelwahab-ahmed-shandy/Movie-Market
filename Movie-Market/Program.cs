@@ -1,35 +1,40 @@
-using BLL.Interfaces;
-using BLL.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
 
 namespace Movie_Market
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            #region Add services to the container
             builder.Services.AddControllersWithViews();
+            #endregion
 
-            var app = builder.Build();
+
+            #region Register ApplicationDbContext with Dependency Injection 
+            // Configured to use SQL Server with the connection string from app settings.
+            builder.Services.AddDbContext<ApplicationdbContext>(option =>
+                        option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            #endregion
 
 
             #region Register repository services with Dependency Injection (Scoped Lifetime) 
 
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<IAuditService, AuditService>();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
+                    .AddEntityFrameworkStores<ApplicationdbContext>()
+                    .AddDefaultTokenProviders();
+
 
             #endregion
-
 
 
             #region Email Sender
             builder.Services.AddTransient<IEmailService, EmailService>();
             #endregion
-
 
 
             #region Configure authentication services in the application
@@ -48,14 +53,15 @@ namespace Movie_Market
             .AddGoogle(googleOptions =>
             {
                 // Set the client ID for Google authentication from the application settings
-                googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"]
+                    ?? throw new InvalidOperationException("Google ClientId is not configured.");
 
                 // Set the client secret key for Google authentication from the application settings 
-                googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+                googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]
+                    ?? throw new InvalidOperationException("Google ClientSecret is not configured.");
             });
 
             #endregion
-
 
 
             #region Confige Stripe Setting
@@ -63,6 +69,10 @@ namespace Movie_Market
             //StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
             #endregion
 
+
+            #region Configure the HTTP request 
+
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -74,6 +84,8 @@ namespace Movie_Market
 
             app.UseHttpsRedirection();
 
+            #endregion
+
 
             #region Authentication & Authorization
             // Enable Authentication
@@ -84,10 +96,10 @@ namespace Movie_Market
             // Determines whether the authenticated user has the required permissions to access certain resources           
             app.UseAuthorization();
 
-            #endregion
-
-            app.UseStaticFiles();
             app.MapStaticAssets();
+            app.UseStaticFiles();
+
+            #endregion
 
 
             #region Setting up top-level routes
@@ -118,9 +130,7 @@ namespace Movie_Market
             #endregion
 
 
-
             app.Run();
-
         }
     }
 }

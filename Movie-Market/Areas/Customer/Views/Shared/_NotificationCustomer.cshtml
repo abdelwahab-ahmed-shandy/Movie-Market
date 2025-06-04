@@ -1,0 +1,37 @@
+﻿@if (TempData["notification"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var message = '@TempData["notification"]'.trim();
+            var messageType = '@TempData["MessageType"]'.trim().toLowerCase();
+
+            if (message && message !== 'null' && message !== 'undefined' && message !== '') {
+                messageType = messageType ? messageType : 'info';
+
+                const toastrOptions = {
+                    closeButton: true,
+                    progressBar: true,
+                    positionClass: "toast-top-right",
+                    timeOut: 5000,
+                    extendedTimeOut: 2000
+                };
+
+                switch (messageType) {
+                    case 'success':
+                        toastr.success(message, 'Success', toastrOptions);
+                        break;
+                    case 'error':
+                        toastr.error(message, 'Error', toastrOptions);
+                        break;
+                    case 'warning':
+                        toastr.warning(message, 'Warning', toastrOptions);
+                        break;
+                    default:
+                        toastr.info(message, 'Information', toastrOptions);
+                }
+            }
+        });
+    </script>
+}

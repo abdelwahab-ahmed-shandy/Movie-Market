@@ -1,13 +1,13 @@
 ﻿namespace MovieMart.Models
 {
-    public class CharacterTvSeries
+    public class CharacterTvSeries : BaseModel
     {
         // Many-to-Many: Character <-> TvSeries
 
-        public int CharacterId { get; set; }
+        public Guid CharacterId { get; set; }
         public Character Character { get; set; } = null!;
 
-        public int TvSeriesId { get; set; }
+        public Guid TvSeriesId { get; set; }
         public TvSeries TvSeries { get; set; } = null!;
     }
 }

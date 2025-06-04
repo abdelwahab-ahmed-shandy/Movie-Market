@@ -3,13 +3,15 @@
   "WorkspaceRootPath": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AFCE1501-A3AB-4151-8A12-8962A5F621BB}|..\\DAL\\DAL.csproj|c:\\users\\fm\\desktop\\movie-market\\dal\\repositories\\irepositories\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AFCE1501-A3AB-4151-8A12-8962A5F621BB}|..\\DAL\\DAL.csproj|c:\\users\\fm\\desktop\\movie-market\\dal\\context\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AFCE1501-A3AB-4151-8A12-8962A5F621BB}|..\\DAL\\DAL.csproj|c:\\users\\fm\\desktop\\movie-market\\dal\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMarket.csproj|c:\\users\\fm\\desktop\\movie-market\\movie-market\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMarket.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AFCE1501-A3AB-4151-8A12-8962A5F621BB}|..\\DAL\\DAL.csproj|c:\\users\\fm\\desktop\\movie-market\\dal\\gloubalusing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMarket.csproj|c:\\users\\fm\\desktop\\movie-market\\movie-market\\gloubalusing\\gloubalusing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMarket.csproj|solutionrelative:gloubalusing\\gloubalusing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,46 +21,46 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1625,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "IGenericRepository.cs",
-              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\Repositories\\IRepositories\\IGenericRepository.cs",
-              "RelativeDocumentMoniker": "..\\DAL\\Repositories\\IRepositories\\IGenericRepository.cs",
-              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\Repositories\\IRepositories\\IGenericRepository.cs",
-              "RelativeToolTip": "..\\DAL\\Repositories\\IRepositories\\IGenericRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "GloubalUsing.cs",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\GloubalUsing\\GloubalUsing.cs",
+              "RelativeDocumentMoniker": "GloubalUsing\\GloubalUsing.cs",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\GloubalUsing\\GloubalUsing.cs",
+              "RelativeToolTip": "GloubalUsing\\GloubalUsing.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T05:10:02.277Z",
+              "WhenOpened": "2025-06-04T07:22:10.501Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GloubalUsing.cs",
-              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\GloubalUsing.cs",
-              "RelativeDocumentMoniker": "..\\DAL\\GloubalUsing.cs",
-              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\GloubalUsing.cs",
-              "RelativeToolTip": "..\\DAL\\GloubalUsing.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAnAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T05:53:27.491Z",
+              "WhenOpened": "2025-06-04T07:29:23.644Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GenericRepository.cs",
-              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\Repositories\\GenericRepository.cs",
-              "RelativeDocumentMoniker": "..\\DAL\\Repositories\\GenericRepository.cs",
-              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\Repositories\\GenericRepository.cs",
-              "RelativeToolTip": "..\\DAL\\Repositories\\GenericRepository.cs",
-              "ViewState": "AgIAAGIAAAAAAAAAAAAgwIQAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "ApplicationdbContext.cs",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\Context\\ApplicationdbContext.cs",
+              "RelativeDocumentMoniker": "..\\DAL\\Context\\ApplicationdbContext.cs",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\Context\\ApplicationdbContext.cs",
+              "RelativeToolTip": "..\\DAL\\Context\\ApplicationdbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T05:07:15.354Z",
+              "WhenOpened": "2025-06-03T15:33:45.78Z",
               "EditorCaption": ""
             },
             {
