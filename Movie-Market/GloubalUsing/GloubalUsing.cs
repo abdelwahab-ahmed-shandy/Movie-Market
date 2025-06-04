@@ -12,12 +12,12 @@ global using Microsoft.AspNetCore.Authentication.Cookies;
 global using Microsoft.AspNetCore.Authentication.Google;
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 global using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
-global using Movie_Market.Areas.Identity.ViewModels.Register;
 
 global using MovieMart;
 global using DAL.Models;
 global using DAL.Context;
 global using MovieMart.Models;
+global using DAL.ViewModels.Identity;
 global using BLL.Services.Interfaces;
 global using BLL.Services.Implementations;
 

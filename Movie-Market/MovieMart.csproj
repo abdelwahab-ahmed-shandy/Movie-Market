@@ -359,10 +359,4 @@
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Areas\Customer\ViewModels\" />
-		<Folder Include="Areas\Admin\ViewModels\" />
-		<Folder Include="SharedViewModels\" />
-	</ItemGroup>
-
 </Project>

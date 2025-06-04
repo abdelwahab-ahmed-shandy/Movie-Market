@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Registration Confirmation";
+    ViewData["Subtitle"] = "Check your email to complete registration";
+    Layout = "~/Areas/Identity/Views/Shared/_Layout.cshtml";
+}
+
+<div class="auth-content text-center">
+    <div class="mb-4">
+        <i class="bi bi-envelope-check" style="font-size: 4rem; color: var(--primary-color);"></i>
+    </div>
+    <h3 class="mb-3">Almost Done!</h3>
+    <p class="mb-4">
+        We've sent a confirmation email to <strong>@ViewBag.Email</strong>.
+        Please check your inbox and click the link to verify your account.
+    </p>
+
+    <div class="alert alert-dark mb-4">
+        <i class="bi bi-info-circle me-2"></i>
+        Didn't receive the email? Check your spam folder or
+        <a href="#" id="resendEmail" class="auth-link">click here to resend</a>.
+    </div>
+
+    <a asp-area="Identity" asp-controller="Account" asp-action="Login" class="btn btn-auth w-100">
+        <i class="bi bi-box-arrow-in-right me-2"></i>Back to Login
+    </a>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#resendEmail').click(function(e) {
+                e.preventDefault();
+                $.post('/Identity/Account/ResendConfirmation', { email: '@ViewBag.Email' }, function() {
+                    toastr.success('Confirmation email has been resent!');
+                }).fail(function() {
+                    toastr.error('Error resending confirmation email');
+                });
+            });
+        });
+    </script>
+}

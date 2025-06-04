@@ -22,19 +22,28 @@ namespace Movie_Market
 
             #region Register repository services with Dependency Injection (Scoped Lifetime) 
 
-            builder.Services.AddHttpContextAccessor();
-            builder.Services.AddScoped<IAuditService, AuditService>();
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
-                    .AddEntityFrameworkStores<ApplicationdbContext>()
-                    .AddDefaultTokenProviders();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
 
+                options.SignIn.RequireConfirmedAccount = false;
+                options.User.RequireUniqueEmail = true;
+            })
+            .AddEntityFrameworkStores<ApplicationdbContext>()
+            .AddDefaultTokenProviders();
 
-            #endregion
-
-
-            #region Email Sender
             builder.Services.AddTransient<IEmailService, EmailService>();
+            builder.Services.AddScoped<IAuditService, AuditService>();
+            builder.Services.AddScoped<IAccountService, AccountService>();
+
+            builder.Services.AddHttpContextAccessor();
+
             #endregion
+
 
 
             #region Configure authentication services in the application
@@ -64,10 +73,12 @@ namespace Movie_Market
             #endregion
 
 
+
             #region Confige Stripe Setting
             //builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
             //StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
             #endregion
+
 
 
             #region Configure the HTTP request 

@@ -1,58 +1,121 @@
 ﻿
+using DAL.Enums;
+using Microsoft.AspNetCore.Identity;
+
 namespace Movie_Market.Areas.Identity.Controllers
 {
     [Area("Identity")]
     public class AccountController : Controller
     {
+        private readonly IAccountService _accountService;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly EmailService _emailService;
-        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<AccountController> _logger;
-        public AccountController(UserManager<ApplicationUser> userManager,
-                                  RoleManager<IdentityRole> roleManager,
-                                   SignInManager<ApplicationUser> signInManager,
-                                      EmailService emailService,
-                                        IWebHostEnvironment webHostEnvironment,
-                                          ILogger<AccountController> logger)
+
+        public AccountController(IAccountService accountService,
+                                    UserManager<ApplicationUser> userManager,
+                                        SignInManager<ApplicationUser> signInManager,
+                                            ILogger<AccountController> logger)
         {
+            _accountService = accountService;
             _userManager = userManager;
-            _roleManager = roleManager;
             _signInManager = signInManager;
-            _emailService = emailService;
-            _webHostEnvironment = webHostEnvironment;
             _logger = logger;
         }
 
+
+        #region Confirm Email
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var user = await _accountService.GetUserByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{userId}'.");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                user.AccountStateType = AccountStateType.Active;
+                user.IsActive = true;
+                await _userManager.UpdateAsync(user);
+
+                await _accountService.RecordAuditLogAsync(
+                    "Email Confirmed",
+                    "User confirmed their email address",
+                    user.Id);
+
+                await _signInManager.SignInAsync(user, isPersistent: false);
+
+                return View(nameof(ConfirmEmail));
+            }
+
+            ViewBag.ErrorMessage = "Error confirming your email.";
+            return View("Error");
+        }
+        #endregion
 
 
         #region Register
 
         [HttpGet]
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
+            return View();
+        }
 
-            if (!await _roleManager.RoleExistsAsync("SuperAdmin"))
-                await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
-
-            if (!await _roleManager.RoleExistsAsync("Admin"))
-                await _roleManager.CreateAsync(new IdentityRole("Admin"));
-
-            if (!await _roleManager.RoleExistsAsync("User"))
-                await _roleManager.CreateAsync(new IdentityRole("User"));
-
-
-            if (User.Identity?.IsAuthenticated == true)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterVM model)
+        {
+            if (ModelState.IsValid)
             {
-                TempData["notification"] = "Your account has been created! Please check your email to confirm the account before logging in";
-                TempData["MessageType"] = "Information";
-                return RedirectToAction("Index", "Home", new { area = "Customer" });
+                var result = await _accountService.RegisterUserAsync(model);
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User registration successful.");
+                    return RedirectToAction("RegisterConfirmation", new { email = model.Email });
+                }
+
+                AddErrorsToModelState(result);
             }
-            return View(new RegisterVM());
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RegisterConfirmation(string email)
+        {
+            var user = await _accountService.GetUserByEmailAsync(email);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Email = email;
+            return View();
+        }
+
+        private void AddErrorsToModelState(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
         }
 
         #endregion
+
+
+
 
     }
 }
