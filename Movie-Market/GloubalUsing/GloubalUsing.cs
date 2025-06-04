@@ -11,6 +11,8 @@ global using System.ComponentModel.DataAnnotations;
 global using Microsoft.AspNetCore.Authentication.Cookies;
 global using Microsoft.AspNetCore.Authentication.Google;
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+global using Movie_Market.Areas.Identity.ViewModels.Register;
 
 global using MovieMart;
 global using DAL.Models;

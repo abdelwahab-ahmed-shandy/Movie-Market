@@ -361,7 +361,6 @@
 
 	<ItemGroup>
 		<Folder Include="Areas\Customer\ViewModels\" />
-		<Folder Include="Areas\Identity\ViewModels\" />
 		<Folder Include="Areas\Admin\ViewModels\" />
 		<Folder Include="SharedViewModels\" />
 	</ItemGroup>

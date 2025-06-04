@@ -22,10 +22,9 @@ namespace DAL.Models
         public bool IsActive { get; set; } = false;
         public bool IsBlocked { get; set; } = false;
         public AccountStateType AccountStateType { get; set; }
+        public UserType UserType = UserType.User;
 
         // Navigation properties
         public virtual ICollection<AuditRecord> AuditRecords { get; set; } = new List<AuditRecord>();
-
-
     }
 }
