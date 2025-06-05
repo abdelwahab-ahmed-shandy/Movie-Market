@@ -50,33 +50,6 @@ namespace BLL.Services.Implementations
             }
         }
 
-        //public async Task RecordAuditAsync(Guid userId, string action, string description, string entityId = null)
-        //{
-        //    try
-        //    {
-        //        var currentUser = GetCurrentUserName();
-        //        var auditRecord = new AuditRecord
-        //        {
-        //            UserId = userId,
-        //            Action = action,
-        //            Description = description,
-        //            EntityId = entityId,
-        //            LastAction = action,
-        //            CreatedBy = currentUser
-        //        };
-
-        //        _context.AuditRecords.Add(auditRecord);
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, "Error recording audit log");
-        //        throw;
-        //    }
-        //}
-
-
-
     }
 
 }

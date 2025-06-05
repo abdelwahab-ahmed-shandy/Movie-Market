@@ -14,6 +14,7 @@ global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 global using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 global using MovieMart;
+global using DAL.Enums;
 global using DAL.Models;
 global using DAL.Context;
 global using MovieMart.Models;

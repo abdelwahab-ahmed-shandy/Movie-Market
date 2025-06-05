@@ -2,103 +2,259 @@
 @{
     ViewData["Title"] = "Register";
     ViewData["Subtitle"] = "Create your MovieMart account";
-    Layout = "~/Areas/Identity/Views/Shared/_Layout.cshtml";
-
 }
 
-<div class="auth-content">
-    <form asp-area="Identity" asp-controller="Account" asp-action="Register" method="post" class="needs-validation" novalidate>
-        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
-        <div class="row g-3">
-            <div class="col-md-6">
-                <div class="form-floating mb-3">
-                    <input asp-for="FirstName" class="form-control" placeholder="First Name" required />
-                    <label asp-for="FirstName"></label>
-                    <span asp-validation-for="FirstName" class="text-danger small"></span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-floating mb-3">
-                    <input asp-for="LastName" class="form-control" placeholder="Last Name" required />
-                    <label asp-for="LastName"></label>
-                    <span asp-validation-for="LastName" class="text-danger small"></span>
-                </div>
-            </div>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1 class="auth-title">@ViewData["Title"]</h1>
+            <p class="auth-subtitle">@ViewData["Subtitle"]</p>
         </div>
 
-        <div class="form-floating mb-3">
-            <input asp-for="Email" class="form-control" placeholder="Email Address" required />
-            <label asp-for="Email"></label>
-            <span asp-validation-for="Email" class="text-danger small"></span>
-        </div>
+        <form asp-area="Identity" asp-controller="Account" asp-action="Register" method="post" class="auth-form" id="registerForm" novalidate>
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4" role="alert"></div>
 
-        <div class="row g-3">
-            <div class="col-md-6">
-                <div class="form-floating mb-3">
-                    <input asp-for="Password" type="password" class="form-control" placeholder="Password" required />
-                    <label asp-for="Password"></label>
-                    <span asp-validation-for="Password" class="text-danger small"></span>
-                    <div class="password-strength mt-2">
-                        <div class="progress" style="height: 4px;">
-                            <div class="progress-bar" role="progressbar" style="width: 0%"></div>
-                        </div>
-                        <small class="text-muted">Password strength</small>
+            <!-- Name Fields -->
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="FirstName" class="form-control" placeholder="First Name" required />
+                        <label asp-for="FirstName"></label>
+                        <span asp-validation-for="FirstName" class="invalid-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="LastName" class="form-control" placeholder="Last Name" required />
+                        <label asp-for="LastName"></label>
+                        <span asp-validation-for="LastName" class="invalid-feedback"></span>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-floating mb-3">
-                    <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm Password" required />
-                    <label asp-for="ConfirmPassword"></label>
-                    <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+
+            <!-- Email Field -->
+            <div class="form-floating mb-3">
+                <input asp-for="Email" class="form-control" placeholder="Email Address" required 
+                       type="email" autocomplete="email" />
+                <label asp-for="Email"></label>
+                <span asp-validation-for="Email" class="invalid-feedback"></span>
+                <div id="emailFeedback" class="small mt-1"></div>
+            </div>
+
+            <!-- Password Fields -->
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <div class="form-floating position-relative">
+                        <input asp-for="Password" type="password" class="form-control" 
+                               placeholder="Password" required autocomplete="new-password"
+                               data-password-rules="minlength:8" />
+                        <label asp-for="Password"></label>
+                        <button type="button" class="btn btn-sm position-absolute end-0 top-0 mt-3 me-2 toggle-password">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <span asp-validation-for="Password" class="invalid-feedback"></span>
+                        <div class="password-strength mt-2">
+                            <div class="progress" style="height: 4px;">
+                                <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                            </div>
+                            <small class="text-muted d-block">Password strength: <span id="strengthText">Weak</span></small>
+                            <ul class="password-requirements list-unstyled small text-muted mt-2">
+                                <li data-requirement="length"><i class="bi bi-x-circle-fill text-danger me-1"></i> At least 8 characters</li>
+                                <li data-requirement="uppercase"><i class="bi bi-x-circle-fill text-danger me-1"></i> Uppercase letter</li>
+                                <li data-requirement="lowercase"><i class="bi bi-x-circle-fill text-danger me-1"></i> Lowercase letter</li>
+                                <li data-requirement="number"><i class="bi bi-x-circle-fill text-danger me-1"></i> Number</li>
+                                <li data-requirement="special"><i class="bi bi-x-circle-fill text-danger me-1"></i> Special character</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating position-relative">
+                        <input asp-for="ConfirmPassword" type="password" class="form-control" 
+                               placeholder="Confirm Password" required autocomplete="new-password" />
+                        <label asp-for="ConfirmPassword"></label>
+                        <button type="button" class="btn btn-sm position-absolute end-0 top-0 mt-3 me-2 toggle-password">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <span asp-validation-for="ConfirmPassword" class="invalid-feedback"></span>
+                        <div id="passwordMatch" class="small mt-1"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row g-3">
-            <div class="col-md-6">
-                <div class="form-floating mb-3">
-                    <input asp-for="BirthDay" type="date" class="form-control" placeholder="Birth Date" />
-                    <label asp-for="BirthDay"></label>
-                    <span asp-validation-for="BirthDay" class="text-danger small"></span>
+            <!-- Additional Info -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="BirthDay" type="date" class="form-control" 
+                               placeholder="Birth Date" max="@DateTime.Now.AddYears(-13).ToString("yyyy-MM-dd")" />
+                        <label asp-for="BirthDay"></label>
+                        <span asp-validation-for="BirthDay" class="invalid-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input asp-for="Address" class="form-control" placeholder="Address" />
+                        <label asp-for="Address"></label>
+                        <span asp-validation-for="Address" class="invalid-feedback"></span>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-floating mb-3">
-                    <input asp-for="Address" class="form-control" placeholder="Address" />
-                    <label asp-for="Address"></label>
-                    <span asp-validation-for="Address" class="text-danger small"></span>
-                </div>
+
+            <!-- Terms Checkbox -->
+            <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                <label class="form-check-label small" for="termsCheck">
+                    I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a>
+                </label>
+                <div class="invalid-feedback">You must agree to the terms before registering.</div>
             </div>
-        </div>
 
-        <div class="form-check mb-4">
-            <input class="form-check-input" type="checkbox" id="termsCheck" required>
-            <label class="form-check-label small" for="termsCheck">
-                I agree to the <a href="#" class="auth-link">Terms of Service</a> and <a href="#" class="auth-link">Privacy Policy</a>
-            </label>
-        </div>
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100 py-3 mb-3" id="registerButton">
+                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                <span class="btn-text">Create Account</span>
+            </button>
+        </form>
 
-        <button type="submit" class="btn btn-auth w-100 py-3 mb-3">
-            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-            <span class="btn-text">Create Account</span>
-        </button>
-
-        <div class="divider">OR</div>
-        <div class="social-auth">
-            <a href="#" class="social-btn bg-google">
-                <i class="bi bi-google"></i>
-            </a>
-            <a href="#" class="social-btn bg-facebook">
-                <i class="bi bi-facebook"></i>
-            </a>
-            <a href="#" class="social-btn bg-twitter">
-                <i class="bi bi-twitter-x"></i>
+        <!-- Login Link -->
+        <div class="text-center mb-4">
+            <p class="text-muted mb-2">Already have an account?</p>
+            <a asp-area="Identity" asp-controller="Account" asp-action="Login" class="btn btn-outline-primary px-4">
+                Sign in instead
             </a>
         </div>
-    </form>
+
+        <!-- Social Login Divider -->
+        <div class="divider-with-text my-4">
+            <span class="divider-text">OR REGISTER WITH</span>
+        </div>
+
+        <!-- Social Login Buttons -->
+        <div class="social-login-buttons">
+            <form asp-action="ExternalLogin" asp-controller="Account" method="post" class="w-100">
+                <input type="hidden" name="provider" value="Google" />
+                <input type="hidden" name="returnUrl" value="@Context.Request.Query["ReturnUrl"]" />
+                <button type="submit" class="btn btn-google w-100">
+                    <i class="fab fa-google me-2"></i> Continue with Google
+                </button>
+            </form>
+
+            <!-- Additional providers can be added here -->
+            <form asp-action="ExternalLogin" asp-controller="Account" method="post" class="w-100 mt-2">
+                <input type="hidden" name="provider" value="Facebook" />
+                <input type="hidden" name="returnUrl" value="@Context.Request.Query["ReturnUrl"]" />
+                <button type="submit" class="btn btn-facebook w-100">
+                    <i class="fab fa-facebook-f me-2"></i> Continue with Facebook
+                </button>
+            </form>
+        </div>
+    </div>
 </div>
+
+@section Styles {
+    <style>
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 160px);
+            padding: 2rem 0;
+        }
+
+        .auth-card {
+            background: var(--bs-body-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-title {
+            font-weight: 700;
+            color: var(--bs-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-subtitle {
+            color: var(--bs-secondary);
+            font-size: 1rem;
+        }
+
+        .auth-form .form-floating {
+            margin-bottom: 1.25rem;
+        }
+
+        .toggle-password {
+            background: none;
+            border: none;
+            color: var(--bs-secondary);
+        }
+
+        .password-requirements li.valid {
+            color: var(--bs-success);
+        }
+
+        .password-requirements li.valid i {
+            color: var(--bs-success);
+        }
+
+        .divider-with-text {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--bs-secondary);
+            margin: 1.5rem 0;
+        }
+
+        .divider-with-text::before,
+        .divider-with-text::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid var(--bs-border-color);
+        }
+
+        .divider-text {
+            padding: 0 1rem;
+            font-size: 0.875rem;
+        }
+
+        .btn-google {
+            background-color: #fff;
+            color: #757575;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+
+        .btn-google:hover {
+            background-color: #f8f9fa;
+            border-color: #ccc;
+        }
+
+        #emailFeedback.valid {
+            color: var(--bs-success);
+        }
+
+        #emailFeedback.invalid {
+            color: var(--bs-danger);
+        }
+
+        #passwordMatch.valid {
+            color: var(--bs-success);
+        }
+
+        #passwordMatch.invalid {
+            color: var(--bs-danger);
+        }
+    </style>
+}
+
 
 @section Scripts {
     @{
@@ -106,44 +262,93 @@
     }
 
     <script>
-        $(document).ready(function() {
-            $('#Password').on('input', function() {
-                var password = $(this).val();
-                var strength = 0;
-
-                if (password.length > 0) strength += 1;
-                if (password.length >= 8) strength += 1;
-                if (password.match(/[a-z]/)) strength += 1;
-                if (password.match(/[A-Z]/)) strength += 1;
-                if (password.match(/[0-9]/)) strength += 1;
-                if (password.match(/[^a-zA-Z0-9]/)) strength += 1;
-
-                var width = (strength / 6) * 100;
-                var color = 'bg-danger';
-
-                if (strength > 3) color = 'bg-warning';
-                if (strength > 4) color = 'bg-success';
-
-                $('.progress-bar').css('width', width + '%').removeClass('bg-danger bg-warning bg-success').addClass(color);
+        document.addEventListener('DOMContentLoaded', function () {
+            // Toggle password visibility
+            document.querySelectorAll('.toggle-password').forEach(button => {
+                button.addEventListener('click', function () {
+                    const input = this.closest('.form-floating').querySelector('input');
+                    const icon = this.querySelector('i');
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    icon.classList.toggle('bi-eye');
+                    icon.classList.toggle('bi-eye-slash');
+                });
             });
 
-            $('form').on('submit', function() {
-                $(this).find('.spinner-border').removeClass('d-none');
-                $(this).find('.btn-text').text('Creating Account...');
-                $(this).find('button[type="submit"]').prop('disabled', true);
-            });
+            const passwordInput = document.getElementById('Password');
+            const confirmPasswordInput = document.getElementById('ConfirmPassword');
+            const progressBar = document.querySelector('.progress-bar');
+            const strengthText = document.getElementById('strengthText');
+            const matchFeedback = document.getElementById('passwordMatch');
 
-            $('#Email').on('blur', function() {
-                var email = $(this).val();
-                if (email) {
-                    $.get('/Identity/Account/CheckEmail', { email: email }, function(data) {
-                        if (data.isTaken) {
-                            $('#Email').addClass('is-invalid');
-                            $('span[data-valmsg-for="Email"]').text('This email is already registered');
-                        }
-                    });
+            const requirements = {
+                length: document.querySelector('[data-requirement="length"]'),
+                uppercase: document.querySelector('[data-requirement="uppercase"]'),
+                lowercase: document.querySelector('[data-requirement="lowercase"]'),
+                number: document.querySelector('[data-requirement="number"]'),
+                special: document.querySelector('[data-requirement="special"]')
+            };
+
+            const updateStrength = () => {
+                const value = passwordInput.value;
+                let score = 0;
+
+                // Requirement checks
+                const hasLength = value.length >= 8;
+                const hasUpper = /[A-Z]/.test(value);
+                const hasLower = /[a-z]/.test(value);
+                const hasNumber = /[0-9]/.test(value);
+                const hasSpecial = /[^A-Za-z0-9]/.test(value);
+
+                // Visual updates
+                requirements.length.classList.toggle('valid', hasLength);
+                requirements.uppercase.classList.toggle('valid', hasUpper);
+                requirements.lowercase.classList.toggle('valid', hasLower);
+                requirements.number.classList.toggle('valid', hasNumber);
+                requirements.special.classList.toggle('valid', hasSpecial);
+
+                // Scoring
+                score += hasLength + hasUpper + hasLower + hasNumber + hasSpecial;
+                const percentage = (score / 5) * 100;
+
+                progressBar.style.width = `${percentage}%`;
+
+                if (score <= 2) {
+                    strengthText.textContent = 'Weak';
+                    progressBar.className = 'progress-bar bg-danger';
+                } else if (score === 3 || score === 4) {
+                    strengthText.textContent = 'Moderate';
+                    progressBar.className = 'progress-bar bg-warning';
+                } else {
+                    strengthText.textContent = 'Strong';
+                    progressBar.className = 'progress-bar bg-success';
                 }
+            };
+
+            const checkMatch = () => {
+                if (confirmPasswordInput.value === "") {
+                    matchFeedback.textContent = '';
+                    matchFeedback.className = '';
+                    return;
+                }
+
+                if (confirmPasswordInput.value === passwordInput.value) {
+                    matchFeedback.textContent = 'Passwords match';
+                    matchFeedback.className = 'valid';
+                } else {
+                    matchFeedback.textContent = 'Passwords do not match';
+                    matchFeedback.className = 'invalid';
+                }
+            };
+
+            passwordInput?.addEventListener('input', () => {
+                updateStrength();
+                checkMatch();
             });
+
+            confirmPasswordInput?.addEventListener('input', checkMatch);
         });
     </script>
+
+
 }

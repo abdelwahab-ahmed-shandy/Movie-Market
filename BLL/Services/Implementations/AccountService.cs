@@ -37,7 +37,7 @@ namespace BLL.Services.Implementations
 
         public async Task<IdentityResult> RegisterUserAsync(RegisterVM model)
         {
-            //await EnsureRolesExist();
+            await EnsureRolesExist();
 
             var user = new ApplicationUser
             {
@@ -122,17 +122,17 @@ namespace BLL.Services.Implementations
             }
         }
 
-        //private async Task EnsureRolesExist()
-        //{
-        //    if (!await _roleManager.RoleExistsAsync("SuperAdmin"))
-        //        await _roleManager.CreateAsync(new IdentityRole<Guid>("SuperAdmin"));
+        private async Task EnsureRolesExist()
+        {
+            if (!await _roleManager.RoleExistsAsync("SuperAdmin"))
+                await _roleManager.CreateAsync(new IdentityRole<Guid>("SuperAdmin"));
 
-        //    if (!await _roleManager.RoleExistsAsync("Admin"))
-        //        await _roleManager.CreateAsync(new IdentityRole<Guid>("Admin"));
+            if (!await _roleManager.RoleExistsAsync("Admin"))
+                await _roleManager.CreateAsync(new IdentityRole<Guid>("Admin"));
 
-        //    if (!await _roleManager.RoleExistsAsync("User"))
-        //        await _roleManager.CreateAsync(new IdentityRole<Guid>("User"));
-        //}
+            if (!await _roleManager.RoleExistsAsync("User"))
+                await _roleManager.CreateAsync(new IdentityRole<Guid>("User"));
+        }
 
 
         #endregion

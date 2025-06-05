@@ -26,6 +26,9 @@ namespace DAL.Context
         public virtual DbSet<Subscriber> Subscribers { get; set; }
         public virtual DbSet<SentEmail> SentEmails { get; set; }
         public virtual DbSet<AuditRecord> AuditRecords { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
 
         #endregion
 
