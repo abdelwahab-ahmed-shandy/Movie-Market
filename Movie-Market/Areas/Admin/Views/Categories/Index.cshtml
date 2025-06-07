@@ -27,27 +27,48 @@
 					{
 						<tr class="@(item.IsDeleted ? "table-danger" : "")">
 							<td>@item.Name</td>
-							<td>@(item.Description?.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)</td>
-							<td>
+
+							<td title="@item.Description">
+								@(item.Description?.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)
+							</td>
+
+							<td title="@item.CurrentState">
 								<span class="badge @GetStateBadgeClass(item.CurrentState)">
 									@item.CurrentState
 								</span>
-								@if (item.IsDeleted)
-								{
-									<span class="badge bg-danger">Deleted</span>
-								}
 							</td>
+							
 							<td>@item.MoviesCount</td>
 							<td>@item.CreatedDateUtc.ToString("yyyy-MM-dd")</td>
 							<td>
 								<div class="btn-group" role="group">
 									<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
 									<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
-									<form asp-action="ToggleStatus" asp-route-id="@item.Id" method="post">
-										<button type="submit" class="btn @(item.IsDeleted ? "btn-success" : "btn-danger") btn-sm">
-											@(item.IsDeleted ? "Restore" : "Deleted")
+
+									@if (!item.IsDeleted)
+									{
+										<button type="button"
+												class="btn btn-danger btn-sm"
+												data-bs-toggle="modal"
+												data-bs-target="#confirmDeleteModal"
+												data-id="@item.Id"
+												data-name="@item.Name"
+												data-isdeleted="@item.IsDeleted">
+											Delete
 										</button>
-									</form>
+									}
+									else
+									{
+										<button type="button"
+												class="btn btn-success btn-sm"
+												data-bs-toggle="modal"
+												data-bs-target="#confirmDeleteModal"
+												data-id="@item.Id"
+												data-name="@item.Name"
+												data-isdeleted="@item.IsDeleted">
+											Restore
+										</button>
+									}
 								</div>
 							</td>
 						</tr>
@@ -58,6 +79,64 @@
 	</div>
 </div>
 
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header bg-danger text-white">
+				<h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Action</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Choose the action for category <strong id="categoryName"></strong>:</p>
+			</div>
+			<input type="hidden" id="categoryId" />
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+				<!-- Soft Delete / Restore -->
+				<form id="softDeleteForm" method="post" asp-action="ToggleStatus" class="d-inline">
+					<input type="hidden" name="id" id="softDeleteCategoryId" />
+					<button type="submit" class="btn btn-warning" id="softDeleteBtn">Soft Delete / Restore</button>
+				</form>
+
+				<!-- Permanent Delete -->
+				<form id="permanentDeleteForm" method="post" asp-action="DeletePermanently" class="d-inline">
+					<input type="hidden" name="id" id="permanentDeleteCategoryId" />
+					<button type="submit" class="btn btn-danger">Delete Permanently</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script>
+		var confirmDeleteModal = document.getElementById('confirmDeleteModal');
+		confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+		  var button = event.relatedTarget;
+		  var id = button.getAttribute('data-id');
+		  var name = button.getAttribute('data-name');
+		  var isDeleted = button.getAttribute('data-isdeleted') === 'True';
+
+		  document.getElementById('categoryName').textContent = name;
+		  document.getElementById('categoryId').value = id;
+		  document.getElementById('softDeleteCategoryId').value = id;
+		  document.getElementById('permanentDeleteCategoryId').value = id;
+
+		  var softDeleteBtn = document.getElementById('softDeleteBtn');
+		  if (isDeleted) {
+			softDeleteBtn.textContent = "Restore";
+			softDeleteBtn.classList.remove('btn-warning');
+			softDeleteBtn.classList.add('btn-success');
+		  } else {
+			softDeleteBtn.textContent = "Soft Delete";
+			softDeleteBtn.classList.remove('btn-success');
+			softDeleteBtn.classList.add('btn-warning');
+		  }
+		});
+	</script>
+}
+
 @functions {
 	string GetStateBadgeClass(CurrentState state)
 	{
@@ -65,7 +144,10 @@
 		{
 			CurrentState.Active => "bg-success",
 			CurrentState.Inactive => "bg-secondary",
+			CurrentState.SoftDelete => "bg-danger",
+			CurrentState.Archived => "bg-warning",
 			_ => "bg-secondary"
 		};
 	}
+
 }

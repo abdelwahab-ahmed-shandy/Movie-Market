@@ -25,6 +25,10 @@ namespace DAL.Repositories.IRepositories
         IQueryable<T> Get(Expression<Func<T, bool>> expression);
         #endregion
 
+        #region Get All With Deleted
+        IQueryable<T> GetAllWithDeleted();
+        #endregion
+
         #region Add
         Task<T> Add(T entity);
         #endregion
@@ -34,10 +38,13 @@ namespace DAL.Repositories.IRepositories
         #endregion
 
         #region Soft Delete 
-
-        Task Delete(Guid id);
         Task SoftDeleteAsync(Guid id);
         Task RestoreAsync(Guid id);
+        #endregion
+
+        #region Delete 
+
+        Task DeleteInDB(Guid id);
         #endregion
 
         #endregion

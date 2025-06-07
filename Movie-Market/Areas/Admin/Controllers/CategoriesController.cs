@@ -56,6 +56,11 @@ namespace Movie_Market.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 await _categoryService.CreateCategoryAsync(VM);
+
+                TempData["notification"] = "Category created successfully!";
+                TempData["MessageType"] = "success";
+
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -63,6 +68,7 @@ namespace Movie_Market.Areas.Admin.Controllers
         }
 
         #endregion
+
 
         #region Edit 
 
@@ -80,7 +86,8 @@ namespace Movie_Market.Areas.Admin.Controllers
                 CurrentState = category.CurrentState
             };
 
-            return View(VM);
+
+            return View("Create", VM);
         }
 
         [HttpPost]
@@ -98,21 +105,47 @@ namespace Movie_Market.Areas.Admin.Controllers
                     ModelState.AddModelError("", ex.Message);
                     return View(VM);
                 }
+
+                TempData["notification"] = "Category Is Updated !";
+                TempData["MessageType"] = "danger";
                 return RedirectToAction(nameof(Index));
             }
-            return View(VM);
+            return View("Create", VM);
         }
 
         #endregion
 
+
+        #region Delete 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ToggleStatus(Guid id)
         {
             await _categoryService.ToggleCategoryStatusAsync(id);
+
+            TempData["notification"] = "Category Change Status Soft Deleted!";
+            TempData["MessageType"] = "Information";
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeletePermanently(Guid id)
+        {
+            var category = await _categoryService.GetCategoryDetailsAsync(id);
+            if (category == null)
+                return NotFound();
+
+            await _categoryService.DeleteCategoryPermanentlyAsync(id);
+
+            TempData["notification"] = "Category permanently deleted!";
+            TempData["MessageType"] = "danger";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        #endregion
 
     }
 }

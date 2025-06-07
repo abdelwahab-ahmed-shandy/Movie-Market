@@ -16,7 +16,12 @@ global using DAL.Context;
 global using DAL.ViewModels;
 global using DAL.Migrations;
 global using DAL.Repositories;
+global using DAL.ViewModels.Cart;
 global using DAL.ViewModels.Movie;
+global using DAL.ViewModels.Cinema;
+global using System.Security.Claims;
+global using DAL.ViewModels.Category;
 global using DAL.Repositories.IRepositories;
+
 
 

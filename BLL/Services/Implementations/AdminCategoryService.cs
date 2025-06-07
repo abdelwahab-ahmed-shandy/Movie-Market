@@ -13,19 +13,17 @@ namespace BLL.Services.Implementations
     {
         private readonly IGenericRepository<Category> _categoryRepo;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IMapper _mapper;
         public AdminCategoryService(IGenericRepository<Category> categoryRepository,
-                                        IHttpContextAccessor httpContextAccessor,
-                                            IMapper mapper)
+                                        IHttpContextAccessor httpContextAccessor
+                                            )
         {
             _categoryRepo = categoryRepository;
             _httpContextAccessor = httpContextAccessor;
-            _mapper = mapper;
         }
 
         public async Task<IEnumerable<CategoryAdminIndexVM>> GetAllCategoriesAsync()
         {
-            return await _categoryRepo.GetAll().Select(c => new CategoryAdminIndexVM
+            return await _categoryRepo.GetAllWithDeleted().Select(c => new CategoryAdminIndexVM
             {
                 Id = c.Id,
                 Name = c.Name,
@@ -38,7 +36,8 @@ namespace BLL.Services.Implementations
                 .OrderByDescending(c => c.CreatedDateUtc)
                 .ToListAsync();
         }
-        // todo : Implement pagination and sorting
+
+
         public async Task<CategoryAdminDetailsVM?> GetCategoryDetailsAsync(Guid id)
         {
             var category = await _categoryRepo.GetAll()
@@ -69,48 +68,49 @@ namespace BLL.Services.Implementations
             };
         }
 
-        public async Task<Category> CreateCategoryAsync(CategoryAdminCreateEditVM viewModel)
+
+        public async Task<Category> CreateCategoryAsync(CategoryAdminCreateEditVM vM)
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<CategoryProfile>();
-            });
+            var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
 
-            var mapper = config.CreateMapper();
-            mapper.ConfigurationProvider.AssertConfigurationIsValid();
-
-            var category = mapper.Map<Category>(viewModel, opts =>
+            var category = new Category
             {
-                opts.Items["HttpContextAccessor"] = _httpContextAccessor;
-            });
+                Name = vM.Name,
+                Description = vM.Description,
+                CurrentState = vM.CurrentState,
+                CreatedBy = userName,
+                CreatedDateUtc = DateTime.UtcNow,
+                IsDeleted = false
+            };
 
             return await _categoryRepo.Add(category);
         }
 
 
-        public async Task UpdateCategoryAsync(Guid id, CategoryAdminCreateEditVM viewModel)
+        public async Task UpdateCategoryAsync(Guid id, CategoryAdminCreateEditVM vM)
         {
             var category = await _categoryRepo.GetByIdAsync(id);
-            if (category == null) throw new Exception("Category not found");
 
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<CategoryProfile>();
-            });
+            if (category == null)
+                throw new Exception("Category not found");
 
-            var mapper = config.CreateMapper();
-            mapper.Map(viewModel, category, opts =>
-            {
-                opts.Items["HttpContextAccessor"] = _httpContextAccessor;
-            });
+            var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
+
+            category.Name = vM.Name;
+            category.Description = vM.Description;
+            category.CurrentState = vM.CurrentState;
+            category.UpdatedBy = userName;
+            category.UpdatedDateUtc = DateTime.UtcNow;
 
             await _categoryRepo.Update(category);
         }
 
+
         public async Task ToggleCategoryStatusAsync(Guid id)
         {
             var category = await _categoryRepo.GetByIdAsync(id);
-            if (category == null) throw new Exception("Category not found");
+            if (category == null)
+                throw new Exception("Category not found");
 
             if (category.IsDeleted)
             {
@@ -122,6 +122,14 @@ namespace BLL.Services.Implementations
             }
         }
 
+        public async Task DeleteCategoryPermanentlyAsync(Guid id)
+        {
+            var category = await _categoryRepo.GetByIdAsync(id);
+            if (category == null)
+                throw new Exception("Category not found");
+
+            await _categoryRepo.DeleteInDB(id);
+        }
 
     }
 }

@@ -11,6 +11,7 @@ namespace DAL.Enums
         Inactive = 0,
         Active = 1,
         Archived = 2,
-        Deleted = 3
+        SoftDelete = 3,
+        RestoreDeleted = 4
     }
 }

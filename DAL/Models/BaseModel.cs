@@ -6,7 +6,7 @@ namespace Models
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        public CurrentState? CurrentState { get; set; } = null;
+        public CurrentState? CurrentState { get; set; } = DAL.Enums.CurrentState.Archived;
 
         [MaxLength(100)]
         public string CreatedBy { get; set; } = "System";

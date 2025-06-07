@@ -1,27 +1,68 @@
-﻿@model DAL.ViewModels.Cart.CartDropdownVM
+﻿@model List<DAL.ViewModels.Cinema.CinemaReservationVM>
 
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-dark" href="#" id="cinemaReservationsDropdown" role="button"
+       data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+        <i class="fas fa-ticket-alt me-1 text-danger"></i>
+        <span class="fw-medium">My Cinema Bookings</span>
+        <span class="badge bg-primary rounded-pill ms-1">@Model?.Count</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end shadow-lg" style="min-width: 300px;">
+        @if (Model?.Any() == true)
+        {
+            <li class="dropdown-header px-3 py-2 bg-light">
+                <small>UPCOMING SHOWTIMES</small>
+            </li>
 
-@* <div class="dropdown cart-dropdown"> *@
-@*     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> *@
-@*         <i class="fas fa-shopping-cart"></i> *@
-@*         <span class="cart-count">@Model.Items.Count</span> *@
-@*     </a> *@
+            @foreach (var booking in Model.OrderBy(b => b.ShowTime).Take(5))
+            {
+                <li>
+                    <a class="dropdown-item py-2"
+                       href="@Url.Action("Details", "Movies", new { area = "Customer", id = booking.MovieId })">
+                        <div class="d-flex align-items-center">
+                            <img src="@booking.MovieImage"
+                                 class="rounded me-2"
+                                 style="width: 40px; height: 40px; object-fit: cover;"
+                                 alt="@booking.MovieTitle">
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-0">@booking.MovieTitle</h6>
+                                    <small class="text-muted">@booking.FormattedShowTime</small>
+                                </div>
+                                <small class="text-muted d-block">@booking.ShortCinemaName</small>
+                                <small class="text-success fw-bold">$@booking.Price.ToString("0.00")</small>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            }
 
-@*     <div class="dropdown-menu dropdown-menu-right"> *@
-@*         @foreach (var item in Model.Items) *@
-@*         { *@
-@*             <div class="dropdown-item"> *@
-@*                 <img src="@item.Movie.ImageUrl" width="50" alt="@item.Movie.Title"> *@
-@*                 <div> *@
-@*                     <h6>@item.Movie.Title</h6> *@
-@*                     <p>@item.Quantity x @item.Price.ToString("C")</p> *@
-@*                 </div> *@
-@*             </div> *@
-@*         } *@
-@*         <div class="dropdown-divider"></div> *@
-@*         <div class="dropdown-item"> *@
-@*             <strong>Total: @Model.Total.ToString("C")</strong> *@
-@*         </div> *@
-@*         <a href="/Cart" class="dropdown-item text-center">View Cart</a> *@
-@*     </div> *@
-@* </div> *@
+            @if (Model.Count > 5)
+            {
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item text-center py-2 text-primary"
+                       href="@Url.Action("Index", "CinemaBookings", new { area = "Customer" })">
+                        View All (@Model.Count)
+                    </a>
+                </li>
+            }
+        }
+        else
+        {
+            <li>
+                <div class="dropdown-item py-3 text-center text-muted">
+                    <i class="fas fa-film fa-2x mb-2"></i>
+                    <p class="mb-0">No upcoming cinema bookings</p>
+                    <small>Book your movie tickets now!</small>
+                </div>
+            </li>
+            <li>
+                <a class="dropdown-item text-center py-2 text-primary"
+                   href="@Url.Action("Index", "Cinemas", new { area = "Customer" })">
+                    Browse Cinemas
+                </a>
+            </li>
+        }
+    </ul>
+</li>

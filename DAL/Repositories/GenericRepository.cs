@@ -58,6 +58,16 @@ namespace DAL.Repositories
         #endregion
 
 
+        #region Get All With Deleted
+
+        public IQueryable<T> GetAllWithDeleted()
+        {
+            return _dbSet;
+        }
+
+        #endregion
+
+
         #region Add 
 
         public async Task<T> Add(T entity)
@@ -93,7 +103,8 @@ namespace DAL.Repositories
 
         private void MarkAsDeleted(T entity, string deletedBy)
         {
-            entity.IsDeleted = true;
+            entity.IsDeleted = false;
+            entity.CurrentState = CurrentState.SoftDelete;
             entity.DeletedBy = deletedBy;
             entity.DeletedDateUtc = DateTime.UtcNow;
         }
@@ -101,14 +112,13 @@ namespace DAL.Repositories
         private void MarkAsRestored(T entity, string restoredBy)
         {
             entity.IsDeleted = false;
+            entity.CurrentState = CurrentState.RestoreDeleted;
             entity.RestoredBy = restoredBy;
             entity.RestoredDateUtc = DateTime.UtcNow;
         }
 
         #endregion
 
-        public async Task Delete(Guid id)
-            => await SoftDeleteAsync(id);
 
         public async Task SoftDeleteAsync(Guid id)
         {
@@ -135,6 +145,22 @@ namespace DAL.Repositories
 
         #endregion
 
+
+        #region Delete 
+
+        public async Task DeleteInDB(Guid id)
+        {
+            var entity = await FindByIdAsync(id);
+
+            if (entity != null)
+            {
+                _dbSet.Remove(entity);
+                await _context.SaveChangesAsync();
+            }
+
+        }
+
+        #endregion
 
         #endregion
 

@@ -1,15 +1,19 @@
 ﻿@model DAL.ViewModels.Category.CategoryAdminCreateEditVM
 
 @{
-	ViewData["Title"] = ViewContext.RouteData.Values["action"].ToString() == "Edit" ? "Edit Category" : "Add New Category";
+	var isEdit = string.Equals(ViewContext.RouteData.Values["action"]?.ToString(), "Edit", StringComparison.OrdinalIgnoreCase);
+	ViewData["Title"] = isEdit ? "Edit Category" : "Add New Category";
 }
+
 
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
 		<h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
 	</div>
 	<div class="card-body">
-		<form asp-action="@ViewContext.RouteData.Values["action"].ToString()">
+
+		<form asp-action="@(ViewContext.RouteData.Values["action"])" method="post">
+
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 			<div class="form-group row">
