@@ -13,5 +13,10 @@ global using Models;
 global using DAL.Enums;
 global using DAL.Models;
 global using DAL.Context;
+global using DAL.ViewModels;
+global using DAL.Migrations;
+global using DAL.Repositories;
+global using DAL.ViewModels.Movie;
+global using DAL.Repositories.IRepositories;
 
 

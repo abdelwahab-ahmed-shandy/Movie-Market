@@ -240,6 +240,11 @@
         </div>
 
         @RenderBody()
+    
+    <div class="col-md-3">
+        <!-- Popular Categories Sidebar -->
+        @await Component.InvokeAsync("PopularCategories", new { count = 5 })
+    </div>
     </main>
 
     <!-- Footer Section -->

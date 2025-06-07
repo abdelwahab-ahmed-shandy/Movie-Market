@@ -1,4 +1,9 @@
 
+using DAL.Repositories.IRepositories;
+using DAL.Repositories;
+using BLL.Services.Interfaces.Mappings;
+using AutoMapper;
+
 namespace Movie_Market
 {
     public static class Program
@@ -7,9 +12,12 @@ namespace Movie_Market
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
+
             #region Add services to the container
             builder.Services.AddControllersWithViews();
             #endregion
+
 
 
             #region Register ApplicationDbContext with Dependency Injection 
@@ -20,8 +28,30 @@ namespace Movie_Market
             #endregion
 
 
-            #region Register repository services with Dependency Injection (Scoped Lifetime) 
+            #region AutoMapper
+            #region AutoMapper
+            builder.Services.AddAutoMapper(cfg => { cfg.AddProfile<CategoryProfile>(); }, typeof(Program).Assembly);
+            #endregion
 
+            #endregion
+
+
+            #region Register Services
+            // Admin Services
+            builder.Services.AddScoped<IAdminCategoryService, AdminCategoryService>();
+
+            // Customer Services
+            builder.Services.AddScoped<ICustomerCategoryService, CustomerCategoryService>();
+
+            // Repository Services
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddTransient<IEmailService, EmailService>();
+            builder.Services.AddScoped<IAuditService, AuditService>();
+            builder.Services.AddScoped<IAccountService, AccountService>();
+            #endregion
+
+
+            #region Identity Configuration
             builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
             {
                 options.Password.RequireDigit = true;
@@ -29,46 +59,35 @@ namespace Movie_Market
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = true;
                 options.Password.RequireLowercase = true;
-
                 options.SignIn.RequireConfirmedAccount = false;
                 options.User.RequireUniqueEmail = true;
             })
             .AddEntityFrameworkStores<ApplicationdbContext>()
             .AddDefaultTokenProviders();
-
-            builder.Services.AddTransient<IEmailService, EmailService>();
-            builder.Services.AddScoped<IAuditService, AuditService>();
-            builder.Services.AddScoped<IAccountService, AccountService>();
-
-            builder.Services.AddHttpContextAccessor();
-
             #endregion
 
 
 
-            #region Configure authentication services in the application
+            #region Authentication Configuration
 
             builder.Services.AddAuthentication(options =>
             {
-                // Specify the default authentication system using cookies
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
-                // Specify Google as the authentication method when attempting to log in (when attempting to log in)
                 options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
             })
-            // Add authentication using cookies to store session data after login
             .AddCookie()
-            // Add authentication via Google OAuth
             .AddGoogle(googleOptions =>
             {
-                // Set the client ID for Google authentication from the application settings
                 googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"]
                     ?? throw new InvalidOperationException("Google ClientId is not configured.");
 
-                // Set the client secret key for Google authentication from the application settings 
                 googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]
                     ?? throw new InvalidOperationException("Google ClientSecret is not configured.");
             });
+
+
+            builder.Services.AddHttpContextAccessor();
 
             #endregion
 
@@ -93,24 +112,16 @@ namespace Movie_Market
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
-
-            #endregion
-
-
-            #region Authentication & Authorization
-            // Enable Authentication
-            // Ensures that incoming requests pass user identity verification before accessing protected resources           
+            app.UseStaticFiles();
+            app.UseRouting();
             app.UseAuthentication();
-
-            // Enable Authorization
-            // Determines whether the authenticated user has the required permissions to access certain resources           
             app.UseAuthorization();
 
-            app.MapStaticAssets();
-            app.UseStaticFiles();
-
             #endregion
+
+
 
 
             #region Setting up top-level routes
@@ -141,7 +152,10 @@ namespace Movie_Market
             #endregion
 
 
+
+
             app.Run();
+
         }
     }
 }

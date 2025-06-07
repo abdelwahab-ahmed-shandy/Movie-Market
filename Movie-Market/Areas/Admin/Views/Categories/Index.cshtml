@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DAL.ViewModels.Category.CategoryAdminIndexVM>
+
+@{
+	ViewData["Title"] = "Category Management";
+}
+
+<div class="card shadow mb-4">
+	<div class="card-header py-3 d-flex justify-content-between align-items-center">
+		<h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
+		<a asp-action="Create" class="btn btn-primary btn-sm">Add a new category</a>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Status</th>
+						<th>Number of movies</th>
+						<th>Creation date</th>
+						<th>Procedures</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr class="@(item.IsDeleted ? "table-danger" : "")">
+							<td>@item.Name</td>
+							<td>@(item.Description?.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)</td>
+							<td>
+								<span class="badge @GetStateBadgeClass(item.CurrentState)">
+									@item.CurrentState
+								</span>
+								@if (item.IsDeleted)
+								{
+									<span class="badge bg-danger">Deleted</span>
+								}
+							</td>
+							<td>@item.MoviesCount</td>
+							<td>@item.CreatedDateUtc.ToString("yyyy-MM-dd")</td>
+							<td>
+								<div class="btn-group" role="group">
+									<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
+									<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
+									<form asp-action="ToggleStatus" asp-route-id="@item.Id" method="post">
+										<button type="submit" class="btn @(item.IsDeleted ? "btn-success" : "btn-danger") btn-sm">
+											@(item.IsDeleted ? "Restore" : "Deleted")
+										</button>
+									</form>
+								</div>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+@functions {
+	string GetStateBadgeClass(CurrentState state)
+	{
+		return state switch
+		{
+			CurrentState.Active => "bg-success",
+			CurrentState.Inactive => "bg-secondary",
+			_ => "bg-secondary"
+		};
+	}
+}

@@ -1,0 +1,64 @@
+﻿@model DAL.ViewModels.Category.CategoryDetailsVM
+
+@{
+	ViewData["Title"] = Model.Name;
+}
+
+<div class="container py-5">
+	<div class="category-header mb-5 text-center">
+		<h1 class="display-4">@Model.Name</h1>
+		@if (!string.IsNullOrEmpty(Model.Description))
+		{
+			<p class="lead text-muted">@Model.Description</p>
+		}
+		<hr class="my-4">
+	</div>
+
+	<h3 class="mb-4">Available movies</h3>
+
+	@if (Model.Movies.Any())
+	{
+		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+			@foreach (var movie in Model.Movies)
+			{
+				<div class="col">
+					<div class="card h-100 shadow-sm">
+						<img src="@movie.PosterUrl" class="card-img-top" alt="@movie.Title" style="height: 300px; object-fit: cover;">
+						<div class="card-body">
+							<h5 class="card-title">@movie.Title (@movie.ReleaseYear)</h5>
+							@if (movie.Rating.HasValue)
+							{
+								<div class="mb-2">
+									<span class="text-warning">★</span>
+									<span>@movie.Rating.Value.ToString("0.0")/10</span>
+								</div>
+							}
+							@if (!string.IsNullOrEmpty(movie.ShortDescription))
+							{
+								<p class="card-text text-muted">@movie.ShortDescription</p>
+							}
+						</div>
+						<div class="card-footer bg-transparent">
+							<a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id"
+							   class="btn btn-sm btn-primary w-100">
+								Details
+							</a>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	}
+	else
+	{
+		<div class="alert alert-info text-center">
+			<i class="fas fa-info-circle me-2"></i> There are currently no movies available in this category.
+		</div>
+	}
+
+	<div class="related-categories mt-5">
+		<h3>Similar Categories</h3>
+		@await Component.InvokeAsync("PopularCategories", new { count = 4 })
+	</div>
+
+</div>
