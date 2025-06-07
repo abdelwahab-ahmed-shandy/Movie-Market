@@ -1,0 +1,45 @@
+﻿@model List<DAL.ViewModels.Category.CategoryIndexVM>
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-dark" href="#" id="categoriesDropdown" role="button"
+       data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+        <i class="fas fa-film me-1 text-primary" aria-hidden="true"></i>
+        <span class="fw-medium">Movie Categories</span>
+        <span class="visually-hidden">(click to expand)</span>
+    </a>
+    <ul class="dropdown-menu shadow-sm dropdown-menu-end" aria-labelledby="categoriesDropdown"
+        style="border-radius: 10px; min-width: 250px;">
+
+        @if (Model?.Any() == true)
+        {
+            foreach (var category in Model)
+            {
+                <li>
+                    <a class="dropdown-item d-flex align-items-center py-2"
+                       href="@Url.Action("Details", "Categories", new { area = "Customer", id = category.Id })"
+                       aria-label="@category.Name category">
+                        @* @if (!string.IsNullOrWhiteSpace(category.IconUrl)) *@
+                        @* { *@
+                        @*     <i class="@category.IconUrl me-2 text-muted" aria-hidden="true"></i> *@
+                        @* } *@
+                        <span>@category.Name</span>
+                    </a>
+                </li>
+            }
+            <li><hr class="dropdown-divider my-1"></li>
+        }
+        else
+        {
+            <li><a class="dropdown-item py-2 text-muted">No categories available</a></li>
+        }
+
+        <li>
+            <a class="dropdown-item d-flex align-items-center py-2" 
+               href="@Url.Action("Index", "Categories", new { area = "Customer" })">
+                <i class="fas fa-list-ul me-2 text-primary" aria-hidden="true"></i>
+                <span>Browse All Categories</span>
+                <i class="fas fa-chevron-right ms-auto text-muted" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</li>

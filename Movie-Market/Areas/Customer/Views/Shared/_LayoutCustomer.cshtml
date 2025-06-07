@@ -190,21 +190,8 @@
             <div class="container">
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-list me-1"></i> Categories
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                                <li><a class="dropdown-item" href="/Customer/Category/MoreMovieWithCategory/1">Shonen</a></li>
-                                <li><a class="dropdown-item" href="/Customer/Category/MoreMovieWithCategory/2">Seinen</a></li>
-                                <li><a class="dropdown-item" href="/Customer/Category/MoreMovieWithCategory/3">Fantasy</a></li>
-                                <li><a class="dropdown-item" href="/Customer/Category/MoreMovieWithCategory/4">Sci-Fi</a></li>
 
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" asp-controller="Category" asp-action="Index">All Categories</a></li>
-                            </ul>
-                        </li>
+                        @await Component.InvokeAsync("CategoriesDropdown")
 
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Character" asp-action="Index">Characters</a>

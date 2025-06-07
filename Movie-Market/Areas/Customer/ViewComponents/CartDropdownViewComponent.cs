@@ -1,7 +1,7 @@
 ﻿using DAL.ViewModels.Cart;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 
-namespace Movie_Market.Areas.Customer.Views.Shared.Components
+namespace Movie_Market.Areas.Customer.ViewComponents
 {
     public class CartDropdownViewComponent : ViewComponent
     {

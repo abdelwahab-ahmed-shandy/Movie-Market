@@ -3,17 +3,30 @@
   "WorkspaceRootPath": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|c:\\users\\fm\\desktop\\movie-market\\movie-market\\areas\\customer\\views\\shared\\_layoutcustomer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|solutionrelative:areas\\customer\\views\\shared\\_layoutcustomer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|c:\\users\\fm\\desktop\\movie-market\\movie-market\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2EB37683-492C-44AE-860B-755458E25F33}|..\\BLL\\BLL.csproj|c:\\users\\fm\\desktop\\movie-market\\bll\\services\\interfaces\\mappings\\categoryprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|c:\\users\\fm\\desktop\\movie-market\\movie-market\\areas\\customer\\views\\shared\\components\\categoriesdropdown\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|solutionrelative:areas\\customer\\views\\shared\\components\\categoriesdropdown\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AFCE1501-A3AB-4151-8A12-8962A5F621BB}|..\\DAL\\DAL.csproj|c:\\users\\fm\\desktop\\movie-market\\dal\\models\\basemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2EB37683-492C-44AE-860B-755458E25F33}|..\\BLL\\BLL.csproj|c:\\users\\fm\\desktop\\movie-market\\bll\\services\\implementations\\customercategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2EB37683-492C-44AE-860B-755458E25F33}|..\\BLL\\BLL.csproj|c:\\users\\fm\\desktop\\movie-market\\bll\\services\\implementations\\admincategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AFCE1501-A3AB-4151-8A12-8962A5F621BB}|..\\DAL\\DAL.csproj|c:\\users\\fm\\desktop\\movie-market\\dal\\viewmodels\\category\\categoryindexvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|c:\\users\\fm\\desktop\\movie-market\\movie-market\\areas\\customer\\viewcomponents\\categoriesdropdownviewcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|solutionrelative:areas\\customer\\viewcomponents\\categoriesdropdownviewcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|c:\\users\\fm\\desktop\\movie-market\\movie-market\\areas\\customer\\viewcomponents\\cartdropdownviewcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|solutionrelative:areas\\customer\\viewcomponents\\cartdropdownviewcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,58 +36,98 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1625,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "BaseModel.cs",
-              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\Models\\BaseModel.cs",
-              "RelativeDocumentMoniker": "..\\DAL\\Models\\BaseModel.cs",
-              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\Models\\BaseModel.cs",
-              "RelativeToolTip": "..\\DAL\\Models\\BaseModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T01:33:36.768Z",
+              "Title": "Default.cshtml",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Customer\\Views\\Shared\\Components\\CategoriesDropdown\\Default.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Customer\\Views\\Shared\\Components\\CategoriesDropdown\\Default.cshtml",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Customer\\Views\\Shared\\Components\\CategoriesDropdown\\Default.cshtml",
+              "RelativeToolTip": "Areas\\Customer\\Views\\Shared\\Components\\CategoriesDropdown\\Default.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-07T12:31:40.519Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CategoryProfile.cs",
-              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\BLL\\Services\\Interfaces\\Mappings\\CategoryProfile.cs",
-              "RelativeDocumentMoniker": "..\\BLL\\Services\\Interfaces\\Mappings\\CategoryProfile.cs",
-              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\BLL\\Services\\Interfaces\\Mappings\\CategoryProfile.cs",
-              "RelativeToolTip": "..\\BLL\\Services\\Interfaces\\Mappings\\CategoryProfile.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAUwA4AAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T01:28:25.134Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAiwJoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAkwCYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T01:17:14.496Z",
+              "WhenOpened": "2025-06-07T12:58:12.54Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "AdminCategoryService.cs",
-              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\BLL\\Services\\Implementations\\AdminCategoryService.cs",
-              "RelativeDocumentMoniker": "..\\BLL\\Services\\Implementations\\AdminCategoryService.cs",
-              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\BLL\\Services\\Implementations\\AdminCategoryService.cs",
-              "RelativeToolTip": "..\\BLL\\Services\\Implementations\\AdminCategoryService.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAxwGsAAAAJAAAAAAAAAA==",
+              "Title": "CustomerCategoryService.cs",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\BLL\\Services\\Implementations\\CustomerCategoryService.cs",
+              "RelativeDocumentMoniker": "..\\BLL\\Services\\Implementations\\CustomerCategoryService.cs",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\BLL\\Services\\Implementations\\CustomerCategoryService.cs",
+              "RelativeToolTip": "..\\BLL\\Services\\Implementations\\CustomerCategoryService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T01:14:12.412Z",
+              "WhenOpened": "2025-06-07T12:55:55.073Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CategoryIndexVM.cs",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\ViewModels\\Category\\CategoryIndexVM.cs",
+              "RelativeDocumentMoniker": "..\\DAL\\ViewModels\\Category\\CategoryIndexVM.cs",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\ViewModels\\Category\\CategoryIndexVM.cs*",
+              "RelativeToolTip": "..\\DAL\\ViewModels\\Category\\CategoryIndexVM.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T12:54:16.054Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CategoriesDropdownViewComponent.cs",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Customer\\ViewComponents\\CategoriesDropdownViewComponent.cs",
+              "RelativeDocumentMoniker": "Areas\\Customer\\ViewComponents\\CategoriesDropdownViewComponent.cs",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Customer\\ViewComponents\\CategoriesDropdownViewComponent.cs",
+              "RelativeToolTip": "Areas\\Customer\\ViewComponents\\CategoriesDropdownViewComponent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T12:47:42.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CartDropdownViewComponent.cs",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Customer\\ViewComponents\\CartDropdownViewComponent.cs",
+              "RelativeDocumentMoniker": "Areas\\Customer\\ViewComponents\\CartDropdownViewComponent.cs",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Customer\\ViewComponents\\CartDropdownViewComponent.cs",
+              "RelativeToolTip": "Areas\\Customer\\ViewComponents\\CartDropdownViewComponent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T12:47:11.798Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_LayoutCustomer.cshtml",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Customer\\Views\\Shared\\_LayoutCustomer.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Customer\\Views\\Shared\\_LayoutCustomer.cshtml",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Customer\\Views\\Shared\\_LayoutCustomer.cshtml*",
+              "RelativeToolTip": "Areas\\Customer\\Views\\Shared\\_LayoutCustomer.cshtml*",
+              "ViewState": "AgIAALEAAAAAAAAAAAAQwL4AAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-07T12:36:22.109Z",
               "EditorCaption": ""
             },
             {

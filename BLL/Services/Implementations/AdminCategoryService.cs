@@ -38,7 +38,7 @@ namespace BLL.Services.Implementations
                 .OrderByDescending(c => c.CreatedDateUtc)
                 .ToListAsync();
         }
-
+        // todo : Implement pagination and sorting
         public async Task<CategoryAdminDetailsVM?> GetCategoryDetailsAsync(Guid id)
         {
             var category = await _categoryRepo.GetAll()

@@ -29,10 +29,7 @@ namespace Movie_Market
 
 
             #region AutoMapper
-            #region AutoMapper
             builder.Services.AddAutoMapper(cfg => { cfg.AddProfile<CategoryProfile>(); }, typeof(Program).Assembly);
-            #endregion
-
             #endregion
 
 

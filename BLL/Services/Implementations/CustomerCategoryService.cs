@@ -12,13 +12,12 @@ namespace BLL.Services.Implementations
     public class CustomerCategoryService : ICustomerCategoryService
     {
         private readonly IGenericRepository<Category> _categoryRepository;
-        private readonly IMapper _mapper;
 
-        public CustomerCategoryService(IGenericRepository<Category> categoryRepository, IMapper mapper)
+        public CustomerCategoryService(IGenericRepository<Category> categoryRepository)
         {
             _categoryRepository = categoryRepository;
-            _mapper = mapper;
         }
+
 
         public async Task<IEnumerable<CategoryIndexVM>> GetActiveCategoriesAsync()
         {
@@ -30,9 +29,11 @@ namespace BLL.Services.Implementations
                     Id = c.Id,
                     Name = c.Name,
                     Description = c.Description,
+                    //IconUrl = c.IconUrl
                     MoviesCount = c.Movies.Count(m => !m.IsDeleted && m.CurrentState == CurrentState.Active)
                 }).ToListAsync();
         }
+
 
         public async Task<CategoryDetailsVM?> GetCategoryWithMoviesAsync(Guid id)
         {
@@ -60,6 +61,7 @@ namespace BLL.Services.Implementations
                 })
             };
         }
+
 
         public async Task<IEnumerable<CategoryIndexVM>> GetPopularCategoriesAsync(int count)
         {
