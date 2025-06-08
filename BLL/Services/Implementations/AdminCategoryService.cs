@@ -21,20 +21,43 @@ namespace BLL.Services.Implementations
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<IEnumerable<CategoryAdminIndexVM>> GetAllCategoriesAsync()
+        public async Task<CategoryAdminListVM> GetAllCategoriesAsync(int pageNumber = 1, int pageSize = 10, string searchTerm = null)
         {
-            return await _categoryRepo.GetAllWithDeleted().Select(c => new CategoryAdminIndexVM
+            var query = _categoryRepo.GetAllWithDeleted();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
             {
-                Id = c.Id,
-                Name = c.Name,
-                Description = c.Description,
-                CurrentState = c.CurrentState.Value,
-                CreatedDateUtc = c.CreatedDateUtc,
-                MoviesCount = c.Movies.Count,
-                IsDeleted = c.IsDeleted
-            })
+                query = query.Where(c =>
+                    c.Name.Contains(searchTerm) ||
+                    (c.Description != null && c.Description.Contains(searchTerm)));
+            }
+
+            var totalCount = await query.CountAsync();
+
+            var categories = await query
+                .Select(c => new CategoryAdminIndexVM
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description,
+                    CurrentState = c.CurrentState.Value,
+                    CreatedDateUtc = c.CreatedDateUtc,
+                    MoviesCount = c.Movies.Count,
+                    IsDeleted = c.IsDeleted
+                })
                 .OrderByDescending(c => c.CreatedDateUtc)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
+
+            return new CategoryAdminListVM
+            {
+                Categories = categories,
+                TotalCount = totalCount,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                SearchTerm = searchTerm
+            };
         }
 
 

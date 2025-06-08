@@ -1,112 +1,160 @@
-﻿@model IEnumerable<DAL.ViewModels.Category.CategoryAdminIndexVM>
+﻿@model DAL.ViewModels.Category.CategoryAdminListVM
 
 @{
-	ViewData["Title"] = "Category Management";
+    ViewData["Title"] = "Category Management";
 }
 
 <div class="card shadow mb-4">
-	<div class="card-header py-3 d-flex justify-content-between align-items-center">
-		<h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
-		<a asp-action="Create" class="btn btn-primary btn-sm">Add a new category</a>
-	</div>
-	<div class="card-body">
-		<div class="table-responsive">
-			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Description</th>
-						<th>Status</th>
-						<th>Number of movies</th>
-						<th>Creation date</th>
-						<th>Procedures</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (var item in Model)
-					{
-						<tr class="@(item.IsDeleted ? "table-danger" : "")">
-							<td>@item.Name</td>
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
+        <a asp-action="Create" class="btn btn-primary btn-sm">Add a new category</a>
+    </div>
+    <div class="card-body">
+        <!-- Search Box -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form method="get" class="form-inline">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="searchTerm" value="@Model.SearchTerm" placeholder="Search categories...">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        @if (!string.IsNullOrEmpty(Model.SearchTerm))
+                        {
+                            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
 
-							<td title="@item.Description">
-								@(item.Description?.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)
-							</td>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Number of movies</th>
+                        <th>Creation date</th>
+                        <th>Procedures</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Categories)
+                    {
+                        <tr class="@(item.IsDeleted ? "table-danger" : "")">
+                            <td>@item.Name</td>
 
-							<td title="@item.CurrentState">
-								<span class="badge @GetStateBadgeClass(item.CurrentState)">
-									@item.CurrentState
-								</span>
-							</td>
-							
-							<td>@item.MoviesCount</td>
-							<td>@item.CreatedDateUtc.ToString("yyyy-MM-dd")</td>
-							<td>
-								<div class="btn-group" role="group">
-									<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
-									<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
+                            <td title="@item.Description">
+                                @(item.Description?.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)
+                            </td>
 
-									@if (!item.IsDeleted)
-									{
-										<button type="button"
-												class="btn btn-danger btn-sm"
-												data-bs-toggle="modal"
-												data-bs-target="#confirmDeleteModal"
-												data-id="@item.Id"
-												data-name="@item.Name"
-												data-isdeleted="@item.IsDeleted">
-											Delete
-										</button>
-									}
-									else
-									{
-										<button type="button"
-												class="btn btn-success btn-sm"
-												data-bs-toggle="modal"
-												data-bs-target="#confirmDeleteModal"
-												data-id="@item.Id"
-												data-name="@item.Name"
-												data-isdeleted="@item.IsDeleted">
-											Restore
-										</button>
-									}
-								</div>
-							</td>
-						</tr>
-					}
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
+                            <td title="@item.CurrentState">
+                                <span class="badge @GetStateBadgeClass(item.CurrentState)">
+                                    @item.CurrentState
+                                </span>
+                            </td>
 
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header bg-danger text-white">
-				<h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Action</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<p>Choose the action for category <strong id="categoryName"></strong>:</p>
-			</div>
-			<input type="hidden" id="categoryId" />
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <td>@item.MoviesCount</td>
+                            <td>@item.CreatedDateUtc.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
 
-				<!-- Soft Delete / Restore -->
-				<form id="softDeleteForm" method="post" asp-action="ToggleStatus" class="d-inline">
-					<input type="hidden" name="id" id="softDeleteCategoryId" />
-					<button type="submit" class="btn btn-warning" id="softDeleteBtn">Soft Delete / Restore</button>
-				</form>
+                                    @if (!item.IsDeleted)
+                                    {
+                                        <button type="button"
+                                                class="btn btn-danger btn-sm"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#confirmDeleteModal"
+                                                data-id="@item.Id"
+                                                data-name="@item.Name"
+                                                data-isdeleted="@item.IsDeleted">
+                                            Delete
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button"
+                                                class="btn btn-success btn-sm"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#confirmDeleteModal"
+                                                data-id="@item.Id"
+                                                data-name="@item.Name"
+                                                data-isdeleted="@item.IsDeleted">
+                                            Restore
+                                        </button>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 
-				<!-- Permanent Delete -->
-				<form id="permanentDeleteForm" method="post" asp-action="DeletePermanently" class="d-inline">
-					<input type="hidden" name="id" id="permanentDeleteCategoryId" />
-					<button type="submit" class="btn btn-danger">Delete Permanently</button>
-				</form>
-			</div>
-		</div>
-	</div>
+        <!-- Pagination -->
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="dataTables_info">
+                    Showing @((Model.PageNumber - 1) * Model.PageSize + 1) to
+                    @Math.Min(Model.PageNumber * Model.PageSize, Model.TotalCount) of
+                    @Model.TotalCount entries
+                </div>
+            </div>
+            <div class="col-md-6">
+                <nav class="float-end">
+                    <ul class="pagination">
+                        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                            <a class="page-link"
+                               href="@Url.Action("Index", new { pageNumber = Model.PageNumber - 1, pageSize = Model.PageSize, searchTerm = Model.SearchTerm })">
+                                Previous
+                            </a>
+                        </li>
+
+                        @for (int i = 1; i <= Model.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                                <a class="page-link"
+                                   href="@Url.Action("Index", new { pageNumber = i, pageSize = Model.PageSize, searchTerm = Model.SearchTerm })">
+                                    @i
+                                </a>
+                            </li>
+                        }
+
+                        <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+                            <a class="page-link"
+                               href="@Url.Action("Index", new { pageNumber = Model.PageNumber + 1, pageSize = Model.PageSize, searchTerm = Model.SearchTerm })">
+                                Next
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Page Size Selector -->
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="form-inline float-end">
+                    <label class="mr-2">Items per page:</label>
+                    <select class="form-select form-select-sm" onchange="window.location.href=this.value">
+                        @foreach (var size in new[] { 5, 10, 20, 50 })
+                        {
+                            <option value="@Url.Action("Index", new { pageNumber = 1, pageSize = size, searchTerm = Model.SearchTerm })"
+                                    selected="@(Model.PageSize == size)">
+                                @size
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

@@ -20,11 +20,10 @@ namespace Movie_Market.Areas.Admin.Controllers
         #region View Category
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 10, string searchTerm = null)
         {
-            var categories = await _categoryService.GetAllCategoriesAsync();
-
-            return View(categories);
+            var model = await _categoryService.GetAllCategoriesAsync(pageNumber, pageSize, searchTerm);
+            return View(model);
         }
 
         [HttpGet]

@@ -169,6 +169,28 @@
             padding: 12px;
             text-align: center;
         }
+        /* Pagination Styles */
+        .pagination .page-item.active .page-link {
+            background-color: #4e73df;
+            border-color: #4e73df;
+        }
+
+        .pagination .page-link {
+            color: #4e73df;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            color: #6c757d;
+        }
+
+        /* Search Box Styles */
+        .search-box {
+            max-width: 400px;
+        }
+
+            .search-box .input-group-append .btn {
+                border-radius: 0 .35rem .35rem 0;
+            }
 
         /* Add this inside your Razor View or _Layout.cshtml */
         @@media (max-width: 768px) {

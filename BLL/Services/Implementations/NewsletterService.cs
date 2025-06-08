@@ -1,7 +1,9 @@
 ﻿using Castle.Core.Smtp;
 using DAL.Repositories.IRepositories;
+using DAL.ViewModels.Subscriber;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using MovieMart.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,21 +30,33 @@ namespace BLL.Services.Implementations
             _logger = logger;
         }
 
-        public async Task<PaginatedList<Subscriber>> GetSubscribersAsync(string query, int page, int pageSize)
+        public async Task<SubscriberListVM> GetSubscribersAsync(string query, int page, int pageSize)
         {
-            var baseQuery = _subscriberRepo.GetAll();
+            var source = _subscriberRepo.GetAll();
 
             if (!string.IsNullOrEmpty(query))
             {
-                baseQuery = baseQuery.Where(s =>
-                    s.Email.Contains(query) ||
-                    s.SubscribedAt.ToString("yyyy-MM-dd").Contains(query)
-                );
+                source = source.Where(s => s.Email.Contains(query));
             }
 
-            var orderedQuery = baseQuery.OrderByDescending(s => s.SubscribedAt);
-            return await PaginatedList<Subscriber>.CreateAsync(orderedQuery, page, pageSize);
+            var paginatedList = await PaginatedList<Subscriber>.CreateAsync(source, page, pageSize);
+
+            return new SubscriberListVM
+            {
+                Subscribers = paginatedList.Select(s => new SubscriberVM
+                {
+                    Id = s.Id,
+                    Email = s.Email,
+                    SubscribedAt = s.SubscribedAt
+                }),
+                PageIndex = paginatedList.PageIndex,
+                PageSize = pageSize,
+                TotalCount = paginatedList.TotalCount,
+                SearchTerm = query
+            };
         }
+
+
 
         public async Task<(bool Success, string Message)> SendNewsletterAsync(string subject, string body)
         {
@@ -94,6 +108,16 @@ namespace BLL.Services.Implementations
                 .ToListAsync();
         }
 
+
+
+        public async Task DeleteSubscriberAsync(Guid id)
+        {
+            var subscriber = await _subscriberRepo.GetByIdAsync(id);
+            if (subscriber == null)
+                throw new Exception("Subscriber not found");
+
+            await _subscriberRepo.DeleteInDB(id);
+        }
 
     }
 }

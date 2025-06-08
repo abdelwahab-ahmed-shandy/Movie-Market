@@ -15,17 +15,16 @@ namespace Movie_Market.Areas.Admin.Controllers
         }
 
 
-        #region View Index
-        public async Task<IActionResult> Index(string query, int page = 1)
+        #region View Index 
+        public async Task<IActionResult> Index(string query, int page = 1, int pageSize = 5)
         {
-            const int pageSize = 5;
             var model = await _newsletterService.GetSubscribersAsync(query, page, pageSize);
-
             ViewBag.Query = query;
             return View(model);
         }
 
         #endregion
+
 
         #region Send Email Subscribers :
         [HttpGet]
@@ -54,11 +53,35 @@ namespace Movie_Market.Areas.Admin.Controllers
         }
         #endregion
 
+
         #region View Email History
         public async Task<IActionResult> EmailHistory()
         {
             var emails = await _newsletterService.GetEmailHistoryAsync();
             return View(emails);
+        }
+        #endregion
+
+
+        #region Delete Subscriber
+        [HttpPost]
+        public async Task<IActionResult> DeleteSubscriber(Guid id)
+        {
+            try
+            {
+                await _newsletterService.DeleteSubscriberAsync(id);
+                TempData["notification"] = "Subscriber deleted successfully.";
+                TempData["MessageType"] = "success";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting subscriber");
+
+                TempData["notification"] = "An error occurred while deleting the subscriber. Please try again.";
+                TempData["MessageType"] = "error";
+                return RedirectToAction(nameof(Index));
+            }
         }
         #endregion
 

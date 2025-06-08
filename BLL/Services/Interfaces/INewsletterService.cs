@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.ViewModels.Subscriber;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,10 @@ namespace BLL.Services.Interfaces
 {
     public interface INewsletterService
     {
-        Task<PaginatedList<Subscriber>> GetSubscribersAsync(string query, int page, int pageSize);
+        Task<SubscriberListVM> GetSubscribersAsync(string query, int page, int pageSize);
         Task<(bool Success, string Message)> SendNewsletterAsync(string subject, string body);
         Task<List<SentEmail>> GetEmailHistoryAsync();
+        Task DeleteSubscriberAsync(Guid id);
+
     }
 }

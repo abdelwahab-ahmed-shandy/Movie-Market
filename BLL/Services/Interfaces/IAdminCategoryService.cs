@@ -10,7 +10,7 @@ namespace BLL.Services.Interfaces
 {
     public interface IAdminCategoryService
     {
-        Task<IEnumerable<CategoryAdminIndexVM>> GetAllCategoriesAsync();
+        Task<CategoryAdminListVM> GetAllCategoriesAsync(int pageNumber = 1, int pageSize = 10, string searchTerm = null);
         Task<CategoryAdminDetailsVM?> GetCategoryDetailsAsync(Guid id);
         Task<Category> CreateCategoryAsync(CategoryAdminCreateEditVM viewModel);
         Task UpdateCategoryAsync(Guid id, CategoryAdminCreateEditVM viewModel);
