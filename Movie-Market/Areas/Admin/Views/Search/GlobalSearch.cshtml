@@ -1,0 +1,116 @@
+﻿@model DAL.ViewModels.Search.SearchAdminResultVM
+
+@{
+    ViewData["Title"] = "Global Search";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form class="d-flex search-form" role="search" method="get"
+                  action="@Url.Action("GlobalSearch", "Search", new { area = "Admin" })">
+                <div class="input-group">
+                    <input class="form-control search-input" type="search"
+                           placeholder="Search across all entities..."
+                           aria-label="Search"
+                           id="globalSearch"
+                           name="query"
+                           value="@Context.Request.Query["query"]">
+                    <button class="btn btn-primary search-btn" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-results dropdown-menu w-100 p-2 d-none"></div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model.TotalResults > 0)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Search Results for "@Context.Request.Query["query"]"</h5>
+            </div>
+            <div class="card-body">
+                @await Html.PartialAsync("_AdminSearchResults", Model)
+            </div>
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(Context.Request.Query["query"]))
+    {
+        <div class="alert alert-info">No results found for "@Context.Request.Query["query"]"</div>
+    }
+</div>
+
+@section Styles {
+    <style>
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 500px;
+            overflow-y: auto;
+            z-index: 1000;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('globalSearch');
+            const searchResults = document.querySelector('.search-results');
+            const searchForm = document.querySelector('.search-form');
+
+            function debounce(func, wait) {
+                let timeout;
+                return function() {
+                    const context = this, args = arguments;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        func.apply(context, args);
+                    }, wait);
+                };
+            }
+
+            searchInput.addEventListener('input', debounce(function(e) {
+                const query = e.target.value.trim();
+
+                if (query.length < 2) {
+                    searchResults.classList.add('d-none');
+                    return;
+                }
+
+                fetch(`/Admin/Search/GlobalSearchPartial?query=${encodeURIComponent(query)}`)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.text();
+                    })
+                    .then(html => {
+                        searchResults.innerHTML = html;
+                        searchResults.classList.remove('d-none');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        searchResults.innerHTML = '<div class="p-2 text-danger">Error loading results</div>';
+                        searchResults.classList.remove('d-none');
+                    });
+            }, 300));
+
+            document.addEventListener('click', function(e) {
+                if (!searchForm.contains(e.target)) {
+                    searchResults.classList.add('d-none');
+                }
+            });
+        });
+    </script>
+}
+
+
+

@@ -1,0 +1,119 @@
+﻿@model DAL.ViewModels.Search.SearchCutomerResultVM
+
+<div class="search-results-container">
+    @if (Model.Movies.Count > 0)
+    {
+        <div class="search-category">
+            <h6>Movies (@Model.Movies.Count)</h6>
+            @foreach (var movie in Model.Movies)
+            {
+                <a href="#" class="search-item">
+                    <div class="search-item-content">
+                        <h7>@movie.Title</h7>
+                        <small class="text-muted">@movie.ReleaseYear • @movie.Author</small>
+                        <p class="mb-0 text-truncate">@movie.Description</p>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+
+    @if (Model.Cinemas.Count > 0)
+    {
+        <div class="search-category">
+            <h6>Cinemas (@Model.Cinemas.Count)</h6>
+            @foreach (var cinema in Model.Cinemas)
+            {
+                <a href="/Customer/Cinemas/Index" class="search-item">
+                    <div class="search-item-content">
+                        <h7>@cinema.Name</h7>
+                        <small class="text-muted">@cinema.Location</small>
+                        <p class="mb-0 text-truncate">@cinema.Description</p>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+
+    @if (Model.Categories.Count > 0)
+    {
+        <div class="search-category">
+            <h6>Categories (@Model.Categories.Count)</h6>
+            @foreach (var category in Model.Categories)
+            {
+                        <a href="/Customer/Categories/Index" class="search-item">
+                    <div class="search-item-content">
+                        <h7>@category.Name</h7>
+                        <p class="mb-0 text-truncate">@category.Description</p>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+
+    @if (Model.Characters.Count > 0)
+    {
+        <div class="search-category">
+            <h6>Characters (@Model.Characters.Count)</h6>
+            @foreach (var character in Model.Characters)
+            {
+                <a href="/Customer/Characters/Index" class="search-item">
+                    <div class="search-item-content">
+                        <h7>@character.Name</h7>
+                        <p class="mb-0 text-truncate">@character.Description</p>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+
+    @if (Model.Seasons.Count > 0)
+    {
+        <div class="search-category">
+            <h6>Seasons (@Model.Seasons.Count)</h6>
+            @foreach (var season in Model.Seasons)
+            {
+                <a href="/Customer/Seasons/Index" class="search-item">
+                    <div class="search-item-content">
+                        <h7>@season.Title</h7>
+                        <small class="text-muted">@season.ReleaseYear • Season @season.SeasonNumber</small>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+
+    @if (Model.Episodes.Count > 0)
+    {
+        <div class="search-category">
+            <h6>Episodes (@Model.Episodes.Count)</h6>
+            @foreach (var episode in Model.Episodes)
+            {
+                <a href="/Customer/Episodes/Index" class="search-item">
+                    <div class="search-item-content">
+                        <h7>@episode.Title</h7>
+                        <small class="text-muted">Episode @episode.EpisodeNumber • @episode.Duration</small>
+                        <p class="mb-0 text-truncate">@episode.Description</p>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+
+    @if (Model.TvSeries.Count > 0)
+    {
+        <div class="search-category">
+            <h6>TV Series (@Model.TvSeries.Count)</h6>
+            @foreach (var series in Model.TvSeries)
+            {
+                <a href="/Customer/TvSeries/Index" class="search-item">
+                    <div class="search-item-content">
+                        <h7>@series.Title</h7>
+                        <small class="text-muted">@series.ReleaseYear • @series.Author</small>
+                        <p class="mb-0 text-truncate">@series.Description</p>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+</div>

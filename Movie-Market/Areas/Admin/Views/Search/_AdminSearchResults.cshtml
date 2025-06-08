@@ -1,0 +1,266 @@
+﻿@model DAL.ViewModels.Search.SearchAdminResultVM
+
+@if (Model.TotalResults == 0)
+{
+    <div class="p-2 text-center">
+        <small class="text-muted">No results found</small>
+    </div>
+}
+else
+{
+    <div class="search-results-admin">
+        
+        @if (Model.Movies.Count > 0)
+        {
+            <div class="mb-4">
+                <h6 class="mb-3 border-bottom pb-2">Movies (@Model.Movies.Count)</h6>
+                <div class="row">
+                    @foreach (var movie in Model.Movies)
+                    {
+                        var baseModel = movie.Bases.FirstOrDefault();
+                        <div class="col-md-4 mb-3">
+                            <a href="@Url.Action("Details", "Movies", new { area = "Admin", id = baseModel?.Id })"
+                               class="card entity-card @(baseModel?.CurrentState == CurrentState.SoftDelete ? "deleted-entity" : "")">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <h5 class="card-title">@movie.Title</h5>
+                                        @if (baseModel != null)
+                                        {
+                                            <span class="badge state-badge @baseModel.CurrentState">
+                                                @baseModel.CurrentState
+                                            </span>
+                                        }
+                                    </div>
+                                    <h6 class="card-subtitle mb-2 text-muted">@movie.Author (@movie.ReleaseYear)</h6>
+                                    <p class="card-text text-truncate">@movie.Description</p>
+                                    <div class="d-flex justify-content-between">
+                                        <small class="text-muted">$@movie.Price</small>
+                                        <small class="text-muted">@baseModel.CreatedBy</small>
+                                        <small class="text-muted">@baseModel?.CreatedDateUtc.ToShortDateString()</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+
+        @if (Model.Cinemas.Count > 0)
+        {
+            <div class="mb-4">
+                <h6 class="mb-3 border-bottom pb-2">Cinemas (@Model.Cinemas.Count)</h6>
+                <div class="row">
+                    @foreach (var cinema in Model.Cinemas)
+                    {
+                        var baseModel = cinema.Bases.FirstOrDefault();
+                        <div class="col-md-4 mb-3">
+                            <a href="@Url.Action("Details", "Cinemas", new { area = "Admin", id = baseModel?.Id })"
+                               class="card entity-card @(baseModel?.CurrentState == CurrentState.SoftDelete ? "deleted-entity" : "")">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <h5 class="card-title">@cinema.Name</h5>
+                                        @if (baseModel != null)
+                                        {
+                                            <span class="badge state-badge @baseModel.CurrentState">
+                                                @baseModel.CurrentState
+                                            </span>
+                                        }
+                                    </div>
+                                    <p class="card-text text-truncate">@cinema.Description</p>
+                                    <div class="d-flex justify-content-between">
+                                        <small class="text-muted">@cinema.Location</small>
+                                        <small class="text-muted">@baseModel.CreatedBy</small>
+                                        <small class="text-muted">@baseModel?.CreatedDateUtc.ToShortDateString()</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+
+        @if (Model.Categories.Count > 0)
+        {
+            <div class="mb-4">
+                <h6 class="mb-3 border-bottom pb-2">Categories (@Model.Categories.Count)</h6>
+                <div class="row">
+                    @foreach (var categories in Model.Categories)
+                    {
+                        var baseModel = categories.Bases.FirstOrDefault();
+                        <div class="col-md-4 mb-3">
+                            <a href="@Url.Action("Details", "Categories", new { area = "Admin", id = baseModel?.Id })"
+                               class="card entity-card @(baseModel?.CurrentState == CurrentState.SoftDelete ? "deleted-entity" : "")">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <h5 class="card-title">@categories.Name</h5>
+                                        @if (baseModel != null)
+                                        {
+                                            <span class="badge state-badge @baseModel.CurrentState">
+                                                @baseModel.CurrentState
+                                            </span>
+                                        }
+                                    </div>
+                                    <p class="card-text text-truncate">@categories.Description</p>
+                                    <div class="d-flex justify-content-between">
+                                        <small class="text-muted">@baseModel.CreatedBy</small>
+
+                                        <small class="text-muted">@baseModel?.CreatedDateUtc.ToShortDateString()</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+
+        @if (Model.Characters.Count > 0)
+        {
+            <div class="mb-4">
+                <h6 class="mb-3 border-bottom pb-2">Characters (@Model.Characters.Count)</h6>
+                <div class="row">
+                    @foreach (var characters in Model.Characters)
+                    {
+                        var baseModel = characters.Bases.FirstOrDefault();
+                        <div class="col-md-4 mb-3">
+                            <a href="@Url.Action("Details", "Characters", new { area = "Admin", id = baseModel?.Id })"
+                               class="card entity-card @(baseModel?.CurrentState == CurrentState.SoftDelete ? "deleted-entity" : "")">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <h5 class="card-title">@characters.Name</h5>
+                                        @if (baseModel != null)
+                                        {
+                                            <span class="badge state-badge @baseModel.CurrentState">
+                                                @baseModel.CurrentState
+                                            </span>
+                                        }
+                                    </div>
+                                    <p class="card-text text-truncate">@characters.Description</p>
+                                    <div class="d-flex justify-content-between">
+                                        <small class="text-muted">@baseModel.CreatedBy</small>
+                                        <small class="text-muted">@baseModel?.CreatedDateUtc.ToShortDateString()</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+
+        @if (Model.Episodes.Count > 0)
+        {
+            <div class="mb-4">
+                <h6 class="mb-3 border-bottom pb-2">Episodes (@Model.Episodes.Count)</h6>
+                <div class="row">
+                    @foreach (var episodes in Model.Episodes)
+                    {
+                        var baseModel = episodes.Bases.FirstOrDefault();
+                        <div class="col-md-4 mb-3">
+                            <a href="@Url.Action("Details", "Episodes", new { area = "Admin", id = baseModel?.Id })"
+                               class="card entity-card @(baseModel?.CurrentState == CurrentState.SoftDelete ? "deleted-entity" : "")">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <h5 class="card-title">@episodes.Title</h5>
+                                        @if (baseModel != null)
+                                        {
+                                            <span class="badge state-badge @baseModel.CurrentState">
+                                                @baseModel.CurrentState
+                                            </span>
+                                        }
+                                    </div>
+                                    <p class="card-text text-truncate">@episodes.Description</p>
+                                    <small class="text-muted">Episode @episodes.EpisodeNumber • @episodes.Duration</small>
+                                    <div class="d-flex justify-content-between">
+                                        <small class="text-muted">@baseModel.CreatedBy</small>
+                                        <small class="text-muted">@baseModel?.CreatedDateUtc.ToShortDateString()</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+
+        @if (Model.Seasons.Count > 0)
+        {
+            <div class="mb-4">
+                <h6 class="mb-3 border-bottom pb-2">Seasons (@Model.Seasons.Count)</h6>
+                <div class="row">
+                    @foreach (var seasons in Model.Seasons)
+                    {
+                        var baseModel = seasons.Bases.FirstOrDefault();
+                        <div class="col-md-4 mb-3">
+                            <a href="@Url.Action("Details", "Seasons", new { area = "Admin", id = baseModel?.Id })"
+                               class="card entity-card @(baseModel?.CurrentState == CurrentState.SoftDelete ? "deleted-entity" : "")">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <h5 class="card-title">@seasons.Title</h5>
+                                        @if (baseModel != null)
+                                        {
+                                            <span class="badge state-badge @baseModel.CurrentState">
+                                                @baseModel.CurrentState
+                                            </span>
+                                        }
+                                    </div>
+                                    <p class="card-text text-truncate">@seasons.Title</p>
+                                    <small class="text-muted">Episode @seasons.SeasonNumber • @seasons.ReleaseYear</small>
+                                    <div class="d-flex justify-content-between">
+                                        <small class="text-muted">@baseModel.CreatedBy</small>
+                                        <small class="text-muted">@baseModel?.CreatedDateUtc.ToShortDateString()</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+
+        @if (Model.TvSeries.Count > 0)
+        {
+            <div class="mb-4">
+                <h6 class="mb-3 border-bottom pb-2">TvSeries (@Model.TvSeries.Count)</h6>
+                <div class="row">
+                    @foreach (var tvSeries in Model.TvSeries)
+                    {
+                        var baseModel = tvSeries.Bases.FirstOrDefault();
+                        <div class="col-md-4 mb-3">
+                            <a href="@Url.Action("Details", "Seasons", new { area = "Admin", id = baseModel?.Id })"
+                               class="card entity-card @(baseModel?.CurrentState == CurrentState.SoftDelete ? "deleted-entity" : "")">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <h5 class="card-title">@tvSeries.Title</h5>
+                                        @if (baseModel != null)
+                                        {
+                                            <span class="badge state-badge @baseModel.CurrentState">
+                                                @baseModel.CurrentState
+                                            </span>
+                                        }
+                                    </div>
+                                    <p class="card-text text-truncate">@tvSeries.Description</p>
+                                    <small class="text-muted">Episode @tvSeries.Author • @tvSeries.ReleaseYear</small>
+                                    <div class="d-flex justify-content-between">
+                                        <small class="text-muted">@baseModel.CreatedBy</small>
+                                        <small class="text-muted">@baseModel?.CreatedDateUtc.ToShortDateString()</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+
+    </div>
+}

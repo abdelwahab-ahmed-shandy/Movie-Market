@@ -1,7 +1,6 @@
 
 using DAL.Repositories.IRepositories;
 using DAL.Repositories;
-using BLL.Services.Interfaces.Mappings;
 using AutoMapper;
 
 namespace Movie_Market
@@ -28,12 +27,8 @@ namespace Movie_Market
             #endregion
 
 
-            #region AutoMapper
-            builder.Services.AddAutoMapper(cfg => { cfg.AddProfile<CategoryProfile>(); }, typeof(Program).Assembly);
-            #endregion
-
-
             #region Register Services
+
             // Admin Services
             builder.Services.AddScoped<IAdminCategoryService, AdminCategoryService>();
 
@@ -48,6 +43,8 @@ namespace Movie_Market
             builder.Services.AddTransient<IEmailService, EmailService>();
             builder.Services.AddScoped<IAuditService, AuditService>();
             builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<ISearchService, SearchService>();
+
             #endregion
 
 
