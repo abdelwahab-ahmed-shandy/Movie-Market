@@ -308,6 +308,11 @@
 
                         <div class="sb-sidenav-menu-heading">Content Management</div>
 
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Categories" ? "active" : "")" asp-area="Admin" asp-controller="Categories" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="bi bi-collection"></i></div>
+                            Categories
+                        </a>
+
                         <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Cinema" ? "active" : "")" asp-area="Admin" asp-controller="Cinema" asp-action="Index">
                             <div class="sb-nav-link-icon"><i class="bi bi-building"></i></div>
                             Cinemas
@@ -318,10 +323,6 @@
                             Movies
                         </a>
 
-                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Categories" ? "active" : "")" asp-area="Admin" asp-controller="Categories" asp-action="Index">
-                            <div class="sb-nav-link-icon"><i class="bi bi-collection"></i></div>
-                            Categories
-                        </a>
 
                         <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Character" ? "active" : "")" asp-area="Admin" asp-controller="Character" asp-action="Index">
                             <div class="sb-nav-link-icon"><i class="bi bi-people"></i></div>
