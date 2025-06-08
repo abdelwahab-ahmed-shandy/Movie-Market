@@ -1,0 +1,26 @@
+﻿@model IEnumerable<SentEmail>
+@{
+    ViewData["Title"] = "Email History";
+}
+
+<h2>Email History</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Body</th>
+            <th>Sent At</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var email in Model)
+        {
+            <tr>
+                <td>@email.Subject</td>
+                <td>@Html.Raw(email.Body.Length > 100 ? email.Body.Substring(0, 100) + "..." : email.Body)</td>
+                <td>@email.SentAt.ToString("yyyy-MM-dd HH:mm")</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -39,6 +39,9 @@ namespace Movie_Market
 
             // Customer Services
             builder.Services.AddScoped<ICustomerCategoryService, CustomerCategoryService>();
+            builder.Services.AddScoped<ISubscriberService, SubscriberService>();
+            builder.Services.AddScoped<INewsletterService, NewsletterService>();
+
 
             // Repository Services
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

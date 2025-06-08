@@ -1,0 +1,91 @@
+﻿@model BLL.Utilities.PaginatedList<Subscriber>
+@{
+    ViewData["Title"] = "Newsletter Subscribers";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
+        <form asp-action="Index" method="get" class="form-inline">
+            <div class="input-group">
+                <input type="text" class="form-control" name="query" value="@ViewBag.Query" placeholder="Search subscribers...">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Email</th>
+                        <th>Subscription Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        foreach (var subscriber in Model)
+                        {
+                            <tr>
+                                <td>@subscriber.Email</td>
+                                <td>@subscriber.SubscribedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a href="mailto:@subscriber.Email" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-envelope"></i> Email
+                                        </a>
+                                        <form asp-action="Delete" asp-route-id="@subscriber.Id" method="post" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                    onclick="return confirm('Are you sure you want to remove this subscriber?')">
+                                                <i class="fas fa-trash-alt"></i> Remove
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" class="text-center">No subscribers found</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+
+            <div class="d-flex justify-content-between">
+                <div>
+                    <p>Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalCount entries</p>
+                </div>
+                <div>
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.PageIndex - 1)"
+                       asp-route-query="@ViewBag.Query"
+                       class="btn btn-outline-secondary @(Model.HasPreviousPage ? "" : "disabled")">
+                        Previous
+                    </a>
+                    <span class="mx-2">Page @Model.PageIndex of @Model.TotalPages</span>
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.PageIndex + 1)"
+                       asp-route-query="@ViewBag.Query"
+                       class="btn btn-outline-secondary @(Model.HasNextPage ? "" : "disabled")">
+                        Next
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>

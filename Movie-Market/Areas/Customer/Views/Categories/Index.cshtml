@@ -7,7 +7,7 @@
 <div class="container py-5">
 	<h1 class="text-center mb-5">@ViewData["Title"]</h1>
 
-	@await Component.InvokeAsync("PopularCategories", new { count = 5 })
+	@* @await Component.InvokeAsync("PopularCategories", new { count = 5 }) *@
 
 	<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 		@foreach (var category in Model)

@@ -1,7 +1,34 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|c:\\users\\fm\\desktop\\movie-market\\movie-market\\areas\\admin\\controllers\\newslettercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|solutionrelative:areas\\admin\\controllers\\newslettercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|c:\\users\\fm\\desktop\\movie-market\\movie-market\\areas\\admin\\views\\newsletter\\sendemail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|solutionrelative:areas\\admin\\views\\newsletter\\sendemail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB37683-492C-44AE-860B-755458E25F33}|..\\BLL\\BLL.csproj|c:\\users\\fm\\desktop\\movie-market\\bll\\services\\implementations\\newsletterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|c:\\users\\fm\\desktop\\movie-market\\movie-market\\areas\\admin\\views\\newsletter\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|solutionrelative:areas\\admin\\views\\newsletter\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB37683-492C-44AE-860B-755458E25F33}|..\\BLL\\BLL.csproj|c:\\users\\fm\\desktop\\movie-market\\bll\\utilities\\paginatedlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|c:\\users\\fm\\desktop\\movie-market\\movie-market\\areas\\admin\\views\\newsletter\\emailhistory.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|solutionrelative:areas\\admin\\views\\newsletter\\emailhistory.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|c:\\users\\fm\\desktop\\movie-market\\movie-market\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86280736-BE50-41B3-B5D3-6DF3EAC55553}|MovieMart.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +36,100 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1625,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PaginatedList.cs",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\BLL\\Utilities\\PaginatedList.cs",
+              "RelativeDocumentMoniker": "..\\BLL\\Utilities\\PaginatedList.cs",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\BLL\\Utilities\\PaginatedList.cs",
+              "RelativeToolTip": "..\\BLL\\Utilities\\PaginatedList.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAA3wB4AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T21:24:26.464Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NewsletterService.cs",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\BLL\\Services\\Implementations\\NewsletterService.cs",
+              "RelativeDocumentMoniker": "..\\BLL\\Services\\Implementations\\NewsletterService.cs",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\BLL\\Services\\Implementations\\NewsletterService.cs",
+              "RelativeToolTip": "..\\BLL\\Services\\Implementations\\NewsletterService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGEAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T08:15:55.895Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EmailHistory.cshtml",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Admin\\Views\\Newsletter\\EmailHistory.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Newsletter\\EmailHistory.cshtml",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Admin\\Views\\Newsletter\\EmailHistory.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Newsletter\\EmailHistory.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAQwBoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T07:53:34.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SendEmail.cshtml",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Admin\\Views\\Newsletter\\SendEmail.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Newsletter\\SendEmail.cshtml",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Admin\\Views\\Newsletter\\SendEmail.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Newsletter\\SendEmail.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T07:49:37.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Admin\\Views\\Newsletter\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Newsletter\\Index.cshtml",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Admin\\Views\\Newsletter\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Newsletter\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFgAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T07:45:15.747Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NewsletterController.cs",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Admin\\Controllers\\NewsletterController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\NewsletterController.cs",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Areas\\Admin\\Controllers\\NewsletterController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\NewsletterController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAvwDcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T21:17:52.646Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\FM\\Desktop\\Movie-Market\\Movie-Market\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAuwCwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T21:13:27.716Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"

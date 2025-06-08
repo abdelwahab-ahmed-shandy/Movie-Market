@@ -10,6 +10,7 @@ global using Microsoft.AspNetCore.Identity;
 global using Models;
 global using MovieMart;
 global using DAL.Models;
+global using BLL.Utilities;
 global using MovieMart.Models;
 global using DAL.ViewModels.Cart;
 global using DAL.ViewModels.Movie;

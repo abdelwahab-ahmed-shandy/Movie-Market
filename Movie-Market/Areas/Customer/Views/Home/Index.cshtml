@@ -1,10 +1,15 @@
-﻿
+﻿@{
+	ViewData["Title"] = "Home Bage";
+}
+
+<div class="container py-6">
 
 
 <div class="hero-section">
 	<!-- Hero section -->
 </div>
 
-<div class="popular-categories-section">
+<div class="popular-categories-section ">
 	@await Component.InvokeAsync("PopularCategories", new { count = 6 })
+</div>
 </div>
