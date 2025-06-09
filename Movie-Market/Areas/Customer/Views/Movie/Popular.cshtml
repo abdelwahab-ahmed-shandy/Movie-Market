@@ -1,0 +1,26 @@
+﻿@model IEnumerable<DAL.ViewModels.Movie.MovieIndexVM>
+
+<h2>Most Popular Movies</h2>
+<hr />
+
+<div class="row">
+    @foreach (var movie in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="@movie.ImgUrl" class="card-img-top" alt="@movie.Title">
+                <div class="card-body">
+                    <h5 class="card-title">@movie.Title</h5>
+                    <p class="card-text">
+                        <span class="badge bg-primary">@movie.CategoryName</span>
+                        <span class="badge bg-success">$@movie.Price</span>
+                        <span class="badge bg-warning">@movie.Rating?.ToString("0.0")/10</span>
+                    </p>
+                    <a asp-action="Details" asp-route-id="@movie.Id" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Back to All Movies</a>

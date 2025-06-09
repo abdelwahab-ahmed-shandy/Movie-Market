@@ -16,6 +16,7 @@ global using MovieMart.Models;
 global using DAL.ViewModels.Cart;
 global using DAL.ViewModels.Movie;
 global using DAL.ViewModels.Search;
+global using DAL.ViewModels.Cinema;
 global using DAL.ViewModels.Identity;
 global using DAL.ViewModels.Category;
 global using BLL.Services.Interfaces;

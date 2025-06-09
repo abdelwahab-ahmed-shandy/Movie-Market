@@ -1,0 +1,28 @@
+﻿@model IEnumerable<DAL.ViewModels.Movie.MovieIndexVM>
+
+@{
+    ViewData["Title"] = "Movies";
+}
+
+<div class="row">
+    @foreach (var movie in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="@movie.ImgUrl" class="card-img-top" alt="@movie.Title">
+                <div class="card-body">
+                    <h5 class="card-title">@movie.Title</h5>
+                    <p class="card-text">
+                        <span class="badge bg-primary">@movie.CategoryName</span>
+                        <span class="badge bg-success">$@movie.Price</span>
+                        @if (movie.Rating.HasValue)
+                        {
+                            <span class="badge bg-warning">@movie.Rating.Value.ToString("0.0")/10</span>
+                        }
+                    </p>
+                    <a asp-action="Details" asp-route-id="@movie.Id" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

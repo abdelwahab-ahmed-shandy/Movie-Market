@@ -1,0 +1,61 @@
+﻿@model DAL.ViewModels.Movie.MovieDetailsVM
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="@Model.ImgUrl" class="img-fluid" alt="@Model.Title">
+    </div>
+    <div class="col-md-8">
+        <h1>@Model.Title</h1>
+        <p>@Model.Description</p>
+
+        <div class="mb-3">
+            <strong>Price:</strong> $@Model.Price<br>
+            <strong>Duration:</strong> @Model.Duration.ToString(@"hh\:mm")<br>
+            <strong>Release Year:</strong> @Model.ReleaseYear<br>
+            <strong>Rating:</strong> @(Model.Rating?.ToString("0.0") ?? "N/A")/10<br>
+            <strong>Category:</strong> @Model.CategoryName<br>
+            <strong>Author:</strong> @(Model.Author ?? "Unknown")<br>
+        </div>
+
+        @if (Model.Characters.Any())
+        {
+            <div class="mb-3">
+                <h5>Characters</h5>
+                <div class="d-flex flex-wrap gap-2">
+                    @foreach (var character in Model.Characters)
+                    {
+                        <span class="badge bg-secondary">@character</span>
+                    }
+                </div>
+            </div>
+        }
+
+        @if (Model.Cinemas.Any())
+        {
+            <div class="mb-3">
+                <h5>Available in Cinemas</h5>
+                <div class="d-flex flex-wrap gap-2">
+                    @foreach (var cinema in Model.Cinemas)
+                    {
+                        <span class="badge bg-info">@cinema</span>
+                    }
+                </div>
+            </div>
+        }
+
+        @if (Model.Specials.Any())
+        {
+            <div class="mb-3">
+                <h5>Specials</h5>
+                <div class="d-flex flex-wrap gap-2">
+                    @foreach (var special in Model.Specials)
+                    {
+                        <span class="badge bg-success">@special</span>
+                    }
+                </div>
+            </div>
+        }
+
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>

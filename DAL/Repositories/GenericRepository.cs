@@ -1,6 +1,4 @@
 ﻿
-using DAL.Repositories.IRepositories;
-
 namespace DAL.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseModel

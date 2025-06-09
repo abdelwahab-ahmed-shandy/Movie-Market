@@ -31,11 +31,13 @@ namespace Movie_Market
 
             // Admin Services
             builder.Services.AddScoped<IAdminCategoryService, AdminCategoryService>();
+            builder.Services.AddScoped<IAdminMovieService, AdminMovieService>();
 
             // Customer Services
             builder.Services.AddScoped<ICustomerCategoryService, CustomerCategoryService>();
             builder.Services.AddScoped<ISubscriberService, SubscriberService>();
             builder.Services.AddScoped<INewsletterService, NewsletterService>();
+            builder.Services.AddScoped<ICustomerMovieService, CustomerMovieService>();
 
 
             // Repository Services

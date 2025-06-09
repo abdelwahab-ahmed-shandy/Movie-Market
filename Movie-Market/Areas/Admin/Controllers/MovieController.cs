@@ -1,0 +1,184 @@
+﻿using DAL.ViewModels.Movie;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Movie_Market.Areas.Admin.Controllers
+{
+    [Area("Admin")]
+    //[Authorize(Roles = "Admin")]
+    public class MovieController : Controller
+    {
+        private readonly IAdminMovieService _movieService;
+        private readonly IGenericRepository<Category> _categoryRepo;
+        private readonly IGenericRepository<Character> _characterRepo;
+        private readonly IGenericRepository<Cinema> _cinemaRepo;
+        private readonly IGenericRepository<Special> _specialRepo;
+
+        public MovieController(
+            IAdminMovieService movieService,
+            IGenericRepository<Category> categoryRepo,
+            IGenericRepository<Character> characterRepo,
+            IGenericRepository<Cinema> cinemaRepo,
+            IGenericRepository<Special> specialRepo)
+        {
+            _movieService = movieService;
+            _categoryRepo = categoryRepo;
+            _characterRepo = characterRepo;
+            _cinemaRepo = cinemaRepo;
+            _specialRepo = specialRepo;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var movies = await _movieService.GetAllMoviesAsync();
+            return View(movies);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            await LoadDropdowns();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(MovieAdminCreateVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                await LoadDropdowns();
+                return View(model);
+            }
+
+            var result = await _movieService.CreateMovieAsync(model);
+            if (result)
+            {
+                TempData["Success"] = "Movie created successfully!";
+                return RedirectToAction(nameof(Index));
+            }
+
+            ModelState.AddModelError("", "Error creating movie");
+            await LoadDropdowns();
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var movie = await _movieService.GetMovieForEditAsync(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            await LoadDropdowns();
+            return View(movie);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(MovieAdminEditVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                await LoadDropdowns();
+                return View(model);
+            }
+
+            var result = await _movieService.UpdateMovieAsync(model);
+            if (result)
+            {
+                TempData["Success"] = "Movie updated successfully!";
+                return RedirectToAction(nameof(Index));
+            }
+
+            ModelState.AddModelError("", "Error updating movie");
+            await LoadDropdowns();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SoftDelete(Guid id)
+        {
+            var result = await _movieService.SoftDeleteMovieAsync(id);
+            if (result)
+            {
+                TempData["Success"] = "Movie soft deleted successfully!";
+            }
+            else
+            {
+                TempData["Error"] = "Error soft deleting movie";
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Restore(Guid id)
+        {
+            var result = await _movieService.RestoreMovieAsync(id);
+            if (result)
+            {
+                TempData["Success"] = "Movie restored successfully!";
+            }
+            else
+            {
+                TempData["Error"] = "Error restoring movie";
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeletePermanently(Guid id)
+        {
+            var result = await _movieService.DeleteMoviePermanentlyAsync(id);
+            if (result)
+            {
+                TempData["Success"] = "Movie permanently deleted!";
+            }
+            else
+            {
+                TempData["Error"] = "Error deleting movie";
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        private async Task LoadDropdowns()
+        {
+            ViewBag.Categories = await _categoryRepo.GetAll()
+                .OrderBy(c => c.Name)
+                .Select(c => new SelectListItem
+                {
+                    Value = c.Id.ToString(),
+                    Text = c.Name
+                }).ToListAsync();
+
+            ViewBag.Characters = await _characterRepo.GetAll()
+                .OrderBy(c => c.Name)
+                .Select(c => new SelectListItem
+                {
+                    Value = c.Id.ToString(),
+                    Text = c.Name
+                }).ToListAsync();
+
+            ViewBag.Cinemas = await _cinemaRepo.GetAll()
+                .OrderBy(c => c.Name)
+                .Select(c => new SelectListItem
+                {
+                    Value = c.Id.ToString(),
+                    Text = c.Name
+                }).ToListAsync();
+
+            ViewBag.Specials = await _specialRepo.GetAll()
+                .OrderBy(s => s.Name)
+                .Select(s => new SelectListItem
+                {
+                    Value = s.Id.ToString(),
+                    Text = s.Name
+                }).ToListAsync();
+        }
+    }
+}

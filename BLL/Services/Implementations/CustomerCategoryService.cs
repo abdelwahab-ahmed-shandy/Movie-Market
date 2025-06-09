@@ -48,11 +48,11 @@ namespace BLL.Services.Implementations
                 Id = category.Id,
                 Name = category.Name,
                 Description = category.Description,
-                Movies = category.Movies.Select(m => new MovieVM
+                Movies = category.Movies.Select(m => new MovieIndexVM
                 {
                     Id = m.Id,
                     Title = m.Title,
-                    PosterUrl = m.ImgUrl,
+                    ImgUrl = m.ImgUrl,
                     ReleaseYear = m.ReleaseYear,
                     Rating = m.Rating,
                     ShortDescription = m.Description?.Length > 100 ?
@@ -61,7 +61,6 @@ namespace BLL.Services.Implementations
                 })
             };
         }
-
 
         public async Task<IEnumerable<CategoryIndexVM>> GetPopularCategoriesAsync(int count)
         {

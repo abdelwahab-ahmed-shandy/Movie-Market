@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 namespace DAL.ViewModels.Movie
 {
-    public class MovieVM
+    public class MovieIndexVM
     {
         public Guid Id { get; set; }
-        public string Title { get; set; }
-        public string? PosterUrl { get; set; }
-        public int ReleaseYear { get; set; }
+        public string Title { get; set; } = null!;
+        public string? ImgUrl { get; set; }
+        public double Price { get; set; }
         public double? Rating { get; set; }
+        public string CategoryName { get; set; } = null!;
+
+        public int? ReleaseYear { get; set; }
         public string? ShortDescription { get; set; }
+
 
     }
 }
