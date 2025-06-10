@@ -14,8 +14,7 @@ namespace BLL.Services.Implementations.Admin
         private readonly IGenericRepository<Category> _categoryRepo;
         private readonly IHttpContextAccessor _httpContextAccessor;
         public AdminCategoryService(IGenericRepository<Category> categoryRepository,
-                                        IHttpContextAccessor httpContextAccessor
-                                            )
+                                        IHttpContextAccessor httpContextAccessor)
         {
             _categoryRepo = categoryRepository;
             _httpContextAccessor = httpContextAccessor;
@@ -129,7 +128,7 @@ namespace BLL.Services.Implementations.Admin
         }
 
 
-        public async Task ToggleCategoryStatusAsync(Guid id)
+        public async Task SoftDelete(Guid id)
         {
             var category = await _categoryRepo.GetByIdAsync(id);
             if (category == null)
@@ -145,7 +144,7 @@ namespace BLL.Services.Implementations.Admin
             }
         }
 
-        public async Task DeleteCategoryPermanentlyAsync(Guid id)
+        public async Task Delete(Guid id)
         {
             var category = await _categoryRepo.GetByIdAsync(id);
             if (category == null)
@@ -153,6 +152,7 @@ namespace BLL.Services.Implementations.Admin
 
             await _categoryRepo.DeleteInDB(id);
         }
+
 
     }
 }

@@ -29,12 +29,21 @@ namespace Movie_Market.Areas.Admin.Controllers
             _specialRepo = specialRepo;
         }
 
+        #region Movie Views
+
         public async Task<IActionResult> Index()
         {
             var movies = await _movieService.GetAllMoviesAsync();
             return View(movies);
         }
 
+
+
+
+        #endregion
+
+
+        #region Create
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -64,6 +73,10 @@ namespace Movie_Market.Areas.Admin.Controllers
             return View(model);
         }
 
+        #endregion
+
+
+        #region Edit 
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -98,6 +111,11 @@ namespace Movie_Market.Areas.Admin.Controllers
             await LoadDropdowns();
             return View(model);
         }
+
+        #endregion
+
+
+        #region Delete
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -181,5 +199,9 @@ namespace Movie_Market.Areas.Admin.Controllers
                     Text = s.Name
                 }).ToListAsync();
         }
+
+        #endregion
+
+
     }
 }

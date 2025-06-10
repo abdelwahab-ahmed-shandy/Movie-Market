@@ -22,9 +22,7 @@ namespace BLL.Services.Implementations.Customer
 
         public async Task<IEnumerable<CategoryIndexVM>> GetActiveCategoriesAsync()
         {
-            return await _categoryRepository.GetAll()
-                .Where(c => !c.IsDeleted && c.CurrentState == CurrentState.Active)
-                .OrderBy(c => c.Name)
+            return await _categoryRepository.Get(c => !c.IsDeleted && c.CurrentState == CurrentState.Active)
                 .Select(c => new CategoryIndexVM
                 {
                     Id = c.Id,

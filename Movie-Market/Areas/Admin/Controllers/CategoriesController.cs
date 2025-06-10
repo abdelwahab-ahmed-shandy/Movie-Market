@@ -122,7 +122,7 @@ namespace Movie_Market.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ToggleStatus(Guid id)
         {
-            await _categoryService.ToggleCategoryStatusAsync(id);
+            await _categoryService.SoftDelete(id);
 
             TempData["notification"] = "Category Change Status Soft Deleted!";
             TempData["MessageType"] = "Information";
@@ -137,7 +137,7 @@ namespace Movie_Market.Areas.Admin.Controllers
             if (category == null)
                 return NotFound();
 
-            await _categoryService.DeleteCategoryPermanentlyAsync(id);
+            await _categoryService.Delete(id);
 
             TempData["notification"] = "Category permanently deleted!";
             TempData["MessageType"] = "danger";
@@ -146,6 +146,7 @@ namespace Movie_Market.Areas.Admin.Controllers
         }
 
         #endregion
+
 
     }
 }

@@ -13,16 +13,28 @@ namespace Movie_Market.Areas.Admin.Controllers
         }
 
 
-        #region Index
+        #region Cinema Index
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 10, string searchTerm = null)
         {
-            var cinemas = await _cinemaService.GetAllAsync();
+            var cinemas = await _cinemaService.GetAllCinemasAsync(pageNumber, pageSize, searchTerm);
             return View(cinemas);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var cinema = await _cinemaService.GetCinemaDetailsAsync(id);
+
+            if (cinema == null)
+                return NotFound();
+
+            return View(cinema);
+        }
+
         #endregion
+
 
 
         #region Create 
@@ -41,12 +53,17 @@ namespace Movie_Market.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 await _cinemaService.CreateAsync(VM);
+
+                TempData["notification"] = "Cinema Created Successfully!";
+                TempData["MessageType"] = "success";
+
                 return RedirectToAction(nameof(Index));
             }
             return View(VM);
         }
 
         #endregion
+
 
 
         #region Edit 
@@ -74,6 +91,10 @@ namespace Movie_Market.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 await _cinemaService.UpdateAsync(VM);
+
+                TempData["notification"] = "Cinema Updated Successfully!";
+                TempData["MessageType"] = "success";
+
                 return RedirectToAction(nameof(Index));
             }
             return View(VM);
@@ -82,13 +103,21 @@ namespace Movie_Market.Areas.Admin.Controllers
         #endregion
 
 
+
         #region Delete 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SoftDelete(Guid id)
         {
+            if (id == Guid.Empty)
+                return NotFound();
+
             await _cinemaService.SoftDeleteAsync(id);
+
+            TempData["notification"] = "Cinema soft-deleted or restored successfully!";
+            TempData["MessageType"] = "success";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -96,7 +125,14 @@ namespace Movie_Market.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid id)
         {
+            if (id == Guid.Empty)
+                return NotFound();
+
             await _cinemaService.DeleteAsync(id);
+
+            TempData["notification"] = "Cinema permanently deleted!";
+            TempData["MessageType"] = "success";
+
             return RedirectToAction(nameof(Index));
         }
 

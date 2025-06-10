@@ -25,7 +25,7 @@ namespace BLL.Services.Implementations.Customer
         {
             try
             {
-                var cinemas = await _cinemaRepo.GetAll()
+                var cinemas = await _cinemaRepo.Get(c => c.CurrentState.Value == DAL.Enums.CurrentState.Active)
                     .OrderBy(c => c.Name)
                     .ToListAsync();
 

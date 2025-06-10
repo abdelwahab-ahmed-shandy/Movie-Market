@@ -157,45 +157,80 @@
     </div>
 </div>
 
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                
+                </button>
+            </div>
+
+            <div class="modal-body">
+                Are you sure you want to perform this action on <strong id="categoryName"></strong>?
+            </div>
+
+            <div class="modal-footer">
+
+                <form method="post" asp-action="ToggleStatus">
+                    <input type="hidden" name="id" id="softDeleteCategoryId" />
+                    <button type="submit" class="btn btn-warning" id="softDeleteBtn">Soft Delete</button>
+                </form>
+
+                <form method="post" asp-action="DeletePermanently">
+                    <input type="hidden" name="id" id="permanentDeleteCategoryId" />
+                    <button type="submit" class="btn btn-danger">Delete Permanently</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section Scripts {
-	<script>
-		var confirmDeleteModal = document.getElementById('confirmDeleteModal');
-		confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
-		  var button = event.relatedTarget;
-		  var id = button.getAttribute('data-id');
-		  var name = button.getAttribute('data-name');
-		  var isDeleted = button.getAttribute('data-isdeleted') === 'True';
+    <script>
+        var confirmDeleteModal = document.getElementById('confirmDeleteModal');
+        confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var id = button.getAttribute('data-id');
+            var name = button.getAttribute('data-name');
+            var isDeleted = button.getAttribute('data-isdeleted') === 'True';
 
-		  document.getElementById('categoryName').textContent = name;
-		  document.getElementById('categoryId').value = id;
-		  document.getElementById('softDeleteCategoryId').value = id;
-		  document.getElementById('permanentDeleteCategoryId').value = id;
+            document.getElementById('categoryName').textContent = name;
+            document.getElementById('softDeleteCategoryId').value = id;
+            document.getElementById('permanentDeleteCategoryId').value = id;
 
-		  var softDeleteBtn = document.getElementById('softDeleteBtn');
-		  if (isDeleted) {
-			softDeleteBtn.textContent = "Restore";
-			softDeleteBtn.classList.remove('btn-warning');
-			softDeleteBtn.classList.add('btn-success');
-		  } else {
-			softDeleteBtn.textContent = "Soft Delete";
-			softDeleteBtn.classList.remove('btn-success');
-			softDeleteBtn.classList.add('btn-warning');
-		  }
-		});
-	</script>
+            var softDeleteBtn = document.getElementById('softDeleteBtn');
+            if (isDeleted) {
+                softDeleteBtn.textContent = "Restore";
+                softDeleteBtn.classList.remove('btn-warning');
+                softDeleteBtn.classList.add('btn-success');
+            } else {
+                softDeleteBtn.textContent = "Soft Delete";
+                softDeleteBtn.classList.remove('btn-success');
+                softDeleteBtn.classList.add('btn-warning');
+            }
+        });
+
+    </script>
 }
 
 @functions {
-	string GetStateBadgeClass(CurrentState state)
-	{
-		return state switch
-		{
-			CurrentState.Active => "bg-success",
-			CurrentState.Inactive => "bg-secondary",
-			CurrentState.SoftDelete => "bg-danger",
-			CurrentState.Archived => "bg-warning",
-			_ => "bg-secondary"
-		};
-	}
+    string GetStateBadgeClass(CurrentState state)
+    {
+        return state switch
+        {
+            CurrentState.Active => "bg-success",
+            CurrentState.Inactive => "bg-secondary",
+            CurrentState.SoftDelete => "bg-danger",
+            CurrentState.Archived => "bg-warning",
+            _ => "bg-secondary"
+        };
+    }
 
-}
+}  >> هل يوجد مشاكل هنا في جزء الخاص بالدليت والزراير الخاصه به ?

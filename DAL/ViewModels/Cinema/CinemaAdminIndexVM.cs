@@ -6,19 +6,15 @@ using System.Threading.Tasks;
 
 namespace DAL.ViewModels.Cinema
 {
-    public class CinemaAdminVM
+    public class CinemaAdminIndexVM
     {
         public Guid Id { get; set; }
-
-        [Required]
         public string Name { get; set; } = string.Empty;
-
         public string? Description { get; set; }
-
-        [Required]
         public string Location { get; set; } = string.Empty;
-
-        [Display(Name = "Status")]
         public CurrentState CurrentState { get; set; }
+        public DateTime CreatedDateUtc { get; set; }
+        public int CinemasCount { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

@@ -1,0 +1,106 @@
+﻿@model DAL.ViewModels.Cinema.CinemaAdminDetailsVM
+
+@{
+	ViewData["Title"] = "Cinema Details";
+}
+
+<div class="card shadow mb-4">
+	<div class="card-header py-3 d-flex justify-content-between align-items-center">
+		<h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
+		<div>
+			<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Edit</a>
+			<a asp-action="Index" class="btn btn-secondary btn-sm">Back to list</a>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-6">
+				<dl class="row">
+					<dt class="col-sm-4">Name:</dt>
+					<dd class="col-sm-8">@Model.Name</dd>
+
+					<dt class="col-sm-4">Description:</dt>
+					<dd class="col-sm-8">@Model.Description</dd>
+
+					<dt class="col-sm-4">Location:</dt>
+					<dd class="col-sm-8">@Model.Location</dd>
+
+					<dt class="col-sm-4">Status:</dt>
+					<dd class="col-sm-8">
+						<span class="badge @GetStateBadgeClass(Model.CurrentState)">
+							@Model.CurrentState
+						</span>
+					</dd>
+				</dl>
+			</div>
+			<div class="col-md-6">
+				<dl class="row">
+					<dt class="col-sm-4">Created by:</dt>
+					<dd class="col-sm-8">@Model.CreatedBy</dd>
+
+					<dt class="col-sm-4">Created Date:</dt>
+					<dd class="col-sm-8">@Model.CreatedDateUtc.ToString("yyyy-MM-dd HH:mm")</dd>
+
+					@if (Model.UpdatedBy != null)
+					{
+						<dt class="col-sm-4">Last modified by:</dt>
+						<dd class="col-sm-8">@Model.UpdatedBy</dd>
+
+						<dt class="col-sm-4">Modified Date:</dt>
+						<dd class="col-sm-8">@Model.UpdatedDateUtc?.ToString("yyyy-MM-dd HH:mm")</dd>
+					}
+				</dl>
+			</div>
+		</div>
+
+		<h5 class="mt-5">Movies in this category (@Model.Movies.Count())</h5>
+
+		@if (Model.Movies.Any())
+		{
+			<div class="table-responsive">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Status</th>
+							<th>Delete status</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var movie in Model.Movies)
+						{
+							<tr class="@(movie.IsDeleted ? "table-danger" : "")">
+								<td>@movie.Title</td>
+								<td>
+									<span class="badge @GetStateBadgeClass(movie.CurrentState)">
+										@movie.CurrentState
+									</span>
+								</td>
+								<td>@(movie.IsDeleted ? "Deleted" : "Active")</td>
+							</tr>
+						}
+
+					</tbody>
+
+				</table>
+
+			</div>
+		}
+		else
+		{
+			<div class="alert alert-info">There are no movies in this category</div>
+		}
+
+	</div>
+
+@functions {
+	string GetStateBadgeClass(CurrentState state)
+	{
+		return state switch
+		{
+			CurrentState.Active => "bg-success",
+			CurrentState.Inactive => "bg-secondary",
+			_ => "bg-secondary"
+		};
+	}
+}

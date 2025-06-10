@@ -9,11 +9,12 @@ namespace BLL.Services.Interfaces.Admin
 {
     public interface IAdminCinemaService
     {
-        Task<IEnumerable<CinemaAdminVM>> GetAllAsync();
+        Task<CinemaAdminListVM> GetAllCinemasAsync(int pageNumber = 1, int pageSize = 10, string searchTerm = null);
+        Task<CinemaAdminDetailsVM?> GetCinemaDetailsAsync(Guid id);
         Task<CinemaAdminVM?> GetByIdAsync(Guid id);
         Task<CinemaAdminVM> CreateAsync(CinemaAdminVM cinema);
         Task<CinemaAdminVM> UpdateAsync(CinemaAdminVM cinema);
-        Task<bool> SoftDeleteAsync(Guid id);
-        Task<bool> DeleteAsync(Guid id);
+        Task SoftDeleteAsync(Guid id);
+        Task DeleteAsync(Guid id);
     }
 }

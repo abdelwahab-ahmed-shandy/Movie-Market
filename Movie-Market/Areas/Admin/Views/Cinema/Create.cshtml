@@ -1,5 +1,11 @@
 ﻿@model CinemaAdminVM
 
+@{
+    ViewData["Title"] = "Create Cinema";
+}
+
+
+
 <h1>Create Cinema</h1>
 
 <form asp-action="Create">
@@ -18,5 +24,14 @@
         <input asp-for="Location" class="form-control" />
         <span asp-validation-for="Location" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
+
+    <div class="form-group">
+        <label asp-for="CurrentState" class="col-sm-2 col-form-label"></label>
+            <select asp-for="CurrentState" asp-items="Html.GetEnumSelectList<CurrentState>()" class="form-control"></select>
+            <span asp-validation-for="CurrentState" class="text-danger"></span>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary justify-content-xxl-end">Create</button>
 </form>
+
