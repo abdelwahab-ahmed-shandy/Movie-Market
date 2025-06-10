@@ -1,0 +1,52 @@
+﻿@model DAL.ViewModels.Cinema.CinemaDetailsVM
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@Model.Name</h1>
+            <h4 class="text-muted">@Model.Location</h4>
+            <p class="lead">@Model.Description</p>
+            <p><small>Added on @Model.CreatedDate.ToString("d")</small></p>
+        </div>
+
+        <div class="col-md-12 mt-4">
+            <h3>Now Showing</h3>
+
+            @if (Model.Movies.Any())
+            {
+                <div class="row">
+                    @foreach (var movie in Model.Movies.OrderBy(m => m.StartDate))
+                    {
+                        <div class="col-md-3 mb-4">
+                            <div class="card h-100">
+                                <img src="@movie.ImgUrl" class="card-img-top" alt="@movie.Title">
+                                <div class="card-body">
+                                    <h5 class="card-title">@movie.Title</h5>
+                                    <p class="card-text">
+                                        <strong>Showtime:</strong> @movie.StartDate<br>
+                                        <strong>Duration:</strong> @movie.Duration.ToString(@"hh\:mm")
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    No movies currently showing at this cinema.
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+    </div>
+
+</div>

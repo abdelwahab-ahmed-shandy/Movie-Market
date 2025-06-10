@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BLL.Services.Interfaces.Customer;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Movie_Market.Areas.Customer.Controllers
 {

@@ -1,4 +1,6 @@
-﻿namespace Movie_Market.Areas.Customer.ViewComponents
+﻿using BLL.Services.Interfaces.Customer;
+
+namespace Movie_Market.Areas.Customer.ViewComponents
 {
     public class PopularCategoriesViewComponent : ViewComponent
     {

@@ -1,4 +1,5 @@
-﻿using DAL.Repositories.IRepositories;
+﻿using BLL.Services.Interfaces.Admin;
+using DAL.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Implementations
+namespace BLL.Services.Implementations.Admin
 {
     public class AdminCategoryService : IAdminCategoryService
     {
@@ -28,7 +29,7 @@ namespace BLL.Services.Implementations
             {
                 query = query.Where(c =>
                     c.Name.Contains(searchTerm) ||
-                    (c.Description != null && c.Description.Contains(searchTerm)));
+                    c.Description != null && c.Description.Contains(searchTerm));
             }
 
             var totalCount = await query.CountAsync();

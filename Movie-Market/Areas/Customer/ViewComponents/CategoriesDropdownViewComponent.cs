@@ -1,4 +1,5 @@
-﻿using DAL.Context;
+﻿using BLL.Services.Interfaces.Customer;
+using DAL.Context;
 
 namespace Movie_Market.Areas.Customer.ViewComponents
 {

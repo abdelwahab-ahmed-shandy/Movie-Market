@@ -19,7 +19,10 @@ global using DAL.Models;
 global using DAL.Context;
 global using MovieMart.Models;
 global using DAL.Repositories;
+global using DAL.ViewModels.Cinema;
 global using DAL.ViewModels.Identity;
 global using BLL.Services.Interfaces;
 global using BLL.Services.Implementations;
+global using BLL.Services.Interfaces.Admin;
 global using DAL.Repositories.IRepositories;
+

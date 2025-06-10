@@ -2,6 +2,10 @@
 using DAL.Repositories.IRepositories;
 using DAL.Repositories;
 using AutoMapper;
+using BLL.Services.Interfaces.Admin;
+using BLL.Services.Interfaces.Customer;
+using BLL.Services.Implementations.Admin;
+using BLL.Services.Implementations.Customer;
 
 namespace Movie_Market
 {
@@ -32,12 +36,13 @@ namespace Movie_Market
             // Admin Services
             builder.Services.AddScoped<IAdminCategoryService, AdminCategoryService>();
             builder.Services.AddScoped<IAdminMovieService, AdminMovieService>();
+            builder.Services.AddScoped<IAdminCinemaService, AdminCinemaService>();
+
 
             // Customer Services
             builder.Services.AddScoped<ICustomerCategoryService, CustomerCategoryService>();
-            builder.Services.AddScoped<ISubscriberService, SubscriberService>();
-            builder.Services.AddScoped<INewsletterService, NewsletterService>();
             builder.Services.AddScoped<ICustomerMovieService, CustomerMovieService>();
+            builder.Services.AddScoped<ICustomerCinemaService, CustomerCinemaService>();
 
 
             // Repository Services
@@ -46,6 +51,8 @@ namespace Movie_Market
             builder.Services.AddScoped<IAuditService, AuditService>();
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<ISearchService, SearchService>();
+            builder.Services.AddScoped<ISubscriberService, SubscriberService>();
+            builder.Services.AddScoped<INewsletterService, NewsletterService>();
 
             #endregion
 

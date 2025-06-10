@@ -31,11 +31,12 @@ namespace MovieMart.Models
         public Guid CategoryId { get; set; }
         public virtual Category Category { get; set; } = null!;
 
+        // Many-to-Many: Cinema <-> Movie
+        public virtual ICollection<CinemaMovie> CinemaMovies { get; set; } = new List<CinemaMovie>();
+
         // Many-to-Many: Character <-> Movie
         public virtual ICollection<CharacterMovie> CharacterMovies { get; set; } = new List<CharacterMovie>();
 
-        // Many-to-Many: Cinema <-> Movie
-        public virtual ICollection<CinemaMovie> CinemaMovies { get; set; } = new List<CinemaMovie>();
 
         // Many-to-Many: Cinema <-> Special
         public virtual ICollection<MovieSpecial> MovieSpecials { get; set; } = new List<MovieSpecial>();

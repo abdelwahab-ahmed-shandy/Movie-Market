@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Interfaces
+namespace BLL.Services.Interfaces.Admin
 {
     public interface IAdminMovieService
     {

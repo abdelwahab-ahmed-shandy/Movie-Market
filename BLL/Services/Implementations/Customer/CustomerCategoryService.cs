@@ -1,4 +1,5 @@
-﻿using DAL.Enums;
+﻿using BLL.Services.Interfaces.Customer;
+using DAL.Enums;
 using DAL.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Implementations
+namespace BLL.Services.Implementations.Customer
 {
     public class CustomerCategoryService : ICustomerCategoryService
     {
