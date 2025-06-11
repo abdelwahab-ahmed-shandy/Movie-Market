@@ -1,75 +1,245 @@
-﻿@model IEnumerable<DAL.ViewModels.Movie.MovieAdminListVM>
+﻿@* @model IEnumerable<DAL.ViewModels.Movie.MovieAdminListVM> *@
+
+@* @{ *@
+@*     ViewData["Title"] = "Manage Movies"; *@
+@* } *@
+
+@* <div class="d-flex justify-content-between align-items-center mb-4"> *@
+@*     <h1>@ViewData["Title"]</h1> *@
+@*     <a asp-action="Create" class="btn btn-primary">Create New</a> *@
+@* </div> *@
+
+@* <table class="table table-striped table-bordered"> *@
+@*     <thead> *@
+@*         <tr> *@
+@*             <th>Poster</th> *@
+@*             <th>Title</th> *@
+@*             <th>Category</th> *@
+@*             <th>Price</th> *@
+@*             <th>Rating</th> *@
+@*             <th>Status</th> *@
+@*             <th>Actions</th> *@
+@*         </tr> *@
+@*     </thead> *@
+@*     <tbody> *@
+@*         @foreach (var item in Model) *@
+@*         { *@
+@*             <tr> *@
+@*                 <td> *@
+@*                     @if (!string.IsNullOrEmpty(item.ImgUrl)) *@
+@*                     { *@
+@*                         <img src="@item.ImgUrl" alt="@item.Title" style="max-width: 80px; max-height: 80px;" /> *@
+@*                     } *@
+@*                 </td> *@
+@*                 <td>@item.Title</td> *@
+@*                 <td>@item.CategoryName</td> *@
+@*                 <td>$@item.Price</td> *@
+@*                 <td>@(item.Rating?.ToString("0.0") ?? "N/A")</td> *@
+@*                 <td> *@
+@*                     @if (item.IsDeleted) *@
+@*                     { *@
+@*                         <span class="badge bg-danger">Deleted</span> *@
+@*                     } *@
+@*                     else *@
+@*                     { *@
+@*                         <span class="badge bg-success">Active</span> *@
+@*                     } *@
+@*                 </td> *@
+@*                 <td> *@
+@*                     <div class="btn-group" role="group"> *@
+@*                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a> *@
+
+@*                         @if (item.IsDeleted) *@
+@*                         { *@
+@*                             <form method="post" asp-action="Restore" asp-route-id="@item.Id" class="d-inline"> *@
+@*                                 <button type="submit" class="btn btn-sm btn-success">Restore</button> *@
+@*                             </form> *@
+@*                             <form method="post" asp-action="DeletePermanently" asp-route-id="@item.Id" class="d-inline"> *@
+@*                                 <button type="submit" class="btn btn-sm btn-danger" *@
+@*                                         onclick="return confirm('Are you sure you want to permanently delete this movie?')"> *@
+@*                                     Delete *@
+@*                                 </button> *@
+@*                             </form> *@
+@*                         } *@
+@*                         else *@
+@*                         { *@
+@*                             <form method="post" asp-action="SoftDelete" asp-route-id="@item.Id" class="d-inline"> *@
+@*                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button> *@
+@*                             </form> *@
+@*                         } *@
+@*                     </div> *@
+@*                 </td> *@
+@*             </tr> *@
+@*         } *@
+@*     </tbody> *@
+@* </table> *@
+
+
+
+@model DAL.ViewModels.Movie.MovieAdminListResultVM
 
 @{
     ViewData["Title"] = "Manage Movies";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>@ViewData["Title"]</h1>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
-</div>
-
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Poster</th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Rating</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @if (!string.IsNullOrEmpty(item.ImgUrl))
-                    {
-                        <img src="@item.ImgUrl" alt="@item.Title" style="max-width: 80px; max-height: 80px;" />
-                    }
-                </td>
-                <td>@item.Title</td>
-                <td>@item.CategoryName</td>
-                <td>$@item.Price</td>
-                <td>@(item.Rating?.ToString("0.0") ?? "N/A")</td>
-                <td>
-                    @if (item.IsDeleted)
-                    {
-                        <span class="badge bg-danger">Deleted</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-success">Active</span>
-                    }
-                </td>
-                <td>
-                    <div class="btn-group" role="group">
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
-
-                        @if (item.IsDeleted)
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
+        <a asp-action="Create" class="btn btn-primary btn-sm">
+            <i class="fas fa-plus-circle"></i> Create New
+        </a>
+    </div>
+    <div class="card-body">
+        <!-- Search Box -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form method="get" class="form-inline">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="query" value="@Model.SearchTerm" placeholder="Search movies...">
+                        <input type="hidden" name="pageSize" value="@Model.PageSize" />
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        @if (!string.IsNullOrEmpty(Model.SearchTerm))
                         {
-                            <form method="post" asp-action="Restore" asp-route-id="@item.Id" class="d-inline">
-                                <button type="submit" class="btn btn-sm btn-success">Restore</button>
-                            </form>
-                            <form method="post" asp-action="DeletePermanently" asp-route-id="@item.Id" class="d-inline">
-                                <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Are you sure you want to permanently delete this movie?')">
-                                    Delete
-                                </button>
-                            </form>
-                        }
-                        else
-                        {
-                            <form method="post" asp-action="SoftDelete" asp-route-id="@item.Id" class="d-inline">
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                            </form>
+                            <a href="@Url.Action("Index", new { pageSize = Model.PageSize })" class="btn btn-secondary">
+                                <i class="fas fa-times"></i>
+                            </a>
                         }
                     </div>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                </form>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Poster</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Rating</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Movies)
+                    {
+                        <tr class="@(item.IsDeleted ? "table-danger" : "")">
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.ImgUrl))
+                                {
+                                    <img src="@item.ImgUrl" alt="@item.Title" style="max-width: 80px; max-height: 80px;" />
+                                }
+                            </td>
+                            <td>@item.Title</td>
+                            <td>@item.CategoryName</td>
+                            <td>$@item.Price</td>
+                            <td>@(item.Rating?.ToString("0.0") ?? "N/A")</td>
+                            <td>
+                                @if (item.IsDeleted)
+                                {
+                                    <span class="badge bg-danger">Deleted</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">Active</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+
+                                    @if (item.IsDeleted)
+                                    {
+                                        <form method="post" asp-action="Restore" asp-route-id="@item.Id" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-success">
+                                                <i class="fas fa-undo"></i> Restore
+                                            </button>
+                                        </form>
+                                        <form method="post" asp-action="DeletePermanently" asp-route-id="@item.Id" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Are you sure you want to permanently delete this movie?')">
+                                                <i class="fas fa-trash-alt"></i> Delete
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <form method="post" asp-action="SoftDelete" asp-route-id="@item.Id" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash-alt"></i> Delete
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="dataTables_info">
+                    Showing @((Model.PageIndex - 1) * Model.PageSize + 1) to
+                    @Math.Min(Model.PageIndex * Model.PageSize, Model.TotalCount) of
+                    @Model.TotalCount entries
+                </div>
+            </div>
+            <div class="col-md-6">
+                <nav class="float-end">
+                    <ul class="pagination">
+                        <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
+                            <a class="page-link"
+                               href="@Url.Action("Index", new { page = Model.PageIndex - 1, pageSize = Model.PageSize, query = Model.SearchTerm })">
+                                Previous
+                            </a>
+                        </li>
+
+                        @for (int i = 1; i <= (Model.TotalCount + Model.PageSize - 1) / Model.PageSize; i++)
+                        {
+                            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                                <a class="page-link"
+                                   href="@Url.Action("Index", new { page = i, pageSize = Model.PageSize, query = Model.SearchTerm })">
+                                    @i
+                                </a>
+                            </li>
+                        }
+
+                        <li class="page-item @(Model.PageIndex * Model.PageSize >= Model.TotalCount ? "disabled" : "")">
+                            <a class="page-link"
+                               href="@Url.Action("Index", new { page = Model.PageIndex + 1, pageSize = Model.PageSize, query = Model.SearchTerm })">
+                                Next
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Page Size Selector -->
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="form-inline float-end">
+                    <label class="mr-2">Items per page:</label>
+                    <select class="form-select form-select-sm" onchange="window.location.href=this.value">
+                        @foreach (var size in new[] { 5, 10, 20, 50 })
+                        {
+                            <option value="@Url.Action("Index", new { page = 1, pageSize = size, query = Model.SearchTerm })"
+                                    selected="@(Model.PageSize == size)">
+                                @size
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

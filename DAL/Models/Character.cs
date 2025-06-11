@@ -5,6 +5,7 @@ namespace MovieMart.Models
     {
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
+        public string? ImgUrl { get; set; }
         // Many-to-Many relationship with Movie via CharacterMovie
         public ICollection<CharacterMovie> CharacterMovies { get; set; } = new List<CharacterMovie>();
         // Many-to-Many relationship with TvSeries via CharacterTvSeries

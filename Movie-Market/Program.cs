@@ -44,6 +44,7 @@ namespace Movie_Market
             builder.Services.AddScoped<ICustomerMovieService, CustomerMovieService>();
             builder.Services.AddScoped<ICustomerCinemaService, CustomerCinemaService>();
             builder.Services.AddScoped<ICustomerTvSeriesService, CustomerTvSeriesService>();
+            builder.Services.AddScoped<ICustomerCharacterService, CustomerCharacterService>();
 
 
             // Repository Services

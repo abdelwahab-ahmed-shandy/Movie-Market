@@ -10,10 +10,10 @@
 				<div class="col">
 					<div class="card h-100 border-0 shadow-sm">
 						<a asp-action="Details" asp-route-id="@category.Id" class="text-decoration-none">
-							@* @if (!string.IsNullOrEmpty(category.ImageUrl)) *@
-							@* { *@
-							@* 	<img src="@category.ImageUrl" class="card-img-top" alt="@category.Name" style="height: 100px; object-fit: cover;"> *@
-							@* } *@
+							 @if (!string.IsNullOrEmpty(category.IconUrl)) 
+							 { 
+							 	<img src="@category.IconUrl" class="card-img-top" alt="@category.Name" style="height: 100px; object-fit: cover;"> 
+							 } 
 							<div class="card-body text-center p-2">
 								<h6 class="card-title mb-0">@category.Name</h6>
 								<small class="text-muted">@category.MoviesCount Movies</small>

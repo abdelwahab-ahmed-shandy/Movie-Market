@@ -29,11 +29,12 @@ namespace Movie_Market.Areas.Admin.Controllers
             _specialRepo = specialRepo;
         }
 
+
         #region Movie Views
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 10, string? searchTerm = null)
         {
-            var movies = await _movieService.GetAllMoviesAsync();
+            var movies = await _movieService.GetAllMoviesAsync(pageNumber, pageSize, searchTerm);
             return View(movies);
         }
 

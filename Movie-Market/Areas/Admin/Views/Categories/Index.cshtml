@@ -34,6 +34,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>Poster</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Status</th>
@@ -46,6 +47,12 @@
                     @foreach (var item in Model.Categories)
                     {
                         <tr class="@(item.IsDeleted ? "table-danger" : "")">
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.IconUrl))
+                                {
+                                    <img src="@item.IconUrl" alt="@item.Name" style="max-width: 80px; max-height: 80px;" />
+                                }
+                            </td>
                             <td>@item.Name</td>
 
                             <td title="@item.Description">
@@ -233,4 +240,4 @@
         };
     }
 
-}  >> هل يوجد مشاكل هنا في جزء الخاص بالدليت والزراير الخاصه به ?
+} 

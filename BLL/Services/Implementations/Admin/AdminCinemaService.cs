@@ -22,22 +22,24 @@ namespace BLL.Services.Implementations.Admin
         }
 
 
-        public async Task<CinemaAdminListVM> GetAllCinemasAsync(int pageNumber = 1, int pageSize = 10, string searchTerm = null)
-        {
-            var query = _cinemaRepo.GetAllWithDeleted();
 
-            if (!string.IsNullOrWhiteSpace(searchTerm))
+        public async Task<CinemaAdminListVM> GetAllCinemasAsync(int page, int pageSize, string query = null)
+        {
+            var source = _cinemaRepo.GetAllWithDeleted();
+
+            if (!string.IsNullOrWhiteSpace(query))
             {
-                query = query.Where(c =>
-                    c.Name.Contains(searchTerm) ||
-                    c.Description != null && c.Description.Contains(searchTerm) ||
-                    c.Location.Contains(searchTerm));
+                source = source.Where(c =>
+                    c.Name.Contains(query) ||
+                    (c.Description != null && c.Description.Contains(query)) ||
+                    c.Location.Contains(query));
             }
 
-            var totalCount = await query.CountAsync();
+            var paginatedList = await PaginatedList<Cinema>.CreateAsync(source, page, pageSize);
 
-            var cinemas = await query
-                .Select(c => new CinemaAdminIndexVM
+            return new CinemaAdminListVM
+            {
+                Cinemas = paginatedList.Select(c => new CinemaAdminIndexVM
                 {
                     Id = c.Id,
                     Name = c.Name,
@@ -47,21 +49,14 @@ namespace BLL.Services.Implementations.Admin
                     CreatedDateUtc = c.CreatedDateUtc,
                     CinemasCount = c.CinemaMovies.Count,
                     IsDeleted = c.IsDeleted
-                })
-                .OrderByDescending(c => c.CreatedDateUtc)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-
-            return new CinemaAdminListVM
-            {
-                Cinemas = cinemas,
-                TotalCount = totalCount,
-                PageNumber = pageNumber,
+                }),
+                PageNumber = paginatedList.PageIndex,
                 PageSize = pageSize,
-                SearchTerm = searchTerm
+                TotalCount = paginatedList.TotalCount,
+                SearchTerm = query
             };
         }
+
 
 
         public async Task<CinemaAdminDetailsVM> GetCinemaDetailsAsync(Guid id)

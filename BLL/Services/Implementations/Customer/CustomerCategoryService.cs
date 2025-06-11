@@ -28,7 +28,7 @@ namespace BLL.Services.Implementations.Customer
                     Id = c.Id,
                     Name = c.Name,
                     Description = c.Description,
-                    //IconUrl = c.IconUrl
+                    IconUrl = c.ImgUrl,
                     MoviesCount = c.Movies.Count(m => !m.IsDeleted && m.CurrentState == CurrentState.Active)
                 }).ToListAsync();
         }
@@ -47,6 +47,7 @@ namespace BLL.Services.Implementations.Customer
                 Id = category.Id,
                 Name = category.Name,
                 Description = category.Description,
+                //IconUrl = category.ImgUrl,
                 Movies = category.Movies.Select(m => new MovieIndexVM
                 {
                     Id = m.Id,
@@ -72,6 +73,7 @@ namespace BLL.Services.Implementations.Customer
                 {
                     Id = c.Id,
                     Name = c.Name,
+                    IconUrl = c.ImgUrl,
                     MoviesCount = c.Movies.Count
                 }).ToListAsync();
         }

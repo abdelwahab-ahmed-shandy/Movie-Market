@@ -17,5 +17,9 @@ namespace DAL.ViewModels.Category
 
         [Display(Name = "Status")]
         public CurrentState CurrentState { get; set; }
+
+        [Url(ErrorMessage = "Please enter a valid URL")]
+        [StringLength(500, ErrorMessage = "Icon URL must not exceed 500 characters")]
+        public string? IconUrl { get; set; }
     }
 }

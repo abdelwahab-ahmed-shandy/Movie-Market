@@ -20,44 +20,39 @@ namespace BLL.Services.Implementations.Admin
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<CategoryAdminListVM> GetAllCategoriesAsync(int pageNumber = 1, int pageSize = 10, string searchTerm = null)
+        public async Task<CategoryAdminListVM> GetAllCategoriesAsync(int page, int pageSize, string query = null)
         {
-            var query = _categoryRepo.GetAllWithDeleted();
+            var source = _categoryRepo.GetAllWithDeleted();
 
-            if (!string.IsNullOrWhiteSpace(searchTerm))
+            if (!string.IsNullOrWhiteSpace(query))
             {
-                query = query.Where(c =>
-                    c.Name.Contains(searchTerm) ||
-                    c.Description != null && c.Description.Contains(searchTerm));
+                source = source.Where(c =>
+                    c.Name.Contains(query) ||
+                    (c.Description != null && c.Description.Contains(query)));
             }
 
-            var totalCount = await query.CountAsync();
+            var paginatedList = await PaginatedList<Category>.CreateAsync(source, page, pageSize);
 
-            var categories = await query
-                .Select(c => new CategoryAdminIndexVM
+            return new CategoryAdminListVM
+            {
+                Categories = paginatedList.Select(c => new CategoryAdminIndexVM
                 {
                     Id = c.Id,
                     Name = c.Name,
+                    IconUrl = c.ImgUrl,
                     Description = c.Description,
                     CurrentState = c.CurrentState.Value,
                     CreatedDateUtc = c.CreatedDateUtc,
                     MoviesCount = c.Movies.Count,
                     IsDeleted = c.IsDeleted
-                })
-                .OrderByDescending(c => c.CreatedDateUtc)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-
-            return new CategoryAdminListVM
-            {
-                Categories = categories,
-                TotalCount = totalCount,
-                PageNumber = pageNumber,
+                }),
+                PageNumber = paginatedList.PageIndex,
                 PageSize = pageSize,
-                SearchTerm = searchTerm
+                TotalCount = paginatedList.TotalCount,
+                SearchTerm = query
             };
         }
+
 
 
         public async Task<CategoryAdminDetailsVM?> GetCategoryDetailsAsync(Guid id)
@@ -72,6 +67,7 @@ namespace BLL.Services.Implementations.Admin
             {
                 Id = category.Id,
                 Name = category.Name,
+                IconUrl = category.ImgUrl,
                 Description = category.Description,
                 CurrentState = category.CurrentState.Value,
                 CreatedBy = category.CreatedBy,
@@ -99,6 +95,7 @@ namespace BLL.Services.Implementations.Admin
             {
                 Name = vM.Name,
                 Description = vM.Description,
+                ImgUrl = vM.IconUrl,
                 CurrentState = vM.CurrentState,
                 CreatedBy = userName,
                 CreatedDateUtc = DateTime.UtcNow,
@@ -123,6 +120,7 @@ namespace BLL.Services.Implementations.Admin
             category.CurrentState = vM.CurrentState;
             category.UpdatedBy = userName;
             category.UpdatedDateUtc = DateTime.UtcNow;
+            category.ImgUrl = vM.IconUrl;
 
             await _categoryRepo.Update(category);
         }
@@ -143,6 +141,7 @@ namespace BLL.Services.Implementations.Admin
                 await _categoryRepo.SoftDeleteAsync(id);
             }
         }
+
 
         public async Task Delete(Guid id)
         {

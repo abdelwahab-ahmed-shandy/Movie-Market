@@ -9,7 +9,7 @@ namespace BLL.Services.Interfaces.Admin
 {
     public interface IAdminCinemaService
     {
-        Task<CinemaAdminListVM> GetAllCinemasAsync(int pageNumber = 1, int pageSize = 10, string searchTerm = null);
+        Task<CinemaAdminListVM> GetAllCinemasAsync(int page, int pageSize, string query = null);
         Task<CinemaAdminDetailsVM?> GetCinemaDetailsAsync(Guid id);
         Task<CinemaAdminVM?> GetByIdAsync(Guid id);
         Task<CinemaAdminVM> CreateAsync(CinemaAdminVM cinema);

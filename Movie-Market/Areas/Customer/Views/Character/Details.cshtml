@@ -1,0 +1,58 @@
+﻿@model DAL.ViewModels.Character.CharacterIndexVM
+
+@{
+    ViewData["Title"] = "Character Details";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.Img))
+            {
+                <img src="@Model.Img" class="img-fluid rounded" alt="@Model.Name">
+            }
+        </div>
+        <div class="col-md-8">
+            <h1>@Model.Name</h1>
+            <p class="lead">@Model.Description</p>
+
+            <div class="mt-4">
+                <h4>Movies</h4>
+                @if (Model.Movies.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var movie in Model.Movies)
+                        {
+                            <li class="list-group-item">@movie</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-muted">No movies found for this character.</p>
+                }
+            </div>
+
+            <div class="mt-4">
+                <h4>TV Series</h4>
+                @if (Model.TvSeries.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var tvSeries in Model.TvSeries)
+                        {
+                            <li class="list-group-item">@tvSeries</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-muted">No TV series found for this character.</p>
+                }
+            </div>
+
+            <div class="mt-4">
+                <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

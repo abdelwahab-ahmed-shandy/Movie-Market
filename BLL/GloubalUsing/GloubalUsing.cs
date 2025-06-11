@@ -21,9 +21,10 @@ global using DAL.ViewModels.Cinema;
 global using DAL.ViewModels.Identity;
 global using DAL.ViewModels.Category;
 global using BLL.Services.Interfaces;
+global using DAL.ViewModels.Character;
 global using BLL.Services.Implementations;
 global using DAL.Repositories.IRepositories;
+global using BLL.Services.Interfaces.Customer;
 global using System.ComponentModel.DataAnnotations;
-
 
 

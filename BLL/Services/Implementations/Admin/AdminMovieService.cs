@@ -40,24 +40,44 @@ namespace BLL.Services.Implementations
 
 
 
-        public async Task<IEnumerable<MovieAdminListVM>> GetAllMoviesAsync()
+        public async Task<MovieAdminListResultVM> GetAllMoviesAsync(int page, int pageSize, string? query = null)
         {
-            var movies = await _movieRepo.GetAll()
+            // Start with Include to maintain IIncludableQueryable type
+            var source = _movieRepo.GetAllWithDeleted()
                 .Include(m => m.Category)
-                .OrderBy(m => m.Title)
-                .ToListAsync();
+                .AsQueryable();  // Explicitly cast to IQueryable if needed
 
-            return movies.Select(m => new MovieAdminListVM
+            if (!string.IsNullOrWhiteSpace(query))
             {
-                Id = m.Id,
-                Title = m.Title,
-                ImgUrl = m.ImgUrl,
-                Price = m.Price,
-                Rating = m.Rating,
-                CategoryName = m.Category.Name,
-                IsDeleted = m.IsDeleted
-            });
+                source = source.Where(m =>
+                    m.Title.Contains(query) ||
+                    (m.Category != null && m.Category.Name.Contains(query)));
+            }
+
+            var paginatedList = await PaginatedList<Movie>.CreateAsync(
+                source.OrderBy(m => m.Title),
+                page,
+                pageSize);
+
+            return new MovieAdminListResultVM
+            {
+                Movies = paginatedList.Select(m => new MovieAdminListVM
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    ImgUrl = m.ImgUrl,
+                    Price = m.Price,
+                    Rating = m.Rating,
+                    CategoryName = m.Category != null ? m.Category.Name : string.Empty,
+                    IsDeleted = m.IsDeleted
+                }),
+                PageIndex = paginatedList.PageIndex,
+                PageSize = pageSize,
+                TotalCount = paginatedList.TotalCount,
+                SearchTerm = query
+            };
         }
+
 
 
         public async Task<MovieAdminEditVM?> GetMovieForEditAsync(Guid id)
