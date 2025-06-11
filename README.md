@@ -1,5 +1,7 @@
 # 🎬 Movie Market
 
+[![Visit My Blog](https://img.shields.io/badge/Visit%20My%20Blog-2962FF?style=flat-square&logo=hashnode&logoColor=white)](https://abdelwahabshandy.hashnode.dev)
+
 ## 📖 Overview
 
 **Movie Market** is a full-featured web application built using **ASP.NET Core** and **Entity Framework Core**. It allows users to explore a curated library of movies, manage their personal watchlists, and enables administrators to control content and user access through a powerful admin dashboard.
@@ -85,7 +87,6 @@ If you have any questions or feedback, feel free to reach out:
 [![LinkedIn](https://img.shields.io/badge/Followers-4000-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/abdelwahab-ahmed-shandy/)
 [![Medium](https://img.shields.io/badge/Followers-25-brightgreen?style=for-the-badge&logo=medium&logoColor=white)](https://medium.com/@abdelwahabshandy)
 [![GitHub](https://img.shields.io/badge/GitHub-333333?style=for-the-badge&logo=github&logoColor=white)](https://github.com/abdelwahab-ahmed-shandy)
-[![Visit My Blog](https://img.shields.io/badge/Visit%20My%20Blog-2962FF?style=flat-square&logo=hashnode&logoColor=white)](https://abdelwahabshandy.hashnode.dev)
 
 ---
 
