@@ -33,8 +33,7 @@ namespace BLL.Services.Implementations
         {
             var now = DateTime.UtcNow;
 
-            var movies = await _movieRepo.Get(m => m.CurrentState.Value == DAL.Enums.CurrentState.Active &&
-                !m.IsDeleted &&
+            var movies = await _movieRepo.Get(m => m.CurrentState.Value == DAL.Enums.CurrentState.Active && !m.IsDeleted &&
                 (m.StartDate == null || m.StartDate <= now) &&
                 (m.EndDate == null || m.EndDate >= now))
                 .Include(m => m.Category)

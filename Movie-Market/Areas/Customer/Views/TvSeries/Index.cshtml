@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DAL.ViewModels.TvSeries.TvSeriesVM>
+
+@{
+    ViewData["Title"] = "TV Series";
+}
+
+<div class="container">
+    <h1 class="my-4">TV Series</h1>
+
+    <div class="row">
+        @foreach (var series in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    @if (!string.IsNullOrEmpty(series.ImgUrl))
+                    {
+                        <img src="@series.ImgUrl" class="card-img-top" alt="@series.Title">
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@series.Title</h5>
+                        <p class="card-text">@series.ShortDescription</p>
+                        <p class="text-muted">Released: @series.ReleaseYear</p>
+                        @if (series.Rating.HasValue)
+                        {
+                            <p>Rating: @series.Rating.Value.ToString("0.0")/10</p>
+                        }
+                    </div>
+                    <div class="card-footer">
+                        <a asp-action="Details" asp-route-id="@series.Id" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

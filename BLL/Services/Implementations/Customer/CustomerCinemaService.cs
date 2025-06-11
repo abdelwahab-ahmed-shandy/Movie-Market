@@ -21,11 +21,12 @@ namespace BLL.Services.Implementations.Customer
             _logger = logger;
         }
 
+
         public async Task<IEnumerable<CinemaIndexVM>> GetActiveCinemaAsync()
         {
             try
             {
-                var cinemas = await _cinemaRepo.Get(c => c.CurrentState.Value == DAL.Enums.CurrentState.Active)
+                var cinemas = await _cinemaRepo.Get(c => !c.IsDeleted && c.CurrentState.Value == DAL.Enums.CurrentState.Active)
                     .OrderBy(c => c.Name)
                     .ToListAsync();
 
@@ -43,6 +44,7 @@ namespace BLL.Services.Implementations.Customer
                 throw;
             }
         }
+
 
         public async Task<CinemaDetailsVM?> GetCinemaDetailsAsync(Guid id)
         {
@@ -86,6 +88,7 @@ namespace BLL.Services.Implementations.Customer
             }
         }
 
+
         public async Task<IEnumerable<CinemaIndexVM>> GetPopularCinemaAsync(int count)
         {
             try
@@ -110,6 +113,7 @@ namespace BLL.Services.Implementations.Customer
                 throw;
             }
         }
+
 
     }
 }

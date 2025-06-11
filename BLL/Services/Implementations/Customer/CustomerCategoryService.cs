@@ -61,6 +61,7 @@ namespace BLL.Services.Implementations.Customer
             };
         }
 
+
         public async Task<IEnumerable<CategoryIndexVM>> GetPopularCategoriesAsync(int count)
         {
             return await _categoryRepository.GetAll()

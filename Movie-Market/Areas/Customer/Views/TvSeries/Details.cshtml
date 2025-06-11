@@ -1,0 +1,62 @@
+﻿@* Areas/Customer/Views/TvSeries/Details.cshtml *@
+@model DAL.ViewModels.TvSeries.TvSeriesDetailsVM
+
+@{
+    ViewData["Title"] = Model.TvSeries.Title;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.TvSeries.ImgUrl))
+            {
+                <img src="@Model.TvSeries.ImgUrl" class="img-fluid" alt="@Model.TvSeries.Title">
+            }
+        </div>
+        <div class="col-md-8">
+            <h1>@Model.TvSeries.Title</h1>
+            <p><strong>Release Year:</strong> @Model.TvSeries.ReleaseYear</p>
+            <p><strong>Author:</strong> @Model.TvSeries.Author</p>
+            @if (Model.TvSeries.Rating.HasValue)
+            {
+                <p><strong>Rating:</strong> @Model.TvSeries.Rating.Value.ToString("0.0")/10</p>
+            }
+            <p>@Model.TvSeries.Description</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h3>Seasons</h3>
+            <ul class="list-group">
+                @foreach (var season in Model.Seasons)
+                {
+                    <li class="list-group-item">
+                        <h5>@season.Title</h5>
+                        <p>Season @season.SeasonNumber - @season.ReleaseYear</p>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Characters</h3>
+            <div class="row">
+                @foreach (var character in Model.Characters)
+                {
+                    <div class="col-sm-6 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">@character.Name</h5>
+                                @if (!string.IsNullOrEmpty(character.Description))
+                                {
+                                    <p class="card-text">@character.Description</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
