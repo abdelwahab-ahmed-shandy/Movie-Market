@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DAL.ViewModels.Special.SpecialIndexVM>
+
+@{
+    ViewData["Title"] = "Active Specials";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Current Special Offers</h2>
+
+    <div class="row">
+        @foreach (var special in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 special-card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">@special.Name</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="badge bg-success mb-2">
+                            @special.DiscountPercentage.ToString("0")% OFF
+                        </div>
+                        <p class="card-text">@special.Description</p>
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">
+                                <i class="fas fa-calendar-start"></i> @special.StartDate.ToString("d")
+                            </small>
+                            <small class="text-muted">
+                                <i class="fas fa-calendar-end"></i> @special.EndDate.ToString("d")
+                            </small>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a asp-action="Details" asp-route-id="@special.Id"
+                           class="btn btn-outline-primary btn-sm">
+                            View Details
+                        </a>
+                        <span class="float-end @(special.IsActive ? "text-success" : "text-danger")">
+                            @(special.IsActive ? "Active" : "Expired")
+                        </span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .special-card {
+        transition: transform 0.2s;
+    }
+    .special-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+</style>

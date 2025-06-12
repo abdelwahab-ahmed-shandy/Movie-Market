@@ -13,8 +13,7 @@ namespace BLL.Services.Implementations.Customer
         private readonly IGenericRepository<Cinema> _cinemaRepo;
         private readonly ILogger<CustomerCinemaService> _logger;
 
-        public CustomerCinemaService(
-            IGenericRepository<Cinema> cinemaRepo,
+        public CustomerCinemaService(IGenericRepository<Cinema> cinemaRepo,
             ILogger<CustomerCinemaService> logger)
         {
             _cinemaRepo = cinemaRepo;

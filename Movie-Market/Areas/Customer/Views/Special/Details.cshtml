@@ -1,0 +1,93 @@
+﻿@model DAL.ViewModels.Special.SpecialDetailsVM
+
+@{
+    ViewData["Title"] = "Special Offer Details";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2>@Model.Name</h2>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success mb-4">
+                        <h4 class="alert-heading">@Model.DiscountPercentage.ToString("0")% Discount</h4>
+                        <p class="mb-0">Valid from @Model.StartDate.ToString("d") to @Model.EndDate.ToString("d")</p>
+                    </div>
+
+                    <p class="lead">@Model.Description</p>
+
+                    <hr />
+
+                    <h4 class="mb-3">Included Movies:</h4>
+
+                    <div class="row">
+                        @foreach (var movie in Model.Movies)
+                        {
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img src="@movie.MoviePosterUrl" class="img-fluid rounded-start" alt="@movie.MovieTitle">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title">@movie.MovieTitle</h5>
+                                                @if (movie.IsFeatured)
+                                                {
+                                                    <span class="badge bg-warning text-dark mb-2">Featured</span>
+                                                }
+                                                <a asp-controller="Movies" asp-action="Details"
+                                                   asp-route-id="@movie.MovieId"
+                                                   class="btn btn-sm btn-outline-primary mt-2">
+                                                    View Movie
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Offer Summary</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Status:</span>
+                            <span class="badge @(Model.IsActive ? "bg-success" : "bg-danger")">
+                                @(Model.IsActive ? "Active" : "Expired")
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Start Date:</span>
+                            <span>@Model.StartDate.ToString("d")</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>End Date:</span>
+                            <span>@Model.EndDate.ToString("d")</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Discount:</span>
+                            <span class="text-success">@Model.DiscountPercentage.ToString("0")%</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
