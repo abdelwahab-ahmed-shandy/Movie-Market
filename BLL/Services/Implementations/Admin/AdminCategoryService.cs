@@ -20,7 +20,7 @@ namespace BLL.Services.Implementations.Admin
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<CategoryAdminListVM> GetAllCategoriesAsync(int page, int pageSize, string query = null)
+        public async Task<CategoryAdminListVM> GetAllCategoriesAsync(int page, int pageSize, string? query = null)
         {
             var source = _categoryRepo.GetAllWithDeleted();
 

@@ -93,14 +93,17 @@
 
 	</div>
 
-@functions {
-	string GetStateBadgeClass(CurrentState state)
-	{
-		return state switch
+	@functions {
+		string GetStateBadgeClass(CurrentState state)
 		{
-			CurrentState.Active => "bg-success",
-			CurrentState.Inactive => "bg-secondary",
-			_ => "bg-secondary"
-		};
+			return state switch
+			{
+				CurrentState.Active => "bg-success",
+				CurrentState.Inactive => "bg-secondary",
+				CurrentState.SoftDelete => "bg-danger",
+				CurrentState.Archived => "bg-warning",
+				_ => "bg-secondary"
+			};
+		}
+
 	}
-}

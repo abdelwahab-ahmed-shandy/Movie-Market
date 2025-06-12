@@ -37,6 +37,7 @@ namespace Movie_Market
             builder.Services.AddScoped<IAdminCategoryService, AdminCategoryService>();
             builder.Services.AddScoped<IAdminMovieService, AdminMovieService>();
             builder.Services.AddScoped<IAdminCinemaService, AdminCinemaService>();
+            builder.Services.AddScoped<IAdminCharacterService, AdminCharacterService>();
 
 
             // Customer Services

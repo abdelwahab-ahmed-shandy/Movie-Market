@@ -30,7 +30,7 @@ namespace BLL.Services.Implementations.Customer
         public async Task<List<CharacterIndexVM>> GetAllCharactersAsync()
         {
             var characters = await _characterRepo.GetAll()
-                .Where(c => !c.IsDeleted)
+                .Where(c => !c.IsDeleted && c.CurrentState == CurrentState.Active)
                 .ToListAsync();
 
             return characters.Select(c => new CharacterIndexVM
@@ -48,11 +48,11 @@ namespace BLL.Services.Implementations.Customer
             if (character == null || character.IsDeleted)
                 return null;
 
-            var characterMovies = await _characterMovieRepo.Get(cm => cm.CharacterId == id)
+            var characterMovies = await _characterMovieRepo.Get(cm => cm.CharacterId == id && cm.CurrentState == CurrentState.Active)
                 .Include(cm => cm.Movie)
                 .ToListAsync();
 
-            var characterTvSeries = await _characterTvSeriesRepo.Get(ct => ct.CharacterId == id)
+            var characterTvSeries = await _characterTvSeriesRepo.Get(ct => ct.CharacterId == id && ct.CurrentState == CurrentState.Active)
                 .Include(ct => ct.TvSeries)
                 .ToListAsync();
 
