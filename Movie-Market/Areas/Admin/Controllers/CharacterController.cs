@@ -65,6 +65,8 @@ namespace Movie_Market.Areas.Admin.Controllers
                 var result = await _characterService.CreateCharacter(model);
                 if (result)
                 {
+                    TempData["notification"] = "Character created successfully!";
+                    TempData["MessageType"] = "success";
                     return RedirectToAction(nameof(Index));
                 }
                 ModelState.AddModelError("", "Error creating character");
@@ -115,6 +117,8 @@ namespace Movie_Market.Areas.Admin.Controllers
                 var result = await _characterService.UpdateCharacter(model);
                 if (result)
                 {
+                    TempData["notification"] = "Character Is Updated !";
+                    TempData["MessageType"] = "Success";
                     return RedirectToAction(nameof(Index));
                 }
                 ModelState.AddModelError("", "Error updating character");
@@ -140,6 +144,8 @@ namespace Movie_Market.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            TempData["notification"] = "Character permanently deleted!";
+            TempData["MessageType"] = "Warning";
             return RedirectToAction(nameof(Index));
         }
 
@@ -154,6 +160,9 @@ namespace Movie_Market.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+
+            TempData["notification"] = "Character Change Status Soft Deleted!";
+            TempData["MessageType"] = "Information";
             return RedirectToAction(nameof(Index));
         }
         #endregion

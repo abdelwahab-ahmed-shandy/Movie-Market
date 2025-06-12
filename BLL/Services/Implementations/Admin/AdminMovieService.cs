@@ -66,12 +66,13 @@ namespace BLL.Services.Implementations
                     Id = m.Id,
                     Title = m.Title,
                     ImgUrl = m.ImgUrl,
+                    CurrentState = m.CurrentState.Value,
                     Price = m.Price,
                     Rating = m.Rating,
                     CategoryName = m.Category != null ? m.Category.Name : string.Empty,
                     IsDeleted = m.IsDeleted
                 }),
-                PageIndex = paginatedList.PageIndex,
+                PageNumber = paginatedList.PageIndex,
                 PageSize = pageSize,
                 TotalCount = paginatedList.TotalCount,
                 SearchTerm = query
@@ -95,6 +96,7 @@ namespace BLL.Services.Implementations
                 Id = movie.Id,
                 Title = movie.Title,
                 Description = movie.Description,
+                CurrentState = movie.CurrentState.Value,
                 Price = movie.Price,
                 Author = movie.Author,
                 ImgUrl = movie.ImgUrl,
@@ -119,6 +121,7 @@ namespace BLL.Services.Implementations
                 {
                     Title = model.Title,
                     Description = model.Description,
+                    CurrentState = model.CurrentState,
                     Price = model.Price,
                     Author = model.Author,
                     ImgUrl = model.ImgUrl,
@@ -190,6 +193,7 @@ namespace BLL.Services.Implementations
                 movie.EndDate = model.EndDate;
                 movie.ReleaseYear = model.ReleaseYear;
                 movie.Rating = model.Rating;
+                movie.CurrentState = model.CurrentState;
                 movie.CategoryId = model.CategoryId;
 
                 await _movieRepo.Update(movie);

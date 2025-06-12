@@ -11,9 +11,11 @@ namespace DAL.ViewModels.Movie
         public Guid Id { get; set; }
         public string Title { get; set; } = null!;
         public string? ImgUrl { get; set; }
+        public string? Description { get; set; }
         public double Price { get; set; }
         public double? Rating { get; set; }
         public string CategoryName { get; set; } = null!;
         public bool IsDeleted { get; set; }
+        public CurrentState CurrentState { get; set; }
     }
 }

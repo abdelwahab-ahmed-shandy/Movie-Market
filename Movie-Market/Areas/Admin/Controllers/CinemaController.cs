@@ -16,7 +16,7 @@ namespace Movie_Market.Areas.Admin.Controllers
         #region Cinema Index
 
         [HttpGet]
-        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 10, string searchTerm = null)
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 10, string? searchTerm = null)
         {
             var cinemas = await _cinemaService.GetAllCinemasAsync(pageNumber, pageSize, searchTerm);
             return View(cinemas);
@@ -116,7 +116,7 @@ namespace Movie_Market.Areas.Admin.Controllers
             await _cinemaService.SoftDeleteAsync(id);
 
             TempData["notification"] = "Cinema soft-deleted or restored successfully!";
-            TempData["MessageType"] = "success";
+            TempData["MessageType"] = "Information";
 
             return RedirectToAction(nameof(Index));
         }
@@ -131,7 +131,7 @@ namespace Movie_Market.Areas.Admin.Controllers
             await _cinemaService.DeleteAsync(id);
 
             TempData["notification"] = "Cinema permanently deleted!";
-            TempData["MessageType"] = "success";
+            TempData["MessageType"] = "Warning";
 
             return RedirectToAction(nameof(Index));
         }

@@ -49,5 +49,7 @@ namespace DAL.ViewModels.Movie
 
         [Display(Name = "Specials")]
         public List<Guid> SpecialIds { get; set; } = new();
+
+        public CurrentState CurrentState { get; set; }
     }
 }

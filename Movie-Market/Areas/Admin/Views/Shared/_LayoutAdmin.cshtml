@@ -352,6 +352,11 @@
                             Characters
                         </a>
 
+                        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Specials" ? "active" : "")" asp-area="Admin" asp-controller="Specials" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="bi bi-percent"></i></div>
+                            Specials
+                        </a>
+
                         <div class="sb-sidenav-menu-heading">TV Series</div>
 
                         <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "TvSeries" ? "active" : "")" asp-area="Admin" asp-controller="TvSeries" asp-action="Index">

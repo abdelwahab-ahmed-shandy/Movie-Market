@@ -74,6 +74,14 @@
                 <span asp-validation-for="Author" class="text-danger"></span>
             </div>
 
+            <div class="form-group">
+                <label asp-for="CurrentState"></label>
+                <select asp-for="CurrentState" asp-items="Html.GetEnumSelectList<CurrentState>()" class="form-control" required>
+                    <option value="">-- Select State --</option>
+                </select>
+                <span asp-validation-for="CurrentState" class="text-danger"></span>
+            </div>
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -111,8 +119,6 @@
                 </select>
                 <span asp-validation-for="SpecialIds" class="text-danger"></span>
             </div>
-
-            
             
             <div class="form-group mt-3">
                 <input type="submit" value="Save" class="btn btn-primary" />

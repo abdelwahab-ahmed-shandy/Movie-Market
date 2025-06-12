@@ -23,7 +23,7 @@ namespace BLL.Services.Implementations.Admin
 
 
 
-        public async Task<CinemaAdminListVM> GetAllCinemasAsync(int page, int pageSize, string query = null)
+        public async Task<CinemaAdminListVM> GetAllCinemasAsync(int page, int pageSize, string? query = null)
         {
             var source = _cinemaRepo.GetAllWithDeleted();
 

@@ -1,14 +1,13 @@
-﻿@model DAL.ViewModels.Movie.MovieAdminListResultVM
+﻿@model DAL.ViewModels.Special.SpecialAdminListVM
 
 @{
-    ViewData["Title"] = "Manage Movies";
+    ViewData["Title"] = "Specials Management";
 }
-
 
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
-        <a asp-action="Create" class="btn btn-primary btn-sm">Add a new Movie</a>
+        <a asp-action="Create" class="btn btn-primary btn-sm">Add New Special</a>
     </div>
     <div class="card-body">
         <!-- Search Box -->
@@ -16,7 +15,7 @@
             <div class="col-md-6">
                 <form method="get" class="form-inline">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="searchTerm" value="@Model.SearchTerm" placeholder="Search Movies...">
+                        <input type="text" class="form-control" name="searchTerm" value="@Model.SearchTerm" placeholder="Search Specials...">
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-search"></i>
                         </button>
@@ -35,62 +34,38 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Poster</th>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Rating</th>
+                        <th>Name</th>
+                        <th>Discount</th>
+                        <th>Date Range</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Movies)
+                    @foreach (var item in Model.Specials)
                     {
-                        <tr class="@(item.IsDeleted ? "table-danger" : "")">
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.DiscountPercentage%</td>
+                            <td>@item.StartDate.ToString("d") - @item.EndDate.ToString("d")</td>
                             <td>
-                                @if (!string.IsNullOrEmpty(item.ImgUrl))
-                                {
-                                    <img src="@item.ImgUrl" alt="@item.Title" style="max-width: 80px; max-height: 80px;" />
-                                }
-                            </td>
-                            <td>@item.Title</td>
-                            <td>@item.CategoryName</td>
-                            <td>$@item.Price</td>
-                            <td>@(item.Rating?.ToString("0.0") ?? "N/A")</td>
-                            <td title="@item.CurrentState">
-                                <span class="badge @GetStateBadgeClass(item.CurrentState)">
-                                    @item.CurrentState
+                                <span class="badge @(item.IsActive ? "bg-success" : "bg-secondary")">
+                                    @(item.IsActive ? "Active" : "Inactive")
                                 </span>
                             </td>
                             <td>
-                                <div class="btn-group" role="group">
-                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </a>
-
-                                    @if (item.IsDeleted)
-                                    {
-                                        <form method="post" asp-action="Restore" asp-route-id="@item.Id" class="d-inline">
-                                            <button type="submit" class="btn btn-sm btn-success">
-                                                <i class="fas fa-undo"></i> Restore
-                                            </button>
-                                        </form>
-                                        <form method="post" asp-action="DeletePermanently" asp-route-id="@item.Id" class="d-inline">
-                                            <button type="submit" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Are you sure you want to permanently delete this movie?')">
-                                                <i class="fas fa-trash-alt"></i> Delete
-                                            </button>
-                                        </form>
-                                    }
-                                    else
-                                    {
-                                        <form method="post" asp-action="SoftDelete" asp-route-id="@item.Id" class="d-inline">
-                                            <button type="submit" class="btn btn-sm btn-danger">
-                                                <i class="fas fa-trash-alt"></i> Delete
-                                            </button>
-                                        </form>
-                                    }
+                                <div class="btn-group btn-group-sm">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#confirmDeleteModal"
+                                            data-id="@item.Id"
+                                            data-name="@item.Name">
+                                        Delete
+                                    </button>
+                                    <button onclick="toggleStatus('@item.Id')"
+                                            class="btn @(item.IsActive ? "btn-warning" : "btn-success")">
+                                        @(item.IsActive ? "Deactivate" : "Activate")
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -164,35 +139,26 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
-
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Action</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                </button>
             </div>
-
             <div class="modal-body">
-                Are you sure you want to perform this action on <strong id="categoryName"></strong>?
+                Are you sure you want to perform this action on <strong id="specialName"></strong>?
             </div>
-
             <div class="modal-footer">
-
-                <form method="post" asp-action="ToggleStatus">
-                    <input type="hidden" name="id" id="softDeleteCategoryId" />
+                <form method="post" asp-action="SoftDelete">
+                    <input type="hidden" name="id" id="softDeleteSpecialId" />
                     <button type="submit" class="btn btn-warning" id="softDeleteBtn">Soft Delete</button>
                 </form>
-
-                <form method="post" asp-action="DeletePermanently">
-                    <input type="hidden" name="id" id="permanentDeleteCategoryId" />
+                <form method="post" asp-action="Delete">
+                    <input type="hidden" name="id" id="permanentDeleteSpecialId" />
                     <button type="submit" class="btn btn-danger">Delete Permanently</button>
                 </form>
-
-
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
-
 
 @section Scripts {
     <script>
@@ -201,38 +167,20 @@
             var button = event.relatedTarget;
             var id = button.getAttribute('data-id');
             var name = button.getAttribute('data-name');
-            var isDeleted = button.getAttribute('data-isdeleted') === 'True';
 
-            document.getElementById('categoryName').textContent = name;
-            document.getElementById('softDeleteCategoryId').value = id;
-            document.getElementById('permanentDeleteCategoryId').value = id;
-
-            var softDeleteBtn = document.getElementById('softDeleteBtn');
-            if (isDeleted) {
-                softDeleteBtn.textContent = "Restore";
-                softDeleteBtn.classList.remove('btn-warning');
-                softDeleteBtn.classList.add('btn-success');
-            } else {
-                softDeleteBtn.textContent = "Soft Delete";
-                softDeleteBtn.classList.remove('btn-success');
-                softDeleteBtn.classList.add('btn-warning');
-            }
+            document.getElementById('specialName').textContent = name;
+            document.getElementById('softDeleteSpecialId').value = id;
+            document.getElementById('permanentDeleteSpecialId').value = id;
         });
 
+        function toggleStatus(id) {
+            $.post('@Url.Action("ToggleStatus")', { id: id })
+                .done(function() {
+                    window.location.reload();
+                })
+                .fail(function() {
+                    alert('Failed to update status');
+                });
+        }
     </script>
 }
-
-@functions {
-    string GetStateBadgeClass(CurrentState state)
-    {
-        return state switch
-        {
-            CurrentState.Active => "bg-success",
-            CurrentState.Inactive => "bg-secondary",
-            CurrentState.SoftDelete => "bg-danger",
-            CurrentState.Archived => "bg-warning",
-            _ => "bg-secondary"
-        };
-    }
-
-} 

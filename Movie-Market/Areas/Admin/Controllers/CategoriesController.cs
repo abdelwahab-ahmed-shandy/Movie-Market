@@ -107,7 +107,7 @@ namespace Movie_Market.Areas.Admin.Controllers
                 }
 
                 TempData["notification"] = "Category Is Updated !";
-                TempData["MessageType"] = "danger";
+                TempData["MessageType"] = "Success";
                 return RedirectToAction(nameof(Index));
             }
             return View("Create", VM);
@@ -140,7 +140,7 @@ namespace Movie_Market.Areas.Admin.Controllers
             await _categoryService.Delete(id);
 
             TempData["notification"] = "Category permanently deleted!";
-            TempData["MessageType"] = "danger";
+            TempData["MessageType"] = "Warning";
 
             return RedirectToAction(nameof(Index));
         }

@@ -1,0 +1,82 @@
+﻿@model SpecialAdminDetailsVM
+
+@{
+    ViewData["Title"] = "Special Offer Details";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3 class="card-title">@ViewData["Title"]</h3>
+        <div class="card-toolbar">
+            <span class="badge @(Model.CurrentState == CurrentState.Active ? "bg-success" : "bg-secondary")">
+                @Model.CurrentState
+            </span>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h4>@Model.Name</h4>
+                <p class="text-muted">@Model.Description</p>
+            </div>
+            <div class="col-md-6">
+                <div class="alert alert-success">
+                    <h5 class="alert-heading">@Model.DiscountPercentage% Discount</h5>
+                    <p class="mb-0">
+                        <strong>Valid:</strong> @Model.StartDate.ToString("d") to @Model.EndDate.ToString("d")
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <h5 class="mb-3">Included Movies</h5>
+
+        @if (Model.Movies.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Movie</th>
+                            <th>Featured</th>
+                            <th>Order</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var movie in Model.Movies)
+                        {
+                            <tr>
+                                <td>@movie.Title</td>
+                                <td>
+                                    @if (movie.IsFeatured)
+                                    {
+                                        <i class="fas fa-check text-success"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fas fa-times text-muted"></i>
+                                    }
+                                </td>
+                                <td>@movie.DisplayOrder</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">No movies included in this special offer</div>
+        }
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">Edit</a>
+            <form asp-action="Delete" method="post" class="d-inline">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>

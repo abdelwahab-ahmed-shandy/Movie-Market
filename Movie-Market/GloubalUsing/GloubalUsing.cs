@@ -6,12 +6,14 @@ global using System.Collections.Generic;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Mvc.Rendering;
 global using System.ComponentModel.DataAnnotations;
 global using Microsoft.AspNetCore.Authentication.Cookies;
 global using Microsoft.AspNetCore.Authentication.Google;
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 global using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+
 
 global using MovieMart;
 global using DAL.Enums;
@@ -22,11 +24,11 @@ global using DAL.Repositories;
 global using DAL.ViewModels.Cart;
 global using DAL.ViewModels.Movie;
 global using DAL.ViewModels.Cinema;
+global using DAL.ViewModels.Special;
+global using BLL.Services.Interfaces;
 global using DAL.ViewModels.Identity;
 global using DAL.ViewModels.Category;
-global using BLL.Services.Interfaces;
 global using DAL.ViewModels.Subscriber;
 global using BLL.Services.Implementations;
 global using BLL.Services.Interfaces.Admin;
 global using DAL.Repositories.IRepositories;
-
