@@ -1,4 +1,5 @@
-﻿using DAL.ViewModels.Search;
+﻿using BLL.Services.Interfaces.Customer;
+using DAL.ViewModels.Search;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Movie_Market.Areas.Customer.Controllers
@@ -7,10 +8,15 @@ namespace Movie_Market.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ISearchService _searchService;
+        private readonly ICustomerMovieService _movieService;
+        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ISearchService searchService)
+        public HomeController(ISearchService searchService , ICustomerMovieService movieService,
+                                 ILogger<HomeController> logger)
         {
             _searchService = searchService;
+            _logger = logger;
+            _movieService = movieService;
         }
         public IActionResult Index()
         {
@@ -40,6 +46,26 @@ namespace Movie_Market.Areas.Customer.Controllers
             var results = await _searchService.GlobalSearchCustomerAsync(query);
             return PartialView("_SearchResults", results);
         }
+        #endregion
+
+
+        #region New Releases
+
+        [HttpGet]
+        public async Task<IActionResult> NewReleases()
+        {
+            try
+            {
+                var newReleases = await _movieService.GetMoviesNewReleasesAsync(20);
+                return View(newReleases);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error loading new releases");
+                return View("Error");
+            }
+        }
+
         #endregion
 
 

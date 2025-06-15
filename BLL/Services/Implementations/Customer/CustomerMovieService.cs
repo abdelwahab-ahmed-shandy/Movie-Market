@@ -51,6 +51,32 @@ namespace BLL.Services.Implementations
             });
         }
 
+        public async Task<List<MovieDetailsVM>> GetMoviesNewReleasesAsync(int count)
+        {
+            var cutoffDate = DateTime.UtcNow.AddMonths(-3);
+
+            var newReleases = await _movieRepo.Get(m =>
+                    m.CurrentState.Value == DAL.Enums.CurrentState.Active &&
+                    !m.IsDeleted &&
+                    m.StartDate >= cutoffDate)
+                .OrderByDescending(m => m.ReleaseYear)
+                .ThenByDescending(m => m.Rating)
+                .Take(count)
+                .Include(m => m.Category)
+                .Select(m => new MovieDetailsVM
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    ImgUrl = m.ImgUrl,
+                    Price = m.Price,
+                    Rating = m.Rating,
+                    CategoryName = m.Category != null ? m.Category.Name : string.Empty
+                })
+                .ToListAsync();
+
+            return newReleases;
+        }
+
         public async Task<MovieDetailsVM?> GetMovieDetailsAsync(Guid id)
         {
             var movie = await _movieRepo.Get(m => m.Id == id && !m.IsDeleted)

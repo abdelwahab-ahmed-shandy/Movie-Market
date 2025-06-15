@@ -10,6 +10,8 @@ namespace BLL.Services.Interfaces.Customer
     {
         Task<IEnumerable<MovieIndexVM>> GetActiveMoviesAsync();
 
+        Task<List<MovieDetailsVM>> GetMoviesNewReleasesAsync(int count);
+
         Task<MovieDetailsVM?> GetMovieDetailsAsync(Guid id);
 
         Task<IEnumerable<MovieIndexVM>> GetPopularMoviesAsync(int count);

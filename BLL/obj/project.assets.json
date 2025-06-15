@@ -4063,11 +4063,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\FM\\Desktop\\Movie-Market\\BLL\\BLL.csproj",
+      "projectUniqueName": "D:\\Git-Hub\\Movie-Market\\BLL\\BLL.csproj",
       "projectName": "BLL",
-      "projectPath": "C:\\Users\\FM\\Desktop\\Movie-Market\\BLL\\BLL.csproj",
+      "projectPath": "D:\\Git-Hub\\Movie-Market\\BLL\\BLL.csproj",
       "packagesPath": "C:\\Users\\FM\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\FM\\Desktop\\Movie-Market\\BLL\\obj\\",
+      "outputPath": "D:\\Git-Hub\\Movie-Market\\BLL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4088,8 +4088,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\DAL.csproj": {
-              "projectPath": "C:\\Users\\FM\\Desktop\\Movie-Market\\DAL\\DAL.csproj"
+            "D:\\Git-Hub\\Movie-Market\\DAL\\DAL.csproj": {
+              "projectPath": "D:\\Git-Hub\\Movie-Market\\DAL\\DAL.csproj"
             }
           }
         }
@@ -4104,7 +4104,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -4143,7 +4143,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
