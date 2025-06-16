@@ -10,15 +10,15 @@ namespace Movie_Market.Areas.Admin.Controllers
         private readonly IAdminCharacterService _characterService;
         private readonly IGenericRepository<Movie> _movieRepo;
         private readonly IGenericRepository<TvSeries> _tvSeriesRepo;
+        private readonly IAdminCharacterTvSeriesService _characterTvSeriesService;
 
-        public CharacterController(
-            IAdminCharacterService characterService,
-            IGenericRepository<Movie> movieRepo,
-            IGenericRepository<TvSeries> tvSeriesRepo)
+        public CharacterController(IAdminCharacterService characterService,IGenericRepository<Movie> movieRepo,
+                                        IGenericRepository<TvSeries> tvSeriesRepo , IAdminCharacterTvSeriesService characterTvSeriesService)
         {
             _characterService = characterService;
             _movieRepo = movieRepo;
             _tvSeriesRepo = tvSeriesRepo;
+            _characterTvSeriesService = characterTvSeriesService;
         }
 
 
@@ -133,6 +133,57 @@ namespace Movie_Market.Areas.Admin.Controllers
 
 
 
+        #region Add To TvSeries
+
+        [HttpGet]
+        public async Task<IActionResult> AddToTvSeries(Guid tvSeriesId)
+        {
+            try
+            {
+                var model = await _characterTvSeriesService.GetAddCharactersViewModel(tvSeriesId);
+                return View(model);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddToTvSeries(CharacterTvSeriesAddVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _characterTvSeriesService.AddCharacterToTvSeries(model.TvSeriesId, model.CharacterId);
+                    TempData["SuccessMessage"] = "Character added successfully!";
+                    return RedirectToAction("Details", "TvSeries", new { id = model.TvSeriesId });
+                }
+                catch (KeyNotFoundException)
+                {
+                    return NotFound();
+                }
+                catch (InvalidOperationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"An error occurred: {ex.Message}");
+                }
+            }
+
+            // If we got this far, something failed; reload the available characters
+            model.AvailableCharacters = (await _characterTvSeriesService.GetAddCharactersViewModel(model.TvSeriesId)).AvailableCharacters;
+            return View(model);
+        }
+
+        #endregion
+
+
+
         #region Delete
         // POST: Admin/Character/Delete/5
         [HttpPost]
@@ -166,7 +217,6 @@ namespace Movie_Market.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
         #endregion
-
 
 
     }

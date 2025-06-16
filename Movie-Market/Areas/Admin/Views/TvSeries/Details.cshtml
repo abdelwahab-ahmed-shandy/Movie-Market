@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    <div class="row">
+     <div class="row">
         <div class="col-md-6">
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-light">
@@ -107,7 +107,7 @@
                         <div class="list-group">
                             @foreach (var season in Model.Seasons)
                             {
-                                <a asp-controller="Seasons" asp-action="Details" asp-route-id="@season.Id"
+                                <a asp-controller="Season" asp-action="Details" asp-route-id="@season.Id"
                                    class="list-group-item list-group-item-action @(season.IsDeleted ? "list-group-item-secondary" : "")">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1">@season.Title</h5>
@@ -125,7 +125,7 @@
                     }
                 </div>
                 <div class="card-footer">
-                    <a asp-controller="Seasons" asp-action="Create" asp-route-tvSeriesId="@Model.Id"
+                    <a asp-controller="Season" asp-action="Create" asp-route-tvSeriesId="@Model.Id"
                        class="btn btn-sm btn-primary">Add Season</a>
                 </div>
             </div>
@@ -178,11 +178,13 @@
                     }
                 </div>
                 <div class="card-footer">
-                    <a asp-controller="Characters" asp-action="AddToTvSeries" asp-route-tvSeriesId="@Model.Id"
+                    <a asp-controller="Character" asp-action="AddToTvSeries" asp-route-tvSeriesId="@Model.Id"
                        class="btn btn-sm btn-primary">Add Character</a>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
+
+
 </div>
 

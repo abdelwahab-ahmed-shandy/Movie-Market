@@ -1,0 +1,48 @@
+﻿@model DAL.ViewModels.Season.SeasonAdminCreateVM
+
+@{
+    ViewData["Title"] = "Create New Season";
+}
+
+<div class="container mt-4">
+    <h1>@ViewData["Title"]</h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="TvSeriesId" />
+
+                <div class="form-group mb-3">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="SeasonNumber" class="control-label"></label>
+                    <input asp-for="SeasonNumber" class="form-control" />
+                    <span asp-validation-for="SeasonNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ReleaseYear" class="control-label"></label>
+                    <input asp-for="ReleaseYear" class="form-control" />
+                    <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a asp-action="Index" asp-route-tvSeriesId="@Model.TvSeriesId" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

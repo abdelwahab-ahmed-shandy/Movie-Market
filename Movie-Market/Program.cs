@@ -40,7 +40,9 @@ namespace Movie_Market
             builder.Services.AddScoped<IAdminCharacterService, AdminCharacterService>();
             builder.Services.AddScoped<IAdminSpecialService, AdminSpecialService>();
             builder.Services.AddScoped<IAdminTvSeriesService, AdminTvSeriesService>();
-
+            builder.Services.AddScoped<IAdminSeasonService, AdminSeasonService>();
+            builder.Services.AddScoped<IAdminEpisodeService, AdminEpisodeService>();
+            builder.Services.AddScoped<IAdminCharacterTvSeriesService, AdminCharacterTvSeriesService>();
 
             // Customer Services
             builder.Services.AddScoped<ICustomerCategoryService, CustomerCategoryService>();
@@ -49,6 +51,7 @@ namespace Movie_Market
             builder.Services.AddScoped<ICustomerTvSeriesService, CustomerTvSeriesService>();
             builder.Services.AddScoped<ICustomerCharacterService, CustomerCharacterService>();
             builder.Services.AddScoped<ICustomerSpecialService, CustomerSpecialService>();
+            builder.Services.AddScoped<ICustomerSeasonService, CustomerSeasonService>();
 
 
             // Repository Services

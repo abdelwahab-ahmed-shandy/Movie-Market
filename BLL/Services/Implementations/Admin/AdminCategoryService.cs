@@ -54,7 +54,6 @@ namespace BLL.Services.Implementations.Admin
         }
 
 
-
         public async Task<CategoryAdminDetailsVM?> GetCategoryDetailsAsync(Guid id)
         {
             var category = await _categoryRepo.GetAll()

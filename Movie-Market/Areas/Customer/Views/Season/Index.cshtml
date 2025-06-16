@@ -1,0 +1,45 @@
+﻿@model List<DAL.ViewModels.Season.SeasonCustomerVM>
+
+@{
+    ViewData["Title"] = "Seasons";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>@ViewData["Title"]</h1>
+        <a asp-controller="TvSeries" asp-action="Details" asp-route-id="@ViewBag.TvSeriesId"
+           class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Back to TV Series
+        </a>
+    </div>
+
+    <div class="row">
+        @foreach (var season in Model.OrderBy(s => s.SeasonNumber))
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    @if (!string.IsNullOrEmpty(season.ImgUrl))
+                    {
+                        <img src="@season.ImgUrl" class="card-img-top" alt="@season.Title" style="height: 200px; object-fit: cover;">
+                    }
+                    else
+                    {
+                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <i class="fas fa-tv fa-3x text-muted"></i>
+                        </div>
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@season.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Season @season.SeasonNumber (@season.ReleaseYear)</h6>
+                        <p class="card-text">@season.EpisodeCount episodes</p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a asp-action="Details" asp-route-id="@season.Id" class="btn btn-primary btn-sm">
+                            View Episodes
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

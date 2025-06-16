@@ -1,0 +1,78 @@
+﻿@model DAL.ViewModels.Episode.EpisodeAdminEditVM
+
+@{
+    ViewData["Title"] = "Edit Episode";
+}
+
+<div class="container mt-4">
+    <h1>@ViewData["Title"]</h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group mb-3">
+                    <label asp-for="EpisodeNumber" class="control-label"></label>
+                    <input asp-for="EpisodeNumber" class="form-control" />
+                    <span asp-validation-for="EpisodeNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Rating" class="control-label"></label>
+                    <input asp-for="Rating" class="form-control" />
+                    <span asp-validation-for="Rating" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Duration" class="control-label"></label>
+                    <input asp-for="Duration" type="time" step="1" class="form-control" />
+                    <span asp-validation-for="Duration" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="VideoUrl" class="control-label"></label>
+                    <input asp-for="VideoUrl" class="form-control" />
+                    <span asp-validation-for="VideoUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ThumbnailUrl" class="control-label"></label>
+                    <input asp-for="ThumbnailUrl" class="form-control" />
+                    <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="CurrentState" class="control-label"></label>
+                    <select asp-for="CurrentState" asp-items="Html.GetEnumSelectList<CurrentState>()" class="form-control"></select>
+                    <span asp-validation-for="CurrentState" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,176 @@
+﻿@model DAL.ViewModels.Episode.EpisodeAdminListVM
+
+@{
+    ViewData["Title"] = "Manage Episodes";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        @* <h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"] - @Model.SeasonTitle</h6> *@
+        <div>
+            <a asp-controller="Season" asp-action="Details" asp-route-id="@Model.SeasonId" class="btn btn-secondary btn-sm">
+                <i class="fas fa-arrow-left"></i> Back to Season
+            </a>
+            <a asp-action="Create" asp-route-seasonId="@Model.SeasonId" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus"></i> Add New Episode
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <!-- Search Box -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form method="get" class="form-inline">
+                    <input type="hidden" name="seasonId" value="@Model.SeasonId" />
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="query" value="@Model.SearchTerm" placeholder="Search episodes...">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        @if (!string.IsNullOrEmpty(Model.SearchTerm))
+                        {
+                            <a asp-action="Index" asp-route-seasonId="@Model.SeasonId" class="btn btn-secondary">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Episode</th>
+                        <th>Title</th>
+                        <th>Duration</th>
+                        <th>Rating</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Episodes)
+                    {
+                        <tr class="@(item.IsDeleted ? "table-danger" : "")">
+                            <td>@item.EpisodeNumber</td>
+                            <td>@item.Title</td>
+                            <td>@item.Duration.ToString(@"hh\:mm\:ss")</td>
+                            <td>@(item.Rating?.ToString("0.0") ?? "N/A")</td>
+                            <td>
+                                <span class="badge @GetStateBadgeClass(item.CurrentState)">
+                                    @item.CurrentState
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    @if (item.IsDeleted)
+                                    {
+                                        <form method="post" asp-action="Restore" asp-route-id="@item.Id" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-success">
+                                                <i class="fas fa-undo"></i>
+                                            </button>
+                                        </form>
+                                        <form method="post" asp-action="Delete" asp-route-id="@item.Id" class="d-inline"
+                                              onsubmit="return confirm('Permanently delete this episode?')">
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <form method="post" asp-action="SoftDelete" asp-route-id="@item.Id" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="dataTables_info">
+                    Showing @((Model.PageNumber - 1) * Model.PageSize + 1) to
+                    @Math.Min(Model.PageNumber * Model.PageSize, Model.TotalCount) of
+                    @Model.TotalCount entries
+                </div>
+            </div>
+            <div class="col-md-6">
+                <nav class="float-end">
+                    <ul class="pagination">
+                        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                            <a class="page-link"
+                               href="@Url.Action("Index", new { page = Model.PageNumber - 1, pageSize = Model.PageSize, seasonId = Model.SeasonId, query = Model.SearchTerm })">
+                                Previous
+                            </a>
+                        </li>
+
+                        @for (int i = 1; i <= Model.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                                <a class="page-link"
+                                   href="@Url.Action("Index", new { page = i, pageSize = Model.PageSize, seasonId = Model.SeasonId, query = Model.SearchTerm })">
+                                    @i
+                                </a>
+                            </li>
+                        }
+
+                        <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+                            <a class="page-link"
+                               href="@Url.Action("Index", new { page = Model.PageNumber + 1, pageSize = Model.PageSize, seasonId = Model.SeasonId, query = Model.SearchTerm })">
+                                Next
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Page Size Selector -->
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="form-inline float-end">
+                    <label class="mr-2">Items per page:</label>
+                    <select class="form-select form-select-sm" onchange="window.location.href=this.value">
+                        @foreach (var size in new[] { 5, 10, 20, 50 })
+                        {
+                            <option value="@Url.Action("Index", new { page = 1, pageSize = size, seasonId = Model.SeasonId, query = Model.SearchTerm })"
+                                    selected="@(Model.PageSize == size)">
+                                @size
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetStateBadgeClass(CurrentState state)
+    {
+        return state switch
+        {
+            CurrentState.Active => "bg-success",
+            CurrentState.Inactive => "bg-secondary",
+            CurrentState.SoftDelete => "bg-danger",
+            CurrentState.Archived => "bg-warning",
+            _ => "bg-secondary"
+        };
+    }
+}

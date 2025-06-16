@@ -1,0 +1,58 @@
+﻿@* Areas/Admin/Views/Character/AddToTvSeries.cshtml *@
+@model DAL.ViewModels.Character.CharacterTvSeriesAddVM
+
+@{
+    ViewData["Title"] = "Add Character to TV Series";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>@ViewData["Title"]</h1>
+        <a asp-controller="TvSeries" asp-action="Details" asp-route-id="@Model.TvSeriesId"
+           class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Back to TV Series
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-light">
+            <h4 class="mb-0">Add Character to @Model.TvSeriesTitle</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="AddToTvSeries">
+                <input type="hidden" asp-for="TvSeriesId" />
+                <input type="hidden" asp-for="TvSeriesTitle" />
+
+                <div class="form-group mb-3">
+                    <label asp-for="CharacterId" class="control-label">Select Character</label>
+                    <select asp-for="CharacterId" class="form-control">
+                        <option value="">-- Select Character --</option>
+                        @foreach (var character in Model.AvailableCharacters)
+                        {
+                            <option value="@character.Id">
+                                @character.Name
+                                @if (!string.IsNullOrEmpty(character.ActorName))
+                                {
+                                    <text>(Played by @character.ActorName)</text>
+                                }
+                            </option>
+                        }
+                    </select>
+                    <span asp-validation-for="CharacterId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Add Character</button>
+                    <a asp-controller="TvSeries" asp-action="Details" asp-route-id="@Model.TvSeriesId"
+                       class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

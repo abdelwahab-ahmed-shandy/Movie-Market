@@ -1,0 +1,35 @@
+﻿using BLL.Services.Interfaces.Customer;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Movie_Market.Areas.Customer.Controllers
+{
+    [Area("Customer")]
+    public class SeasonController : Controller
+    {
+        private readonly ICustomerSeasonService _seasonService;
+        public SeasonController(ICustomerSeasonService seasonService)
+        {
+            _seasonService = seasonService;
+        }
+
+        public async Task<IActionResult> Index(Guid tvSeriesId)
+        {
+            var seasons = await _seasonService.GetAllSeasonAsync();
+            seasons = seasons.Where(s => s.Id == tvSeriesId).ToList();
+            ViewBag.TvSeriesId = tvSeriesId;
+            return View(seasons);
+        }
+
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var season = await _seasonService.GetSeasonDetailsAsync(id);
+            if (season == null)
+            {
+                return NotFound();
+            }
+            return View(season);
+        }
+
+
+    }
+}
