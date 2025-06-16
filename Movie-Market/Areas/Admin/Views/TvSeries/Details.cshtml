@@ -1,0 +1,188 @@
+﻿@model DAL.ViewModels.TvSeries.TvSeriesAdminDetailsVM
+
+@{
+    ViewData["Title"] = "TV Series Details";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>@Model.Title</h1>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+            @if (Model.IsDeleted)
+            {
+                <form asp-action="Restore" method="post" class="d-inline">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn btn-success">Restore</button>
+                </form>
+                <form asp-action="Delete" method="post" class="d-inline"
+                      onsubmit="return confirm('Permanently delete this TV series?');">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn btn-danger">Permanently Delete</button>
+                </form>
+            }
+            else
+            {
+                <form asp-action="SoftDelete" method="post" class="d-inline">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn btn-secondary">Delete</button>
+                </form>
+            }
+            <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    @if (!string.IsNullOrEmpty(Model.ImgUrl))
+                    {
+                        <img src="@Model.ImgUrl" class="img-fluid rounded mb-3" alt="@Model.Title" style="max-height: 400px;">
+                    }
+                    else
+                    {
+                        <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height: 300px; width: 100%;">
+                            <span class="text-muted">No image available</span>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-8">
+                    <div class="mb-3">
+                        @if (Model.Rating.HasValue)
+                        {
+                            <span class="badge bg-warning text-dark fs-5">★ @Model.Rating.Value.ToString("0.0")</span>
+                        }
+                        <span class="badge @(Model.IsDeleted ? "bg-danger" : "bg-success")">
+                            @Model.CurrentState
+                        </span>
+                    </div>
+
+                    <h4 class="mb-3">Description</h4>
+                    <p class="text-muted">@(Model.Description ?? "No description available")</p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <dl>
+                                <dt>Author</dt>
+                                <dd>@(Model.Author ?? "Unknown")</dd>
+
+                                <dt>Release Year</dt>
+                                <dd>@Model.ReleaseYear</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl>
+                                <dt>Created</dt>
+                                <dd>@Model.CreatedDateUtc.ToString("g") by @Model.CreatedBy</dd>
+
+                                @if (Model.LastModifiedDateUtc.HasValue)
+                                {
+                                    <dt>Last Modified</dt>
+                                    <dd>@Model.LastModifiedDateUtc.Value.ToString("g") by @Model.LastModifiedBy</dd>
+                                }
+
+                                @if (Model.IsDeleted)
+                                {
+                                    <dt>Deleted</dt>
+                                    <dd>@Model.DeletedDateUtc?.ToString("g") by @Model.DeletedBy</dd>
+                                }
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h4 class="mb-0">Seasons (@Model.Seasons.Count)</h4>
+                </div>
+                <div class="card-body">
+                    @if (Model.Seasons.Any())
+                    {
+                        <div class="list-group">
+                            @foreach (var season in Model.Seasons)
+                            {
+                                <a asp-controller="Seasons" asp-action="Details" asp-route-id="@season.Id"
+                                   class="list-group-item list-group-item-action @(season.IsDeleted ? "list-group-item-secondary" : "")">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">@season.Title</h5>
+                                        <small>Season @season.SeasonNumber</small>
+                                    </div>
+                                    <p class="mb-1">@season.EpisodeCount episodes</p>
+                                    <small class="text-muted">Status: @season.CurrentState</small>
+                                </a>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No seasons available</p>
+                    }
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Seasons" asp-action="Create" asp-route-tvSeriesId="@Model.Id"
+                       class="btn btn-sm btn-primary">Add Season</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h4 class="mb-0">Characters (@Model.Characters.Count)</h4>
+                </div>
+                <div class="card-body">
+                    @if (Model.Characters.Any())
+                    {
+                        <div class="row">
+                            @foreach (var character in Model.Characters)
+                            {
+                                <div class="col-md-6 mb-3">
+                                    <div class="card h-100">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                @if (!string.IsNullOrEmpty(character.ImageUrl))
+                                                {
+                                                    <img src="@character.ImageUrl" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="@character.Name">
+                                                }
+                                                else
+                                                {
+                                                    <div class="bg-light d-flex align-items-center justify-content-center h-100">
+                                                        <span class="text-muted">No image</span>
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">@character.Name</h5>
+                                                    @if (!string.IsNullOrEmpty(character.ActorName))
+                                                    {
+                                                        <p class="card-text"><small class="text-muted">Played by @character.ActorName</small></p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No characters available</p>
+                    }
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Characters" asp-action="AddToTvSeries" asp-route-tvSeriesId="@Model.Id"
+                       class="btn btn-sm btn-primary">Add Character</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

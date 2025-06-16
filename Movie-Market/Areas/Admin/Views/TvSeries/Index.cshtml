@@ -1,0 +1,196 @@
+﻿@model DAL.ViewModels.TvSeries.TvSeriesAdminListVM
+
+@{
+    ViewData["Title"] = "Manage TV Series";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
+        <a asp-action="Create" class="btn btn-primary btn-sm">Add New TV Series</a>
+    </div>
+    <div class="card-body">
+        <!-- Search Box -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form method="get" class="form-inline">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="query" value="@Model.SearchTerm" placeholder="Search TV Series...">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        @if (!string.IsNullOrEmpty(Model.SearchTerm))
+                        {
+                            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Poster</th>
+                        <th>Title</th>
+                        <th>Release Year</th>
+                        <th>Seasons</th>
+                        <th>Rating</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.TvSeries)
+                    {
+                        <tr class="@(item.IsDeleted ? "table-danger" : "")">
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.ImgUrl))
+                                {
+                                    <img src="@item.ImgUrl" alt="@item.Title" style="max-width: 80px; max-height: 80px;" />
+                                }
+                                else
+                                {
+                                    <div class="bg-light d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                        <i class="fas fa-tv text-muted"></i>
+                                    </div>
+                                }
+                            </td>
+                            <td>@item.Title</td>
+                            <td>@item.ReleaseYear</td>
+                            <td>@item.SeasonCount</td>
+                            <td>@(item.Rating?.ToString("0.0") ?? "N/A")</td>
+                            <td title="@item.CurrentState">
+                                <span class="badge @GetStateBadgeClass(item.CurrentState)">
+                                    @item.CurrentState
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+
+                                    @if (item.IsDeleted)
+                                    {
+                                        <form method="post" asp-action="Restore" asp-route-id="@item.Id" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-success">
+                                                <i class="fas fa-undo"></i> Restore
+                                            </button>
+                                        </form>
+                                        <form method="post" asp-action="Delete" asp-route-id="@item.Id" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Are you sure you want to permanently delete this TV series?')">
+                                                <i class="fas fa-trash-alt"></i> Delete
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <form method="post" asp-action="SoftDelete" asp-route-id="@item.Id" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash-alt"></i> Delete
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="dataTables_info">
+                    Showing @((Model.PageNumber - 1) * Model.PageSize + 1) to
+                    @Math.Min(Model.PageNumber * Model.PageSize, Model.TotalCount) of
+                    @Model.TotalCount entries
+                </div>
+            </div>
+            <div class="col-md-6">
+                <nav class="float-end">
+                    <ul class="pagination">
+                        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                            <a class="page-link"
+                               href="@Url.Action("Index", new { page = Model.PageNumber - 1, pageSize = Model.PageSize, query = Model.SearchTerm })">
+                                Previous
+                            </a>
+                        </li>
+
+                        @for (int i = 1; i <= Model.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                                <a class="page-link"
+                                   href="@Url.Action("Index", new { page = i, pageSize = Model.PageSize, query = Model.SearchTerm })">
+                                    @i
+                                </a>
+                            </li>
+                        }
+
+                        <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+                            <a class="page-link"
+                               href="@Url.Action("Index", new { page = Model.PageNumber + 1, pageSize = Model.PageSize, query = Model.SearchTerm })">
+                                Next
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Page Size Selector -->
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="form-inline float-end">
+                    <label class="mr-2">Items per page:</label>
+                    <select class="form-select form-select-sm" onchange="window.location.href=this.value">
+                        @foreach (var size in new[] { 5, 10, 20, 50 })
+                        {
+                            <option value="@Url.Action("Index", new { page = 1, pageSize = size, query = Model.SearchTerm })"
+                                    selected="@(Model.PageSize == size)">
+                                @size
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Any additional JavaScript can go here
+        $(document).ready(function() {
+            // Initialize DataTable if needed
+            $('#dataTable').DataTable({
+                paging: false, // We're using our own pagination
+                searching: false, // We're using our own search
+                info: false // We're using our own info display
+            });
+        });
+    </script>
+}
+
+@functions {
+    string GetStateBadgeClass(CurrentState state)
+    {
+        return state switch
+        {
+            CurrentState.Active => "bg-success",
+            CurrentState.Inactive => "bg-secondary",
+            CurrentState.SoftDelete => "bg-danger",
+            CurrentState.Archived => "bg-warning",
+            _ => "bg-secondary"
+        };
+    }
+}
