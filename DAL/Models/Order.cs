@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    public class Order
+    public class Order : BaseModel
     {
         public Guid Id { get; set; }
 

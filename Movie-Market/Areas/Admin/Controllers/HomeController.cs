@@ -1,21 +1,26 @@
-﻿using DAL.ViewModels.Search;
+﻿using DAL.ViewModels.Dashboard;
+using DAL.ViewModels.Search;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin,SuperAdmin")]
     public class HomeController : Controller
     {
-
-
-        public IActionResult Index()
+        private readonly IAdminDashboardService _dashboardService;
+        public HomeController(IAdminDashboardService dashboardService)
         {
-            return View();
-
-
+            _dashboardService = dashboardService;
         }
 
+        #region Admin DashBord
+        public async Task<IActionResult> Index()
+        {
+            var dashboardData = await _dashboardService.GetDashboardDataAsync();
+            return View(dashboardData);
+        }
+        #endregion
 
     }
 }

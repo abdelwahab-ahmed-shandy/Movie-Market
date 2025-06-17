@@ -27,7 +27,7 @@ namespace BLL.Services.Implementations.Admin
         public async Task<TvSeriesAdminListVM> GetAllTvSeriesAsync(int page, int pageSize, string? query = null)
         {
             var tvSeriesQuery = _tvSeriesRepository.GetAllWithDeleted()
-                                        .Include(t => t.Seasons.Where(s => !s.IsDeleted)).AsQueryable(); ;
+                                        .Include(t => t.Seasons.Where(s => !s.IsDeleted)).AsQueryable();
 
             if (!string.IsNullOrEmpty(query))
             {

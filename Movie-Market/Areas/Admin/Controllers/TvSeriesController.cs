@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //[Authorize(Roles = "Admin,SuperAdmin")]
     public class TvSeriesController : Controller
     {
         private readonly IAdminTvSeriesService _tvSeriesService;

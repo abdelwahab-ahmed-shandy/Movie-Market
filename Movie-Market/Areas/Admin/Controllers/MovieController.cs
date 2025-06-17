@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin,SuperAdmin")]
     public class MovieController : Controller
     {
         private readonly IAdminMovieService _movieService;

@@ -1,11 +1,11 @@
 
-using DAL.Repositories.IRepositories;
-using DAL.Repositories;
 using AutoMapper;
-using BLL.Services.Interfaces.Admin;
-using BLL.Services.Interfaces.Customer;
 using BLL.Services.Implementations.Admin;
 using BLL.Services.Implementations.Customer;
+using BLL.Services.Interfaces.Admin;
+using BLL.Services.Interfaces.Customer;
+using DAL.Repositories;
+using DAL.Repositories.IRepositories;
 
 namespace Movie_Market
 {
@@ -43,6 +43,7 @@ namespace Movie_Market
             builder.Services.AddScoped<IAdminSeasonService, AdminSeasonService>();
             builder.Services.AddScoped<IAdminEpisodeService, AdminEpisodeService>();
             builder.Services.AddScoped<IAdminCharacterTvSeriesService, AdminCharacterTvSeriesService>();
+            builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
 
             // Customer Services
             builder.Services.AddScoped<ICustomerCategoryService, CustomerCategoryService>();
@@ -52,7 +53,7 @@ namespace Movie_Market
             builder.Services.AddScoped<ICustomerCharacterService, CustomerCharacterService>();
             builder.Services.AddScoped<ICustomerSpecialService, CustomerSpecialService>();
             builder.Services.AddScoped<ICustomerSeasonService, CustomerSeasonService>();
-
+            builder.Services.AddScoped<IDashboardService, DashboardService>();
 
             // Repository Services
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -62,6 +63,7 @@ namespace Movie_Market
             builder.Services.AddScoped<ISearchService, SearchService>();
             builder.Services.AddScoped<ISubscriberService, SubscriberService>();
             builder.Services.AddScoped<INewsletterService, NewsletterService>();
+            builder.Services.AddMemoryCache();
 
             #endregion
 

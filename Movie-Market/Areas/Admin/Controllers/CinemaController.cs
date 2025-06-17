@@ -2,7 +2,7 @@
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin,SuperAdmin")]
     public class CinemaController : Controller
     {
         private readonly IAdminCinemaService _cinemaService;

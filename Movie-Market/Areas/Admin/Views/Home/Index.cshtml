@@ -1,3 +1,360 @@
-﻿@{
-    ViewData["Title"] = "DashBoard";
+﻿@model DAL.ViewModels.Dashboard.AdminDashboardVM
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+
+<div class="container-fluid">
+    <h1 class="mt-4">Dashboard</h1>
+
+    <div class="row">
+        <!-- Categories Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2 hover-effect">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total Categories
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalCategories</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-tags fa-2x text-primary opacity-25"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <a href="@Url.Action("Index", "Categories")" class="text-xs text-primary">
+                            View all <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Movies Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2 hover-effect">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                Total Movies
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalMovies</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-film fa-2x text-danger opacity-25"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <a href="@Url.Action("Index", "Movie")" class="text-xs text-danger">
+                            View all <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TV Series Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2 hover-effect">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Total TV Series
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalTvSeries</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-tv fa-2x text-success opacity-25"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <a href="@Url.Action("Index", "TvSeries")" class="text-xs text-success">
+                            View all <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2 hover-effect">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Total Users
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalUsers</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-info opacity-25"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <a href="@Url.Action("Index", "Users")" class="text-xs text-info">
+                            View all <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orders Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2 hover-effect">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Total Orders
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalOrders</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-shopping-cart fa-2x text-warning opacity-25"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <a href="@Url.Action("Index", "Order")" class="text-xs text-warning">
+                            View all <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Characters Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-purple shadow h-100 py-2 hover-effect">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-purple text-uppercase mb-1">
+                                Total Characters
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalCharacters</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user-astronaut fa-2x text-purple opacity-25"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <a href="@Url.Action("Index", "Character")" class="text-xs text-purple">
+                            View all <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cinemas Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-orange shadow h-100 py-2 hover-effect">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-orange text-uppercase mb-1">
+                                Total Cinemas
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalCinemas</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-building fa-2x text-orange opacity-25"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <a href="@Url.Action("Index", "Cinema")" class="text-xs text-orange">
+                            View all <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Specials Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-pink shadow h-100 py-2 hover-effect">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-pink text-uppercase mb-1">
+                                Active Specials
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalActiveSpecials</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-percentage fa-2x text-pink opacity-25"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <a href="@Url.Action("Index", "Specials")" class="text-xs text-pink">
+                            View all <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Recent Orders</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.RecentOrders)
+                        {
+                            <tr>
+                                <td>@order.Id</td>
+                                <td>@order.ApplicationUser?.UserName</td>
+                                <td>@order.OrderDate.ToString("g")</td>
+                                <td>@order.OrderTotal.ToString("C")</td>
+                                <td title="@order.CurrentState">
+                                    <span class="badge @GetStateBadgeClass(order.CurrentState.Value)">
+                                        @order.CurrentState
+                                    </span>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+<!-- Recent Subscriber -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Recent Subscriber</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Subscriber ID</th>
+                        <th>Mail</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model.RecentSubscriber)
+                    {
+                        <tr>
+                            <td>@order.Id</td>
+                            <td>@order.Email</td>
+                            <td>@order.SubscribedAt</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
+
+@section Styles {
+    <style>
+        .hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .hover-effect:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15) !important;
+            }
+
+        .text-purple {
+            color: #6f42c1;
+        }
+
+        .text-orange {
+            color: #fd7e14;
+        }
+
+        .text-pink {
+            color: #e83e8c;
+        }
+
+        .border-left-purple {
+            border-left: 0.25rem solid #6f42c1 !important;
+        }
+
+        .border-left-orange {
+            border-left: 0.25rem solid #fd7e14 !important;
+        }
+
+        .border-left-pink {
+            border-left: 0.25rem solid #e83e8c !important;
+        }
+
+        .card-body a {
+            transition: all 0.2s ease;
+        }
+
+            .card-body a:hover {
+                text-decoration: none;
+                transform: translateX(3px);
+            }
+
+        .table-responsive {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        // Add any JavaScript for animations or interactions
+        $(document).ready(function() {
+            // Example: Animate numbers counting up
+            $('.count-up').each(function() {
+                $(this).prop('Counter', 0).animate({
+                    Counter: $(this).text()
+                }, {
+                    duration: 1000,
+                    easing: 'swing',
+                    step: function(now) {
+                        $(this).text(Math.ceil(now));
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+@functions {
+    string GetStateBadgeClass(CurrentState state)
+    {
+        return state switch
+        {
+            CurrentState.Active => "bg-success",
+            CurrentState.Inactive => "bg-secondary",
+            CurrentState.SoftDelete => "bg-danger",
+            CurrentState.Archived => "bg-warning",
+            _ => "bg-secondary"
+        };
+    }
+
 }

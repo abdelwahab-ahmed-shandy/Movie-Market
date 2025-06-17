@@ -3,7 +3,7 @@
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin,SuperAdmin")]
     public class NewsletterController : Controller
     {
         private readonly INewsletterService _newsletterService;

@@ -1,15 +1,223 @@
-﻿@{
-	ViewData["Title"] = "Home Bage";
+﻿@using DAL.ViewModels.Dashboard
+@model DashboardVM
+@{
+    ViewData["Title"] = "Dashboard - Your Ultimate Movie Destination";
 }
 
-<div class="container py-6">
+<!-- Hero Section -->
+<section class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/Assets/Customer/Home/hero-moviemart-banner.png'); background-size: cover; background-position: center; padding: 120px 0;">
+    <div class="container">
+        <div class="hero-content text-center text-white py-5">
+            <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">Welcome to MovieMart</h1>
+            <p class="lead mb-5 animate__animated animate__fadeInUp">Discover the best movies, TV series, and cinemas all in one place</p>
+        </div>
+    </div>
+</section>
 
+<!-- Featured Movies -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-header d-flex justify-content-between align-items-center mb-5">
+            <h2 class="fw-bold"><i class="fas fa-star me-2 text-warning"></i> Featured Movies</h2>
+            <a asp-action="Index" asp-controller="Movie" class="btn btn-outline-primary">View All</a>
+        </div>
 
-<div class="hero-section">
-	<!-- Hero section -->
-</div>
+        <div class="row g-4">
+            @foreach (var movie in Model.RecentMovies)
+            {
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    @await Component.InvokeAsync("MovieCard", new { movie = movie })
+                </div>
+            }
+        </div>
+    </div>
+</section>
 
-<div class="popular-categories-section ">
-	@await Component.InvokeAsync("PopularCategories", new { count = 6 })
-</div>
-</div>
+<!-- Popular Cinemas -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-header d-flex justify-content-between align-items-center mb-5">
+            <h2 class="fw-bold"><i class="fas fa-map-marker-alt me-2 text-danger"></i> Popular Cinemas</h2>
+            <a asp-action="Index" asp-controller="Cinema" class="btn btn-outline-primary">View All</a>
+        </div>
+
+        <div class="row g-4">
+            @foreach (var cinema in Model.RecentCinemas)
+            {
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm cinema-card">
+
+                        @* <div class="cinema-img-container"> *@
+                        @*     <img src="~/Assets/Customer/CinemasPhoto/@cinema.Name" class="card-img-top" alt="@cinema.Name"> *@
+                        @* </div> *@
+
+                        <div class="card-body">
+                            <h5 class="card-title">@cinema.Name</h5>
+                            <p class="card-text text-muted">
+                                <i class="fas fa-location-dot me-2"></i> @cinema.Location
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">
+                                    <i class="fas fa-film me-1"></i> @cinema.CinemaMovies.Count() Movies
+                                </span>
+                                <a asp-controller="Cinema" asp-action="MoreMovieWithCinema" asp-route-id="@cinema.Id" class="btn btn-sm btn-primary">
+                                    View <i class="fas fa-chevron-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- New Releases & Top Rated -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-5 mb-md-0">
+                <div class="section-header d-flex justify-content-between align-items-center mb-5">
+                    <h2 class="fw-bold"><i class="fas fa-calendar-plus me-2 text-success"></i> New Releases</h2>
+                    <a href="/Home/NewReleases" class="btn btn-outline-primary">View All</a>
+                </div>
+
+                <div class="row g-4">
+                    @foreach (var movie in Model.NewReleases.Take(3))
+                    {
+                        <div class="col-12">
+                            @await Component.InvokeAsync("MovieCardHorizontal", new { movie = movie })
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="section-header d-flex justify-content-between align-items-center mb-5">
+                    <h2 class="fw-bold"><i class="fas fa-chart-line me-2 text-danger"></i> Top Rated</h2>
+                    <a href="/Home/TopRated" class="btn btn-outline-primary">View All</a>
+                </div>
+
+                <div class="row g-4">
+                    @foreach (var movie in Model.TopRated.Take(3))
+                    {
+                        <div class="col-12">
+                            @await Component.InvokeAsync("MovieCardHorizontal", new { movie = movie })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popular TV Series -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-header d-flex justify-content-between align-items-center mb-5">
+            <h2 class="fw-bold"><i class="fas fa-tv me-2 text-primary"></i> Popular TV Series</h2>
+            <a asp-action="Index" asp-controller="TvSerie" class="btn btn-outline-primary">View All</a>
+        </div>
+
+        <div class="row g-4">
+            @foreach (var series in Model.PopularSeries)
+            {
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <img src="@series.ImgUrl" class="card-img-top" alt="@series.Title">
+                        <div class="card-body text-center">
+                            <h6 class="card-title mb-0">@series.Title</h6>
+                            <small class="text-muted">@series.Seasons.Count Seasons</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</section>
+
+<!-- Movie Categories -->
+<section class="py-5 bg-dark text-white">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5">Browse By Category</h2>
+
+        <div class="row g-4">
+            @foreach (var category in Model.MovieCategories)
+            {
+                <div class="col-md-3 col-sm-6">
+                    <div class="category-card text-center p-4 rounded-3 h-100">
+                        <div class="category-icon mb-3">
+                            <i class="fas fa-film fa-3x"></i>
+                        </div>
+                        <h4>@category.Name</h4>
+                        <p class="mb-0">@category.Movies.Count Movies</p>
+                        <a asp-controller="Categories" asp-action="Details" asp-route-id="@category.Id" ></a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-4">Ready for an amazing movie experience?</h2>
+        <p class="lead mb-4">Join thousands of happy customers enjoying our services</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a asp-area="Identity" asp-controller="Account" asp-action="Register" class="btn btn-light btn-lg px-4">
+                Sign Up Now
+            </a>
+            <a asp-controller="Movie" asp-action="Index" class="btn btn-outline-light btn-lg px-4">
+                Browse Movies
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hero-section {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/Assets/Customer/hero-bg.jpg');
+        background-size: cover;
+        background-position: center;
+        padding: 100px 0;
+        margin-bottom: 50px;
+    }
+
+    .cinema-card {
+        transition: all 0.3s ease;
+    }
+
+        .cinema-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+    .cinema-img-container {
+        height: 200px;
+        overflow: hidden;
+    }
+
+        .cinema-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .category-card {
+        background: rgba(255,255,255,0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+        .category-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+
+    .category-icon {
+        color: rgba(255,255,255,0.5);
+    }
+</style>
+
