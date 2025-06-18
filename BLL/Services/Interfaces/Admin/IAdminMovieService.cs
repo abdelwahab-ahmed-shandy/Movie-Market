@@ -9,6 +9,7 @@ namespace BLL.Services.Interfaces.Admin
     public interface IAdminMovieService
     {
         Task<MovieAdminListResultVM> GetAllMoviesAsync(int page, int pageSize, string? query = null);
+        Task<MovieAdminDetailsVM?> GetMovieDetailsAsync(Guid id);
         Task<MovieAdminEditVM?> GetMovieForEditAsync(Guid id);
         Task<bool> CreateMovieAsync(MovieAdminCreateVM model);
         Task<bool> UpdateMovieAsync(MovieAdminEditVM model);

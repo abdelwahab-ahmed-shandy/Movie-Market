@@ -61,16 +61,13 @@
                                 <i class="fas fa-home me-1"></i> Home
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Movie" asp-action="Index">
                                 <i class="fas fa-film me-1"></i> Movies
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="TvSeries" asp-action="Index">
-                                <i class="fas fa-tv me-1"></i> TV Series
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Cinema" asp-action="Index">
                                 <i class="fas fa-map-marker-alt me-1"></i> Cinemas
@@ -194,14 +191,11 @@
                         @await Component.InvokeAsync("CategoriesDropdown")
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Character" asp-action="Index">Characters</a>
+                            <a class="nav-link" asp-controller="TvSeries" asp-action="Index">
+                                <i class="fas fa-tv me-1"></i> TV Series
+                            </a>
                         </li>
-                        @* <li class="nav-item">
-                            <a class="nav-link" asp-controller="Season" asp-action="Index">Seasons</a>
-                        </li> *@
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Episode" asp-action="Index">Episodes</a>
-                        </li>
+
                     </ul>
 
                     <div class="d-flex">

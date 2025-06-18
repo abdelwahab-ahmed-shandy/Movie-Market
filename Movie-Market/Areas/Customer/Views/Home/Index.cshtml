@@ -4,164 +4,181 @@
     ViewData["Title"] = "Dashboard - Your Ultimate Movie Destination";
 }
 
+
+
 <!-- Hero Section -->
-<section class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/Assets/Customer/Home/hero-moviemart-banner.png'); background-size: cover; background-position: center; padding: 120px 0;">
-    <div class="container">
-        <div class="hero-content text-center text-white py-5">
-            <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">Welcome to MovieMart</h1>
-            <p class="lead mb-5 animate__animated animate__fadeInUp">Discover the best movies, TV series, and cinemas all in one place</p>
+    <section class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/Assets/Customer/Home/hero-moviemart-banner.png'); background-size: cover; background-position: center; padding: 120px 0;">
+        <div class="container">
+            <div class="hero-content text-center text-white py-5">
+                <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">Welcome to MovieMart</h1>
+                <p class="lead mb-5 animate__animated animate__fadeInUp">Discover the best movies, TV series, and cinemas all in one place</p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Featured Movies -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="section-header d-flex justify-content-between align-items-center mb-5">
-            <h2 class="fw-bold"><i class="fas fa-star me-2 text-warning"></i> Featured Movies</h2>
-            <a asp-action="Index" asp-controller="Movie" class="btn btn-outline-primary">View All</a>
+
+<div class="container">
+
+
+    <!-- Recent Movies -->
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Recent Movies</h2>
+            <a asp-area="Customer" asp-controller="Movies" asp-action="Index" class="btn btn-outline-primary">View All</a>
         </div>
-
-        <div class="row g-4">
+        <div class="row">
             @foreach (var movie in Model.RecentMovies)
             {
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    @await Component.InvokeAsync("MovieCard", new { movie = movie })
+                <div class="col-md-2 mb-4">
+                    <partial name="_MovieCard" model="movie" />
                 </div>
             }
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Popular Cinemas -->
-<section class="py-5">
-    <div class="container">
-        <div class="section-header d-flex justify-content-between align-items-center mb-5">
-            <h2 class="fw-bold"><i class="fas fa-map-marker-alt me-2 text-danger"></i> Popular Cinemas</h2>
-            <a asp-action="Index" asp-controller="Cinema" class="btn btn-outline-primary">View All</a>
+    <!-- New Releases -->
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>New Releases</h2>
+            <a asp-area="Customer" asp-controller="Home" asp-action="NewReleases" class="btn btn-outline-primary">View All</a>
         </div>
+        <div class="row">
+            @foreach (var movie in Model.NewReleases)
+            {
+                <div class="col-md-2 mb-4">
+                    <partial name="_MovieCard" model="movie" />
+                </div>
+            }
+        </div>
+    </section>
 
-        <div class="row g-4">
+    <!-- Top Rated Movies -->
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Top Rated Movies</h2>
+            <a asp-area="Customer" asp-controller="Movies" asp-action="TopRated" class="btn btn-outline-primary">View All</a>
+        </div>
+        <div class="row">
+            @foreach (var movie in Model.TopRated)
+            {
+                <div class="col-md-2 mb-4">
+                    <partial name="_MovieCard" model="movie" />
+                </div>
+            }
+        </div>
+    </section>
+
+    <!-- Recent Cinemas -->
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Recent Cinemas</h2>
+            <a asp-area="Customer" asp-controller="Cinemas" asp-action="Index" class="btn btn-outline-primary">View All</a>
+        </div>
+        <div class="row">
             @foreach (var cinema in Model.RecentCinemas)
             {
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm cinema-card">
-
-                        @* <div class="cinema-img-container"> *@
-                        @*     <img src="~/Assets/Customer/CinemasPhoto/@cinema.Name" class="card-img-top" alt="@cinema.Name"> *@
-                        @* </div> *@
-
+                <div class="col-md-2 mb-4">
+                    <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title">@cinema.Name</h5>
-                            <p class="card-text text-muted">
-                                <i class="fas fa-location-dot me-2"></i> @cinema.Location
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge bg-primary">
-                                    <i class="fas fa-film me-1"></i> @cinema.CinemaMovies.Count() Movies
-                                </span>
-                                <a asp-controller="Cinema" asp-action="MoreMovieWithCinema" asp-route-id="@cinema.Id" class="btn btn-sm btn-primary">
-                                    View <i class="fas fa-chevron-right ms-1"></i>
-                                </a>
-                            </div>
+                            <p class="card-text text-muted">@cinema.Location</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a asp-area="Customer" asp-controller="Cinema" asp-action="Details"
+                               asp-route-id="@cinema.Id" class="btn btn-sm btn-outline-primary w-100">View</a>
                         </div>
                     </div>
                 </div>
             }
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- New Releases & Top Rated -->
-<section class="py-5 bg-light">
-    <div class="container">
+    <!-- Recent TV Series -->
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Recent TV Series</h2>
+            <a asp-area="Customer" asp-controller="TvSeries" asp-action="Index" class="btn btn-outline-primary">View All</a>
+        </div>
         <div class="row">
-            <div class="col-md-6 mb-5 mb-md-0">
-                <div class="section-header d-flex justify-content-between align-items-center mb-5">
-                    <h2 class="fw-bold"><i class="fas fa-calendar-plus me-2 text-success"></i> New Releases</h2>
-                    <a href="/Home/NewReleases" class="btn btn-outline-primary">View All</a>
-                </div>
-
-                <div class="row g-4">
-                    @foreach (var movie in Model.NewReleases.Take(3))
-                    {
-                        <div class="col-12">
-                            @await Component.InvokeAsync("MovieCardHorizontal", new { movie = movie })
+            @foreach (var series in Model.RecentTvSeries)
+            {
+                <div class="col-md-2 mb-4">
+                    <div class="card h-100">
+                        <img src="@series.ImgUrl" class="card-img-top" alt="@series.Title">
+                        <div class="card-body">
+                            <h5 class="card-title">@series.Title</h5>
+                            <p class="card-text text-muted">@series.ReleaseYear</p>
                         </div>
-                    }
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="section-header d-flex justify-content-between align-items-center mb-5">
-                    <h2 class="fw-bold"><i class="fas fa-chart-line me-2 text-danger"></i> Top Rated</h2>
-                    <a href="/Home/TopRated" class="btn btn-outline-primary">View All</a>
-                </div>
-
-                <div class="row g-4">
-                    @foreach (var movie in Model.TopRated.Take(3))
-                    {
-                        <div class="col-12">
-                            @await Component.InvokeAsync("MovieCardHorizontal", new { movie = movie })
+                        <div class="card-footer bg-transparent">
+                            <a asp-area="Customer" asp-controller="TvSeries" asp-action="Details"
+                               asp-route-id="@series.Id" class="btn btn-sm btn-outline-primary w-100">Details</a>
                         </div>
-                    }
+                    </div>
                 </div>
-            </div>
+            }
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Popular TV Series -->
-<section class="py-5">
-    <div class="container">
-        <div class="section-header d-flex justify-content-between align-items-center mb-5">
-            <h2 class="fw-bold"><i class="fas fa-tv me-2 text-primary"></i> Popular TV Series</h2>
-            <a asp-action="Index" asp-controller="TvSerie" class="btn btn-outline-primary">View All</a>
+    <!-- Popular TV Series -->
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Popular TV Series</h2>
+            <a asp-area="Customer" asp-controller="TvSeries" asp-action="Popular" class="btn btn-outline-primary">View All</a>
         </div>
-
-        <div class="row g-4">
+        <div class="row">
             @foreach (var series in Model.PopularSeries)
             {
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                    <div class="card border-0 shadow-sm h-100">
+                <div class="col-md-2 mb-4">
+                    <div class="card h-100">
                         <img src="@series.ImgUrl" class="card-img-top" alt="@series.Title">
-                        <div class="card-body text-center">
-                            <h6 class="card-title mb-0">@series.Title</h6>
-                            <small class="text-muted">@series.Seasons.Count Seasons</small>
+                        <div class="card-body">
+                            <h5 class="card-title">@series.Title</h5>
+                            <p class="card-text text-muted">@series.ReleaseYear</p>
+                            <div class="text-warning">
+                                <i class="fas fa-star"></i> @series.Rating?.ToString("0.0")
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a asp-area="Customer" asp-controller="TvSeries" asp-action="Details"
+                               asp-route-id="@series.Id" class="btn btn-sm btn-outline-primary w-100">Details</a>
                         </div>
                     </div>
                 </div>
             }
         </div>
+    </section>
 
-    </div>
-</section>
-
-<!-- Movie Categories -->
-<section class="py-5 bg-dark text-white">
-    <div class="container">
-        <h2 class="fw-bold text-center mb-5">Browse By Category</h2>
-
-        <div class="row g-4">
+    <!-- Categories -->
+    <section>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Movie Categories</h2>
+            <a asp-area="Customer" asp-controller="Categories" asp-action="Index" class="btn btn-outline-primary">View All</a>
+        </div>
+        <div class="row">
             @foreach (var category in Model.MovieCategories)
             {
-                <div class="col-md-3 col-sm-6">
-                    <div class="category-card text-center p-4 rounded-3 h-100">
-                        <div class="category-icon mb-3">
-                            <i class="fas fa-film fa-3x"></i>
+                <div class="col-md-2 mb-4">
+                    <div class="card h-100">
+                        <img src="@category.ImgUrl" class="card-img-top" alt="@category.Name">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@category.Name</h5>
+                            <p class="card-text small text-muted">@category.Description</p>
                         </div>
-                        <h4>@category.Name</h4>
-                        <p class="mb-0">@category.Movies.Count Movies</p>
-                        <a asp-controller="Categories" asp-action="Details" asp-route-id="@category.Id" ></a>
+                        <div class="card-footer bg-transparent">
+                            <a asp-area="Customer" asp-controller="Categories" asp-action="Details"
+                               asp-route-id="@category.Id" class="btn btn-sm btn-outline-primary w-100">Browse</a>
+                        </div>
                     </div>
                 </div>
             }
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Call to Action -->
-<section class="py-5 bg-primary text-white">
+
+</div>
+
+    <!-- Call to Action -->
+    <section class="py-5 bg-primary text-white">
     <div class="container text-center">
         <h2 class="fw-bold mb-4">Ready for an amazing movie experience?</h2>
         <p class="lead mb-4">Join thousands of happy customers enjoying our services</p>

@@ -466,6 +466,7 @@ namespace DAL.Context
 
 
         #region Private Configuration Methods
+
         private void ConfigureGlobalFilters(ModelBuilder modelBuilder)
         {
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())

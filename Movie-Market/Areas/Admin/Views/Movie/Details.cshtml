@@ -1,0 +1,207 @@
+﻿@model DAL.ViewModels.Movie.MovieAdminDetailsVM
+
+@{
+    ViewData["Title"] = "Movie Details - " + Model.Title;
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2>@Model.Title</h2>
+            <span class="badge @(Model.IsDeleted ? "bg-danger" : "bg-success")">
+                @(Model.IsDeleted ? "Deleted" : "Active")
+            </span>
+            <span class="badge bg-info">@Model.CurrentState</span>
+        </div>
+        
+        <div class="card-body">
+            <div class="row">
+                <!-- Movie Poster -->
+                <div class="col-md-4">
+                    <img src="@Model.ImgUrl" class="img-fluid rounded" alt="@Model.Title poster" onerror="this.src='/images/default-movie.jpg'">
+                </div>
+                
+                <!-- Movie Details -->
+                <div class="col-md-8">
+                    <div class="mb-3">
+                        <h4>Basic Information</h4>
+                        <p class="text-muted">@Model.Description</p>
+                        
+                        <dl class="row">
+                            <dt class="col-sm-3">Release Year</dt>
+                            <dd class="col-sm-9">@Model.ReleaseYear</dd>
+                            
+                            <dt class="col-sm-3">Duration</dt>
+                            <dd class="col-sm-9">@Model.Duration.ToString(@"hh\:mm")</dd>
+                            
+                            <dt class="col-sm-3">Price</dt>
+                            <dd class="col-sm-9">@Model.Price.ToString("C")</dd>
+                            
+                            <dt class="col-sm-3">Rating</dt>
+                            <dd class="col-sm-9">@(Model.Rating?.ToString("0.0"))/10</dd>
+                            
+                            <dt class="col-sm-3">Category</dt>
+                            <dd class="col-sm-9">@Model.Category?.Name </dd>
+                            
+                            <dt class="col-sm-3">Author</dt>
+                            <dd class="col-sm-9">@Model.Author </dd>
+                            
+                            <dt class="col-sm-3">Screening Period</dt>
+                            <dd class="col-sm-9">
+                                @Model.StartDate?.ToString("d") to @Model.EndDate?.ToString("d")
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs for additional information -->
+            <ul class="nav nav-tabs mt-4" id="movieTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="characters-tab" data-bs-toggle="tab" data-bs-target="#characters" type="button" role="tab">Characters</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="cinemas-tab" data-bs-toggle="tab" data-bs-target="#cinemas" type="button" role="tab">Cinemas</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="specials-tab" data-bs-toggle="tab" data-bs-target="#specials" type="button" role="tab">Specials</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="audit-tab" data-bs-toggle="tab" data-bs-target="#audit" type="button" role="tab">Audit Info</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content p-3 border border-top-0 rounded-bottom" id="movieTabsContent">
+                <!-- Characters Tab -->
+                <div class="tab-pane fade show active" id="characters" role="tabpanel">
+                    @if (Model.Characters.Any())
+                    {
+                        <div class="row">
+                            @foreach (var character in Model.Characters)
+                            {
+                                <div class="col-md-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@character.Name</h5>
+                                            <p class="card-text text-muted">@character.Description</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">No characters associated with this movie</div>
+                    }
+                </div>
+                
+                <!-- Cinemas Tab -->
+                <div class="tab-pane fade" id="cinemas" role="tabpanel">
+                    @if (Model.Cinemas.Any())
+                    {
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Cinema</th>
+                                    <th>Location</th>
+                                    <th>Show Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var cinema in Model.Cinemas)
+                                {
+                                    <tr>
+                                        <td>@cinema.Name</td>
+                                        <td>@cinema.Location</td>
+                                        <td>@cinema.ShowTime.ToString("g")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">No cinemas showing this movie</div>
+                    }
+                </div>
+                
+                <!-- Specials Tab -->
+                <div class="tab-pane fade" id="specials" role="tabpanel">
+                    @if (Model.Specials.Any())
+                    {
+                        <div class="row">
+                            @foreach (var special in Model.Specials.OrderBy(s => s.DisplayOrder))
+                            {
+                                <div class="col-md-6 mb-3">
+                                    <div class="card @(special.IsFeatured ? "border-primary" : "")">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <h5 class="card-title">@special.Title</h5>
+                                                @if (special.IsFeatured)
+                                                {
+                                                    <span class="badge bg-primary">Featured</span>
+                                                }
+                                            </div>
+                                            <p class="card-text">@special.Description</p>
+                                            <small class="text-muted">Display Order: @special.DisplayOrder</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">No specials available for this movie</div>
+                    }
+                </div>
+                
+                <!-- Audit Info Tab -->
+                <div class="tab-pane fade" id="audit" role="tabpanel">
+                    <dl class="row">
+                        <dt class="col-sm-3">Created By</dt>
+                        <dd class="col-sm-9">@Model.CreatedBy</dd>
+                        
+                        <dt class="col-sm-3">Created Date</dt>
+                        <dd class="col-sm-9">@Model.CreatedDateUtc.ToString("g")</dd>
+                        
+                        @if (Model.UpdatedBy != null)
+                        {
+                            <dt class="col-sm-3">Updated By</dt>
+                            <dd class="col-sm-9">@Model.UpdatedBy</dd>
+                            
+                            <dt class="col-sm-3">Updated Date</dt>
+                            <dd class="col-sm-9">@Model.UpdatedDateUtc?.ToString("g")</dd>
+                        }
+                        
+                        @if (Model.IsDeleted)
+                        {
+                            <dt class="col-sm-3">Deleted By</dt>
+                            <dd class="col-sm-9">@Model.DeletedBy</dd>
+                            
+                            <dt class="col-sm-3">Deleted Date</dt>
+                            <dd class="col-sm-9">@Model.DeletedDateUtc?.ToString("g")</dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-footer">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Initialize Bootstrap tabs
+        var tabEls = document.querySelectorAll('button[data-bs-toggle="tab"]');
+        tabEls.forEach(function(tabEl) {
+            new bootstrap.Tab(tabEl);
+        });
+    </script>
+}

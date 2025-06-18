@@ -1,4 +1,5 @@
 ﻿using BLL.Services.Interfaces.Admin;
+using MovieMart.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,7 +80,75 @@ namespace BLL.Services.Implementations
             };
         }
 
+        public async Task<MovieAdminDetailsVM?> GetMovieDetailsAsync(Guid id)
+        {
+            var movie = await _movieRepo.GetAll()
+                .Include(m => m.Category)
+                .Include(m => m.CharacterMovies)
+                    .ThenInclude(cm => cm.Character)
+                .Include(m => m.CinemaMovies)
+                    .ThenInclude(cm => cm.Cinema)
+                .Include(m => m.MovieSpecials)
+                    .ThenInclude(ms => ms.Special)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
+            if (movie == null) return null;
+
+            return new MovieAdminDetailsVM
+            {
+                Id = movie.Id,
+                Title = movie.Title,
+                Description = movie.Description,
+                CurrentState = movie.CurrentState.Value,
+                Price = movie.Price,
+                Author = movie.Author,
+                ImgUrl = movie.ImgUrl,
+                Duration = movie.Duration,
+                StartDate = movie.StartDate,
+                EndDate = movie.EndDate,
+                ReleaseYear = movie.ReleaseYear,
+                Rating = movie.Rating,
+                Category = movie.Category != null ? new CategoryMovieVM
+                {
+                    Id = movie.Category.Id,
+                    Name = movie.Category.Name
+                } : null,
+                Characters = movie.CharacterMovies
+                    .Where(cm => cm.Character != null)
+                    .Select(cm => new CharacterMovieVM
+                    {
+                        Id = cm.Character.Id,
+                        Name = cm.Character.Name,
+                        Description = cm.Character.Description
+                    }).ToList(),
+                Cinemas = movie.CinemaMovies
+                    .Where(cm => cm.Cinema != null)
+                    .Select(cm => new CinemaMovieVM
+                    {
+                        Id = cm.Cinema.Id,
+                        Name = cm.Cinema.Name,
+                        Location = cm.Cinema.Location,
+                        ShowTime = cm.ShowTime
+                    }).ToList(),
+                Specials = movie.MovieSpecials
+                    .Where(ms => ms.Special != null)
+                    .Select(ms => new SpecialMovieViewModel
+                    {
+                        Id = ms.Special.Id,
+                        Title = ms.Special.Name,
+                        Description = ms.Special.Description,
+                        IsFeatured = ms.IsFeatured,
+                        DisplayOrder = ms.DisplayOrder
+                    }).ToList(),
+                CreatedBy = movie.CreatedBy,
+                CreatedDateUtc = movie.CreatedDateUtc,
+                UpdatedBy = movie.UpdatedBy,
+                UpdatedDateUtc = movie.UpdatedDateUtc,
+                DeletedBy = movie.DeletedBy,
+                DeletedDateUtc = movie.DeletedDateUtc,
+                IsDeleted = movie.IsDeleted
+            };
+        }
 
         public async Task<MovieAdminEditVM?> GetMovieForEditAsync(Guid id)
         {

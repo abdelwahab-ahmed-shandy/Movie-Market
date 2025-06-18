@@ -37,7 +37,6 @@
                         <th>Name</th>
                         <th>Discount</th>
                         <th>Date Range</th>
-                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -48,26 +47,34 @@
                             <td>@item.Name</td>
                             <td>@item.DiscountPercentage%</td>
                             <td>@item.StartDate.ToString("d") - @item.EndDate.ToString("d")</td>
+
                             <td>
-                                <span class="badge @(item.IsActive ? "bg-success" : "bg-secondary")">
-                                    @(item.IsActive ? "Active" : "Inactive")
-                                </span>
-                            </td>
-                            <td>
-                                <div class="btn-group btn-group-sm">
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning" title="Edit this special">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info" title="View details">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </a>
+
+                                    <button onclick="toggleStatus('@item.Id')"
+                                            class="btn @(item.IsActive ? "btn-secondary" : "btn-success")"
+                                            title="@(item.IsActive ? "Deactivate" : "Activate")">
+                                        <i class="fas @(item.IsActive ? "fa-toggle-off" : "fa-toggle-on")"></i>
+                                        @(item.IsActive ? "Deactivate" : "Activate")
+                                    </button>
+
+                                    <button type="button" class="btn btn-danger" title="Delete"
+                                            data-bs-toggle="modal"
                                             data-bs-target="#confirmDeleteModal"
                                             data-id="@item.Id"
                                             data-name="@item.Name">
-                                        Delete
-                                    </button>
-                                    <button onclick="toggleStatus('@item.Id')"
-                                            class="btn @(item.IsActive ? "btn-warning" : "btn-success")">
-                                        @(item.IsActive ? "Deactivate" : "Activate")
+                                        <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </div>
                             </td>
+
                         </tr>
                     }
                 </tbody>
@@ -174,13 +181,14 @@
         });
 
         function toggleStatus(id) {
-            $.post('@Url.Action("ToggleStatus")', { id: id })
-                .done(function() {
+            $.post('@Url.Action("ToggleStatus", "Specials", new { area = "Admin" })', { id: id })
+                .done(function () {
                     window.location.reload();
                 })
-                .fail(function() {
+                .fail(function () {
                     alert('Failed to update status');
                 });
         }
+
     </script>
 }

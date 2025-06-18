@@ -9,16 +9,14 @@ namespace Movie_Market.Areas.Customer.Controllers
     [Area("Customer")]
     public class HomeController : Controller
     {
-        private readonly IMemoryCache _cache;
         private readonly IDashboardService _dashboardService;
         private readonly ISearchService _searchService;
         private readonly ICustomerMovieService _movieService;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ISearchService searchService , ICustomerMovieService movieService,
-                                 ILogger<HomeController> logger, IDashboardService dashboardService , IMemoryCache memoryCache)
+                                 ILogger<HomeController> logger, IDashboardService dashboardService )
         {
-            _cache = memoryCache;
             _searchService = searchService;
             _logger = logger;
             _movieService = movieService;
@@ -26,19 +24,20 @@ namespace Movie_Market.Areas.Customer.Controllers
         }
 
 
-        #region index Customer Home Page
+        #region Index Customer Home Page
 
-        public async Task<IActionResult> Index() 
+        public async Task<IActionResult> Index()
         {
-            const string cacheKey = "DashboardData";
-
-            if (!_cache.TryGetValue(cacheKey, out DashboardVM data))
+            try
             {
-                data = await _dashboardService.GetDashboardDataAsync();
-                _cache.Set(cacheKey, data, TimeSpan.FromMinutes(10));
+                var model = await _dashboardService.GetDashboardDataAsync();
+                return View(model);
             }
-
-            return View(data); 
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error loading dashboard data");
+                return View("Error");
+            }
         }
 
         #endregion

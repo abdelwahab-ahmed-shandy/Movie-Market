@@ -115,7 +115,7 @@ namespace Movie_Market.Areas.Admin.Controllers
         {
             await _specialService.DeleteAsync(id);
             TempData["notification"] = "Special Deleted successfully!";
-            TempData["MessageType"] = "Information";
+            TempData["MessageType"] = "Warning";
             return RedirectToAction(nameof(Index));
         }
 

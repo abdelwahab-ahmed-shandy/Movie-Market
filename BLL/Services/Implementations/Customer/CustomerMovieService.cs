@@ -58,8 +58,8 @@ namespace BLL.Services.Implementations
             var newReleases = await _movieRepo.Get(m =>
                     m.CurrentState.Value == DAL.Enums.CurrentState.Active &&
                     !m.IsDeleted &&
-                    m.StartDate >= cutoffDate)
-                .OrderByDescending(m => m.ReleaseYear)
+                    m.CreatedDateUtc >= cutoffDate)
+                .OrderByDescending(m => m.StartDate)
                 .ThenByDescending(m => m.Rating)
                 .Take(count)
                 .Include(m => m.Category)

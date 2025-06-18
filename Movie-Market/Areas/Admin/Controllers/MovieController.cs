@@ -38,13 +38,22 @@ namespace Movie_Market.Areas.Admin.Controllers
             return View(movies);
         }
 
-
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var movie = await _movieService.GetMovieDetailsAsync(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return View(movie);
+        }
 
 
         #endregion
 
 
         #region Create
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -106,17 +115,14 @@ namespace Movie_Market.Areas.Admin.Controllers
             var result = await _movieService.UpdateMovieAsync(model);
             if (result)
             {
-                TempData["notification"] = "Movie Is Updated !";
-                TempData["MessageType"] = "success";
-
                 return RedirectToAction(nameof(Index));
             }
 
             ModelState.AddModelError("", "Error updating movie");
             await LoadDropdowns();
 
-
-
+            TempData["notification"] = "Movie Is Updated !";
+            TempData["MessageType"] = "success";
             return RedirectToAction(nameof(Index));
         }
 
@@ -132,11 +138,13 @@ namespace Movie_Market.Areas.Admin.Controllers
             var result = await _movieService.SoftDeleteMovieAsync(id);
             if (result)
             {
-                TempData["Success"] = "Movie soft deleted successfully!";
+                TempData["notification"] = "Movie soft deleted successfully!";
+                TempData["MessageType"] = "Information";
             }
             else
             {
-                TempData["Error"] = "Error soft deleting movie";
+                TempData["notification"] = "Error soft deleting movie";
+                TempData["MessageType"] = "Information";
             }
             TempData["notification"] = "Movie Change Status Soft Deleted!";
             TempData["MessageType"] = "Information";

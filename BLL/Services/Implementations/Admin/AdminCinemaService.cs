@@ -61,8 +61,9 @@ namespace BLL.Services.Implementations.Admin
 
         public async Task<CinemaAdminDetailsVM> GetCinemaDetailsAsync(Guid id)
         {
-            var cinema = await _cinemaRepo.GetAll()
+            var cinema = await _cinemaRepo.GetAllWithDeleted()
                                 .Include(m => m.CinemaMovies)
+                                .ThenInclude(cm => cm.Movie)
                                 .FirstOrDefaultAsync(c => c.Id == id);
 
             if (cinema == null) return null;
@@ -80,13 +81,15 @@ namespace BLL.Services.Implementations.Admin
                 UpdatedDateUtc = cinema.UpdatedDateUtc,
                 DeletedBy = cinema.DeletedBy,
                 DeletedDateUtc = cinema.DeletedDateUtc,
-                Movies = cinema.CinemaMovies.Select(cm => new MovieAdminVM
-                {
-                    Id = cm.Movie.Id,
-                    Title = cm.Movie.Title,
-                    CurrentState = cm.Movie.CurrentState.Value,
-                    IsDeleted = cm.Movie.IsDeleted,
-                }).ToList()
+                Movies = cinema.CinemaMovies
+                    .Where(cm => cm.Movie != null)          
+                    .Select(cm => new MovieAdminVM
+                    {
+                        Id = cm.Movie.Id,
+                        Title = cm.Movie.Title,
+                        CurrentState = cm.Movie.CurrentState.Value,
+                        IsDeleted = cm.Movie.IsDeleted,
+                    }).ToList()
             };
 
         }

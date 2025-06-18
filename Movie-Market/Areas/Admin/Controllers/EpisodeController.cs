@@ -13,6 +13,7 @@ namespace Movie_Market.Areas.Admin.Controllers
             _episodeService = episodeService;
         }
 
+
         #region Views
         public async Task<IActionResult> Index(int page = 1, int pageSize = 10, Guid seasonId = default, string? query = null)
         {
@@ -45,7 +46,10 @@ namespace Movie_Market.Areas.Admin.Controllers
                 try
                 {
                     await _episodeService.CreateEpisodeAsync(model);
-                    TempData["SuccessMessage"] = "Episode created successfully!";
+
+                    TempData["notification"] = "Episode created successfully!";
+                    TempData["MessageType"] = "success";
+
                     return RedirectToAction(nameof(Index), new { seasonId = model.SeasonId });
                 }
                 catch (Exception ex)
@@ -93,7 +97,10 @@ namespace Movie_Market.Areas.Admin.Controllers
                 try
                 {
                     await _episodeService.UpdateEpisodeAsync(id, model);
-                    TempData["SuccessMessage"] = "Episode updated successfully!";
+
+                    TempData["notification"] = "Episode updated successfully!";
+                    TempData["MessageType"] = "success";
+
                     return RedirectToAction(nameof(Details), new { id });
                 }
                 catch (Exception ex)
@@ -107,7 +114,7 @@ namespace Movie_Market.Areas.Admin.Controllers
         #endregion
 
 
-        #region
+        #region Delete Actions
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -116,7 +123,9 @@ namespace Movie_Market.Areas.Admin.Controllers
             try
             {
                 await _episodeService.SoftDeleteEpisodeAsync(id);
-                TempData["SuccessMessage"] = "Episode soft deleted!";
+
+                TempData["notification"] = "Episode soft deleted!";
+                TempData["MessageType"] = "Information";
             }
             catch (Exception ex)
             {
@@ -132,7 +141,8 @@ namespace Movie_Market.Areas.Admin.Controllers
             try
             {
                 await _episodeService.RestoreEpisodeAsync(id);
-                TempData["SuccessMessage"] = "Episode restored!";
+                TempData["notification"] = "Episode restored!";
+                TempData["MessageType"] = "Information";
             }
             catch (Exception ex)
             {
@@ -148,7 +158,9 @@ namespace Movie_Market.Areas.Admin.Controllers
             try
             {
                 await _episodeService.DeleteEpisodeAsync(id);
-                TempData["SuccessMessage"] = "Episode permanently deleted!";
+
+                TempData["notification"] = "Episode permanently deleted!";
+                TempData["MessageType"] = "Warning";
             }
             catch (Exception ex)
             {

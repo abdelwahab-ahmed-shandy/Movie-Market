@@ -158,7 +158,10 @@ namespace Movie_Market.Areas.Admin.Controllers
                 try
                 {
                     await _characterTvSeriesService.AddCharacterToTvSeries(model.TvSeriesId, model.CharacterId);
-                    TempData["SuccessMessage"] = "Character added successfully!";
+
+                    TempData["notification"] = "Character added successfully!";
+                    TempData["MessageType"] = "success";
+
                     return RedirectToAction("Details", "TvSeries", new { id = model.TvSeriesId });
                 }
                 catch (KeyNotFoundException)

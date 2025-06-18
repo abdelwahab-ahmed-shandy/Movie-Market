@@ -15,6 +15,7 @@ namespace Movie_Market.Areas.Admin.Controllers
             _logger = logger;
         }
 
+
         #region TvSeries Views 
         public async Task<IActionResult> Index(int page = 1, int pageSize = 10, string query = null)
         {
@@ -63,8 +64,10 @@ namespace Movie_Market.Areas.Admin.Controllers
                 try
                 {
                     await _tvSeriesService.CreateTvSeriesAsync(model);
-                    //TempData["SuccessMessage"] = "TV Series created successfully!";
-                    //TempData["Ma"];
+
+                    TempData["notification"] = "TV Series created successfully!";
+                    TempData["MessageType"] = "success";
+
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
@@ -114,7 +117,9 @@ namespace Movie_Market.Areas.Admin.Controllers
                 try
                 {
                     await _tvSeriesService.UpdateTvSeriesAsync(id, model);
-                    TempData["SuccessMessage"] = "TV Series updated successfully!";
+
+                    TempData["notification"] = "TV Series updated successfully!";
+                    TempData["MessageType"] = "success";
                     return RedirectToAction(nameof(Index));
                 }
                 catch (KeyNotFoundException)
@@ -141,7 +146,9 @@ namespace Movie_Market.Areas.Admin.Controllers
             try
             {
                 await _tvSeriesService.Delete(id);
-                TempData["SuccessMessage"] = "TV Series permanently deleted!";
+
+                TempData["notification"] = "TV Series permanently deleted!";
+                TempData["MessageType"] = "Warning";
             }
             catch (KeyNotFoundException)
             {
@@ -161,7 +168,9 @@ namespace Movie_Market.Areas.Admin.Controllers
             try
             {
                 await _tvSeriesService.SoftDelete(id);
-                TempData["SuccessMessage"] = "TV Series soft deleted!";
+
+                TempData["notification"] = "TV Series soft deleted!";
+                TempData["MessageType"] = "Information";
             }
             catch (KeyNotFoundException)
             {
@@ -182,7 +191,10 @@ namespace Movie_Market.Areas.Admin.Controllers
             {
                 // Note: You'll need to add RestoreAsync to your IAdminTvSeriesService
                 await _tvSeriesService.RestoreAsync(id);
-                TempData["SuccessMessage"] = "TV Series restored successfully!";
+
+                TempData["notification"] = "TV Series restored successfully!";
+                TempData["MessageType"] = "Warning";
+
             }
             catch (KeyNotFoundException)
             {

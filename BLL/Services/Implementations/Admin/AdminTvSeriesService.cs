@@ -24,6 +24,7 @@ namespace BLL.Services.Implementations.Admin
             _characterRepo = characterRepo;
         }
 
+
         public async Task<TvSeriesAdminListVM> GetAllTvSeriesAsync(int page, int pageSize, string? query = null)
         {
             var tvSeriesQuery = _tvSeriesRepository.GetAllWithDeleted()
@@ -116,6 +117,7 @@ namespace BLL.Services.Implementations.Admin
             };
         }
 
+
         public async Task<TvSeries> CreateTvSeriesAsync(TvSeriesAdminCreateVM viewModel)
         {
             var userName = _HttpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
@@ -170,10 +172,12 @@ namespace BLL.Services.Implementations.Admin
             await _tvSeriesRepository.DeleteInDB(Id);
         }
 
+
         public async Task RestoreAsync(Guid Id)
         {
             await _tvSeriesRepository.RestoreAsync(Id);
         }
+
 
     }
 }

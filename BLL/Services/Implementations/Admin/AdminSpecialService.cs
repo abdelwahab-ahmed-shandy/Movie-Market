@@ -156,6 +156,7 @@ namespace BLL.Services.Implementations.Admin
             return true;
         }
 
+
         public async Task SoftDeleteAsync(Guid id)
         {
             var cinema = await _specialRepo.GetByIdAsync(id);

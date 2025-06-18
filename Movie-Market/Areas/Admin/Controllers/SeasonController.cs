@@ -49,7 +49,10 @@ namespace Movie_Market.Areas.Admin.Controllers
                 try
                 {
                     await _seasonService.CreateSeasonAsync(model);
-                    TempData["SuccessMessage"] = "Season created successfully!";
+                    TempData["SuccessMessage"] = 
+
+                    TempData["notification"] = "Season created successfully!";
+                    TempData["MessageType"] = "success";
                     return RedirectToAction(nameof(Index), new { tvSeriesId = model.TvSeriesId });
                 }
                 catch (Exception ex)
@@ -93,7 +96,9 @@ namespace Movie_Market.Areas.Admin.Controllers
                 try
                 {
                     await _seasonService.UpdateSeasonAsync(id, model);
-                    TempData["SuccessMessage"] = "Season updated successfully!";
+
+                    TempData["notification"] = "Season updated successfully!";
+                    TempData["MessageType"] = "success";
                     return RedirectToAction(nameof(Details), new { id });
                 }
                 catch (Exception ex)
@@ -117,7 +122,10 @@ namespace Movie_Market.Areas.Admin.Controllers
             try
             {
                 await _seasonService.SoftDeleteSeasonAsync(id);
-                TempData["SuccessMessage"] = "Season soft deleted!";
+
+                TempData["notification"] = "Season soft deleted!";
+                TempData["MessageType"] = "Information";
+
             }
             catch (Exception ex)
             {
@@ -134,7 +142,9 @@ namespace Movie_Market.Areas.Admin.Controllers
             try
             {
                 await _seasonService.RestoreSeasonAsync(id);
-                TempData["SuccessMessage"] = "Season restored!";
+
+                TempData["notification"] = "Season restored!";
+                TempData["MessageType"] = "Information";
             }
             catch (Exception ex)
             {
@@ -151,7 +161,10 @@ namespace Movie_Market.Areas.Admin.Controllers
             try
             {
                 await _seasonService.DeleteSeasonAsync(id);
-                TempData["SuccessMessage"] = "Season permanently deleted!";
+
+                TempData["notification"] = "Season permanently deleted!";
+                TempData["MessageType"] = "Warning";
+
             }
             catch (Exception ex)
             {

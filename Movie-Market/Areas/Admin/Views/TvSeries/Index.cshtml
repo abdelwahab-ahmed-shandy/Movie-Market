@@ -77,28 +77,31 @@
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
 
-                                    @if (item.IsDeleted)
+                                    @if (!item.IsDeleted)
                                     {
-                                        <form method="post" asp-action="Restore" asp-route-id="@item.Id" class="d-inline">
-                                            <button type="submit" class="btn btn-sm btn-success">
-                                                <i class="fas fa-undo"></i> Restore
-                                            </button>
-                                        </form>
-                                        <form method="post" asp-action="Delete" asp-route-id="@item.Id" class="d-inline">
-                                            <button type="submit" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Are you sure you want to permanently delete this TV series?')">
-                                                <i class="fas fa-trash-alt"></i> Delete
-                                            </button>
-                                        </form>
+                                        <button type="button"
+                                                class="btn btn-danger btn-sm"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#confirmDeleteModal"
+                                                data-id="@item.Id"
+                                                data-name="@item.Title"
+                                                data-isdeleted="@item.IsDeleted">
+                                            Delete
+                                        </button>
                                     }
                                     else
                                     {
-                                        <form method="post" asp-action="SoftDelete" asp-route-id="@item.Id" class="d-inline">
-                                            <button type="submit" class="btn btn-sm btn-danger">
-                                                <i class="fas fa-trash-alt"></i> Delete
-                                            </button>
-                                        </form>
+                                        <button type="button"
+                                                class="btn btn-success btn-sm"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#confirmDeleteModal"
+                                                data-id="@item.Id"
+                                                data-name="@item.Title"
+                                                data-isdeleted="@item.IsDeleted">
+                                            Restore
+                                        </button>
                                     }
+
                                 </div>
                             </td>
                         </tr>
@@ -167,17 +170,65 @@
     </div>
 </div>
 
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                </button>
+            </div>
+
+            <div class="modal-body">
+                Are you sure you want to perform this action on <strong id="categoryName"></strong>?
+            </div>
+
+            <div class="modal-footer">
+
+                <form method="post" asp-action="SoftDelete">
+                    <input type="hidden" name="id" id="softDeleteCategoryId" />
+                    <button type="submit" class="btn btn-warning" id="softDeleteBtn">Soft Delete</button>
+                </form>
+
+                <form method="post" asp-action="Delete">
+                    <input type="hidden" name="id" id="permanentDeleteCategoryId" />
+                    <button type="submit" class="btn btn-danger">Delete Permanently</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script>
-        // Any additional JavaScript can go here
-        $(document).ready(function() {
-            // Initialize DataTable if needed
-            $('#dataTable').DataTable({
-                paging: false, // We're using our own pagination
-                searching: false, // We're using our own search
-                info: false // We're using our own info display
-            });
+        var confirmDeleteModal = document.getElementById('confirmDeleteModal');
+        confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var id = button.getAttribute('data-id');
+            var name = button.getAttribute('data-name');
+            var isDeleted = button.getAttribute('data-isdeleted') === 'True';
+
+            document.getElementById('categoryName').textContent = name;
+            document.getElementById('softDeleteCategoryId').value = id;
+            document.getElementById('permanentDeleteCategoryId').value = id;
+
+            var softDeleteBtn = document.getElementById('softDeleteBtn');
+            if (isDeleted) {
+                softDeleteBtn.textContent = "Restore";
+                softDeleteBtn.classList.remove('btn-warning');
+                softDeleteBtn.classList.add('btn-success');
+            } else {
+                softDeleteBtn.textContent = "Soft Delete";
+                softDeleteBtn.classList.remove('btn-success');
+                softDeleteBtn.classList.add('btn-warning');
+            }
         });
+
     </script>
 }
 
