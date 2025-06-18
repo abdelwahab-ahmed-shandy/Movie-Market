@@ -4051,7 +4051,6 @@
     "net9.0": [
       "AutoMapper >= 14.0.0",
       "DAL >= 1.0.0",
-      "Microsoft.AspNetCore.Hosting.Abstractions >= 2.3.0",
       "Microsoft.AspNetCore.Identity >= 2.3.1",
       "Microsoft.AspNetCore.Mvc.Abstractions >= 2.3.0"
     ]
@@ -4113,10 +4112,6 @@
           "AutoMapper": {
             "target": "Package",
             "version": "[14.0.0, )"
-          },
-          "Microsoft.AspNetCore.Hosting.Abstractions": {
-            "target": "Package",
-            "version": "[2.3.0, )"
           },
           "Microsoft.AspNetCore.Identity": {
             "target": "Package",

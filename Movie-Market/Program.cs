@@ -1,4 +1,4 @@
-
+using BLL.Services.Implementations;
 using AutoMapper;
 using BLL.Services.Implementations.Admin;
 using BLL.Services.Implementations.Customer;
@@ -57,6 +57,7 @@ namespace Movie_Market
 
             // Repository Services
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddScoped<IFileService, FileService>();
             builder.Services.AddTransient<IEmailService, EmailService>();
             builder.Services.AddScoped<IAuditService, AuditService>();
             builder.Services.AddScoped<IAccountService, AccountService>();
@@ -64,6 +65,7 @@ namespace Movie_Market
             builder.Services.AddScoped<ISubscriberService, SubscriberService>();
             builder.Services.AddScoped<INewsletterService, NewsletterService>();
             builder.Services.AddMemoryCache();
+
 
             #endregion
 
