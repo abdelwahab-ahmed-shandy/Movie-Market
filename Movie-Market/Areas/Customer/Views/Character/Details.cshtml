@@ -1,58 +1,270 @@
 ﻿@model DAL.ViewModels.Character.CharacterIndexVM
 
 @{
-    ViewData["Title"] = "Character Details";
+    ViewData["Title"] = Model.Name;
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            @if (!string.IsNullOrEmpty(Model.Img))
-            {
-                <img src="@Model.Img" class="img-fluid rounded" alt="@Model.Name">
-            }
-        </div>
-        <div class="col-md-8">
-            <h1>@Model.Name</h1>
-            <p class="lead">@Model.Description</p>
+<div class="character-detail-container">
+    <!-- Header Section -->
+    <div class="character-header py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03));">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index">Characters</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+                </ol>
+            </nav>
 
-            <div class="mt-4">
-                <h4>Movies</h4>
-                @if (Model.Movies.Any())
-                {
-                    <ul class="list-group">
-                        @foreach (var movie in Model.Movies)
-                        {
-                            <li class="list-group-item">@movie</li>
-                        }
-                    </ul>
-                }
-                else
-                {
-                    <p class="text-muted">No movies found for this character.</p>
-                }
-            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-4">
+                    @if (!string.IsNullOrEmpty(Model.Img))
+                    {
+                        <img src="@Model.Img" class="img-fluid rounded-3 shadow-lg" alt="@Model.Name" style="max-height: 400px; object-fit: cover;">
+                    }
+                    else
+                    {
+                        <div class="placeholder-poster d-flex align-items-center justify-content-center bg-light rounded-3 shadow-lg" style="height: 400px;">
+                            <i class="fas fa-user fa-4x text-muted"></i>
+                        </div>
+                    }
+                </div>
+                <div class="col-lg-8 mt-4 mt-lg-0">
+                    <h1 class="display-4 fw-bold mb-3">@Model.Name</h1>
 
-            <div class="mt-4">
-                <h4>TV Series</h4>
-                @if (Model.TvSeries.Any())
-                {
-                    <ul class="list-group">
-                        @foreach (var tvSeries in Model.TvSeries)
-                        {
-                            <li class="list-group-item">@tvSeries</li>
-                        }
-                    </ul>
-                }
-                else
-                {
-                    <p class="text-muted">No TV series found for this character.</p>
-                }
-            </div>
+                    @if (!string.IsNullOrEmpty(Model.Description))
+                    {
+                        <div class="character-description mb-4 p-3 bg-light rounded">
+                            <p class="lead mb-0">@Model.Description</p>
+                        </div>
+                    }
 
-            <div class="mt-4">
-                <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+                    <div class="character-stats d-flex flex-wrap gap-3">
+                        <div class="stat-card">
+                            <div class="stat-value">@Model.Movies.Count</div>
+                            <div class="stat-label">Movies</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">@Model.TvSeries.Count</div>
+                            <div class="stat-label">TV Shows</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Appearances Section -->
+    <div class="container">
+        <div class="row g-4">
+            <!-- Movies Section -->
+            <div class="col-lg-6">
+                <div class="section-header mb-4">
+                    <h3 class="section-title fw-bold">
+                        <i class="fas fa-film me-2"></i> Movie Appearances
+                    </h3>
+                    <div class="section-divider"></div>
+                </div>
+
+                @if (Model.Movies.Any())
+                {
+                    <div class="row g-3">
+                        @foreach (var movie in Model.Movies)
+                        {
+                            <div class="col-md-6">
+                                <div class="movie-card card border-0 shadow-sm h-100">
+                                    <div class="movie-poster" style="height: 200px;">
+                                        <img src="@movie.ImgUrl" class="card-img-top h-100" alt="@movie.Title" style="object-fit: cover;">
+                                        @if (movie.Rating.HasValue)
+                                        {
+                                            <div class="movie-rating">
+                                                <i class="fas fa-star"></i> @movie.Rating?.ToString("0.0")
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">@movie.Title</h5>
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="badge bg-primary">@movie.CategoryName</span>
+                                            <span class="text-muted">@movie.ReleaseYear</span>
+                                        </div>
+                                        @if (!string.IsNullOrEmpty(movie.ShortDescription))
+                                        {
+                                            <p class="card-text text-muted small">@movie.ShortDescription</p>
+                                        }
+                                    </div>
+                                    <div class="card-footer bg-transparent border-0">
+                                        <a asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id"
+                                           class="btn btn-sm btn-outline-primary w-100">
+                                            <i class="fas fa-info-circle me-1"></i> Details
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="empty-state bg-white p-4 rounded shadow-sm">
+                        <i class="fas fa-film fa-3x text-muted mb-3"></i>
+                        <p class="mb-0 text-muted">This character hasn't appeared in any movies.</p>
+                    </div>
+                }
+            </div>
+
+            <!-- TV Series Section -->
+            <div class="col-lg-6">
+                <div class="section-header mb-4">
+                    <h3 class="section-title fw-bold">
+                        <i class="fas fa-tv me-2"></i> TV Show Appearances
+                    </h3>
+                    <div class="section-divider"></div>
+                </div>
+
+                @if (Model.TvSeries.Any())
+                {
+                    <div class="row g-3">
+                        @foreach (var tvShow in Model.TvSeries)
+                        {
+                            <div class="col-md-6">
+                                <div class="tvshow-card card border-0 shadow-sm h-100">
+                                    <div class="tvshow-poster" style="height: 200px;">
+                                        <img src="@tvShow.ImgUrl" class="card-img-top h-100" alt="@tvShow.Title" style="object-fit: cover;">
+                                        @if (tvShow.Rating.HasValue)
+                                        {
+                                            <div class="tvshow-rating">
+                                                <i class="fas fa-star"></i> @tvShow.Rating?.ToString("0.0")
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">@tvShow.Title</h5>
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="text-muted">@tvShow.ReleaseYear</span>
+                                            @if (!string.IsNullOrEmpty(tvShow.Author))
+                                            {
+                                                <span class="text-muted">by @tvShow.Author</span>
+                                            }
+                                        </div>
+                                        @if (!string.IsNullOrEmpty(tvShow.ShortDescription))
+                                        {
+                                            <p class="card-text text-muted small">@tvShow.ShortDescription</p>
+                                        }
+                                    </div>
+                                    <div class="card-footer bg-transparent border-0">
+                                        <a asp-controller="TvSeries" asp-action="Details" asp-route-id="@tvShow.Id"
+                                           class="btn btn-sm btn-outline-primary w-100">
+                                            <i class="fas fa-info-circle me-1"></i> Details
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="empty-state bg-white p-4 rounded shadow-sm">
+                        <i class="fas fa-tv fa-3x text-muted mb-3"></i>
+                        <p class="mb-0 text-muted">This character hasn't appeared in any TV shows.</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="mt-5 text-center">
+            <a asp-action="Index" class="btn btn-outline-primary px-4">
+                <i class="fas fa-arrow-left me-2"></i> Back to Characters
+            </a>
+        </div>
+    </div>
 </div>
+
+<style>
+    .character-detail-container {
+        background-color: #f8f9fa;
+        min-height: 100vh;
+    }
+
+    .character-header {
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .placeholder-poster {
+        border-radius: 12px;
+    }
+
+    .character-description {
+        border-left: 4px solid var(--bs-primary);
+    }
+
+    .stat-card {
+        background: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .stat-value {
+        font-size: 1.75rem;
+        font-weight: bold;
+        color: var(--bs-primary);
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: var(--bs-secondary);
+    }
+
+    .section-header {
+        position: relative;
+    }
+
+    .section-title {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 8px;
+    }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--bs-primary);
+        }
+
+    .movie-card, .tvshow-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 8px !important;
+        overflow: hidden;
+    }
+
+        .movie-card:hover, .tvshow-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+
+    .movie-poster, .tvshow-poster {
+        position: relative;
+    }
+
+    .movie-rating, .tvshow-rating {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-weight: bold;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 2rem;
+    }
+</style>

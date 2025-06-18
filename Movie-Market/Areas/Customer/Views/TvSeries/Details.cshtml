@@ -1,62 +1,200 @@
-﻿@* Areas/Customer/Views/TvSeries/Details.cshtml *@
-@model DAL.ViewModels.TvSeries.TvSeriesDetailsVM
+﻿@model DAL.ViewModels.TvSeries.TvSeriesDetailsVM
 
 @{
     ViewData["Title"] = Model.TvSeries.Title;
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            @if (!string.IsNullOrEmpty(Model.TvSeries.ImgUrl))
-            {
-                <img src="@Model.TvSeries.ImgUrl" class="img-fluid" alt="@Model.TvSeries.Title">
-            }
-        </div>
-        <div class="col-md-8">
-            <h1>@Model.TvSeries.Title</h1>
-            <p><strong>Release Year:</strong> @Model.TvSeries.ReleaseYear</p>
-            <p><strong>Author:</strong> @Model.TvSeries.Author</p>
-            @if (Model.TvSeries.Rating.HasValue)
-            {
-                <p><strong>Rating:</strong> @Model.TvSeries.Rating.Value.ToString("0.0")/10</p>
-            }
-            <p>@Model.TvSeries.Description</p>
-        </div>
-    </div>
+<div class="tvseries-detail-container">
+    <!-- Header Section -->
+    <div class="tvseries-header py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4">
+                    @if (!string.IsNullOrEmpty(Model.TvSeries.ImgUrl))
+                    {
+                        <img src="@Model.TvSeries.ImgUrl" class="img-fluid rounded-3 shadow-lg" alt="@Model.TvSeries.Title" style="max-height: 500px; object-fit: cover;">
+                    }
+                    else
+                    {
+                        <div class="placeholder-poster d-flex align-items-center justify-content-center bg-light rounded-3 shadow-lg" style="height: 400px;">
+                            <i class="fas fa-tv fa-4x text-muted"></i>
+                        </div>
+                    }
+                </div>
+                <div class="col-lg-8 mt-4 mt-lg-0">
+                    <div class="tvseries-meta">
+                        <h1 class="display-4 fw-bold text-white mb-3">@Model.TvSeries.Title</h1>
 
-    <div class="row mt-4">
-        <div class="col-md-6">
-            <h3>Seasons</h3>
-            <ul class="list-group">
-                @foreach (var season in Model.Seasons)
-                {
-                    <li class="list-group-item">
-                        <h5>@season.Title</h5>
-                        <p>Season @season.SeasonNumber - @season.ReleaseYear</p>
-                    </li>
-                }
-            </ul>
-        </div>
+                        <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+                            @if (Model.TvSeries.Rating.HasValue)
+                            {
+                                <div class="rating-badge bg-warning text-dark p-2 rounded-pill">
+                                    <i class="fas fa-star me-1"></i> @Model.TvSeries.Rating.Value.ToString("0.0")/10
+                                </div>
+                            }
+                            <span class="text-white"><i class="fas fa-calendar-alt me-2"></i> @Model.TvSeries.ReleaseYear</span>
+                            @if (!string.IsNullOrEmpty(Model.TvSeries.Author))
+                            {
+                                <span class="text-white"><i class="fas fa-user me-2"></i> @Model.TvSeries.Author</span>
+                            }
+                        </div>
 
-        <div class="col-md-6">
-            <h3>Characters</h3>
-            <div class="row">
-                @foreach (var character in Model.Characters)
-                {
-                    <div class="col-sm-6 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">@character.Name</h5>
-                                @if (!string.IsNullOrEmpty(character.Description))
-                                {
-                                    <p class="card-text">@character.Description</p>
-                                }
-                            </div>
+                        <p class="lead text-white mb-4">@Model.TvSeries.Description</p>
+
+                        <div class="action-buttons d-flex gap-3">
+                            <button class="btn btn-primary btn-lg px-4">
+                                <i class="fas fa-play me-2"></i> Watch Now
+                            </button>
+                            <button class="btn btn-outline-light btn-lg px-4">
+                                <i class="fas fa-plus me-2"></i> Add to List
+                            </button>
                         </div>
                     </div>
-                }
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Content Section -->
+    <div class="container py-5">
+        <div class="row g-5">
+            <!-- Seasons Section -->
+            <div class="col-lg-6">
+                <div class="section-header mb-4">
+                    <h2 class="section-title fw-bold">
+                        <i class="fas fa-list-ol me-2"></i> Seasons (@Model.Seasons.Count)
+                    </h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="seasons-list">
+                    @foreach (var season in Model.Seasons.OrderBy(s => s.SeasonNumber))
+                    {
+                        <div class="season-card card mb-3 border-0 shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h4 class="fw-bold mb-1">@season.Title</h4>
+                                        <p class="text-muted mb-0">Season @season.SeasonNumber • @season.ReleaseYear</p>
+
+                                    </div>
+                                    <a asp-controller="Season" asp-action="Details" asp-route-id="@season.Id" class="btn btn-outline-primary">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Characters Section -->
+            <div class="col-lg-6">
+                <div class="section-header mb-4">
+                    <h2 class="section-title fw-bold">
+                        <i class="fas fa-users me-2"></i> Characters (@Model.Characters.Count)
+                    </h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="row g-3">
+                    @foreach (var character in Model.Characters)
+                    {
+                        <div class="col-md-6">
+                            <div class="character-card card border-0 shadow-sm h-100 overflow-hidden">
+                                <div class="character-image-container position-relative" style="height: 180px;">
+                                    @if (!string.IsNullOrEmpty(character.PosterUrl))
+                                    {
+                                        <img src="@character.PosterUrl" class="character-image" alt="@character.Name">
+                                    }
+                                    else
+                                    {
+                                        <div class="character-placeholder d-flex align-items-center justify-content-center">
+                                            <i class="fas fa-user fa-3x text-muted"></i>
+                                        </div>
+                                    }
+                                    <div class="character-overlay"></div>
+                                </div>
+                                <div class="card-body p-3">
+                                    <h5 class="card-title fw-bold mb-2" style="font-size: 1rem;">
+                                        <i class="fas fa-user-circle me-2 text-primary"></i> @character.Name
+                                    </h5>
+                                    @if (!string.IsNullOrEmpty(character.Description))
+                                    {
+                                        <p class="card-text text-muted small" style="font-size: 0.85rem;">
+                                            <i class="fas fa-quote-left me-1 text-secondary"></i>
+                                            @(character.Description.Length > 100 ? character.Description.Substring(0, 100) + "..." : character.Description)
+                                        </p>
+                                    }
+                                    @if (!string.IsNullOrEmpty(character.Name))
+                                    {
+                                        <p class="text-muted small mt-2" style="font-size: 0.8rem;">
+                                            <i class="fas fa-star me-1 text-warning"></i> @character.Name
+                                        </p>
+                                    }
+                                </div>
+                                <div class="card-footer bg-transparent border-0 pt-0 px-3 pb-3">
+                                    <div class="d-grid">
+                                        <a asp-controller="Character" asp-action="Details" asp-route-id="@character.Id" class="btn btn-sm btn-outline-primary py-1">
+                                            <i class="fas fa-info-circle me-1"></i> Details
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
+
+<style>
+    .character-image-container {
+        height: 180px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .character-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .character-placeholder {
+        height: 100%;
+        background-color: #f8f9fa;
+    }
+
+    .character-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40%;
+        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .character-card:hover .character-overlay {
+        opacity: 1;
+    }
+
+    .character-card:hover .character-image {
+        transform: scale(1.05);
+    }
+
+    .character-card {
+        transition: all 0.3s ease;
+        border-radius: 8px !important;
+    }
+
+        .character-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+        }
+</style>

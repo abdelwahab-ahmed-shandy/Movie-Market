@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.ViewModels.TvSeries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,9 @@ namespace DAL.ViewModels.Season
         public string Title { get; set; }
         public int SeasonNumber { get; set; }
         public int ReleaseYear { get; set; }
-        //public string? Description { get; set; }
         public string TvSeriesTitle { get; set; }
         public Guid TvSeriesId { get; set; }
-        public string? ImgUrl { get; set; }
+        public List<TvSeriesVM> tvSeriesVMs { get; set; } = new List<TvSeriesVM>();
         public List<EpisodeCustomerVM> Episodes { get; set; } = new List<EpisodeCustomerVM>();
     }
 }

@@ -7,8 +7,8 @@
         <span class="fw-medium">Movie Categories</span>
         <span class="visually-hidden">(click to expand)</span>
     </a>
-    <ul class="dropdown-menu shadow-sm dropdown-menu-end" aria-labelledby="categoriesDropdown"
-        style="border-radius: 10px; min-width: 250px;">
+    <ul class="dropdown-menu shadow-sm dropdown-menu-end ms-3" aria-labelledby="categoriesDropdown"
+        style="border-radius: 10px; min-width: 250px; left: 15px;">
 
         @if (Model?.Any() == true)
         {
@@ -18,10 +18,10 @@
                     <a class="dropdown-item d-flex align-items-center py-2"
                        href="@Url.Action("Details", "Categories", new { area = "Customer", id = category.Id })"
                        aria-label="@category.Name category">
-                        @* @if (!string.IsNullOrWhiteSpace(category.IconUrl)) *@
-                        @* { *@
-                        @*     <i class="@category.IconUrl me-2 text-muted" aria-hidden="true"></i> *@
-                        @* } *@
+                         @if (!string.IsNullOrWhiteSpace(category.IconUrl)) 
+                         { 
+                             <i class="@category.IconUrl me-2 text-muted" aria-hidden="true"></i> 
+                         } 
                         <span>@category.Name</span>
                     </a>
                 </li>
@@ -37,7 +37,7 @@
             <a class="dropdown-item d-flex align-items-center py-2" 
                href="@Url.Action("Index", "Categories", new { area = "Customer" })">
                 <i class="fas fa-list-ul me-2 text-primary" aria-hidden="true"></i>
-                <span>Browse All Categories</span>
+                <span>All Categories</span>
                 <i class="fas fa-chevron-right ms-auto text-muted" aria-hidden="true"></i>
             </a>
         </li>

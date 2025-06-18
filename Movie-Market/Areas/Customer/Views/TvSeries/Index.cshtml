@@ -4,32 +4,124 @@
     ViewData["Title"] = "TV Series";
 }
 
-<div class="container">
-    <h1 class="my-4">TV Series</h1>
+<div class="tv-series-container py-5">
+    <div class="container">
+        <div class="header-section text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary mb-3">Popular TV Series</h1>
+            <p class="lead text-muted">Discover the best shows from around the world</p>
+        </div>
 
-    <div class="row">
-        @foreach (var series in Model)
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    @if (!string.IsNullOrEmpty(series.ImgUrl))
-                    {
-                        <img src="@series.ImgUrl" class="card-img-top" alt="@series.Title">
-                    }
-                    <div class="card-body">
-                        <h5 class="card-title">@series.Title</h5>
-                        <p class="card-text">@series.ShortDescription</p>
-                        <p class="text-muted">Released: @series.ReleaseYear</p>
-                        @if (series.Rating.HasValue)
-                        {
-                            <p>Rating: @series.Rating.Value.ToString("0.0")/10</p>
-                        }
-                    </div>
-                    <div class="card-footer">
-                        <a asp-action="Details" asp-route-id="@series.Id" class="btn btn-primary">View Details</a>
+        <div class="row g-4">
+            @foreach (var series in Model)
+            {
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="series-card card h-100 border-0 shadow-sm overflow-hidden">
+                        <div class="series-poster position-relative">
+                            @if (!string.IsNullOrEmpty(series.ImgUrl))
+                            {
+                                <img src="@series.ImgUrl" class="card-img-top" alt="@series.Title" style="height: 400px; object-fit: cover;">
+                            }
+                            else
+                            {
+                                <div class="placeholder-img d-flex align-items-center justify-content-center bg-light" style="height: 400px;">
+                                    <i class="fas fa-tv fa-4x text-muted"></i>
+                                </div>
+                            }
+                            <div class="series-overlay"></div>
+                            @if (series.Rating.HasValue)
+                            {
+                                <div class="series-rating">
+                                    <span class="badge bg-warning text-dark p-2">
+                                        <i class="fas fa-star me-1"></i> @series.Rating.Value.ToString("0.0")
+                                    </span>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold mb-3">@series.Title</h5>
+                            <div class="series-meta mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-2">
+                                    @series.ReleaseYear
+                                </span>
+                                @if (!string.IsNullOrEmpty(series.Author))
+                                {
+                                    <span class="badge bg-info bg-opacity-10 text-info">
+                                        @series.Author
+                                    </span>
+                                } 
+                            </div>
+                            <p class="card-text text-muted">@series.ShortDescription</p>
+                        </div>
+                        
+                        <div class="card-footer bg-transparent border-0 pt-0">
+                            <a asp-action="Details" asp-route-id="@series.Id" class="btn btn-primary w-100 py-2">
+                                <i class="fas fa-play me-2"></i> More Details
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </div>
+
+<style>
+    .tv-series-container {
+        background-color: #f8f9fa;
+    }
+
+    .series-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 10px;
+    }
+
+        .series-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+        }
+
+    .series-poster {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .series-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .series-card:hover .series-overlay {
+        opacity: 1;
+    }
+
+    .series-rating {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+    }
+
+    .series-card:hover .series-rating {
+        transform: scale(1);
+    }
+
+    .placeholder-img {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .series-meta .badge {
+        transition: all 0.3s ease;
+    }
+
+        .series-meta .badge:hover {
+            transform: translateY(-2px);
+        }
+</style>

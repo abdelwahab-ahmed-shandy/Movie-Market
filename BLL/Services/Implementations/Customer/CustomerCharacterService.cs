@@ -1,12 +1,14 @@
 ﻿using BLL.Services.Interfaces.Customer;
+using BLL.Services.Interfaces.Customer;
+using DAL.Repositories.IRepositories;
 using DAL.ViewModels.Character;
+using DAL.ViewModels.TvSeries;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.Repositories.IRepositories;
-using BLL.Services.Interfaces.Customer;
 
 
 namespace BLL.Services.Implementations.Customer
@@ -16,12 +18,13 @@ namespace BLL.Services.Implementations.Customer
         private readonly IGenericRepository<Character> _characterRepo;
         private readonly IGenericRepository<CharacterMovie> _characterMovieRepo;
         private readonly IGenericRepository<CharacterTvSeries> _characterTvSeriesRepo;
-
-        public CustomerCharacterService(
+        private readonly ILogger<CustomerCharacterService> _logger;
+        public CustomerCharacterService(ILogger<CustomerCharacterService> logger,
             IGenericRepository<Character> characterRepo,
             IGenericRepository<CharacterMovie> characterMovieRepo,
             IGenericRepository<CharacterTvSeries> characterTvSeriesRepo)
         {
+            _logger = logger;
             _characterRepo = characterRepo;
             _characterMovieRepo = characterMovieRepo;
             _characterTvSeriesRepo = characterTvSeriesRepo;
@@ -42,30 +45,65 @@ namespace BLL.Services.Implementations.Customer
             }).ToList();
         }
 
+
+
         public async Task<CharacterIndexVM?> GetCharacterDetailsAsync(Guid id)
         {
-            var character = await _characterRepo.GetByIdAsync(id);
-            if (character == null || character.IsDeleted)
-                return null;
-
-            var characterMovies = await _characterMovieRepo.Get(cm => cm.CharacterId == id && cm.CurrentState == CurrentState.Active)
-                .Include(cm => cm.Movie)
-                .ToListAsync();
-
-            var characterTvSeries = await _characterTvSeriesRepo.Get(ct => ct.CharacterId == id && ct.CurrentState == CurrentState.Active)
-                .Include(ct => ct.TvSeries)
-                .ToListAsync();
-
-            return new CharacterIndexVM
+            try
             {
-                Id = character.Id,
-                Name = character.Name,
-                Description = character.Description,
-                Img = character.ImgUrl,
-                Movies = characterMovies.Select(cm => cm.Movie.Title).ToList(),
-                TvSeries = characterTvSeries.Select(ct => ct.TvSeries.Title).ToList()
-            };
+                var character = await _characterRepo.GetByIdAsync(id);
+                if (character == null || character.IsDeleted)
+                    return null;
+
+                var characterMovies = await _characterMovieRepo
+                    .Get(cm => cm.CharacterId == id && cm.CurrentState == CurrentState.Active)
+                    .Include(cm => cm.Movie)
+                    .ThenInclude(m => m.Category) // إذا كنت بحاجة إلى معلومات التصنيف
+                    .ToListAsync();
+
+                var characterTvSeries = await _characterTvSeriesRepo
+                    .Get(ct => ct.CharacterId == id && ct.CurrentState == CurrentState.Active)
+                    .Include(ct => ct.TvSeries)
+                    .ToListAsync();
+
+                return new CharacterIndexVM
+                {
+                    Id = character.Id,
+                    Name = character.Name,
+                    Description = character.Description,
+                    Img = character.ImgUrl,
+                    Movies = characterMovies.Select(cm => new MovieIndexVM
+                    {
+                        Id = cm.Movie.Id,
+                        Title = cm.Movie.Title,
+                        ImgUrl = cm.Movie.ImgUrl,
+                        Price = cm.Movie.Price,
+                        Rating = cm.Movie.Rating,
+                        CategoryName = cm.Movie.Category?.Name ?? "Unknown",
+                        ReleaseYear = cm.Movie.ReleaseYear,
+                        ShortDescription = cm.Movie.Description?.Length > 100 ?
+                            cm.Movie.Description.Substring(0, 100) + "..." :
+                            cm.Movie.Description
+                    }).ToList(),
+                    TvSeries = characterTvSeries.Select(ct => new TvSeriesVM
+                    {
+                        Id = ct.TvSeries.Id,
+                        Title = ct.TvSeries.Title,
+                        Description = ct.TvSeries.Description,
+                        Author = ct.TvSeries.Author,
+                        ImgUrl = ct.TvSeries.ImgUrl,
+                        ReleaseYear = ct.TvSeries.ReleaseYear,
+                        Rating = ct.TvSeries.Rating
+                    }).ToList()
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error retrieving character details for ID: {id}");
+                throw;
+            }
         }
+
 
     }
 }

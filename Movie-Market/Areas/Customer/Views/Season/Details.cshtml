@@ -4,77 +4,179 @@
     ViewData["Title"] = Model.Title;
 }
 
-<div class="container mt-4">
-    <div class="row mb-4">
-        <div class="col-md-4">
-            @if (!string.IsNullOrEmpty(Model.ImgUrl))
-            {
-                <img src="@Model.ImgUrl" class="img-fluid rounded" alt="@Model.Title">
-            }
-            else
-            {
-                <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height: 300px;">
-                    <i class="fas fa-tv fa-3x text-muted"></i>
+<div class="season-detail-container">
+    <!-- Header Section -->
+    <div class="season-header py-4 mb-4" style="background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05));">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    @{
+                        var firstEpisodeWithImage = Model.Episodes.FirstOrDefault(e => !string.IsNullOrEmpty(e.ThumbnailUrl));
+                    }
+                    @if (firstEpisodeWithImage != null)
+                    {
+                        <img src="@firstEpisodeWithImage.ThumbnailUrl" class="img-fluid rounded-3 shadow" alt="@Model.Title" style="max-height: 300px; object-fit: cover;">
+                    }
+                    else
+                    {
+                        <div class="placeholder-poster d-flex align-items-center justify-content-center bg-light rounded-3 shadow" style="height: 300px;">
+                            <i class="fas fa-tv fa-4x text-muted"></i>
+                        </div>
+                    }
                 </div>
-            }
-        </div>
-        <div class="col-md-8">
-            <h1>@Model.Title</h1>
-            <h4 class="text-muted">Season @Model.SeasonNumber of @Model.TvSeriesTitle</h4>
-            <p class="lead">@Model.ReleaseYear</p>
+                <div class="col-md-8 mt-4 mt-md-0">
+                    <div class="season-meta">
+                        <h1 class="display-5 fw-bold mb-2">@Model.Title</h1>
+                        <h4 class="text-muted mb-3">Season @Model.SeasonNumber of @Model.TvSeriesTitle</h4>
 
-            @* @if (!string.IsNullOrEmpty(Model.Description))
-            {
-                <div class="mt-3">
-                    <h5>About This Season</h5>
-                    <p>@Model.Description</p>
+                        <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+                            <span class="badge bg-primary bg-opacity-10 text-primary">
+                                <i class="fas fa-calendar-alt me-1"></i> @Model.ReleaseYear
+                            </span>
+                            <span class="badge bg-info bg-opacity-10 text-info">
+                                @Model.Episodes.Count Episodes
+                            </span>
+                        </div>
+
+                        <div class="action-buttons mt-4">
+                            <a asp-controller="TvSeries" asp-action="Details" asp-route-id="@Model.TvSeriesId"
+                               class="btn btn-outline-secondary px-4">
+                                <i class="fas fa-arrow-left me-2"></i> Back to Series
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            } *@
-
-            <div class="mt-3">
-                <a asp-controller="TvSeries" asp-action="Details" asp-route-id="@Model.TvSeriesId"
-                   class="btn btn-outline-secondary">
-                    <i class="fas fa-arrow-left"></i> Back to TV Series
-                </a>
             </div>
         </div>
     </div>
 
-    <div class="card shadow-sm">
-        <div class="card-header bg-light">
-            <h4 class="mb-0">Episodes (@Model.Episodes.Count)</h4>
+    <!-- Episodes Section -->
+    <div class="container">
+        <div class="section-header mb-4">
+            <h3 class="section-title fw-bold">
+                <i class="fas fa-list-ol me-2"></i> Episodes
+            </h3>
+            <div class="section-divider"></div>
         </div>
-        <div class="card-body">
-            @if (Model.Episodes.Any())
-            {
-                <div class="list-group">
-                    @foreach (var episode in Model.Episodes)
-                    {
-                        <a asp-controller="Episode" asp-action="Details" asp-route-id="@episode.Id"
-                           class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">@episode.EpisodeNumber. @episode.Title</h5>
-                                <small>@episode.Duration.ToString(@"hh\:mm")</small>
-                            </div>
-                            @if (!string.IsNullOrEmpty(episode.Description))
-                            {
-                                <p class="mb-1">
-                                    @(episode.Description.Length > 100 ?
-                                                            episode.Description.Substring(0, 100) + "..." : episode.Description)
-                    </p>
+
+        @if (Model.Episodes.Any())
+        {
+            <div class="episodes-list">
+                @foreach (var episode in Model.Episodes.OrderBy(e => e.EpisodeNumber))
+                {
+                    <div class="episode-card card mb-3 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-2 col-3">
+                                    <div class="episode-number-circle bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                        @episode.EpisodeNumber
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-6">
+                                    <h5 class="card-title fw-bold mb-1">@episode.Title</h5>
+                                    <div class="episode-meta d-flex flex-wrap gap-2">
+                                        <small class="text-muted">
+                                            <i class="fas fa-clock me-1"></i> @episode.Duration.ToString(@"hh\:mm")
+                                        </small>
+                                        @if (episode.ReleaseDate.HasValue)
+                                        {
+                                            <small class="text-muted">
+                                                <i class="fas fa-calendar-day me-1"></i> @episode.ReleaseDate.Value.ToString("MMM d, yyyy")
+                                            </small>
                                         }
-                            @if (episode.ReleaseDate.HasValue)
-                            {
-                                <small class="text-muted">Released: @episode.ReleaseDate.Value.ToString("MMMM d, yyyy")</small>
-                            }
-                        </a>
-                    }
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(episode.Description))
+                                    {
+                                        <p class="card-text text-muted mt-2 small">
+                                            @(episode.Description.Length > 100 ? episode.Description.Substring(0, 100) + "..." : episode.Description)
+                                        </p>
+                                    }
+                                </div>
+                                <div class="col-md-2 col-3 text-end">
+                                    <a asp-controller="Episode" asp-action="Details" asp-route-id="@episode.Id"
+                                       class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-play me-1"></i> Watch
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-state text-center py-5 bg-white rounded-3 shadow-sm">
+                <div class="empty-state-icon mb-4">
+                    <i class="fas fa-film fa-4x text-muted"></i>
                 </div>
-            }
-            else
-            {
-                <p class="text-muted">No episodes available for this season.</p>
-            }
-        </div>
+                <h4 class="mb-3">No Episodes Available</h4>
+                <p class="text-muted mb-4">This season doesn't have any episodes yet.</p>
+            </div>
+        }
     </div>
 </div>
+
+<style>
+    .season-detail-container {
+        background-color: #f8f9fa;
+        min-height: 100vh;
+    }
+
+    .season-header {
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .placeholder-poster {
+        border-radius: 12px;
+    }
+
+    .section-header {
+        position: relative;
+    }
+
+    .section-title {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 8px;
+    }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--bs-primary);
+        }
+
+    .episode-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 8px;
+    }
+
+        .episode-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+        }
+
+    .episode-number-circle {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .empty-state {
+        padding: 3rem;
+    }
+
+    .action-buttons .btn {
+        transition: all 0.3s ease;
+    }
+
+        .action-buttons .btn:hover {
+            transform: translateY(-2px);
+        }
+</style>

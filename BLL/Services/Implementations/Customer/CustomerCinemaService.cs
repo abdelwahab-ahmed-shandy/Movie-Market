@@ -52,6 +52,7 @@ namespace BLL.Services.Implementations.Customer
                 var cinema = await _cinemaRepo.GetAll()
                     .Include(c => c.CinemaMovies)
                         .ThenInclude(cm => cm.Movie)
+                        .ThenInclude(m => m.Category)
                     .FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
 
                 if (cinema == null)
@@ -64,6 +65,7 @@ namespace BLL.Services.Implementations.Customer
                     Location = cinema.Location,
                     Description = cinema.Description,
                     CreatedDate = cinema.CreatedDateUtc
+                    
                 };
 
                 foreach (var cinemaMovie in cinema.CinemaMovies.Where(cm => !cm.IsDeleted))
@@ -73,8 +75,16 @@ namespace BLL.Services.Implementations.Customer
                         Id = cinemaMovie.Movie.Id,
                         Title = cinemaMovie.Movie.Title,
                         ImgUrl = cinemaMovie.Movie.ImgUrl,
-                        StartDate = cinemaMovie.ShowTime,
-                        Duration = cinemaMovie.Movie.Duration
+                        StartDate = cinemaMovie.Movie.StartDate,
+                        EndDate = cinemaMovie.Movie.EndDate,
+                        ReleaseYear = cinemaMovie.Movie.ReleaseYear,
+                        Price = cinemaMovie.Movie.Price,
+                        Author = cinemaMovie.Movie.Author,
+                        Rating = cinemaMovie.Movie.Rating,
+
+                        Duration = cinemaMovie.Movie.Duration,
+                        Description = cinemaMovie.Movie.Description,
+
                     });
                 }
 
