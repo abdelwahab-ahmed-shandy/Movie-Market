@@ -15,6 +15,6 @@ namespace BLL.Services.Interfaces.Admin
         Task<Category> CreateCategoryAsync(CategoryAdminCreateEditVM viewModel);
         Task UpdateCategoryAsync(Guid id, CategoryAdminCreateEditVM viewModel);
         Task SoftDelete(Guid id);
-        Task Delete(Guid id);
+        Task DeleteAsync(Guid id);
     }
 }

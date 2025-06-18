@@ -1,6 +1,7 @@
 ﻿using BLL.Services.Interfaces.Admin;
 using DAL.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,17 @@ namespace BLL.Services.Implementations.Admin
     {
         private readonly IGenericRepository<Category> _categoryRepo;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IFileService _fileService;
+        private readonly ILogger<AdminCategoryService> _logger;
         public AdminCategoryService(IGenericRepository<Category> categoryRepository,
-                                        IHttpContextAccessor httpContextAccessor)
+                                        IHttpContextAccessor httpContextAccessor ,
+                                        IFileService fileService,
+                                        ILogger<AdminCategoryService> logger)
         {
             _categoryRepo = categoryRepository;
             _httpContextAccessor = httpContextAccessor;
+            _fileService = fileService;
+            _logger = logger;
         }
 
         public async Task<CategoryAdminListVM> GetAllCategoriesAsync(int page, int pageSize, string? query = null)
@@ -90,18 +97,22 @@ namespace BLL.Services.Implementations.Admin
         {
             var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
 
-            var category = new Category
+            string imagePath = null;
+            if (vM.IconFile != null && vM.IconFile.Length > 0)
+            {
+                imagePath = await _fileService.SaveFileAsync(vM.IconFile, "uploads/categories");
+            }
+
+            return await _categoryRepo.Add(new Category
             {
                 Name = vM.Name,
                 Description = vM.Description,
-                ImgUrl = vM.IconUrl,
+                ImgUrl = imagePath,
                 CurrentState = vM.CurrentState,
                 CreatedBy = userName,
                 CreatedDateUtc = DateTime.UtcNow,
                 IsDeleted = false
-            };
-
-            return await _categoryRepo.Add(category);
+            });
         }
 
 
@@ -114,12 +125,21 @@ namespace BLL.Services.Implementations.Admin
 
             var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
 
+            if (vM.IconFile != null && vM.IconFile.Length > 0)
+            {
+                if (!string.IsNullOrEmpty(category.ImgUrl))
+                {
+                    _fileService.DeleteFile(category.ImgUrl);
+                }
+
+                category.ImgUrl = await _fileService.SaveFileAsync(vM.IconFile, "uploads/categories");
+            }
+
             category.Name = vM.Name;
             category.Description = vM.Description;
             category.CurrentState = vM.CurrentState;
             category.UpdatedBy = userName;
             category.UpdatedDateUtc = DateTime.UtcNow;
-            category.ImgUrl = vM.IconUrl;
 
             await _categoryRepo.Update(category);
         }
@@ -142,11 +162,22 @@ namespace BLL.Services.Implementations.Admin
         }
 
 
-        public async Task Delete(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            var category = await _categoryRepo.GetByIdAsync(id);
-            if (category == null)
-                throw new Exception("Category not found");
+            var category = await _categoryRepo.GetByIdAsync(id)
+                ?? throw new KeyNotFoundException("Category not found");
+
+            if (!string.IsNullOrEmpty(category.ImgUrl))
+            {
+                try
+                {
+                    _fileService.DeleteFile(category.ImgUrl);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning($"Could not delete image file {category.ImgUrl}: {ex.Message}");
+                }
+            }
 
             await _categoryRepo.DeleteInDB(id);
         }

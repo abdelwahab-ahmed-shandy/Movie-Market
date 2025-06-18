@@ -52,7 +52,7 @@ namespace Movie_Market.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CategoryAdminCreateEditVM VM)
+        public async Task<IActionResult> Create([FromForm] CategoryAdminCreateEditVM VM)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace Movie_Market.Areas.Admin.Controllers
             {
                 Name = category.Name,
                 Description = category.Description,
-                CurrentState = category.CurrentState
+                CurrentState = category.CurrentState,
             };
 
 
@@ -93,7 +93,7 @@ namespace Movie_Market.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, CategoryAdminCreateEditVM VM)
+        public async Task<IActionResult> Edit(Guid id, [FromForm] CategoryAdminCreateEditVM VM)
         {
             if (ModelState.IsValid)
             {
@@ -123,31 +123,63 @@ namespace Movie_Market.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ToggleStatus(Guid id)
         {
-            await _categoryService.SoftDelete(id);
+            try
+            {
+                await _categoryService.SoftDelete(id);
 
-            TempData["notification"] = "Category Change Status Soft Deleted!";
-            TempData["MessageType"] = "Information";
-            return RedirectToAction(nameof(Index));
+                TempData["notification"] = "Category status changed successfully!";
+                TempData["MessageType"] = "success";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (KeyNotFoundException ex)
+            {
+                TempData["notification"] = ex.Message;
+                TempData["MessageType"] = "error";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["notification"] = $"Error changing status: {ex.Message}";
+                TempData["MessageType"] = "error";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeletePermanently(Guid id)
         {
-            var category = await _categoryService.GetCategoryDetailsAsync(id);
-            if (category == null)
-                return NotFound();
+            try
+            {
+                var category = await _categoryService.GetCategoryDetailsAsync(id);
+                if (category == null)
+                {
+                    TempData["notification"] = "Category not found";
+                    TempData["MessageType"] = "error";
+                    return RedirectToAction(nameof(Index));
+                }
 
-            await _categoryService.Delete(id);
+                await _categoryService.DeleteAsync(id);
 
-            TempData["notification"] = "Category permanently deleted!";
-            TempData["MessageType"] = "Warning";
-
-            return RedirectToAction(nameof(Index));
+                TempData["notification"] = $"Category '{category.Name}' was permanently deleted!";
+                TempData["MessageType"] = "warning";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (KeyNotFoundException ex)
+            {
+                TempData["notification"] = ex.Message;
+                TempData["MessageType"] = "error";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["notification"] = $"Error deleting category: {ex.Message}";
+                TempData["MessageType"] = "error";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         #endregion
-
 
     }
 }

@@ -18,11 +18,12 @@
                     <a class="dropdown-item d-flex align-items-center py-2"
                        href="@Url.Action("Details", "Categories", new { area = "Customer", id = category.Id })"
                        aria-label="@category.Name category">
-                         @if (!string.IsNullOrWhiteSpace(category.IconUrl)) 
-                         { 
-                             <i class="@category.IconUrl me-2 text-muted" aria-hidden="true"></i> 
-                         } 
-                        <span>@category.Name</span>
+                         @if (!string.IsNullOrWhiteSpace(category.IconUrl))
+                        {
+                            <img src="~/@category.IconUrl" alt="@category.Name" class="rounded-circle"
+                                 style="width: 35px; height: 35px; object-fit: cover;" />
+                        }
+                        <span> @category.Name</span>
                     </a>
                 </li>
             }

@@ -1,65 +1,64 @@
 ﻿@model DAL.ViewModels.Category.CategoryAdminCreateEditVM
 
 @{
-	var isEdit = string.Equals(ViewContext.RouteData.Values["action"]?.ToString(), "Edit", StringComparison.OrdinalIgnoreCase);
-	ViewData["Title"] = isEdit ? "Edit Category" : "Add New Category";
+    var isEdit = string.Equals(ViewContext.RouteData.Values["action"]?.ToString(), "Edit", StringComparison.OrdinalIgnoreCase);
+    ViewData["Title"] = isEdit ? "Edit Category" : "Add New Category";
 }
 
-
 <div class="card shadow mb-4">
-	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
-	</div>
-	<div class="card-body">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="@ViewContext.RouteData.Values["action"]" method="post" enctype="multipart/form-data">
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-		<form asp-action="@(ViewContext.RouteData.Values["action"])" method="post">
+            <div class="form-group row">
+                <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
 
-			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <label asp-for="Description" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
 
-			<div class="form-group row">
-				<label asp-for="Name" class="col-sm-2 col-form-label"></label>
-				<div class="col-sm-10">
-					<input asp-for="Name" class="form-control" />
-					<span asp-validation-for="Name" class="text-danger"></span>
-				</div>
-			</div>
+            <div class="form-group row">
+                <label asp-for="CurrentState" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <select asp-for="CurrentState" asp-items="Html.GetEnumSelectList<CurrentState>()" class="form-control"></select>
+                    <span asp-validation-for="CurrentState" class="text-danger"></span>
+                </div>
+            </div>
 
-			<div class="form-group row">
-				<label asp-for="Description" class="col-sm-2 col-form-label"></label>
-				<div class="col-sm-10">
-<textarea asp-for="Description" class="form-control" rows="3"></textarea>
-					<span asp-validation-for="Description" class="text-danger"></span>
-				</div>
-			</div>
+            <div class="form-group row">
+                <label asp-for="IconFile" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="IconFile" type="file" class="form-control" />
+                    <span asp-validation-for="IconFile" class="text-danger"></span>
+                </div>
+            </div>
 
-			<div class="form-group row">
-				<label asp-for="CurrentState" class="col-sm-2 col-form-label"></label>
-				<div class="col-sm-10">
-					<select asp-for="CurrentState" asp-items="Html.GetEnumSelectList<CurrentState>()" class="form-control"></select>
-					<span asp-validation-for="CurrentState" class="text-danger"></span>
-				</div>
-			</div>
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
 
-			<div class="form-group row">
-				<label asp-for="IconUrl" class="col-sm-2 col-form-label"></label>
-				<div class="col-sm-10">
-					<input asp-for="IconUrl" class="form-control" />
-					<span asp-validation-for="IconUrl" class="text-danger"></span>
-				</div>
-			</div>
-
-			<div class="form-group row">
-				<div class="col-sm-10 offset-sm-2">
-					<button type="submit" class="btn btn-primary">Save</button>
-					<a asp-action="Index" class="btn btn-secondary">Cancel</a>
-				</div>
-			</div>
-		</form>
-	</div>
+        </form>
+    </div>
 </div>
 
 @section Scripts {
-	@{
-		await Html.RenderPartialAsync("_ValidationScriptsPartial");
-	}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

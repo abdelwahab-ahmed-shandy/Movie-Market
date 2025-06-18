@@ -47,12 +47,14 @@
                     @foreach (var item in Model.Categories)
                     {
                         <tr class="@(item.IsDeleted ? "table-danger" : "")">
+
                             <td>
                                 @if (!string.IsNullOrEmpty(item.IconUrl))
                                 {
-                                    <img src="@item.IconUrl" alt="@item.Name" style="max-width: 80px; max-height: 80px;" />
+                                    <img src="@Url.Content("~/" + item.IconUrl)" alt="@item.Name" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;" />
                                 }
                             </td>
+
                             <td>@item.Name</td>
 
                             <td title="@item.Description">
@@ -165,34 +167,35 @@
 </div>
 
 <!-- Delete Confirmation Modal -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
-
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Action</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                
-                </button>
             </div>
-
             <div class="modal-body">
-                Are you sure you want to perform this action on <strong id="categoryName"></strong>?
+                <p>Are you sure you want to <span id="actionType">delete</span> <strong id="categoryName"></strong>?</p>
+                @* <div class="alert alert-warning" id="permanentDeleteWarning" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i> This will permanently delete the category and cannot be undone!
+                </div> *@
             </div>
-
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
-                <form method="post" asp-action="ToggleStatus">
+                <form method="post" asp-action="ToggleStatus" class="d-inline">
                     <input type="hidden" name="id" id="softDeleteCategoryId" />
-                    <button type="submit" class="btn btn-warning" id="softDeleteBtn">Soft Delete</button>
+                    <button type="submit" class="btn" id="statusToggleBtn">
+                        <span id="actionText">Soft Delete</span>
+                    </button>
                 </form>
 
-                <form method="post" asp-action="DeletePermanently">
+                <form method="post" asp-action="DeletePermanently" class="d-inline">
                     <input type="hidden" name="id" id="permanentDeleteCategoryId" />
-                    <button type="submit" class="btn btn-danger">Delete Permanently</button>
+                    <button type="submit" class="btn btn-danger" id="permanentDeleteBtn">
+                        <i class="fas fa-trash-alt"></i> Delete Permanently
+                    </button>
                 </form>
-
-
             </div>
         </div>
     </div>
@@ -201,29 +204,46 @@
 
 @section Scripts {
     <script>
-        var confirmDeleteModal = document.getElementById('confirmDeleteModal');
-        confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget;
-            var id = button.getAttribute('data-id');
-            var name = button.getAttribute('data-name');
-            var isDeleted = button.getAttribute('data-isdeleted') === 'True';
+        document.getElementById('confirmDeleteModal').addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const id = button.getAttribute('data-id');
+            const name = button.getAttribute('data-name');
+            const isDeleted = button.getAttribute('data-isdeleted') === 'True';
 
+            // Set common elements
             document.getElementById('categoryName').textContent = name;
             document.getElementById('softDeleteCategoryId').value = id;
             document.getElementById('permanentDeleteCategoryId').value = id;
 
-            var softDeleteBtn = document.getElementById('softDeleteBtn');
+            // Toggle between delete/restore
+            const actionText = document.getElementById('actionText');
+            const statusToggleBtn = document.getElementById('statusToggleBtn');
+            const actionType = document.getElementById('actionType');
+
             if (isDeleted) {
-                softDeleteBtn.textContent = "Restore";
-                softDeleteBtn.classList.remove('btn-warning');
-                softDeleteBtn.classList.add('btn-success');
+                actionText.textContent = "Restore";
+                actionType.textContent = "restore";
+                statusToggleBtn.classList.remove('btn-warning');
+                statusToggleBtn.classList.add('btn-success');
             } else {
-                softDeleteBtn.textContent = "Soft Delete";
-                softDeleteBtn.classList.remove('btn-success');
-                softDeleteBtn.classList.add('btn-warning');
+                actionText.textContent = "Soft Delete";
+                actionType.textContent = "soft delete";
+                statusToggleBtn.classList.remove('btn-success');
+                statusToggleBtn.classList.add('btn-warning');
             }
+
+            // Show/hide permanent delete warning
+            document.getElementById('permanentDeleteWarning').style.display = 'none';
         });
 
+        // Show warning when hovering permanent delete button
+        document.getElementById('permanentDeleteBtn').addEventListener('mouseover', function() {
+            document.getElementById('permanentDeleteWarning').style.display = 'block';
+        });
+
+        document.getElementById('permanentDeleteBtn').addEventListener('mouseout', function() {
+            document.getElementById('permanentDeleteWarning').style.display = 'none';
+        });
     </script>
 }
 
