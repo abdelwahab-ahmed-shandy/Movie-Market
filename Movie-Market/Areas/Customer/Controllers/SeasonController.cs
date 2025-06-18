@@ -1,10 +1,11 @@
 ﻿using BLL.Services.Interfaces.Customer;
 using Microsoft.AspNetCore.Mvc;
+using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Customer.Controllers
 {
     [Area("Customer")]
-    public class SeasonController : Controller
+    public class SeasonController : BaseController
     {
         private readonly ICustomerSeasonService _seasonService;
         public SeasonController(ICustomerSeasonService seasonService)

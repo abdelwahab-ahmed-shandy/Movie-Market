@@ -3,11 +3,12 @@ using DAL.ViewModels.Dashboard;
 using DAL.ViewModels.Search;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Customer.Controllers
 {
     [Area("Customer")]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IDashboardService _dashboardService;
         private readonly ISearchService _searchService;

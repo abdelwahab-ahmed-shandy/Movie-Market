@@ -2,12 +2,13 @@
 using DAL.ViewModels.Movie;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
     //[Authorize(Roles = "Admin,SuperAdmin")]
-    public class MovieController : Controller
+    public class MovieController : BaseController
     {
         private readonly IAdminMovieService _movieService;
         private readonly IGenericRepository<Category> _categoryRepo;

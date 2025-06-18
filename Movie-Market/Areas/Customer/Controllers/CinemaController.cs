@@ -1,10 +1,11 @@
 ﻿using BLL.Services.Interfaces.Customer;
 using Microsoft.AspNetCore.Mvc;
+using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Customer.Controllers
 {
     [Area("Customer")]
-    public class CinemaController : Controller
+    public class CinemaController : BaseController
     {
         private readonly ICustomerCinemaService _cinemaService;
 

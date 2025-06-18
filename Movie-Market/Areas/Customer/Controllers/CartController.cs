@@ -1,10 +1,11 @@
 ﻿using DAL.Repositories;
 using DAL.Repositories.IRepositories;
+using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Customer.Controllers
 {
     [Area("Customer")]
-    public class CartController : Controller
+    public class CartController : BaseController
     {
         private readonly ICartService _cartService;
         private readonly IGenericRepository<Movie> _movieRepo;

@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Coming Soon";
+    Layout = "~/Areas/Customer/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+@section Styles {
+    <style>
+        .error-page {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+        }
+
+        .error-card {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        @@media (max-width: 576px) {
+            .error-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+}
+
+
+<div class="error-card text-center">
+    <div class="error-icon text-primary">
+        <i class="fas fa-rocket"></i>
+    </div>
+    <h1>Coming Soon!</h1>
+    <p class="lead">We're working on something awesome. Stay tuned!</p>
+
+    <div id="countdown" class="my-4" style="font-size: 1.5rem; font-weight: bold;"></div>
+
+    <div class="alert alert-primary">
+        <h5><i class="fas fa-bell me-2"></i> Notify Me</h5>
+        <div class="input-group">
+            <input type="email" class="form-control" placeholder="Your email address">
+            <button class="btn btn-primary" type="button">Subscribe</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Countdown to 7 days from now
+        const countdownDate = new Date();
+        countdownDate.setDate(countdownDate.getDate() + 7);
+
+        const timer = setInterval(function() {
+            const now = new Date();
+            const diff = countdownDate - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (diff <= 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "Coming Any Moment Now!";
+            }
+        }, 1000);
+    </script>
+}

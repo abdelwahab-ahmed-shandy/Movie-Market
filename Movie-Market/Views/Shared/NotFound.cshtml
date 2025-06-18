@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Page Not Found";
+    Layout = "~/Areas/Customer/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="error-container p-5 rounded shadow">
+                <h1 class="display-1 text-primary mb-4">404</h1>
+                <h2 class="mb-4">Oops! Page Not Found</h2>
+                <p class="lead mb-4">
+                    @ViewBag.Message
+                </p>
+
+                <div class="d-flex justify-content-center gap-3 mb-4">
+                    <a href="/" class="btn btn-primary btn-lg px-4">
+                        <i class="fas fa-home me-2"></i>Go to Homepage
+                    </a>
+                    <a href="javascript:history.back()" class="btn btn-outline-primary btn-lg px-4">
+                        <i class="fas fa-arrow-left me-2"></i>Go Back
+                    </a>
+                </div>
+
+                <div class="search-box mt-5">
+                    <form class="d-flex me-3 search-form" role="search" method="get" action="/Customer/Home/GlobalSearch">
+                        <div class="input-group">
+                            <input class="form-control search-input" type="search" placeholder="Search movies, series..."
+                                   aria-label="Search" id="globalSearch" name="query">
+                            <button class="btn btn-primary search-btn" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="search-results dropdown-menu w-100 p-2 d-none"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .error-container {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+    }
+
+    .display-1 {
+        font-weight: 700;
+        color: #0d6efd;
+    }
+
+    .search-box {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    @@media (max-width: 576px) {
+        .d-flex {
+            flex-direction: column;
+            gap: 1rem !important;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }
+</style>

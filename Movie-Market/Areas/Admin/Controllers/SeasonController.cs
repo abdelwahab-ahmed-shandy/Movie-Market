@@ -1,11 +1,12 @@
 ﻿using DAL.ViewModels.Season;
 using Microsoft.AspNetCore.Mvc;
+using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
     //[Authorize(Roles = "Admin,SuperAdmin")]
-    public class SeasonController : Controller
+    public class SeasonController : BaseController
     {
         private readonly IAdminSeasonService _seasonService;
 

@@ -1,12 +1,13 @@
 ﻿using DAL.ViewModels.Search;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
     //[Authorize(Roles = "Admin,SuperAdmin")]
-    public class SearchController : Controller
+    public class SearchController : BaseController
     {
         private readonly ISearchService _searchService;
 

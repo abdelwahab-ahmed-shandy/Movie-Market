@@ -1,12 +1,13 @@
 ﻿using DAL.ViewModels.Dashboard;
 using DAL.ViewModels.Search;
 using Microsoft.AspNetCore.Mvc;
+using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
     //[Authorize(Roles = "Admin,SuperAdmin")]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IAdminDashboardService _dashboardService;
         public HomeController(IAdminDashboardService dashboardService)

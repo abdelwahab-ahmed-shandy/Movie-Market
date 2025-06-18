@@ -1,12 +1,13 @@
 ﻿using DAL.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Movie_Market.GloubalUsing;
 using System.Security.Claims;
 
 namespace Movie_Market.Areas.Identity.Controllers
 {
     [Area("Identity")]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly IAccountService _accountService;
         private readonly UserManager<ApplicationUser> _userManager;

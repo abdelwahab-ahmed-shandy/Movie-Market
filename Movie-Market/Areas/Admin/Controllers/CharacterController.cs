@@ -1,11 +1,12 @@
 ﻿using DAL.ViewModels.Character;
 using Microsoft.AspNetCore.Mvc;
+using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
     //[Authorize(Roles = "Admin,SuperAdmin")]
-    public class CharacterController : Controller
+    public class CharacterController : BaseController
     {
         private readonly IAdminCharacterService _characterService;
         private readonly IGenericRepository<Movie> _movieRepo;

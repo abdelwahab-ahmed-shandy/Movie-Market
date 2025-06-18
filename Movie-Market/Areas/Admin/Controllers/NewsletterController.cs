@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
     //[Authorize(Roles = "Admin,SuperAdmin")]
-    public class NewsletterController : Controller
+    public class NewsletterController : BaseController
     {
         private readonly INewsletterService _newsletterService;
         private readonly ILogger<NewsletterController> _logger;

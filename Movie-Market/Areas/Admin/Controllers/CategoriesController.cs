@@ -2,12 +2,13 @@
 using DAL.ViewModels.Category;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
     //[Authorize(Roles = "Admin,SuperAdmin")]
-    public class CategoriesController : Controller
+    public class CategoriesController : BaseController
     {
         private readonly ILogger<CategoriesController> _logger;
         private readonly IAdminCategoryService _categoryService;

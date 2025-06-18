@@ -1,9 +1,11 @@
 ﻿
+using Movie_Market.GloubalUsing;
+
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
     //[Authorize(Roles = "Admin,SuperAdmin")]
-    public class SpecialsController : Controller
+    public class SpecialsController : BaseController
     {
         private readonly IAdminSpecialService _specialService;
 

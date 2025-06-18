@@ -1,10 +1,11 @@
 ﻿using BLL.Services.Interfaces.Customer;
 using Microsoft.AspNetCore.Mvc;
+using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Customer.Controllers
 {
     [Area("Customer")]
-    public class NewsletterController : Controller
+    public class NewsletterController : BaseController
     {
         private readonly ISubscriberService _subscriberService;
         private readonly ILogger<NewsletterController> _logger;

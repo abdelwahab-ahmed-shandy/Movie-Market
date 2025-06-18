@@ -1,11 +1,12 @@
 ﻿using DAL.ViewModels.Episode;
 using Microsoft.AspNetCore.Mvc;
+using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
     //[Authorize(Roles = "Admin,SuperAdmin")]
-    public class EpisodeController : Controller
+    public class EpisodeController : BaseController
     {
         private readonly IAdminEpisodeService _episodeService;
         public EpisodeController(IAdminEpisodeService episodeService)
