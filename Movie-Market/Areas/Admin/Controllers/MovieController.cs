@@ -90,6 +90,7 @@ namespace Movie_Market.Areas.Admin.Controllers
 
 
         #region Edit 
+
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -104,27 +105,26 @@ namespace Movie_Market.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(MovieAdminEditVM model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    await LoadDropdowns();
-            //    return View(model);
-            //}
+            if (!ModelState.IsValid)
+            {
+                await LoadDropdowns();
+                return View(model);
+            }
 
             var result = await _movieService.UpdateMovieAsync(model);
-            if (result)
+            if (!result)
             {
+                TempData["notification"] = "Movie updated successfully!";
+                TempData["MessageType"] = "success";
                 return RedirectToAction(nameof(Index));
             }
 
             ModelState.AddModelError("", "Error updating movie");
             await LoadDropdowns();
-
-            TempData["notification"] = "Movie Is Updated !";
-            TempData["MessageType"] = "success";
-            return RedirectToAction(nameof(Index));
+            return View(model);
         }
 
         #endregion

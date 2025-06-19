@@ -12,7 +12,7 @@
                 <div class="col-lg-4">
                     @if (!string.IsNullOrEmpty(Model.TvSeries.ImgUrl))
                     {
-                        <img src="@Model.TvSeries.ImgUrl" class="img-fluid rounded-3 shadow-lg" alt="@Model.TvSeries.Title" style="max-height: 500px; object-fit: cover;">
+                        <img src="@Url.Content("~/" + Model.TvSeries.ImgUrl)" class="img-fluid rounded-3 shadow-lg" alt="@Model.TvSeries.Title" style="max-height: 500px; object-fit: cover;">
                     }
                     else
                     {

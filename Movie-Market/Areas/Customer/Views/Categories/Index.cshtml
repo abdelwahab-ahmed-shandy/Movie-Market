@@ -17,7 +17,7 @@
 
 					 @if (!string.IsNullOrEmpty(category.IconUrl)) 
 					 {
-						<img src="@category.IconUrl" class="card-img-top" alt="@category.Name" style="height: 200px; object-fit: cover;">
+						<img src="@Url.Content("~/" + category.IconUrl)" class="card-img-top" alt="@category.Name" style="height: 200px; object-fit: cover;">
 					} 
 					
 					<div class="card-body">

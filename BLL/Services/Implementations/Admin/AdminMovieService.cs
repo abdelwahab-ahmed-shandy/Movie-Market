@@ -1,4 +1,7 @@
-﻿using BLL.Services.Interfaces.Admin;
+﻿using BLL.Services.Implementations.Admin;
+using BLL.Services.Interfaces.Admin;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using MovieMart.Models;
 using System;
 using System.Collections.Generic;
@@ -18,16 +21,15 @@ namespace BLL.Services.Implementations
         private readonly IGenericRepository<CharacterMovie> _characterMovieRepo;
         private readonly IGenericRepository<CinemaMovie> _cinemaMovieRepo;
         private readonly IGenericRepository<MovieSpecial> _movieSpecialRepo;
+        private readonly IFileService _fileService;
+        private readonly ILogger<AdminMovieService> _logger;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AdminMovieService(
-            IGenericRepository<Movie> movieRepo,
-            IGenericRepository<Category> categoryRepo,
-            IGenericRepository<Character> characterRepo,
-            IGenericRepository<Cinema> cinemaRepo,
-            IGenericRepository<Special> specialRepo,
-            IGenericRepository<CharacterMovie> characterMovieRepo,
-            IGenericRepository<CinemaMovie> cinemaMovieRepo,
-            IGenericRepository<MovieSpecial> movieSpecialRepo)
+        public AdminMovieService(IGenericRepository<Movie> movieRepo,IGenericRepository<Category> categoryRepo,
+            IGenericRepository<Character> characterRepo,IGenericRepository<Cinema> cinemaRepo,
+            IGenericRepository<Special> specialRepo,IGenericRepository<CharacterMovie> characterMovieRepo,
+            IGenericRepository<CinemaMovie> cinemaMovieRepo,IGenericRepository<MovieSpecial> movieSpecialRepo,
+            ILogger<AdminMovieService> logger, IFileService fileService , IHttpContextAccessor httpContextAccessor)
         {
             _movieRepo = movieRepo;
             _categoryRepo = categoryRepo;
@@ -37,6 +39,9 @@ namespace BLL.Services.Implementations
             _characterMovieRepo = characterMovieRepo;
             _cinemaMovieRepo = cinemaMovieRepo;
             _movieSpecialRepo = movieSpecialRepo;
+            _logger = logger;
+            _fileService = fileService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
@@ -79,6 +84,7 @@ namespace BLL.Services.Implementations
                 SearchTerm = query
             };
         }
+
 
         public async Task<MovieAdminDetailsVM?> GetMovieDetailsAsync(Guid id)
         {
@@ -150,42 +156,19 @@ namespace BLL.Services.Implementations
             };
         }
 
-        public async Task<MovieAdminEditVM?> GetMovieForEditAsync(Guid id)
-        {
-            var movie = await _movieRepo.Get(m => m.Id == id)
-                .Include(m => m.CharacterMovies)
-                .Include(m => m.CinemaMovies)
-                .Include(m => m.MovieSpecials)
-                .FirstOrDefaultAsync();
-
-            if (movie == null) return null;
-
-            return new MovieAdminEditVM
-            {
-                Id = movie.Id,
-                Title = movie.Title,
-                Description = movie.Description,
-                CurrentState = movie.CurrentState.Value,
-                Price = movie.Price,
-                Author = movie.Author,
-                ImgUrl = movie.ImgUrl,
-                Duration = movie.Duration,
-                StartDate = movie.StartDate,
-                EndDate = movie.EndDate,
-                ReleaseYear = movie.ReleaseYear,
-                Rating = movie.Rating,
-                CategoryId = movie.CategoryId,
-                CharacterIds = movie.CharacterMovies.Select(cm => cm.CharacterId).ToList(),
-                CinemaIds = movie.CinemaMovies.Select(cm => cm.CinemaId).ToList(),
-                SpecialIds = movie.MovieSpecials.Select(ms => ms.SpecialId).ToList()
-            };
-        }
-
 
         public async Task<bool> CreateMovieAsync(MovieAdminCreateVM model)
         {
             try
             {
+                var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
+
+                string? imagePath = null;
+                if (model.ImgFile != null && model.ImgFile.Length > 0)
+                {
+                    imagePath = await _fileService.SaveFileAsync(model.ImgFile, "uploads/movies");
+                }
+
                 var movie = new Movie
                 {
                     Title = model.Title,
@@ -193,12 +176,14 @@ namespace BLL.Services.Implementations
                     CurrentState = model.CurrentState,
                     Price = model.Price,
                     Author = model.Author,
-                    ImgUrl = model.ImgUrl,
+                    ImgUrl = imagePath,
                     Duration = model.Duration,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
                     ReleaseYear = model.ReleaseYear,
                     Rating = model.Rating,
+                    CreatedBy = userName,
+                    CreatedDateUtc = DateTime.UtcNow,
                     CategoryId = model.CategoryId
                 };
 
@@ -244,6 +229,38 @@ namespace BLL.Services.Implementations
         }
 
 
+        public async Task<MovieAdminEditVM?> GetMovieForEditAsync(Guid id)
+        {
+            var movie = await _movieRepo.Get(m => m.Id == id)
+                .Include(m => m.CharacterMovies)
+                .Include(m => m.CinemaMovies)
+                .Include(m => m.MovieSpecials)
+                .FirstOrDefaultAsync();
+
+            if (movie == null) return null;
+
+            return new MovieAdminEditVM
+            {
+                Id = movie.Id,
+                Title = movie.Title,
+                Description = movie.Description,
+                CurrentState = movie.CurrentState.Value,
+                Price = movie.Price,
+                Author = movie.Author,
+                //ImgFile = movie.ImgUrl,
+                Duration = movie.Duration,
+                StartDate = movie.StartDate,
+                EndDate = movie.EndDate,
+                ReleaseYear = movie.ReleaseYear,
+                Rating = movie.Rating,
+                CategoryId = movie.CategoryId,
+                CharacterIds = movie.CharacterMovies.Select(cm => cm.CharacterId).ToList(),
+                CinemaIds = movie.CinemaMovies.Select(cm => cm.CinemaId).ToList(),
+                SpecialIds = movie.MovieSpecials.Select(ms => ms.SpecialId).ToList()
+            };
+        }
+
+
         public async Task<bool> UpdateMovieAsync(MovieAdminEditVM model)
         {
             try
@@ -251,12 +268,21 @@ namespace BLL.Services.Implementations
                 var movie = await _movieRepo.GetByIdAsync(model.Id);
                 if (movie == null) return false;
 
+                var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
+
+                if (model.ImgFile != null && model.ImgFile.Length > 0)
+                {
+                    if (!string.IsNullOrEmpty(movie.ImgUrl))
+                        _fileService.DeleteFile(movie.ImgUrl);
+
+                    movie.ImgUrl = await _fileService.SaveFileAsync(model.ImgFile, "uploads/movies");
+                }
+
                 // Update movie properties
                 movie.Title = model.Title;
                 movie.Description = model.Description;
                 movie.Price = model.Price;
                 movie.Author = model.Author;
-                movie.ImgUrl = model.ImgUrl;
                 movie.Duration = model.Duration;
                 movie.StartDate = model.StartDate;
                 movie.EndDate = model.EndDate;
@@ -264,6 +290,8 @@ namespace BLL.Services.Implementations
                 movie.Rating = model.Rating;
                 movie.CurrentState = model.CurrentState;
                 movie.CategoryId = model.CategoryId;
+                movie.UpdatedBy = userName;
+                movie.UpdatedDateUtc = DateTime.UtcNow;
 
                 await _movieRepo.Update(movie);
 
@@ -361,15 +389,23 @@ namespace BLL.Services.Implementations
         {
             try
             {
+                var movie = await _movieRepo.GetByIdAsync(id);
+                if (movie == null) return false;
+
+                if (!string.IsNullOrWhiteSpace(movie.ImgUrl))
+                {
+                    _fileService.DeleteFile(movie.ImgUrl);
+                }
+
                 await _movieRepo.DeleteInDB(id);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine($"Error deleting movie: {ex.Message}");
                 return false;
             }
         }
-
 
 
     }

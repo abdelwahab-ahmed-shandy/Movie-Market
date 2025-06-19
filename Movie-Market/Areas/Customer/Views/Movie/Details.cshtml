@@ -8,10 +8,10 @@
     <div class="row g-5">
         <div class="col-lg-5">
             <div class="position-relative">
-                <img src="@Model.ImgUrl" class="img-fluid rounded-3 shadow-lg w-100" alt="@Model.Title" style="max-height: 600px; object-fit: cover;">
+                <img src="@Url.Content("~/" + Model.ImgUrl)"  class="img-fluid rounded-3 shadow-lg w-100" alt="@Model.Title" style="max-height: 600px; object-fit: cover;">
                 @if (Model.Rating.HasValue)
                 {
-                    <div class="position-absolute top-0 end-0 bg-warning text-dark p-3 fw-bold rounded-bottom-left-3" style="box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                    <div class="position-absolute top-0 end-0 bg-warning text-dark p-3 fw-bold rounded-bottom-left-3" style="box-shadow: 0 2px 5px rgba(0,0,0,0.2); border-radius: 80%;">
                         @Model.Rating?.ToString("0.0")/10
                         <i class="fas fa-star ms-1"></i>
                     </div>

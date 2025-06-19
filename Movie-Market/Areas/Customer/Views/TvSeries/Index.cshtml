@@ -19,7 +19,7 @@
                         <div class="series-poster position-relative">
                             @if (!string.IsNullOrEmpty(series.ImgUrl))
                             {
-                                <img src="@series.ImgUrl" class="card-img-top" alt="@series.Title" style="height: 400px; object-fit: cover;">
+                                <img src="@Url.Content("~/" + series.ImgUrl)" class="card-img-top" alt="@series.Title" style="height: 400px; object-fit: cover;">
                             }
                             else
                             {

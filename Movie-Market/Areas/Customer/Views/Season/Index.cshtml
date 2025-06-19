@@ -20,7 +20,7 @@
                 <div class="card h-100">
                     @if (!string.IsNullOrEmpty(season.ImgUrl))
                     {
-                        <img src="@season.ImgUrl" class="card-img-top" alt="@season.Title" style="height: 200px; object-fit: cover;">
+                        <img src="@Url.Content("~/" + season.ImgUrl)" class="card-img-top" alt="@season.Title" style="height: 200px; object-fit: cover;">
                     }
                     else
                     {

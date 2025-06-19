@@ -20,53 +20,65 @@
 <div class="container">
 
 
+    <!-- Categories -->
+    <section>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Movie Categories</h2>
+            <a asp-area="Customer" asp-controller="Categories" asp-action="Index" class="btn btn-outline-primary">View All</a>
+        </div>
+        <div class="row">
+            @foreach (var category in Model.MovieCategories)
+            {
+                <div class="col-md-2 mb-4">
+                    <div class="card h-100">
+                        <img src="@Url.Content("~/" + category.ImgUrl)" class="card-img-top" alt="@category.Name">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@category.Name</h5>
+                            <p class="card-text small text-muted">@category.Description</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a asp-area="Customer" asp-controller="Categories" asp-action="Details"
+                               asp-route-id="@category.Id" class="btn btn-sm btn-outline-primary w-100">Browse</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+
     <!-- Recent Movies -->
     <section class="mb-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2>Recent Movies</h2>
-            <a asp-area="Customer" asp-controller="Movies" asp-action="Index" class="btn btn-outline-primary">View All</a>
+            <a asp-area="Customer" asp-controller="Movie" asp-action="Index" class="btn btn-outline-primary">View All</a>
         </div>
         <div class="row">
             @foreach (var movie in Model.RecentMovies)
             {
                 <div class="col-md-2 mb-4">
-                    <partial name="_MovieCard" model="movie" />
+                    <div class="card h-100">
+                        <img src="@Url.Content("~/" + movie.ImgUrl)" class="card-img-top" alt="@movie.Title">
+                        <div class="card-body">
+                            <h5 class="card-title">@movie.Title</h5>
+                            <p class="card-text text-muted">@movie.ReleaseYear</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">$@movie.Price</span>
+                                <span class="text-warning">
+                                    <i class="fas fa-star"></i> @movie.Rating?.ToString("0.0")
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a asp-area="Customer" asp-controller="Movie" asp-action="Details"
+                               asp-route-id="@movie.Id" class="btn btn-sm btn-primary w-100">Details</a>
+                        </div>
+                    </div>
                 </div>
             }
         </div>
     </section>
 
-    <!-- New Releases -->
-    <section class="mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>New Releases</h2>
-            <a asp-area="Customer" asp-controller="Home" asp-action="NewReleases" class="btn btn-outline-primary">View All</a>
-        </div>
-        <div class="row">
-            @foreach (var movie in Model.NewReleases)
-            {
-                <div class="col-md-2 mb-4">
-                    <partial name="_MovieCard" model="movie" />
-                </div>
-            }
-        </div>
-    </section>
-
-    <!-- Top Rated Movies -->
-    <section class="mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>Top Rated Movies</h2>
-            <a asp-area="Customer" asp-controller="Movies" asp-action="TopRated" class="btn btn-outline-primary">View All</a>
-        </div>
-        <div class="row">
-            @foreach (var movie in Model.TopRated)
-            {
-                <div class="col-md-2 mb-4">
-                    <partial name="_MovieCard" model="movie" />
-                </div>
-            }
-        </div>
-    </section>
 
     <!-- Recent Cinemas -->
     <section class="mb-5">
@@ -93,31 +105,6 @@
         </div>
     </section>
 
-    <!-- Recent TV Series -->
-    <section class="mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>Recent TV Series</h2>
-            <a asp-area="Customer" asp-controller="TvSeries" asp-action="Index" class="btn btn-outline-primary">View All</a>
-        </div>
-        <div class="row">
-            @foreach (var series in Model.RecentTvSeries)
-            {
-                <div class="col-md-2 mb-4">
-                    <div class="card h-100">
-                        <img src="@series.ImgUrl" class="card-img-top" alt="@series.Title">
-                        <div class="card-body">
-                            <h5 class="card-title">@series.Title</h5>
-                            <p class="card-text text-muted">@series.ReleaseYear</p>
-                        </div>
-                        <div class="card-footer bg-transparent">
-                            <a asp-area="Customer" asp-controller="TvSeries" asp-action="Details"
-                               asp-route-id="@series.Id" class="btn btn-sm btn-outline-primary w-100">Details</a>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </section>
 
     <!-- Popular TV Series -->
     <section class="mb-5">
@@ -130,7 +117,7 @@
             {
                 <div class="col-md-2 mb-4">
                     <div class="card h-100">
-                        <img src="@series.ImgUrl" class="card-img-top" alt="@series.Title">
+                        <img src="@Url.Content("~/" + series.ImgUrl)" class="card-img-top" alt="@series.Title">
                         <div class="card-body">
                             <h5 class="card-title">@series.Title</h5>
                             <p class="card-text text-muted">@series.ReleaseYear</p>
@@ -148,31 +135,6 @@
         </div>
     </section>
 
-    <!-- Categories -->
-    <section>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>Movie Categories</h2>
-            <a asp-area="Customer" asp-controller="Categories" asp-action="Index" class="btn btn-outline-primary">View All</a>
-        </div>
-        <div class="row">
-            @foreach (var category in Model.MovieCategories)
-            {
-                <div class="col-md-2 mb-4">
-                    <div class="card h-100">
-                        <img src="@category.ImgUrl" class="card-img-top" alt="@category.Name">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">@category.Name</h5>
-                            <p class="card-text small text-muted">@category.Description</p>
-                        </div>
-                        <div class="card-footer bg-transparent">
-                            <a asp-area="Customer" asp-controller="Categories" asp-action="Details"
-                               asp-route-id="@category.Id" class="btn btn-sm btn-outline-primary w-100">Browse</a>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </section>
 
 
 </div>

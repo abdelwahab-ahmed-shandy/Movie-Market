@@ -19,7 +19,7 @@
                 <div class="col-lg-4">
                     @if (!string.IsNullOrEmpty(Model.Img))
                     {
-                        <img src="@Model.Img" class="img-fluid rounded-3 shadow-lg" alt="@Model.Name" style="max-height: 400px; object-fit: cover;">
+                        <img src="@Url.Content("~/" + Model.Img)" class="img-fluid rounded-3 shadow-lg" alt="@Model.Name" style="max-height: 400px; object-fit: cover;">
                     }
                     else
                     {

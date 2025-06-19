@@ -23,7 +23,7 @@
 			{
 				<div class="col">
 					<div class="card h-100 shadow-sm">
-						<img src="@movie.ImgUrl" class="card-img-top" alt="@movie.Title" style="height: 300px; object-fit: cover;">
+						<img src="@Url.Content("~/" + movie.ImgUrl)" class="card-img-top" alt="@movie.Title" style="height: 300px; object-fit: cover;">
 						<div class="card-body">
 							<h5 class="card-title">@movie.Title (@movie.ReleaseYear)</h5>
 							@if (movie.Rating.HasValue)

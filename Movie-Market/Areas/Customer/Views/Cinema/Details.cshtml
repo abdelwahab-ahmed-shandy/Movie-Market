@@ -50,7 +50,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="movie-card card h-100 border-0 shadow-sm">
                             <div class="movie-poster" style="height: 300px;">
-                                <img src="@movie.ImgUrl" class="card-img-top h-100" alt="@movie.Title" style="object-fit: cover;">
+                                <img src="@Url.Content("~/" + movie.ImgUrl)" class="card-img-top h-100" alt="@movie.Title" style="object-fit: cover;">
                                 <div class="movie-badge bg-dark text-white">
                                     <i class="fas fa-clock me-1"></i> @movie.Duration.ToString(@"hh\:mm")
                                 </div>

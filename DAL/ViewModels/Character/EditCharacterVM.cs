@@ -13,7 +13,10 @@ namespace DAL.ViewModels.Character
         [Required]
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
-        public string? Img { get; set; }
+
+        [Display(Name = "Character Icon")]
+        [DataType(DataType.Upload)]
+        public IFormFile Img { get; set; }
         public CurrentState CurrentState { get; set; }
         public List<Guid>? SelectedMovieIds { get; set; }
         public List<Guid>? SelectedTvSeriesIds { get; set; }

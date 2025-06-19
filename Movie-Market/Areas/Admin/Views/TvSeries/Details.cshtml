@@ -38,7 +38,7 @@
                 <div class="col-md-4 text-center">
                     @if (!string.IsNullOrEmpty(Model.ImgUrl))
                     {
-                        <img src="@Model.ImgUrl" class="img-fluid rounded mb-3" alt="@Model.Title" style="max-height: 400px;">
+                        <img src="@Url.Content("~/" + Model.ImgUrl)" class="img-fluid rounded mb-3" alt="@Model.Title" style="max-height: 400px;">
                     }
                     else
                     {
@@ -148,7 +148,7 @@
                                             <div class="col-md-4">
                                                 @if (!string.IsNullOrEmpty(character.ImageUrl))
                                                 {
-                                                    <img src="@character.ImageUrl" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="@character.Name">
+                                                    <img src="@Url.Content("~/" + character.ImageUrl)" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="@character.Name">
                                                 }
                                                 else
                                                 {

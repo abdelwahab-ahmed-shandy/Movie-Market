@@ -17,19 +17,18 @@
             {
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="@movie.ImgUrl" class="card-img-top" alt="@movie.Title" style="height: 400px; object-fit: cover;">
+                        <img src="@Url.Content("~/" + movie.ImgUrl)" class="card-img-top" alt="@movie.Title" style="height: 400px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">@movie.Title</h5>
                             <p class="card-text">
                                 <span class="badge bg-primary">@movie.CategoryName</span>
                                 <span class="badge bg-success ms-2">@movie.Rating ★</span>
                             </p>
-                            <p class="text-muted">Released: @movie.ReleaseYear</p>
                         </div>
                         <div class="card-footer bg-transparent">
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="h5">$@movie.Price.ToString("0.00")</span>
-                                <a asp-action="Details" asp-route-id="@movie.Id" class="btn btn-primary">Details</a>
+                                <a asp-area="Customer" asp-controller="Movie" asp-action="Details" asp-route-id="@movie.Id" class="btn btn-primary">Details</a>
                             </div>
                         </div>
                     </div>

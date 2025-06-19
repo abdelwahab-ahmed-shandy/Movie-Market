@@ -19,8 +19,9 @@ namespace DAL.ViewModels.Movie
         [MaxLength(100)]
         public string? Author { get; set; }
 
-        [Display(Name = "Image URL")]
-        public string? ImgUrl { get; set; }
+        [Display(Name = "Category Icon")]
+        [DataType(DataType.Upload)]
+        public IFormFile? ImgFile { get; set; }
 
         [Display(Name = "Duration (hh:mm:ss)")]
         public TimeSpan Duration { get; set; }

@@ -1,4 +1,6 @@
 ﻿using BLL.Services.Interfaces.Admin;
+using Microsoft.Extensions.Logging;
+using MovieMart.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +17,14 @@ namespace BLL.Services.Implementations.Admin
         private readonly IGenericRepository<Movie> _movieRepo;
         private readonly IGenericRepository<TvSeries> _tvSeriesRepo;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
+        private readonly IFileService _fileService;
+        private readonly ILogger<AdminCharacterService> _logger;
 
         public AdminCharacterService(IGenericRepository<Character> characterRepo, IGenericRepository<CharacterMovie> characterMovieRepo,
                                        IGenericRepository<CharacterTvSeries> characterTvSeriesRepo,
                                             IGenericRepository<Movie> movieRepo, IGenericRepository<TvSeries> tvSeriesRepo,
-                                                IHttpContextAccessor httpContextAccessor)
+                                                IHttpContextAccessor httpContextAccessor, IFileService fileService,
+                                                    ILogger<AdminCharacterService> logger)
         {
             _characterRepo = characterRepo;
             _characterMovieRepo = characterMovieRepo;
@@ -28,8 +32,9 @@ namespace BLL.Services.Implementations.Admin
             _tvSeriesRepo = tvSeriesRepo;
             _characterTvSeriesRepo = characterTvSeriesRepo;
             _httpContextAccessor = httpContextAccessor;
+            _fileService = fileService;
+            _logger = logger;
         }
-
 
 
         public async Task<CharacterAdminListVM> GetCharacterAll(int page, int pageSize, string? query = null)
@@ -103,11 +108,18 @@ namespace BLL.Services.Implementations.Admin
 
             try
             {
+
+                string imagePath = null;
+                if (model.Img != null && model.Img.Length > 0)
+                {
+                    imagePath = await _fileService.SaveFileAsync(model.Img, "uploads/characters");
+                }
+
                 var character = new Character
                 {
                     Name = model.Name,
                     Description = model.Description,
-                    ImgUrl = model.Img,
+                    ImgUrl = imagePath,
                     CurrentState = model.CurrentState,
                     CreatedBy = userName,
                     CreatedDateUtc = DateTime.UtcNow
@@ -133,9 +145,18 @@ namespace BLL.Services.Implementations.Admin
                 var character = await _characterRepo.GetByIdAsync(model.Id);
                 if (character == null) return false;
 
+                if (model.Img != null && model.Img.Length > 0)
+                {
+                    if (!string.IsNullOrEmpty(character.ImgUrl))
+                    {
+                        _fileService.DeleteFile(character.ImgUrl);
+                    }
+
+                    character.ImgUrl = await _fileService.SaveFileAsync(model.Img, "uploads/characters");
+                }
+
                 character.Name = model.Name;
                 character.Description = model.Description;
-                character.ImgUrl = model.Img;
                 character.CurrentState = model.CurrentState;
                 character.UpdatedBy = userName;
                 character.UpdatedDateUtc = DateTime.UtcNow;
@@ -183,16 +204,23 @@ namespace BLL.Services.Implementations.Admin
         {
             try
             {
+                var character = await _characterRepo.GetByIdAsync(id);
+                if (character == null) return false;
+
+                if (!string.IsNullOrWhiteSpace(character.ImgUrl))
+                {
+                    _fileService.DeleteFile(character.ImgUrl);
+                }
+
                 await _characterRepo.DeleteInDB(id);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine($"Error deleting character: {ex.Message}");
                 return false;
             }
         }
-
-
 
     }
 

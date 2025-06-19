@@ -51,7 +51,7 @@
                             <td>
                                 @if (!string.IsNullOrEmpty(item.Img))
                                 {
-                                    <img src="@item.Img" alt="@item.Name" style="max-width: 80px; max-height: 80px;" />
+                                    <img src="@Url.Content("~/" + item.Img)" alt="@item.Name" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;" />
                                 }
                             </td>
                             <td>@item.Name</td>

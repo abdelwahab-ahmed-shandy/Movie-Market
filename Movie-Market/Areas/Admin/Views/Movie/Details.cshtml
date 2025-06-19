@@ -8,17 +8,16 @@
     <div class="card">
         <div class="card-header bg-primary text-white">
             <h2>@Model.Title</h2>
-            <span class="badge @(Model.IsDeleted ? "bg-danger" : "bg-success")">
-                @(Model.IsDeleted ? "Deleted" : "Active")
-            </span>
-            <span class="badge bg-info">@Model.CurrentState</span>
+            
+            <span class="badge @GetStateBadgeClass(Model.CurrentState)"> @Model.CurrentState</span>    
+            
         </div>
         
         <div class="card-body">
             <div class="row">
                 <!-- Movie Poster -->
                 <div class="col-md-4">
-                    <img src="@Model.ImgUrl" class="img-fluid rounded" alt="@Model.Title poster" onerror="this.src='/images/default-movie.jpg'">
+                    <img src="@Url.Content("~/" + Model.ImgUrl)" class="img-fluid rounded" alt="@Model.Title poster" ">
                 </div>
                 
                 <!-- Movie Details -->
@@ -205,3 +204,19 @@
         });
     </script>
 }
+
+        
+@functions {
+    string GetStateBadgeClass(CurrentState state)
+    {
+        return state switch
+        {
+            CurrentState.Active => "bg-success",
+            CurrentState.Inactive => "bg-secondary",
+            CurrentState.SoftDelete => "bg-danger",
+            CurrentState.Archived => "bg-warning",
+            _ => "bg-secondary"
+        };
+    }
+
+} 

@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-8">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data" >
             <input type="hidden" asp-for="Id" />
 
             <div class="row">
@@ -42,10 +42,11 @@
                 </div>
 
                 <div class="col-md-6">
+
                     <div class="form-group">
-                        <label asp-for="ImgUrl" class="control-label"></label>
-                        <input asp-for="ImgUrl" class="form-control" />
-                        <span asp-validation-for="ImgUrl" class="text-danger"></span>
+                        <label asp-for="ImgFile" class="control-label"></label>
+                        <input asp-for="ImgFile" type="file" class="form-control" />
+                        <span asp-validation-for="ImgFile" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">

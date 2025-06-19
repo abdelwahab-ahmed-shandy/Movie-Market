@@ -20,7 +20,7 @@
                        aria-label="@category.Name category">
                          @if (!string.IsNullOrWhiteSpace(category.IconUrl))
                         {
-                            <img src="~/@category.IconUrl" alt="@category.Name" class="rounded-circle"
+                            <img src="@Url.Content("~/" + category.IconUrl)" alt="@category.Name" class="rounded-circle"
                                  style="width: 35px; height: 35px; object-fit: cover;" />
                         }
                         <span> @category.Name</span>
