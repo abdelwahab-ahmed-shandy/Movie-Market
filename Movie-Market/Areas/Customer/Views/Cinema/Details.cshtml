@@ -5,11 +5,18 @@
 }
 
 <div class="cinema-detail-container">
-    <!-- Cinema Header Section -->
-    <div class="cinema-header py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));">
+    <!-- Cinema Header Section with Background Image -->
+    <div class="cinema-header py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), @(!string.IsNullOrEmpty(Model.Img) ? $"url('{Url.Content("~/" + Model.Img)}')" : "none"); background-size: cover; background-position: center;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-8">
+                    @if (!string.IsNullOrEmpty(Model.Img))
+                    {
+                        <div class="cinema-logo mb-4" style="max-width: 200px;">
+                            <img src="@Url.Content("~/" + Model.Img)" class="img-fluid rounded shadow" alt="@Model.Name" style="max-height: 150px; background: white; padding: 10px;">
+                        </div>
+                    }
+
                     <h1 class="display-4 fw-bold text-white">@Model.Name</h1>
                     <div class="d-flex align-items-center mb-3">
                         <i class="fas fa-map-marker-alt me-2 text-white"></i>
@@ -19,6 +26,9 @@
                     <div class="cinema-meta d-flex align-items-center">
                         <span class="badge bg-light text-dark me-3">
                             <i class="fas fa-calendar-day me-1"></i> Added @Model.CreatedDate.ToString("MMMM d, yyyy")
+                        </span>
+                        <span class="badge bg-primary text-white">
+                            <i class="fas fa-film me-1"></i> @Model.Movies.Count Movies
                         </span>
                     </div>
                 </div>
@@ -33,24 +43,83 @@
         </div>
     </div>
 
+    <!-- Search and Filter Section -->
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <form asp-action="Details" asp-route-id="@Model.Id" method="get" class="row g-3 align-items-center">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <i class="fas fa-search text-muted"></i>
+                                    </span>
+                                    <input type="text" name="searchString" class="form-control border-start-0"
+                                           placeholder="Search movies by title, description..."
+                                           value="@Context.Request.Query["searchString"]">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <select name="sortOrder" class="form-select">
+                                    <option value="">Sort By</option>
+                                    <option value="title" selected="@(Context.Request.Query["sortOrder"] == "title")">Title (A-Z)</option>
+                                    <option value="title_desc" selected="@(Context.Request.Query["sortOrder"] == "title_desc")">Title (Z-A)</option>
+                                    <option value="date" selected="@(Context.Request.Query["sortOrder"] == "date")">Newest</option>
+                                    <option value="date_desc" selected="@(Context.Request.Query["sortOrder"] == "date_desc")">Oldest</option>
+                                    <option value="rating" selected="@(Context.Request.Query["sortOrder"] == "rating")">Top Rated</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-filter me-1"></i> Apply
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Now Showing Section -->
     <div class="container py-5">
-        <div class="section-header mb-5">
-            <h2 class="section-title fw-bold">
-                <i class="fas fa-film me-2"></i> Currently Showing (@Model.Movies.Count)
-            </h2>
-            <div class="section-divider"></div>
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <div>
+                <h2 class="section-title fw-bold m-0">
+                    <i class="fas fa-film me-2"></i> Currently Showing
+                    <span class="badge bg-secondary ms-2">@Model.Movies.Count</span>
+                </h2>
+                @if (!string.IsNullOrEmpty(Context.Request.Query["searchString"]))
+                {
+                    <p class="text-muted mb-0 mt-2">
+                        Search results for: <strong>"@Context.Request.Query["searchString"]"</strong>
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="text-danger ms-2">
+                            <i class="fas fa-times"></i> Clear
+                        </a>
+                    </p>
+                }
+            </div>
         </div>
 
         @if (Model.Movies.Any())
         {
             <div class="row g-4">
-                @foreach (var movie in Model.Movies.OrderBy(m => m.StartDate))
+                @foreach (var movie in Model.Movies)
                 {
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="movie-card card h-100 border-0 shadow-sm">
                             <div class="movie-poster" style="height: 300px;">
-                                <img src="@Url.Content("~/" + movie.ImgUrl)" class="card-img-top h-100" alt="@movie.Title" style="object-fit: cover;">
+                                @if (!string.IsNullOrEmpty(movie.ImgUrl))
+                                {
+                                    <img src="@Url.Content("~/" + movie.ImgUrl)" class="card-img-top h-100" alt="@movie.Title" style="object-fit: cover;">
+                                }
+                                else
+                                {
+                                    <div class="h-100 d-flex align-items-center justify-content-center bg-light">
+                                        <i class="fas fa-film fa-3x text-muted"></i>
+                                    </div>
+                                }
                                 <div class="movie-badge bg-dark text-white">
                                     <i class="fas fa-clock me-1"></i> @movie.Duration.ToString(@"hh\:mm")
                                 </div>
@@ -67,8 +136,8 @@
 
                                 <div class="movie-info mb-3">
                                     <div class="d-flex justify-content-between">
-                                        <span><i class="fas fa-calendar-day text-primary me-1"></i> @movie.StartDate</span>
-                                        <span><i class="fas fa-money-bill-wave text-success me-1"></i> $@movie.Price</span>
+                                        <span><i class="fas fa-calendar-day text-primary me-1"></i> @movie.StartDate </span>
+                                        <span><i class="fas fa-money-bill-wave text-success me-1"></i> $@movie.Price </span>
                                     </div>
                                     <div class="mt-2">
                                         <i class="fas fa-clock text-primary me-1"></i> @movie.StartDate
@@ -98,11 +167,22 @@
                 <div class="empty-state-icon mb-4">
                     <i class="fas fa-film fa-4x text-muted"></i>
                 </div>
-                <h3 class="mb-3">No Movies Currently Showing</h3>
-                <p class="text-muted mb-4">There are no movies scheduled at this cinema at the moment.</p>
-                <a asp-controller="Movies" asp-action="Index" class="btn btn-primary">
-                    <i class="fas fa-ticket-alt me-1"></i> Browse All Movies
-                </a>
+                @if (!string.IsNullOrEmpty(Context.Request.Query["searchString"]))
+                {
+                    <h3 class="mb-3">No movies found</h3>
+                    <p class="text-muted mb-4">No movies match your search criteria.</p>
+                    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">
+                        <i class="fas fa-undo me-1"></i> Show All Movies
+                    </a>
+                }
+                else
+                {
+                    <h3 class="mb-3">No Movies Currently Showing</h3>
+                    <p class="text-muted mb-4">There are no movies scheduled at this cinema at the moment.</p>
+                    <a asp-controller="Movies" asp-action="Index" class="btn btn-primary">
+                        <i class="fas fa-ticket-alt me-1"></i> Browse All Movies
+                    </a>
+                }
             </div>
         }
     </div>
@@ -116,10 +196,16 @@
 
     .cinema-header {
         margin-bottom: 3rem;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
     }
 
-    .section-header {
-        position: relative;
+    .cinema-logo {
+        border: 3px solid white;
+        background: rgba(255,255,255,0.8);
+        padding: 10px;
+        border-radius: 8px;
     }
 
     .section-title {
@@ -175,5 +261,15 @@
 
     .empty-state {
         padding: 3rem;
+    }
+
+    /* Search section styles */
+    .input-group-text {
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus + .input-group-text {
+        color: var(--bs-primary);
+        border-color: var(--bs-primary);
     }
 </style>

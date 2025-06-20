@@ -1,109 +1,123 @@
 ﻿@model DAL.ViewModels.Cinema.CinemaAdminDetailsVM
 
 @{
-	ViewData["Title"] = "Cinema Details";
+    ViewData["Title"] = "Cinema Details";
 }
 
 <div class="card shadow mb-4">
-	<div class="card-header py-3 d-flex justify-content-between align-items-center">
-		<h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
-		<div>
-			<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Edit</a>
-			<a asp-action="Index" class="btn btn-secondary btn-sm">Back to list</a>
-		</div>
-	</div>
-	<div class="card-body">
-		<div class="row">
-			<div class="col-md-6">
-				<dl class="row">
-					<dt class="col-sm-4">Name:</dt>
-					<dd class="col-sm-8">@Model.Name</dd>
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary btn-sm">Back to list</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <!-- Cinema Image Section -->
+        @* <div class="text-center mb-4">
+            @if (!string.IsNullOrEmpty(Model.Img))
+            {
+                <img src="@Url.Content("~/" + Model.Img)"
+                     alt="@Model.Name" 
+                     class="img-fluid rounded shadow" 
+                     style="max-height: 300px; max-width: 100%;" />
+            }
+            else
+            {
+                <div class="bg-light p-5 rounded text-muted d-flex flex-column align-items-center justify-content-center" style="height: 200px;">
+                    <i class="fas fa-camera fa-3x mb-3"></i>
+                    <span>No image available</span>
+                </div>
+            }
+        </div> *@
 
-					<dt class="col-sm-4">Description:</dt>
-					<dd class="col-sm-8">@Model.Description</dd>
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">Name:</dt>
+                    <dd class="col-sm-8">@Model.Name</dd>
 
-					<dt class="col-sm-4">Location:</dt>
-					<dd class="col-sm-8">@Model.Location</dd>
+                    <dt class="col-sm-4">Description:</dt>
+                    <dd class="col-sm-8">@Model.Description</dd>
 
-					<dt class="col-sm-4">Status:</dt>
-					<dd class="col-sm-8">
-						<span class="badge @GetStateBadgeClass(Model.CurrentState)">
-							@Model.CurrentState
-						</span>
-					</dd>
-				</dl>
-			</div>
-			<div class="col-md-6">
-				<dl class="row">
-					<dt class="col-sm-4">Created by:</dt>
-					<dd class="col-sm-8">@Model.CreatedBy</dd>
+                    <dt class="col-sm-4">Location:</dt>
+                    <dd class="col-sm-8">@Model.Location</dd>
 
-					<dt class="col-sm-4">Created Date:</dt>
-					<dd class="col-sm-8">@Model.CreatedDateUtc.ToString("yyyy-MM-dd HH:mm")</dd>
+                    <dt class="col-sm-4">Status:</dt>
+                    <dd class="col-sm-8">
+                        <span class="badge @GetStateBadgeClass(Model.CurrentState)">
+                            @Model.CurrentState
+                        </span>
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">Created by:</dt>
+                    <dd class="col-sm-8">@Model.CreatedBy</dd>
 
-					@if (Model.UpdatedBy != null)
-					{
-						<dt class="col-sm-4">Last modified by:</dt>
-						<dd class="col-sm-8">@Model.UpdatedBy</dd>
+                    <dt class="col-sm-4">Created Date:</dt>
+                    <dd class="col-sm-8">@Model.CreatedDateUtc.ToString("yyyy-MM-dd HH:mm")</dd>
 
-						<dt class="col-sm-4">Modified Date:</dt>
-						<dd class="col-sm-8">@Model.UpdatedDateUtc?.ToString("yyyy-MM-dd HH:mm")</dd>
-					}
-				</dl>
-			</div>
-		</div>
+                    @if (Model.UpdatedBy != null)
+                    {
+                        <dt class="col-sm-4">Last modified by:</dt>
+                        <dd class="col-sm-8">@Model.UpdatedBy</dd>
 
-		<h5 class="mt-5">Movies in this category (@Model.Movies.Count())</h5>
+                        <dt class="col-sm-4">Modified Date:</dt>
+                        <dd class="col-sm-8">@Model.UpdatedDateUtc?.ToString("yyyy-MM-dd HH:mm")</dd>
+                    }
+                </dl>
+            </div>
+        </div>
 
-		@if (Model.Movies.Any())
-		{
-			<div class="table-responsive">
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<th>Title</th>
-							<th>Status</th>
-							<th>Delete status</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach (var movie in Model.Movies)
-						{
-							<tr class="@(movie.IsDeleted ? "table-danger" : "")">
-								<td>@movie.Title</td>
-								<td>
-									<span class="badge @GetStateBadgeClass(movie.CurrentState)">
-										@movie.CurrentState
-									</span>
-								</td>
-								<td>@(movie.IsDeleted ? "Deleted" : "Active")</td>
-							</tr>
-						}
+        <h5 class="mt-5">Movies in this category (@Model.Movies.Count())</h5>
 
-					</tbody>
+        @if (Model.Movies.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Delete status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var movie in Model.Movies)
+                        {
+                            <tr class="@(movie.IsDeleted ? "table-danger" : "")">
+                                <td>@movie.Title</td>
+                                <td>
+                                    <span class="badge @GetStateBadgeClass(movie.CurrentState)">
+                                        @movie.CurrentState
+                                    </span>
+                                </td>
+                                <td>@(movie.IsDeleted ? "Deleted" : "Active")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">There are no movies in this category</div>
+        }
+    </div>
+</div>
 
-				</table>
-
-			</div>
-		}
-		else
-		{
-			<div class="alert alert-info">There are no movies in this category</div>
-		}
-
-	</div>
-
-	@functions {
-		string GetStateBadgeClass(CurrentState state)
-		{
-			return state switch
-			{
-				CurrentState.Active => "bg-success",
-				CurrentState.Inactive => "bg-secondary",
-				CurrentState.SoftDelete => "bg-danger",
-				CurrentState.Archived => "bg-warning",
-				_ => "bg-secondary"
-			};
-		}
-
-	}
+@functions {
+    string GetStateBadgeClass(CurrentState state)
+    {
+        return state switch
+        {
+            CurrentState.Active => "bg-success",
+            CurrentState.Inactive => "bg-secondary",
+            CurrentState.SoftDelete => "bg-danger",
+            CurrentState.Archived => "bg-warning",
+            _ => "bg-secondary"
+        };
+    }
+}

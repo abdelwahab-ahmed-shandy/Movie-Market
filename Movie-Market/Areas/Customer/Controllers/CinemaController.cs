@@ -20,14 +20,16 @@ namespace Movie_Market.Areas.Customer.Controllers
             return View(cinemas);
         }
 
-        public async Task<IActionResult> Details(Guid id)
+        public async Task<IActionResult> Details(Guid id, string searchString, string sortOrder)
         {
-            var cinema = await _cinemaService.GetCinemaDetailsAsync(id);
-            if (cinema == null)
+            var cinemaDetails = await _cinemaService.GetCinemaDetailsAsync(id, searchString, sortOrder);
+
+            if (cinemaDetails == null)
             {
                 return NotFound();
             }
-            return View(cinema);
+
+            return View(cinemaDetails);
         }
 
         public async Task<IActionResult> Popular()

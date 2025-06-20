@@ -7,8 +7,6 @@
 <div class="container py-5">
 	<h1 class="text-center mb-5">@ViewData["Title"]</h1>
 
-	@* @await Component.InvokeAsync("PopularCategories", new { count = 5 }) *@
-
 	<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 		@foreach (var category in Model)
 		{
@@ -18,7 +16,7 @@
 					 @if (!string.IsNullOrEmpty(category.IconUrl)) 
 					 {
 						<img src="@Url.Content("~/" + category.IconUrl)" class="card-img-top" alt="@category.Name" style="height: 200px; object-fit: cover;">
-					} 
+					 } 
 					
 					<div class="card-body">
 						<h5 class="card-title">@category.Name</h5>

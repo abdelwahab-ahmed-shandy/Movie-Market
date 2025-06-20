@@ -105,7 +105,7 @@
                                 <div class="character-image-container position-relative" style="height: 180px;">
                                     @if (!string.IsNullOrEmpty(character.PosterUrl))
                                     {
-                                        <img src="@character.PosterUrl" class="character-image" alt="@character.Name">
+                                        <img src="@Url.Content("~/" + character.PosterUrl)" class="character-image" alt="@character.Name">
                                     }
                                     else
                                     {

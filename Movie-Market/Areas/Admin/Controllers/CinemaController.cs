@@ -50,7 +50,7 @@ namespace Movie_Market.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CinemaAdminVM VM)
+        public async Task<IActionResult> Create([FromForm] CinemaAdminVM VM)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace Movie_Market.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, CinemaAdminVM VM)
+        public async Task<IActionResult> Edit(Guid id, [FromForm] CinemaAdminVM VM)
         {
             if (id != VM.Id)
             {

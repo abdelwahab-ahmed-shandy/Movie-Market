@@ -34,6 +34,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>Poster</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Status</th>
@@ -45,6 +46,14 @@
                     @foreach (var item in Model.Cinemas)
                     {
                         <tr class="@(item.IsDeleted ? "table-danger" : "")">
+
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.Img))
+                                {
+                                    <img src="@Url.Content("~/" + item.Img)" alt="@item.Name" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;" />
+                                }
+                            </td>
+
                             <td>@item.Name</td>
 
                             <td title="@item.Description">

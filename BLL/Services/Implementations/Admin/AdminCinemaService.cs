@@ -1,5 +1,6 @@
 ﻿using BLL.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using MovieMart.Models;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,15 @@ namespace BLL.Services.Implementations.Admin
     {
         private readonly IGenericRepository<Cinema> _cinemaRepo;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public AdminCinemaService(IGenericRepository<Cinema> cinemaRepo, IHttpContextAccessor httpContextAccessor)
+        private readonly IFileService _fileService;
+        private readonly ILogger<AdminCinemaService> _logger;
+        public AdminCinemaService(IGenericRepository<Cinema> cinemaRepo, IHttpContextAccessor httpContextAccessor,
+                                    IFileService fileService , ILogger<AdminCinemaService> logger)
         {
             _cinemaRepo = cinemaRepo;
             _httpContextAccessor = httpContextAccessor;
-
+            _fileService = fileService;
+            _logger = logger;
         }
 
 
@@ -45,6 +49,7 @@ namespace BLL.Services.Implementations.Admin
                     Name = c.Name,
                     Description = c.Description,
                     Location = c.Location,
+                    Img = c.ImgUrl,
                     CurrentState = c.CurrentState.Value,
                     CreatedDateUtc = c.CreatedDateUtc,
                     CinemasCount = c.CinemaMovies.Count,
@@ -56,7 +61,6 @@ namespace BLL.Services.Implementations.Admin
                 SearchTerm = query
             };
         }
-
 
 
         public async Task<CinemaAdminDetailsVM> GetCinemaDetailsAsync(Guid id)
@@ -105,7 +109,7 @@ namespace BLL.Services.Implementations.Admin
                 Id = cinema.Id,
                 Name = cinema.Name,
                 Description = cinema.Description,
-                Location = cinema.Location
+                Location = cinema.Location               
             };
         }
 
@@ -114,11 +118,18 @@ namespace BLL.Services.Implementations.Admin
         {
             var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
 
+            string imagePath = null;
+            if (cinemaVM.IconFile != null && cinemaVM.IconFile.Length > 0)
+            {
+                imagePath = await _fileService.SaveFileAsync(cinemaVM.IconFile, "uploads/cinemas");
+            }
+
             var cinema = new Cinema
             {
                 Name = cinemaVM.Name,
                 Description = cinemaVM.Description,
                 Location = cinemaVM.Location,
+                ImgUrl = imagePath,
                 CreatedDateUtc = DateTime.UtcNow,
                 CurrentState = cinemaVM.CurrentState,
                 CreatedBy = userName,
@@ -140,6 +151,16 @@ namespace BLL.Services.Implementations.Admin
                 throw new Exception("Cinema not found");
 
             var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
+
+            if (cinemaVM.IconFile != null && cinemaVM.IconFile.Length > 0)
+            {
+                if (!string.IsNullOrEmpty(cinema.ImgUrl))
+                {
+                    _fileService.DeleteFile(cinema.ImgUrl);
+                }
+
+                cinema.ImgUrl = await _fileService.SaveFileAsync(cinemaVM.IconFile, "uploads/cinemas");
+            }
 
             cinema.Name = cinemaVM.Name;
             cinema.Description = cinemaVM.Description;
@@ -172,9 +193,21 @@ namespace BLL.Services.Implementations.Admin
 
         public async Task DeleteAsync(Guid id)
         {
-            var category = await _cinemaRepo.GetByIdAsync(id);
-            if (category == null)
-                throw new Exception("Category not found");
+            var cinema = await _cinemaRepo.GetByIdAsync(id);
+            if (cinema == null)
+                throw new Exception("Cinema not found");
+
+            if (!string.IsNullOrEmpty(cinema.ImgUrl))
+            {
+                try
+                {
+                    _fileService.DeleteFile(cinema.ImgUrl);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning($"Could not delete image file {cinema.ImgUrl}: {ex.Message}");
+                }
+            }
 
             await _cinemaRepo.DeleteInDB(id);
         }

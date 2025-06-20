@@ -9,7 +9,7 @@ namespace BLL.Services.Interfaces.Customer
     public interface ICustomerCinemaService
     {
         Task<IEnumerable<CinemaIndexVM>> GetActiveCinemaAsync();
-        Task<CinemaDetailsVM?> GetCinemaDetailsAsync(Guid id);
+        Task<CinemaDetailsVM?> GetCinemaDetailsAsync(Guid id, string? searchString = null, string? sortOrder = null);
         Task<IEnumerable<CinemaIndexVM>> GetPopularCinemaAsync(int count);
 
     }

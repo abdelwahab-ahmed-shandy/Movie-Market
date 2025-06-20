@@ -1,4 +1,5 @@
 ﻿using BLL.Services.Interfaces.Customer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,13 @@ namespace BLL.Services.Implementations.Customer
     {
         private readonly IGenericRepository<Cinema> _cinemaRepo;
         private readonly ILogger<CustomerCinemaService> _logger;
-
-        public CustomerCinemaService(IGenericRepository<Cinema> cinemaRepo,
+        private readonly IGenericRepository<Movie> _movieRepo;
+        public CustomerCinemaService(IGenericRepository<Cinema> cinemaRepo, IGenericRepository<Movie> movieRepo,
             ILogger<CustomerCinemaService> logger)
         {
             _cinemaRepo = cinemaRepo;
             _logger = logger;
+            _movieRepo = movieRepo;
         }
 
 
@@ -34,7 +36,8 @@ namespace BLL.Services.Implementations.Customer
                     Id = c.Id,
                     Name = c.Name,
                     Location = c.Location,
-                    Description = c.Description
+                    Description = c.Description,
+                    ImageUrl = c.ImgUrl
                 });
             }
             catch (Exception ex)
@@ -45,7 +48,7 @@ namespace BLL.Services.Implementations.Customer
         }
 
 
-        public async Task<CinemaDetailsVM?> GetCinemaDetailsAsync(Guid id)
+        public async Task<CinemaDetailsVM?> GetCinemaDetailsAsync(Guid id,string? searchString = null,string? sortOrder = null)
         {
             try
             {
@@ -64,29 +67,49 @@ namespace BLL.Services.Implementations.Customer
                     Name = cinema.Name,
                     Location = cinema.Location,
                     Description = cinema.Description,
-                    CreatedDate = cinema.CreatedDateUtc
-                    
+                    CreatedDate = cinema.CreatedDateUtc,
+                    Img = cinema.ImgUrl
                 };
 
-                foreach (var cinemaMovie in cinema.CinemaMovies.Where(cm => !cm.IsDeleted))
+                var moviesQuery = _movieRepo.GetAll()
+                    .Where(m => m.CinemaMovies.Any(cm => cm.CinemaId == id && !cm.IsDeleted))
+                    .Include(m => m.Category)
+                    .AsQueryable();
+
+                if (!string.IsNullOrEmpty(searchString))
                 {
-                    cinemaDetails.Movies.Add(new MovieDetailsVM
-                    {
-                        Id = cinemaMovie.Movie.Id,
-                        Title = cinemaMovie.Movie.Title,
-                        ImgUrl = cinemaMovie.Movie.ImgUrl,
-                        StartDate = cinemaMovie.Movie.StartDate,
-                        EndDate = cinemaMovie.Movie.EndDate,
-                        ReleaseYear = cinemaMovie.Movie.ReleaseYear,
-                        Price = cinemaMovie.Movie.Price,
-                        Author = cinemaMovie.Movie.Author,
-                        Rating = cinemaMovie.Movie.Rating,
-
-                        Duration = cinemaMovie.Movie.Duration,
-                        Description = cinemaMovie.Movie.Description,
-
-                    });
+                    moviesQuery = moviesQuery.Where(m =>
+                        m.Title.Contains(searchString) ||
+                        (m.Description != null && m.Description.Contains(searchString)));
                 }
+
+                moviesQuery = sortOrder switch
+                {
+                    "title" => moviesQuery.OrderBy(m => m.Title),
+                    "title_desc" => moviesQuery.OrderByDescending(m => m.Title),
+                    "date" => moviesQuery.OrderByDescending(m => m.StartDate),
+                    "date_desc" => moviesQuery.OrderBy(m => m.EndDate),
+                    "rating" => moviesQuery.OrderByDescending(m => m.Rating),
+                    _ => moviesQuery.OrderBy(m => m.Title) 
+                };
+
+                cinemaDetails.Movies = await moviesQuery
+                    .Select(m => new MovieDetailsVM
+                    {
+                        Id = m.Id,
+                        Title = m.Title,
+                        Description = m.Description,
+                        Price = m.Price,
+                        Author = m.Author,
+                        ImgUrl = m.ImgUrl,
+                        Duration = m.Duration,
+                        StartDate = m.StartDate,
+                        EndDate = m.EndDate,
+                        ReleaseYear = m.ReleaseYear,
+                        Rating = m.Rating,
+                        CategoryName = m.Category.Name
+                    })
+                    .ToListAsync(); 
 
                 return cinemaDetails;
             }

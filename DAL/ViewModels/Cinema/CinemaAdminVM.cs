@@ -20,5 +20,9 @@ namespace DAL.ViewModels.Cinema
 
         [Display(Name = "Status")]
         public CurrentState CurrentState { get; set; }
+
+        [DataType(DataType.Upload)]
+        public IFormFile? IconFile { get; set; }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿@* @model IEnumerable<DAL.ViewModels.Cinema.CinemaIndexVM>
+﻿@model IEnumerable<DAL.ViewModels.Cinema.CinemaIndexVM>
 
 @{
     ViewData["Title"] = "Cinemas";
@@ -15,12 +15,12 @@
         {
             <div class="col-xl-3 col-lg-4 col-md-6">
                 <div class="card cinema-card h-100 border-0 shadow-sm overflow-hidden">
-                    <div class="cinema-image-container" style="background-image: url('https://source.unsplash.com/random/600x400/?cinema,theater,movie&sig=@cinema.Id'); height: 200px;">
+                    <div class="cinema-image-container" style="background-image: url('@Url.Content($"~/{cinema.ImageUrl}")'); height: 200px;">
                         <div class="cinema-overlay"></div>
                         <div class="cinema-location-badge">
                             <i class="fas fa-map-marker-alt me-1"></i> @cinema.Location
                         </div>
-                    </div>
+                    </div> 
                     <div class="card-body">
                         <h3 class="card-title fw-bold mb-3">@cinema.Name</h3>
                         <p class="card-text text-muted mb-4">
@@ -96,84 +96,4 @@
         .btn-cinema:hover {
             transform: translateY(-2px);
         }
-</style> *@
-
-
-@model IEnumerable<DAL.ViewModels.Cinema.CinemaIndexVM>
-
-@{
-    ViewData["Title"] = "Cinemas";
-}
-
-<div class="container py-5">
-    <div class="text-center mb-5">
-        <h1 class="display-4 fw-bold text-primary">Our Cinemas</h1>
-        <p class="lead text-muted">Discover the best movie theaters in town</p>
-    </div>
-
-    <div class="row g-4">
-        @foreach (var cinema in Model)
-        {
-            <div class="col-xl-3 col-lg-4 col-md-6">
-                <div class="card cinema-card h-100 border-0 shadow-sm">
-                    <div class="card-header bg-primary text-white py-3">
-                        <h3 class="card-title fw-bold mb-0">@cinema.Name</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-map-marker-alt text-primary me-2"></i>
-                            <span class="fw-bold">@cinema.Location</span>
-                        </div>
-                        <p class="card-text text-muted mb-4">
-                            @if (cinema.Description?.Length > 100)
-                            {
-                                @cinema.Description.Substring(0, 100)
-                        
-                                <text>...</text>
-                            }
-                            else
-                            {
-                                @cinema.Description
-                            }
-                        </p>
-                        <div class="d-grid">
-                            <a asp-action="Details" asp-route-id="@cinema.Id" class="btn btn-outline-primary btn-cinema">
-                                <i class="fas fa-ticket-alt me-2"></i> View Details
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div>
-
-<style>
-    .cinema-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border-radius: 10px;
-    }
-
-        .cinema-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
-        }
-
-    .btn-cinema {
-        border-radius: 8px;
-        padding: 8px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        border-width: 2px;
-    }
-
-        .btn-cinema:hover {
-            background-color: var(--bs-primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-    .card-header {
-        border-radius: 10px 10px 0 0 !important;
-    }
-</style>
+</style> 

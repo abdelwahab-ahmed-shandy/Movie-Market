@@ -12,6 +12,7 @@ namespace DAL.ViewModels.Cinema
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
         public string Location { get; set; } = string.Empty;
+        public string? Img { get; set; }
         public CurrentState CurrentState { get; set; }
 
         // Audit Properties
