@@ -18,12 +18,15 @@ namespace Movie_Market.Areas.Admin.Controllers
 
 
         #region TvSeries Views 
+
+        [HttpGet]
         public async Task<IActionResult> Index(int page = 1, int pageSize = 10, string query = null)
         {
             var model = await _tvSeriesService.GetAllTvSeriesAsync(page, pageSize, query);
             return View(model);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
             try
@@ -46,7 +49,9 @@ namespace Movie_Market.Areas.Admin.Controllers
         #endregion
 
 
-        #region Create :
+        #region Create 
+
+        [HttpGet]
         public IActionResult Create()
         {
             var model = new TvSeriesAdminCreateVM
@@ -58,7 +63,7 @@ namespace Movie_Market.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TvSeriesAdminCreateVM model)
+        public async Task<IActionResult> Create([FromForm] TvSeriesAdminCreateVM model)
         {
             if (ModelState.IsValid)
             {
@@ -82,6 +87,8 @@ namespace Movie_Market.Areas.Admin.Controllers
 
 
         #region Edit
+
+        [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
             var details = await _tvSeriesService.GetTvSeriesDetailsAsync(id);
@@ -96,7 +103,6 @@ namespace Movie_Market.Areas.Admin.Controllers
                 Title = details.Title,
                 Description = details.Description,
                 Author = details.Author,
-                ImgUrl = details.ImgUrl,
                 ReleaseYear = details.ReleaseYear,
                 CurrentState = details.IsDeleted ? CurrentState.SoftDelete : CurrentState.Active
             };
@@ -106,7 +112,7 @@ namespace Movie_Market.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, TvSeriesAdminEditVM model)
+        public async Task<IActionResult> Edit(Guid id, [FromForm] TvSeriesAdminEditVM model)
         {
             if (id != model.Id)
             {
@@ -146,6 +152,8 @@ namespace Movie_Market.Areas.Admin.Controllers
         {
             try
             {
+                if (id == Guid.Empty) return NotFound();
+
                 await _tvSeriesService.Delete(id);
 
                 TempData["notification"] = "TV Series permanently deleted!";
@@ -168,6 +176,8 @@ namespace Movie_Market.Areas.Admin.Controllers
         {
             try
             {
+                if (id == Guid.Empty) return NotFound();
+
                 await _tvSeriesService.SoftDelete(id);
 
                 TempData["notification"] = "TV Series soft deleted!";
@@ -190,7 +200,8 @@ namespace Movie_Market.Areas.Admin.Controllers
         {
             try
             {
-                // Note: You'll need to add RestoreAsync to your IAdminTvSeriesService
+                if (id == Guid.Empty) return NotFound();
+
                 await _tvSeriesService.RestoreAsync(id);
 
                 TempData["notification"] = "TV Series restored successfully!";

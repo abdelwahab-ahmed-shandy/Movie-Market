@@ -171,7 +171,6 @@ namespace BLL.Services.Implementations.Admin
             }
         }
 
-
         public async Task<bool> SoftDeleteCharacter(Guid id)
         {
             try

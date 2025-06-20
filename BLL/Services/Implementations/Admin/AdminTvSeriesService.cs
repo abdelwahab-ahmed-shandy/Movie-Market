@@ -1,6 +1,9 @@
-﻿using BLL.Services.Interfaces.Admin;
+﻿using BLL.Services.Interfaces;
+using BLL.Services.Interfaces.Admin;
 using DAL.ViewModels.TvSeries;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using MovieMart.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +18,18 @@ namespace BLL.Services.Implementations.Admin
         private readonly IGenericRepository<Season> _seasonRepo;
         private readonly IGenericRepository<Character> _characterRepo;
         private readonly IHttpContextAccessor _HttpContextAccessor;
+        private readonly IFileService _fileService;
+        private readonly ILogger<AdminTvSeriesService> _logger;
         public AdminTvSeriesService(IGenericRepository<TvSeries> tvSeriesRepo, IHttpContextAccessor HttpContextAccessor,
-                                         IGenericRepository<Season> seasonRepo , IGenericRepository<Character> characterRepo)
+                                         IGenericRepository<Season> seasonRepo , IGenericRepository<Character> characterRepo,
+                                            IFileService fileService , ILogger<AdminTvSeriesService> logger)
         {
             _HttpContextAccessor = HttpContextAccessor;
             _tvSeriesRepository = tvSeriesRepo;
             _seasonRepo = seasonRepo;
             _characterRepo = characterRepo;
+            _fileService = fileService;
+            _logger = logger;
         }
 
 
@@ -122,12 +130,18 @@ namespace BLL.Services.Implementations.Admin
         {
             var userName = _HttpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
 
+            string imagePath = null;
+            if (viewModel.IconFile != null && viewModel.IconFile.Length > 0)
+            {
+                imagePath = await _fileService.SaveFileAsync(viewModel.IconFile, "uploads/tvSeries");
+            }
+
             var tvSeries = new TvSeries
             {
                 Title = viewModel.Title,
                 Description = viewModel.Description,
                 Author = viewModel.Author,
-                ImgUrl = viewModel.ImgUrl,
+                ImgUrl = imagePath,
                 ReleaseYear = viewModel.ReleaseYear,
                 CurrentState = viewModel.CurrentState,
                 CreatedDateUtc = DateTime.UtcNow,
@@ -140,18 +154,25 @@ namespace BLL.Services.Implementations.Admin
 
         public async Task UpdateTvSeriesAsync(Guid id, TvSeriesAdminEditVM viewModel)
         {
+            var tvSeries = await _tvSeriesRepository.GetByIdAsync(id);
+            
+            if (tvSeries == null) throw new KeyNotFoundException("TV Series not found");
+            
             var userName = _HttpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
 
-            var tvSeries = await _tvSeriesRepository.GetByIdAsync(id);
-            if (tvSeries == null)
+            if (viewModel.IconFile != null && viewModel.IconFile.Length > 0)
             {
-                throw new KeyNotFoundException("TV Series not found");
+                if (!string.IsNullOrEmpty(tvSeries.ImgUrl))
+                {
+                    _fileService.DeleteFile(tvSeries.ImgUrl);
+                }
+
+                tvSeries.ImgUrl = await _fileService.SaveFileAsync(viewModel.IconFile, "uploads/tvSeries");
             }
 
             tvSeries.Title = viewModel.Title;
             tvSeries.Description = viewModel.Description;
             tvSeries.Author = viewModel.Author;
-            tvSeries.ImgUrl = viewModel.ImgUrl;
             tvSeries.ReleaseYear = viewModel.ReleaseYear;
             tvSeries.CurrentState = viewModel.CurrentState;
             tvSeries.UpdatedBy = userName;
@@ -169,6 +190,27 @@ namespace BLL.Services.Implementations.Admin
 
         public async Task Delete(Guid Id)
         {
+            var tvSeries = await _tvSeriesRepository.GetByIdAsync(Id);
+
+            if (tvSeries == null)
+            {
+                _logger.LogWarning($"Attempted to delete non-existing TV Series with ID: {Id}");
+                throw new KeyNotFoundException("TV Series not found");
+            }
+
+            if (!string.IsNullOrEmpty(tvSeries.ImgUrl))
+            {
+                try
+                {
+                    _fileService.DeleteFile(tvSeries.ImgUrl);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning($"Could not delete image file {tvSeries.ImgUrl}: {ex.Message}");
+                }
+            }
+
+
             await _tvSeriesRepository.DeleteInDB(Id);
         }
 

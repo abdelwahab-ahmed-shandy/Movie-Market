@@ -12,15 +12,11 @@ namespace DAL.ViewModels.Character
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
 
-        [Display(Name = "Character Icon")]
         [DataType(DataType.Upload)]
-        public IFormFile Img { get; set; }
+        public IFormFile? Img { get; set; }
 
         [Display(Name = "Status")]
         public CurrentState CurrentState { get; set; }
 
-        public List<Guid>? SelectedMovieIds { get; set; }
-
-        public List<Guid>? SelectedTvSeriesIds { get; set; }
     }
 }

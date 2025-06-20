@@ -48,7 +48,6 @@ namespace Movie_Market.Areas.Admin.Controllers
 
 
         #region Create 
-        // GET: Admin/Character/Create
         public async Task<IActionResult> Create()
         {
             ViewBag.Movies = await _movieRepo.GetAll().ToListAsync();
@@ -56,7 +55,6 @@ namespace Movie_Market.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/Character/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateCharacterVM model)
@@ -83,7 +81,6 @@ namespace Movie_Market.Areas.Admin.Controllers
 
 
         #region Edit
-        // GET: Admin/Character/Edit/5
         public async Task<IActionResult> Edit(Guid id)
         {
             var character = await _characterService.GetCharacterById(id);
@@ -108,7 +105,6 @@ namespace Movie_Market.Areas.Admin.Controllers
             return View(model);
         }
 
-        // POST: Admin/Character/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditCharacterVM model)
@@ -189,7 +185,7 @@ namespace Movie_Market.Areas.Admin.Controllers
 
 
         #region Delete
-        // POST: Admin/Character/Delete/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid id)
@@ -205,7 +201,6 @@ namespace Movie_Market.Areas.Admin.Controllers
         }
 
 
-        // POST: Admin/Character/SoftDelete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SoftDelete(Guid id)

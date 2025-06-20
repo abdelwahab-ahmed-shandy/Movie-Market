@@ -1,1 +1,4 @@
-D:\Git-Hub\Movie-Market\Movie-Market\wwwroot\uploads\cinemas\5231a34c-9782-4c1b-b8d0-81ba681a1bc9.jpg
+D:\Git-Hub\Movie-Market\Movie-Market\wwwroot\uploads\cinemas\079a655a-5db5-4e27-b1df-42819b37fc22.jpg
+D:\Git-Hub\Movie-Market\Movie-Market\wwwroot\uploads\cinemas\7f3cd6d3-9a94-4080-a8b7-58a32ce6e9cc.png
+D:\Git-Hub\Movie-Market\Movie-Market\wwwroot\uploads\cinemas\b5c6eda4-ea56-438d-90a3-2dedaeaff0a5.png
+D:\Git-Hub\Movie-Market\Movie-Market\wwwroot\uploads\tvSeries\d8d53983-741f-4889-8d3a-ff241c230e22.png

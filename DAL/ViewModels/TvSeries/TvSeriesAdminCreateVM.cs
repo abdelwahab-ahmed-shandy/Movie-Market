@@ -14,10 +14,13 @@ namespace DAL.ViewModels.TvSeries
         public string Title { get; set; }
         public string? Description { get; set; }
         public string? Author { get; set; }
-        [Display(Name = "Image URL")]
-        public string? ImgUrl { get; set; }
+
         [Required]
         [Display(Name = "Release Year")]
         public int ReleaseYear { get; set; }
+
+        [DataType(DataType.Upload)]
+        public IFormFile? IconFile { get; set; }
+
     }
 }
