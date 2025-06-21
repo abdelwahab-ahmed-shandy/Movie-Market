@@ -6,13 +6,26 @@ using System.Threading.Tasks;
 
 namespace DAL.ViewModels.Movie
 {
-    public class MovieAdminEditVM : MovieAdminCreateVM
+    public class MovieAdminEditVM 
     {
         public Guid Id { get; set; }
-        //public CurrentState CurrentState { get; set; }
-        public Dictionary<Guid, bool> SpecialFeatures { get; set; } = new(); // SpecialId -> IsFeatured
-        public Dictionary<Guid, int> SpecialDisplayOrders { get; set; } = new(); // SpecialId -> DisplayOrder
-        public Dictionary<Guid, DateTime> CinemaShowTimes { get; set; } = new(); // CinemaId -> ShowTime
+        public string Title { get; set; } = null!;
+        public string? Description { get; set; }
+        public double Price { get; set; }
+        public string? Author { get; set; }
+        public TimeSpan Duration { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public int ReleaseYear { get; set; }
+        public double? Rating { get; set; }
+        public Guid CategoryId { get; set; }
+        public List<Guid> CharacterIds { get; set; } = new();
+        public List<Guid> CinemaIds { get; set; } = new();
+        public List<Guid> SpecialIds { get; set; } = new();
+        public CurrentState CurrentState { get; set; }
 
+        [Display(Name = "Movie Icon")]
+        [DataType(DataType.Upload)]
+        public IFormFile? ImgFile { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BLL.Services.Implementations.Admin;
 using BLL.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MovieMart.Models;
 using System;
@@ -24,7 +25,6 @@ namespace BLL.Services.Implementations
         private readonly IFileService _fileService;
         private readonly ILogger<AdminMovieService> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
         public AdminMovieService(IGenericRepository<Movie> movieRepo,IGenericRepository<Category> categoryRepo,
             IGenericRepository<Character> characterRepo,IGenericRepository<Cinema> cinemaRepo,
             IGenericRepository<Special> specialRepo,IGenericRepository<CharacterMovie> characterMovieRepo,
@@ -43,8 +43,6 @@ namespace BLL.Services.Implementations
             _fileService = fileService;
             _httpContextAccessor = httpContextAccessor;
         }
-
-
 
         public async Task<MovieAdminListResultVM> GetAllMoviesAsync(int page, int pageSize, string? query = null)
         {
@@ -84,8 +82,6 @@ namespace BLL.Services.Implementations
                 SearchTerm = query
             };
         }
-
-
         public async Task<MovieAdminDetailsVM?> GetMovieDetailsAsync(Guid id)
         {
             var movie = await _movieRepo.GetAll()
@@ -155,8 +151,7 @@ namespace BLL.Services.Implementations
                 IsDeleted = movie.IsDeleted
             };
         }
-
-
+        
         public async Task<bool> CreateMovieAsync(MovieAdminCreateVM model)
         {
             try
@@ -228,7 +223,6 @@ namespace BLL.Services.Implementations
             }
         }
 
-
         public async Task<MovieAdminEditVM?> GetMovieForEditAsync(Guid id)
         {
             var movie = await _movieRepo.Get(m => m.Id == id)
@@ -247,7 +241,6 @@ namespace BLL.Services.Implementations
                 CurrentState = movie.CurrentState.Value,
                 Price = movie.Price,
                 Author = movie.Author,
-                //ImgFile = movie.ImgUrl,
                 Duration = movie.Duration,
                 StartDate = movie.StartDate,
                 EndDate = movie.EndDate,
@@ -259,103 +252,120 @@ namespace BLL.Services.Implementations
                 SpecialIds = movie.MovieSpecials.Select(ms => ms.SpecialId).ToList()
             };
         }
-
-
         public async Task<bool> UpdateMovieAsync(MovieAdminEditVM model)
         {
             try
             {
                 var movie = await _movieRepo.GetByIdAsync(model.Id);
-                if (movie == null) return false;
+                if (movie == null)
+                {
+                    _logger.LogWarning("Movie with ID {MovieId} not found for update", model.Id);
+                    return false;
+                }
 
                 var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
 
                 if (model.ImgFile != null && model.ImgFile.Length > 0)
                 {
-                    if (!string.IsNullOrEmpty(movie.ImgUrl))
-                        _fileService.DeleteFile(movie.ImgUrl);
-
-                    movie.ImgUrl = await _fileService.SaveFileAsync(model.ImgFile, "uploads/movies");
+                    try
+                    {
+                        if (!string.IsNullOrEmpty(movie.ImgUrl))
+                        {
+                            _fileService.DeleteFile(movie.ImgUrl);
+                        }
+                        movie.ImgUrl = await _fileService.SaveFileAsync(model.ImgFile, "uploads/movies");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Error updating image for movie {MovieId}", movie.Id);
+                        throw; 
+                    }
                 }
 
-                // Update movie properties
-                movie.Title = model.Title;
-                movie.Description = model.Description;
-                movie.Price = model.Price;
-                movie.Author = model.Author;
-                movie.Duration = model.Duration;
-                movie.StartDate = model.StartDate;
-                movie.EndDate = model.EndDate;
-                movie.ReleaseYear = model.ReleaseYear;
-                movie.Rating = model.Rating;
-                movie.CurrentState = model.CurrentState;
-                movie.CategoryId = model.CategoryId;
-                movie.UpdatedBy = userName;
-                movie.UpdatedDateUtc = DateTime.UtcNow;
-
+                UpdateMovieProperties(movie, model, userName);
                 await _movieRepo.Update(movie);
 
-                // Update character relationships
-                var existingCharacterMovies = await _characterMovieRepo.Get(cm => cm.MovieId == movie.Id).ToListAsync();
-                foreach (var existing in existingCharacterMovies)
-                {
-                    await _characterMovieRepo.DeleteInDB(existing.Id);
-                }
-
-                foreach (var characterId in model.CharacterIds)
-                {
-                    await _characterMovieRepo.Add(new CharacterMovie
-                    {
-                        MovieId = movie.Id,
-                        CharacterId = characterId
-                    });
-                }
-
-                // Update cinema relationships
-                var existingCinemaMovies = await _cinemaMovieRepo.Get(cm => cm.MovieId == movie.Id).ToListAsync();
-                foreach (var existing in existingCinemaMovies)
-                {
-                    await _cinemaMovieRepo.DeleteInDB(existing.Id);
-                }
-
-                foreach (var cinemaId in model.CinemaIds)
-                {
-                    await _cinemaMovieRepo.Add(new CinemaMovie
-                    {
-                        MovieId = movie.Id,
-                        CinemaId = cinemaId,
-                        ShowTime = model.CinemaShowTimes.TryGetValue(cinemaId, out var showTime) ? showTime : DateTime.UtcNow
-                    });
-                }
-
-                // Update special relationships
-                var existingMovieSpecials = await _movieSpecialRepo.Get(ms => ms.ParentMovieId == movie.Id).ToListAsync();
-                foreach (var existing in existingMovieSpecials)
-                {
-                    await _movieSpecialRepo.DeleteInDB(existing.Id);
-                }
-
-                foreach (var specialId in model.SpecialIds)
-                {
-                    await _movieSpecialRepo.Add(new MovieSpecial
-                    {
-                        ParentMovieId = movie.Id,
-                        SpecialId = specialId,
-                        IsFeatured = model.SpecialFeatures.TryGetValue(specialId, out var featured) && featured,
-                        DisplayOrder = model.SpecialDisplayOrders.TryGetValue(specialId, out var order) ? order : 0
-                    });
-                }
+                await UpdateCharacterRelationships(movie.Id, model.CharacterIds ?? new List<Guid>());
+                await UpdateCinemaRelationships(movie.Id, model.CinemaIds ?? new List<Guid>());
+                await UpdateSpecialRelationships(movie.Id, model.SpecialIds ?? new List<Guid>());
 
                 return true;
             }
             catch (Exception ex)
             {
-                // Log the exception
-                Console.WriteLine($"Error updating movie: {ex.Message}");
+                _logger.LogError(ex, "Error updating movie with ID {MovieId}", model.Id);
                 return false;
             }
         }
 
+        #region Update Movie Properties
+        private void UpdateMovieProperties(Movie movie, MovieAdminEditVM model, string userName)
+        {
+            movie.Title = model.Title;
+            movie.Description = model.Description;
+            movie.Price = model.Price;
+            movie.Author = model.Author;
+            movie.Duration = model.Duration;
+            movie.StartDate = model.StartDate;
+            movie.EndDate = model.EndDate;
+            movie.ReleaseYear = model.ReleaseYear;
+            movie.Rating = model.Rating;
+            movie.CurrentState = model.CurrentState;
+            movie.CategoryId = model.CategoryId;
+            movie.UpdatedBy = userName;
+            movie.UpdatedDateUtc = DateTime.UtcNow;
+        }
+
+        private async Task UpdateCharacterRelationships(Guid movieId, List<Guid> newCharacterIds)
+        {
+            var existing = await _characterMovieRepo.Get(cm => cm.MovieId == movieId).ToListAsync();
+            var existingIds = existing.Select(cm => cm.CharacterId).ToList();
+
+            // حذف العلاقات غير الموجودة في الجديدة
+            foreach (var item in existing.Where(cm => !newCharacterIds.Contains(cm.CharacterId)))
+            {
+                await _characterMovieRepo.DeleteInDB(item.Id);
+            }
+
+            // إضافة العلاقات الجديدة
+            foreach (var characterId in newCharacterIds.Except(existingIds))
+            {
+                await _characterMovieRepo.Add(new CharacterMovie { MovieId = movieId, CharacterId = characterId });
+            }
+        }
+
+        private async Task UpdateCinemaRelationships(Guid movieId, List<Guid> newCinemaIds)
+        {
+            var existing = await _cinemaMovieRepo.Get(cm => cm.MovieId == movieId).ToListAsync();
+            var existingIds = existing.Select(cm => cm.CinemaId).ToList();
+
+            foreach (var item in existing.Where(cm => !newCinemaIds.Contains(cm.CinemaId)))
+            {
+                await _cinemaMovieRepo.DeleteInDB(item.Id);
+            }
+
+            foreach (var cinemaId in newCinemaIds.Except(existingIds))
+            {
+                await _cinemaMovieRepo.Add(new CinemaMovie { MovieId = movieId, CinemaId = cinemaId });
+            }
+        }
+
+        private async Task UpdateSpecialRelationships(Guid movieId, List<Guid> newSpecialIds)
+        {
+            var existing = await _movieSpecialRepo.Get(ms => ms.ParentMovieId == movieId).ToListAsync();
+            var existingIds = existing.Select(ms => ms.SpecialId).ToList();
+
+            foreach (var item in existing.Where(ms => !newSpecialIds.Contains(ms.SpecialId)))
+            {
+                await _movieSpecialRepo.DeleteInDB(item.Id);
+            }
+
+            foreach (var specialId in newSpecialIds.Except(existingIds))
+            {
+                await _movieSpecialRepo.Add(new MovieSpecial { ParentMovieId = movieId, SpecialId = specialId });
+            }
+        }
+        #endregion
 
         public async Task<bool> SoftDeleteMovieAsync(Guid id)
         {
@@ -369,8 +379,6 @@ namespace BLL.Services.Implementations
                 return false;
             }
         }
-
-
         public async Task<bool> RestoreMovieAsync(Guid id)
         {
             try
@@ -383,8 +391,6 @@ namespace BLL.Services.Implementations
                 return false;
             }
         }
-
-
         public async Task<bool> DeleteMoviePermanentlyAsync(Guid id)
         {
             try

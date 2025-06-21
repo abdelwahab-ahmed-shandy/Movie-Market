@@ -52,7 +52,6 @@ namespace Movie_Market.Areas.Admin.Controllers
 
         #endregion
 
-
         #region Create
 
         [HttpGet]
@@ -88,47 +87,73 @@ namespace Movie_Market.Areas.Admin.Controllers
 
         #endregion
 
-
         #region Edit 
 
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            var movie = await _movieService.GetMovieForEditAsync(id);
-            if (movie == null)
+            try
             {
-                return NotFound();
-            }
+                var movie = await _movieService.GetMovieForEditAsync(id);
+                if (movie == null)
+                {
+                    TempData["notification"] = "Movie not found";
+                    TempData["MessageType"] = "error";
+                    return RedirectToAction(nameof(Index));
+                }
 
-            await LoadDropdowns();
-            return View(movie);
+                await LoadDropdowns();
+
+                ViewBag.SelectedCharacters = movie.CharacterIds;
+                ViewBag.SelectedCinemas = movie.CinemaIds;
+                ViewBag.SelectedSpecials = movie.SpecialIds;
+
+                return View(movie);
+            }
+            catch (Exception ex)
+            {
+                TempData["notification"] = "Error loading movie";
+                TempData["MessageType"] = "error";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(MovieAdminEditVM model)
         {
-            if (!ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    await LoadDropdowns();
+                    return View(model);
+                }
+
+                var result = await _movieService.UpdateMovieAsync(model);
+                if (result)
+                {
+                    TempData["notification"] = "Movie updated successfully!";
+                    TempData["MessageType"] = "success";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                TempData["notification"] = "Error updating movie";
+                TempData["MessageType"] = "error";
+                ModelState.AddModelError("", "Error updating movie");
                 await LoadDropdowns();
                 return View(model);
             }
-
-            var result = await _movieService.UpdateMovieAsync(model);
-            if (!result)
+            catch (Exception ex)
             {
-                TempData["notification"] = "Movie updated successfully!";
-                TempData["MessageType"] = "success";
-                return RedirectToAction(nameof(Index));
+                TempData["notification"] = "An error occurred while updating the movie";
+                TempData["MessageType"] = "error";
+                await LoadDropdowns();
+                return View(model);
             }
-
-            ModelState.AddModelError("", "Error updating movie");
-            await LoadDropdowns();
-            return View(model);
         }
 
         #endregion
-
 
         #region Delete
 
@@ -190,7 +215,6 @@ namespace Movie_Market.Areas.Admin.Controllers
 
 
         #endregion
-
 
         #region Private Methods
 

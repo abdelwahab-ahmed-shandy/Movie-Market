@@ -102,21 +102,24 @@
 
             <div class="form-group">
                 <label asp-for="CharacterIds" class="control-label"></label>
-                <select asp-for="CharacterIds" asp-items="ViewBag.Characters" class="form-control" multiple>
+                <select asp-for="CharacterIds" asp-items="ViewBag.Characters"
+                        class="form-control multi-select" multiple>
                 </select>
                 <span asp-validation-for="CharacterIds" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="CinemaIds" class="control-label"></label>
-                <select asp-for="CinemaIds" asp-items="ViewBag.Cinemas" class="form-control" multiple>
+                <select asp-for="CinemaIds" asp-items="ViewBag.Cinemas"
+                        class="form-control multi-select" multiple>
                 </select>
                 <span asp-validation-for="CinemaIds" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="SpecialIds" class="control-label"></label>
-                <select asp-for="SpecialIds" asp-items="ViewBag.Specials" class="form-control" multiple>
+                <select asp-for="SpecialIds" asp-items="ViewBag.Specials"
+                        class="form-control multi-select" multiple>
                 </select>
                 <span asp-validation-for="SpecialIds" class="text-danger"></span>
             </div>
@@ -134,3 +137,16 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+<style>
+    .select2-container--default .select2-selection--multiple {
+        min-height: 38px;
+        border: 1px solid #ced4da;
+    }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #007bff;
+            border-color: #006fe6;
+            color: white;
+        }
+</style>
