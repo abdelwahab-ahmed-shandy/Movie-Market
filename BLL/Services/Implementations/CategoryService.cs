@@ -1,5 +1,4 @@
-﻿using BLL.Services.Interfaces.Admin;
-using DAL.Repositories.IRepositories;
+﻿using DAL.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,24 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Implementations.Admin
+namespace BLL.Services.Implementations
 {
-    public class AdminCategoryService : IAdminCategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly IGenericRepository<Category> _categoryRepo;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IFileService _fileService;
-        private readonly ILogger<AdminCategoryService> _logger;
-        public AdminCategoryService(IGenericRepository<Category> categoryRepository,
+        private readonly ILogger<CategoryService> _logger;
+        public CategoryService(IGenericRepository<Category> categoryRepository,
                                         IHttpContextAccessor httpContextAccessor ,
                                         IFileService fileService,
-                                        ILogger<AdminCategoryService> logger)
+                                        ILogger<CategoryService> logger)
         {
             _categoryRepo = categoryRepository;
             _httpContextAccessor = httpContextAccessor;
             _fileService = fileService;
             _logger = logger;
         }
+
+        #region Admin Category Service Methods
 
         public async Task<CategoryAdminListVM> GetAllCategoriesAsync(int page, int pageSize, string? query = null)
         {
@@ -35,7 +36,7 @@ namespace BLL.Services.Implementations.Admin
             {
                 source = source.Where(c =>
                     c.Name.Contains(query) ||
-                    (c.Description != null && c.Description.Contains(query)));
+                    c.Description != null && c.Description.Contains(query));
             }
 
             var paginatedList = await PaginatedList<Category>.CreateAsync(source, page, pageSize);
@@ -59,7 +60,6 @@ namespace BLL.Services.Implementations.Admin
                 SearchTerm = query
             };
         }
-
 
         public async Task<CategoryAdminDetailsVM?> GetCategoryDetailsAsync(Guid id)
         {
@@ -92,7 +92,6 @@ namespace BLL.Services.Implementations.Admin
             };
         }
 
-
         public async Task<Category> CreateCategoryAsync(CategoryAdminCreateEditVM vM)
         {
             var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
@@ -114,7 +113,6 @@ namespace BLL.Services.Implementations.Admin
                 IsDeleted = false
             });
         }
-
 
         public async Task UpdateCategoryAsync(Guid id, CategoryAdminCreateEditVM vM)
         {
@@ -144,7 +142,6 @@ namespace BLL.Services.Implementations.Admin
             await _categoryRepo.Update(category);
         }
 
-
         public async Task SoftDelete(Guid id)
         {
             var category = await _categoryRepo.GetByIdAsync(id);
@@ -160,7 +157,6 @@ namespace BLL.Services.Implementations.Admin
                 await _categoryRepo.SoftDeleteAsync(id);
             }
         }
-
 
         public async Task DeleteAsync(Guid id)
         {
@@ -182,6 +178,68 @@ namespace BLL.Services.Implementations.Admin
             await _categoryRepo.DeleteInDB(id);
         }
 
+        #endregion
+
+
+        #region Customer Category Service Methods
+
+        public async Task<IEnumerable<CategoryIndexVM>> GetActiveCategoriesAsync()
+        {
+            return await _categoryRepo.Get(c => !c.IsDeleted && c.CurrentState == CurrentState.Active)
+                .Select(c => new CategoryIndexVM
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description,
+                    IconUrl = c.ImgUrl,
+                    MoviesCount = c.Movies.Count(m => !m.IsDeleted && m.CurrentState == CurrentState.Active)
+                }).ToListAsync();
+        }
+
+        public async Task<CategoryDetailsVM?> GetCategoryWithMoviesAsync(Guid id)
+        {
+            var category = await _categoryRepo.GetAll()
+                .Include(c => c.Movies.Where(m => !m.IsDeleted && m.CurrentState == CurrentState.Active))
+                .FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
+
+            if (category == null) return null;
+
+            return new CategoryDetailsVM
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Description = category.Description,
+                //IconUrl = category.ImgUrl,
+                Movies = category.Movies.Select(m => new MovieIndexVM
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    ImgUrl = m.ImgUrl,
+                    ReleaseYear = m.ReleaseYear,
+                    Rating = m.Rating,
+                    ShortDescription = m.Description?.Length > 100 ?
+                        m.Description.Substring(0, 100) + "..." :
+                        m.Description
+                })
+            };
+        }
+
+        public async Task<IEnumerable<CategoryIndexVM>> GetPopularCategoriesAsync(int count)
+        {
+            return await _categoryRepo.GetAll()
+                .Where(c => !c.IsDeleted && c.CurrentState == CurrentState.Active)
+                .OrderByDescending(c => c.Movies.Count)
+                .Take(count)
+                .Select(c => new CategoryIndexVM
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    IconUrl = c.ImgUrl,
+                    MoviesCount = c.Movies.Count
+                }).ToListAsync();
+        }
+
+        #endregion
 
     }
 }

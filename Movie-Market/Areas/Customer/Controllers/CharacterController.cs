@@ -7,9 +7,9 @@ namespace Movie_Market.Areas.Customer.Controllers
     [Area("Customer")]
     public class CharacterController : BaseController
     {
-        private readonly ICustomerCharacterService _characterService;
+        private readonly ICharacterService _characterService;
 
-        public CharacterController(ICustomerCharacterService characterService)
+        public CharacterController(ICharacterService characterService)
         {
             _characterService = characterService;
         }
@@ -29,5 +29,6 @@ namespace Movie_Market.Areas.Customer.Controllers
             }
             return View(character);
         }
+     
     }
 }

@@ -1,5 +1,4 @@
-﻿using BLL.Services.Interfaces.Admin;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using MovieMart.Models;
 using System;
@@ -8,25 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Implementations.Admin
+namespace BLL.Services.Implementations
 {
-    public class AdminCinemaService : IAdminCinemaService
+    public class CinemaService : ICinemaService
     {
         private readonly IGenericRepository<Cinema> _cinemaRepo;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IFileService _fileService;
-        private readonly ILogger<AdminCinemaService> _logger;
-        public AdminCinemaService(IGenericRepository<Cinema> cinemaRepo, IHttpContextAccessor httpContextAccessor,
-                                    IFileService fileService , ILogger<AdminCinemaService> logger)
+        private readonly ILogger<CinemaService> _logger;
+        private readonly IGenericRepository<Movie> _movieRepo;
+
+        public CinemaService(IGenericRepository<Cinema> cinemaRepo, IHttpContextAccessor httpContextAccessor,
+                                    IFileService fileService , ILogger<CinemaService> logger, IGenericRepository<Movie> movieRepo)
         {
             _cinemaRepo = cinemaRepo;
             _httpContextAccessor = httpContextAccessor;
             _fileService = fileService;
             _logger = logger;
+            _movieRepo = movieRepo;
         }
 
-
-
+        #region Admin Methods
         public async Task<CinemaAdminListVM> GetAllCinemasAsync(int page, int pageSize, string? query = null)
         {
             var source = _cinemaRepo.GetAllWithDeleted();
@@ -35,7 +36,7 @@ namespace BLL.Services.Implementations.Admin
             {
                 source = source.Where(c =>
                     c.Name.Contains(query) ||
-                    (c.Description != null && c.Description.Contains(query)) ||
+                    c.Description != null && c.Description.Contains(query) ||
                     c.Location.Contains(query));
             }
 
@@ -61,7 +62,6 @@ namespace BLL.Services.Implementations.Admin
                 SearchTerm = query
             };
         }
-
 
         public async Task<CinemaAdminDetailsVM> GetCinemaDetailsAsync(Guid id)
         {
@@ -98,7 +98,6 @@ namespace BLL.Services.Implementations.Admin
 
         }
 
-
         public async Task<CinemaAdminVM?> GetByIdAsync(Guid id)
         {
             var cinema = await _cinemaRepo.GetByIdAsync(id);
@@ -112,7 +111,6 @@ namespace BLL.Services.Implementations.Admin
                 Location = cinema.Location               
             };
         }
-
 
         public async Task<CinemaAdminVM> CreateAsync(CinemaAdminVM cinemaVM)
         {
@@ -141,7 +139,6 @@ namespace BLL.Services.Implementations.Admin
             cinemaVM.Id = cinema.Id;
             return cinemaVM;
         }
-
 
         public async Task<CinemaAdminVM> UpdateAsync(CinemaAdminVM cinemaVM)
         {
@@ -173,7 +170,6 @@ namespace BLL.Services.Implementations.Admin
             return cinemaVM;
         }
 
-
         public async Task SoftDeleteAsync(Guid id)
         {
             var cinema = await _cinemaRepo.GetByIdAsync(id);
@@ -189,7 +185,6 @@ namespace BLL.Services.Implementations.Admin
                 await _cinemaRepo.SoftDeleteAsync(id);
             }
         }
-
 
         public async Task DeleteAsync(Guid id)
         {
@@ -211,6 +206,134 @@ namespace BLL.Services.Implementations.Admin
 
             await _cinemaRepo.DeleteInDB(id);
         }
+
+        #endregion
+
+
+        #region Customer Methods
+
+        public async Task<IEnumerable<CinemaIndexVM>> GetActiveCinemaAsync()
+        {
+            try
+            {
+                var cinemas = await _cinemaRepo.Get(c => !c.IsDeleted && c.CurrentState.Value == DAL.Enums.CurrentState.Active)
+                    .OrderBy(c => c.Name)
+                    .ToListAsync();
+
+                return cinemas.Select(c => new CinemaIndexVM
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Location = c.Location,
+                    Description = c.Description,
+                    ImageUrl = c.ImgUrl
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while getting active cinemas");
+                throw;
+            }
+        }
+
+        public async Task<CinemaDetailsVM?> GetCinemaDetailsAsync(Guid id, string? searchString = null, string? sortOrder = null)
+        {
+            try
+            {
+                var cinema = await _cinemaRepo.GetAll()
+                    .Include(c => c.CinemaMovies)
+                        .ThenInclude(cm => cm.Movie)
+                        .ThenInclude(m => m.Category)
+                    .FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
+
+                if (cinema == null)
+                    return null;
+
+                var cinemaDetails = new CinemaDetailsVM
+                {
+                    Id = cinema.Id,
+                    Name = cinema.Name,
+                    Location = cinema.Location,
+                    Description = cinema.Description,
+                    CreatedDate = cinema.CreatedDateUtc,
+                    Img = cinema.ImgUrl
+                };
+
+                var moviesQuery = _movieRepo.GetAll()
+                    .Where(m => m.CinemaMovies.Any(cm => cm.CinemaId == id && !cm.IsDeleted))
+                    .Include(m => m.Category)
+                    .AsQueryable();
+
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    moviesQuery = moviesQuery.Where(m =>
+                        m.Title.Contains(searchString) ||
+                        (m.Description != null && m.Description.Contains(searchString)));
+                }
+
+                moviesQuery = sortOrder switch
+                {
+                    "title" => moviesQuery.OrderBy(m => m.Title),
+                    "title_desc" => moviesQuery.OrderByDescending(m => m.Title),
+                    "date" => moviesQuery.OrderByDescending(m => m.StartDate),
+                    "date_desc" => moviesQuery.OrderBy(m => m.EndDate),
+                    "rating" => moviesQuery.OrderByDescending(m => m.Rating),
+                    _ => moviesQuery.OrderBy(m => m.Title)
+                };
+
+                cinemaDetails.Movies = await moviesQuery
+                    .Select(m => new MovieDetailsVM
+                    {
+                        Id = m.Id,
+                        Title = m.Title,
+                        Description = m.Description,
+                        Price = m.Price,
+                        Author = m.Author,
+                        ImgUrl = m.ImgUrl,
+                        Duration = m.Duration,
+                        StartDate = m.StartDate,
+                        EndDate = m.EndDate,
+                        ReleaseYear = m.ReleaseYear,
+                        Rating = m.Rating,
+                        CategoryName = m.Category.Name
+                    })
+                    .ToListAsync();
+
+                return cinemaDetails;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error while getting cinema details for ID: {id}");
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<CinemaIndexVM>> GetPopularCinemaAsync(int count)
+        {
+            try
+            {
+                // This is a simplified version - you might want to implement actual popularity logic
+                var cinemas = await _cinemaRepo.GetAll()
+                    .OrderByDescending(c => c.CreatedDateUtc)
+                    .Take(count)
+                    .ToListAsync();
+
+                return cinemas.Select(c => new CinemaIndexVM
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Location = c.Location,
+                    Description = c.Description
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error while getting top {count} popular cinemas");
+                throw;
+            }
+        }
+
+        #endregion
 
 
     }

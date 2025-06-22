@@ -7,10 +7,10 @@ namespace Movie_Market.Areas.Customer.Controllers
     [Area("Customer")]
     public class CategoriesController : BaseController
     {
-        private readonly ICustomerCategoryService _categoryService;
+        private readonly ICategoryService _categoryService;
         private readonly ILogger<CategoriesController> _logger;
 
-        public CategoriesController(ICustomerCategoryService categoryService, ILogger<CategoriesController> logger)
+        public CategoriesController(ICategoryService categoryService, ILogger<CategoriesController> logger)
         {
             _categoryService = categoryService;
             _logger = logger;

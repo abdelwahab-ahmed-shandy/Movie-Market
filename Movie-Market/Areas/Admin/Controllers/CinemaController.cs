@@ -1,5 +1,4 @@
-﻿
-using Movie_Market.GloubalUsing;
+﻿using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Admin.Controllers
 {
@@ -7,9 +6,9 @@ namespace Movie_Market.Areas.Admin.Controllers
     //[Authorize(Roles = "Admin,SuperAdmin")]
     public class CinemaController : BaseController
     {
-        private readonly IAdminCinemaService _cinemaService;
+        private readonly ICinemaService _cinemaService;
 
-        public CinemaController(IAdminCinemaService cinemaService)
+        public CinemaController(ICinemaService cinemaService)
         {
             _cinemaService = cinemaService;
         }

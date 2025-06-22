@@ -1,5 +1,4 @@
-﻿using BLL.Services.Interfaces.Admin;
-using DAL.ViewModels.Category;
+﻿using DAL.ViewModels.Category;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Movie_Market.GloubalUsing;
@@ -11,9 +10,9 @@ namespace Movie_Market.Areas.Admin.Controllers
     public class CategoriesController : BaseController
     {
         private readonly ILogger<CategoriesController> _logger;
-        private readonly IAdminCategoryService _categoryService;
+        private readonly ICategoryService _categoryService;
         public CategoriesController(ILogger<CategoriesController> logger,
-                                     IAdminCategoryService categoryService)
+                                     ICategoryService categoryService)
         {
             _logger = logger;
             _categoryService = categoryService;

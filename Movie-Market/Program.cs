@@ -1,8 +1,6 @@
-using BLL.Services.Implementations;
 using AutoMapper;
 using BLL.Services.Implementations.Admin;
 using BLL.Services.Implementations.Customer;
-using BLL.Services.Interfaces.Admin;
 using BLL.Services.Interfaces.Customer;
 using DAL.Repositories;
 using DAL.Repositories.IRepositories;
@@ -34,10 +32,10 @@ namespace Movie_Market
             #region Register Services
 
             // Admin Services
-            builder.Services.AddScoped<IAdminCategoryService, AdminCategoryService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IAdminMovieService, AdminMovieService>();
-            builder.Services.AddScoped<IAdminCinemaService, AdminCinemaService>();
-            builder.Services.AddScoped<IAdminCharacterService, AdminCharacterService>();
+            builder.Services.AddScoped<ICinemaService, CinemaService>();
+            builder.Services.AddScoped<ICharacterService, CharacterService>();
             builder.Services.AddScoped<IAdminSpecialService, AdminSpecialService>();
             builder.Services.AddScoped<IAdminTvSeriesService, AdminTvSeriesService>();
             builder.Services.AddScoped<IAdminSeasonService, AdminSeasonService>();

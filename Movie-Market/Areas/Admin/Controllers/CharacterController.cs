@@ -8,12 +8,12 @@ namespace Movie_Market.Areas.Admin.Controllers
     //[Authorize(Roles = "Admin,SuperAdmin")]
     public class CharacterController : BaseController
     {
-        private readonly IAdminCharacterService _characterService;
+        private readonly ICharacterService _characterService;
         private readonly IGenericRepository<Movie> _movieRepo;
         private readonly IGenericRepository<TvSeries> _tvSeriesRepo;
         private readonly IAdminCharacterTvSeriesService _characterTvSeriesService;
 
-        public CharacterController(IAdminCharacterService characterService,IGenericRepository<Movie> movieRepo,
+        public CharacterController(ICharacterService characterService,IGenericRepository<Movie> movieRepo,
                                         IGenericRepository<TvSeries> tvSeriesRepo , IAdminCharacterTvSeriesService characterTvSeriesService)
         {
             _characterService = characterService;

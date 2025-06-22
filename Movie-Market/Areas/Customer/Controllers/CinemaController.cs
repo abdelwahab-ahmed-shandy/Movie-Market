@@ -7,9 +7,9 @@ namespace Movie_Market.Areas.Customer.Controllers
     [Area("Customer")]
     public class CinemaController : BaseController
     {
-        private readonly ICustomerCinemaService _cinemaService;
+        private readonly ICinemaService _cinemaService;
 
-        public CinemaController(ICustomerCinemaService cinemaService)
+        public CinemaController(ICinemaService cinemaService)
         {
             _cinemaService = cinemaService;
         }
