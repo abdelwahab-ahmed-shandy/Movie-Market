@@ -1,5 +1,4 @@
-﻿using BLL.Services.Interfaces.Customer;
-using DAL.ViewModels.Dashboard;
+﻿using DAL.ViewModels.Dashboard;
 using DAL.ViewModels.Search;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -12,10 +11,10 @@ namespace Movie_Market.Areas.Customer.Controllers
     {
         private readonly IDashboardService _dashboardService;
         private readonly ISearchService _searchService;
-        private readonly ICustomerMovieService _movieService;
+        private readonly IMovieService _movieService;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ISearchService searchService , ICustomerMovieService movieService,
+        public HomeController(ISearchService searchService , IMovieService movieService,
                                  ILogger<HomeController> logger, IDashboardService dashboardService )
         {
             _searchService = searchService;

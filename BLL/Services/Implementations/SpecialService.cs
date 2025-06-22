@@ -1,21 +1,20 @@
-﻿using BLL.Services.Interfaces.Admin;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Implementations.Admin
+namespace BLL.Services.Implementations
 {
-    public class AdminSpecialService : IAdminSpecialService
+    public class SpecialService : ISpecialService
     {
         private readonly IGenericRepository<Special> _specialRepo;
-        private readonly ILogger<AdminSpecialService> _logger;
+        private readonly ILogger<SpecialService> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AdminSpecialService(IGenericRepository<Special> specialRepo,
-                                        ILogger<AdminSpecialService> logger,
+        public SpecialService(IGenericRepository<Special> specialRepo,
+                                        ILogger<SpecialService> logger,
                                         IHttpContextAccessor httpContextAccessor)
         {
             _specialRepo = specialRepo;
@@ -23,6 +22,7 @@ namespace BLL.Services.Implementations.Admin
             _httpContextAccessor = httpContextAccessor;
         }
 
+        #region Admin Methods 
         public async Task<SpecialAdminListVM> GetAllSpecialsAsync(int page, int pageSize, string? query = null)
         {
             try
@@ -35,7 +35,7 @@ namespace BLL.Services.Implementations.Admin
 
                     source = source.Where(s =>
                         s.Name.ToLower().Contains(query) ||
-                        (s.Description != null && s.Description.ToLower().Contains(query)));
+                        s.Description != null && s.Description.ToLower().Contains(query));
                 }
 
 
@@ -100,7 +100,6 @@ namespace BLL.Services.Implementations.Admin
             };
         }
 
-
         public async Task<Guid> CreateSpecialAsync(SpecialCreateVM model)
         {
             var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
@@ -120,7 +119,6 @@ namespace BLL.Services.Implementations.Admin
             await _specialRepo.Add(special);
             return special.Id;
         }
-
 
         public async Task<bool> UpdateSpecialAsync(Guid id, SpecialEditVM model)
         {
@@ -142,7 +140,6 @@ namespace BLL.Services.Implementations.Admin
             return true;
         }
 
-
         public async Task<bool> ToggleSpecialStatusAsync(Guid id)
         {
             var special = await _specialRepo.GetByIdAsync(id);
@@ -155,7 +152,6 @@ namespace BLL.Services.Implementations.Admin
             await _specialRepo.Update(special);
             return true;
         }
-
 
         public async Task SoftDeleteAsync(Guid id)
         {
@@ -173,7 +169,6 @@ namespace BLL.Services.Implementations.Admin
             }
         }
 
-
         public async Task DeleteAsync(Guid id)
         {
             var category = await _specialRepo.GetByIdAsync(id);
@@ -182,7 +177,83 @@ namespace BLL.Services.Implementations.Admin
 
             await _specialRepo.DeleteInDB(id);
         }
+        #endregion
 
+        #region Customer Methods
+
+        public async Task<IEnumerable<SpecialIndexVM>> GetActiveSpecialAsync()
+        {
+            try
+            {
+                var now = DateTime.Now;
+
+                var specials = await _specialRepo
+                    .Get(s => !s.IsDeleted &&
+                         s.CurrentState == CurrentState.Active &&
+                         s.StartDate <= now &&
+                         s.EndDate >= now)
+                    .OrderBy(s => s.StartDate)
+                    .ToListAsync();
+
+                return specials.Select(s => new SpecialIndexVM
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Description = s.Description,
+                    DiscountPercentage = s.DiscountPercentage,
+                    StartDate = s.StartDate,
+                    EndDate = s.EndDate
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while getting active specials");
+                throw;
+            }
+        }
+
+        public async Task<SpecialDetailsVM?> GetSpecialDetailsAsync(Guid id)
+        {
+            try
+            {
+                var special = await _specialRepo.GetAll()
+                    .Include(s => s.MovieSpecials)
+                        .ThenInclude(ms => ms.ParentMovie)
+                    .FirstOrDefaultAsync(s => s.Id == id && !s.IsDeleted);
+
+                if (special == null)
+                    return null;
+
+                return new SpecialDetailsVM
+                {
+                    Id = special.Id,
+                    Name = special.Name,
+                    Description = special.Description,
+                    StartDate = special.StartDate,
+                    EndDate = special.EndDate,
+                    DiscountPercentage = special.DiscountPercentage,
+                    Movies = special.MovieSpecials
+                        .Where(ms => !ms.IsDeleted && !ms.ParentMovie.IsDeleted)
+                        .OrderBy(ms => ms.DisplayOrder)
+                        .Select(ms => new SpecialMovieVM
+                        {
+                            MovieId = ms.ParentMovieId,
+                            MovieTitle = ms.ParentMovie.Title,
+                            MoviePosterUrl = ms.ParentMovie.ImgUrl,
+                            IsFeatured = ms.IsFeatured,
+                            DisplayOrder = ms.DisplayOrder
+                        }).ToList()
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error while getting special details for ID: {id}");
+                throw;
+            }
+        }
+
+
+        #endregion
 
     }
 }

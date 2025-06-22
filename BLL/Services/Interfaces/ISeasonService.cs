@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Interfaces.Admin
+namespace BLL.Services.Interfaces
 {
-    public interface IAdminSeasonService
+    public interface ISeasonService 
     {
+
+        #region Admin Methods
         Task<SeasonAdminListVM> GetAllSeasonsAsync(int page, int pageSize, Guid tvSeriesId, string? query = null);
         Task<SeasonAdminDetailsVM> GetSeasonDetailsAsync(Guid id);
         Task<Season> CreateSeasonAsync(SeasonAdminCreateVM viewModel);
@@ -16,5 +18,12 @@ namespace BLL.Services.Interfaces.Admin
         Task SoftDeleteSeasonAsync(Guid id);
         Task DeleteSeasonAsync(Guid id);
         Task RestoreSeasonAsync(Guid id);
+        #endregion
+
+        #region Customer Methods
+        Task<List<SeasonCustomerVM>> GetAllSeasonAsync();
+        Task<SeasonDetailsVM?> GetSeasonWithDetailsAsync(Guid id);
+        #endregion
+  
     }
 }

@@ -1,27 +1,32 @@
-﻿using BLL.Services.Interfaces.Admin;
-using DAL.ViewModels.Season;
+﻿using DAL.ViewModels.Season;
+using DAL.ViewModels.TvSeries;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Implementations.Admin
+namespace BLL.Services.Implementations
 {
-    public class AdminSeasonService : IAdminSeasonService
+    public class SeasonService : ISeasonService
     {
         private readonly IGenericRepository<Season> _seasonRepository;
         private readonly IGenericRepository<TvSeries> _tvSeriesRepository;
         private readonly IHttpContextAccessor _HttpContextAccessor;
-        public AdminSeasonService(IGenericRepository<Season> seasonRepository,
+        private readonly ILogger<SeasonService> _logger;
+
+        public SeasonService(IGenericRepository<Season> seasonRepository,
                                     IGenericRepository<TvSeries> tvSeriesRepository,
-                                    IHttpContextAccessor httpContextAccessor)
+                                    IHttpContextAccessor httpContextAccessor, ILogger<SeasonService> logger)
         {
             _seasonRepository = seasonRepository;
+            _logger = logger;
             _tvSeriesRepository = tvSeriesRepository;
             _HttpContextAccessor = httpContextAccessor;
         }
 
+        #region Admin Methods
         public async Task<SeasonAdminListVM> GetAllSeasonsAsync(int page, int pageSize, Guid tvSeriesId, string? query = null)
         {
             var seasonsQuery = _seasonRepository.GetAllWithDeleted()
@@ -56,7 +61,6 @@ namespace BLL.Services.Implementations.Admin
                 TvSeriesId = tvSeriesId
             };
         }
-
 
         public async Task<SeasonAdminDetailsVM> GetSeasonDetailsAsync(Guid id)
         {
@@ -99,7 +103,6 @@ namespace BLL.Services.Implementations.Admin
             };
         }
 
-
         public async Task<Season> CreateSeasonAsync(SeasonAdminCreateVM viewModel)
         {
             var userName = _HttpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
@@ -123,7 +126,6 @@ namespace BLL.Services.Implementations.Admin
             return await _seasonRepository.Add(season);
         }
 
-
         public async Task UpdateSeasonAsync(Guid id, SeasonAdminEditVM viewModel)
         {
             var userName = _HttpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
@@ -144,24 +146,107 @@ namespace BLL.Services.Implementations.Admin
             await _seasonRepository.Update(season);
         }
 
-
         public async Task SoftDeleteSeasonAsync(Guid id)
         {
             await _seasonRepository.SoftDeleteAsync(id);
         }
-
 
         public async Task DeleteSeasonAsync(Guid id)
         {
             await _seasonRepository.DeleteInDB(id);
         }
 
-
         public async Task RestoreSeasonAsync(Guid id)
         {
             await _seasonRepository.RestoreAsync(id);
         }
-    
-    
+        #endregion
+
+        #region Customer Methods
+        public async Task<List<SeasonCustomerVM>> GetAllSeasonAsync()
+        {
+            var seasons = await _seasonRepository.GetAll()
+                .Include(s => s.TvSeries)
+                .Include(s => s.Episodes.Where(e => !e.IsDeleted))
+                .OrderBy(s => s.SeasonNumber)
+                .ToListAsync();
+
+            return seasons.Select(s => new SeasonCustomerVM
+            {
+                Id = s.Id,
+                Title = s.Title,
+                SeasonNumber = s.SeasonNumber,
+                TvSeriesTitle = s.TvSeries.Title,
+                ImgUrl = s.TvSeries.ImgUrl,
+                ReleaseYear = s.ReleaseYear,
+                EpisodeCount = s.Episodes.Count
+            }).ToList();
+        }
+
+        public async Task<SeasonDetailsVM?> GetSeasonWithDetailsAsync(Guid id)
+        {
+            try
+            {
+                var season = await _seasonRepository.GetAll()
+                    .Include(s => s.TvSeries)
+                    .Include(s => s.Episodes.Where(e => !e.IsDeleted))
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(s => s.Id == id && !s.IsDeleted);
+
+                if (season == null)
+                {
+                    return null;
+                }
+
+                // Map episodes
+                var episodes = season.Episodes
+                    .OrderBy(e => e.EpisodeNumber)
+                    .Select(e => new EpisodeCustomerVM
+                    {
+                        Id = e.Id,
+                        Title = e.Title,
+                        EpisodeNumber = e.EpisodeNumber,
+                        Description = e.Description,
+                        Duration = e.Duration,
+                        ThumbnailUrl = !string.IsNullOrEmpty(e.ThumbnailUrl)
+                            ? e.ThumbnailUrl
+                            : season.TvSeries.ImgUrl, 
+                    }).ToList();
+
+                var tvSeriesVMs = new List<TvSeriesVM>
+        {
+            new TvSeriesVM
+            {
+                Id = season.TvSeries.Id,
+                Title = season.TvSeries.Title,
+                Description = season.TvSeries.Description,
+                Author = season.TvSeries.Author,
+                ImgUrl = season.TvSeries.ImgUrl,
+                ReleaseYear = season.TvSeries.ReleaseYear,
+                Rating = season.TvSeries.Rating
+            }
+        };
+
+                return new SeasonDetailsVM
+                {
+                    Id = season.Id,
+                    Title = season.Title,
+                    SeasonNumber = season.SeasonNumber,
+                    ReleaseYear = season.ReleaseYear,
+                    TvSeriesTitle = season.TvSeries.Title,
+                    TvSeriesId = season.TvSeries.Id,
+                    tvSeriesVMs = tvSeriesVMs,
+                    Episodes = episodes
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error retrieving season details for ID: {id}");
+                throw;
+            }
+        }
+
+        #endregion
+
     }
 }

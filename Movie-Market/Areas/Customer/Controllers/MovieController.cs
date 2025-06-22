@@ -1,5 +1,4 @@
-﻿using BLL.Services.Interfaces.Customer;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Movie_Market.GloubalUsing;
 
 namespace Movie_Market.Areas.Customer.Controllers
@@ -7,9 +6,9 @@ namespace Movie_Market.Areas.Customer.Controllers
     [Area("Customer")]
     public class MovieController : BaseController
     {
-        private readonly ICustomerMovieService _movieService;
+        private readonly IMovieService _movieService;
 
-        public MovieController(ICustomerMovieService movieService)
+        public MovieController(IMovieService movieService)
         {
             _movieService = movieService;
         }

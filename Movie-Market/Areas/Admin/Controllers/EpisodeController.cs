@@ -8,8 +8,8 @@ namespace Movie_Market.Areas.Admin.Controllers
     //[Authorize(Roles = "Admin,SuperAdmin")]
     public class EpisodeController : BaseController
     {
-        private readonly IAdminEpisodeService _episodeService;
-        public EpisodeController(IAdminEpisodeService episodeService)
+        private readonly IEpisodeService _episodeService;
+        public EpisodeController(IEpisodeService episodeService)
         {
             _episodeService = episodeService;
         }

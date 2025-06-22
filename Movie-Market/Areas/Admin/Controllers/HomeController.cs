@@ -9,8 +9,8 @@ namespace Movie_Market.Areas.Admin.Controllers
     //[Authorize(Roles = "Admin,SuperAdmin")]
     public class HomeController : BaseController
     {
-        private readonly IAdminDashboardService _dashboardService;
-        public HomeController(IAdminDashboardService dashboardService)
+        private readonly IDashboardService _dashboardService;
+        public HomeController(DashboardService dashboardService)
         {
             _dashboardService = dashboardService;
         }

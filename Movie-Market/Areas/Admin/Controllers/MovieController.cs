@@ -1,5 +1,4 @@
-﻿using BLL.Services.Interfaces.Admin;
-using DAL.ViewModels.Movie;
+﻿using DAL.ViewModels.Movie;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Movie_Market.GloubalUsing;
@@ -10,14 +9,14 @@ namespace Movie_Market.Areas.Admin.Controllers
     //[Authorize(Roles = "Admin,SuperAdmin")]
     public class MovieController : BaseController
     {
-        private readonly IAdminMovieService _movieService;
+        private readonly IMovieService _movieService;
         private readonly IGenericRepository<Category> _categoryRepo;
         private readonly IGenericRepository<Character> _characterRepo;
         private readonly IGenericRepository<Cinema> _cinemaRepo;
         private readonly IGenericRepository<Special> _specialRepo;
 
         public MovieController(
-            IAdminMovieService movieService,
+            IMovieService movieService,
             IGenericRepository<Category> categoryRepo,
             IGenericRepository<Character> characterRepo,
             IGenericRepository<Cinema> cinemaRepo,

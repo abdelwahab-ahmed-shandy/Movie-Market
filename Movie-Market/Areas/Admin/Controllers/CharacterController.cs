@@ -11,10 +11,10 @@ namespace Movie_Market.Areas.Admin.Controllers
         private readonly ICharacterService _characterService;
         private readonly IGenericRepository<Movie> _movieRepo;
         private readonly IGenericRepository<TvSeries> _tvSeriesRepo;
-        private readonly IAdminCharacterTvSeriesService _characterTvSeriesService;
+        private readonly ICharacterTvSeriesService _characterTvSeriesService;
 
         public CharacterController(ICharacterService characterService,IGenericRepository<Movie> movieRepo,
-                                        IGenericRepository<TvSeries> tvSeriesRepo , IAdminCharacterTvSeriesService characterTvSeriesService)
+                                        IGenericRepository<TvSeries> tvSeriesRepo , ICharacterTvSeriesService characterTvSeriesService)
         {
             _characterService = characterService;
             _movieRepo = movieRepo;

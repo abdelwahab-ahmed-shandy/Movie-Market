@@ -1,7 +1,4 @@
 using AutoMapper;
-using BLL.Services.Implementations.Admin;
-using BLL.Services.Implementations.Customer;
-using BLL.Services.Interfaces.Customer;
 using DAL.Repositories;
 using DAL.Repositories.IRepositories;
 
@@ -31,39 +28,27 @@ namespace Movie_Market
 
             #region Register Services
 
-            // Admin Services
-            builder.Services.AddScoped<ICategoryService, CategoryService>();
-            builder.Services.AddScoped<IAdminMovieService, AdminMovieService>();
-            builder.Services.AddScoped<ICinemaService, CinemaService>();
-            builder.Services.AddScoped<ICharacterService, CharacterService>();
-            builder.Services.AddScoped<IAdminSpecialService, AdminSpecialService>();
-            builder.Services.AddScoped<IAdminTvSeriesService, AdminTvSeriesService>();
-            builder.Services.AddScoped<IAdminSeasonService, AdminSeasonService>();
-            builder.Services.AddScoped<IAdminEpisodeService, AdminEpisodeService>();
-            builder.Services.AddScoped<IAdminCharacterTvSeriesService, AdminCharacterTvSeriesService>();
-            builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
-
-            // Customer Services
-            builder.Services.AddScoped<ICustomerCategoryService, CustomerCategoryService>();
-            builder.Services.AddScoped<ICustomerMovieService, CustomerMovieService>();
-            builder.Services.AddScoped<ICustomerCinemaService, CustomerCinemaService>();
-            builder.Services.AddScoped<ICustomerTvSeriesService, CustomerTvSeriesService>();
-            builder.Services.AddScoped<ICustomerCharacterService, CustomerCharacterService>();
-            builder.Services.AddScoped<ICustomerSpecialService, CustomerSpecialService>();
-            builder.Services.AddScoped<ICustomerSeasonService, CustomerSeasonService>();
-            builder.Services.AddScoped<IDashboardService, DashboardService>();
-
             // Repository Services
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddScoped<IFileService, FileService>();
             builder.Services.AddTransient<IEmailService, EmailService>();
             builder.Services.AddScoped<IAuditService, AuditService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<IMovieService, MovieService>();
+            builder.Services.AddScoped<ICinemaService, CinemaService>();
+            builder.Services.AddScoped<ICharacterService, CharacterService>();
+            builder.Services.AddScoped<ISpecialService, SpecialService>();
+            builder.Services.AddScoped<ITvSeriesService, TvSeriesService>();
+            builder.Services.AddScoped<ISeasonService, SeasonService>();
+            builder.Services.AddScoped<IEpisodeService, EpisodeService>();
+            builder.Services.AddScoped<ICharacterTvSeriesService, CharacterTvSeriesService>();
+            builder.Services.AddScoped<IDashboardService, DashboardService>();
+
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<ISearchService, SearchService>();
             builder.Services.AddScoped<ISubscriberService, SubscriberService>();
             builder.Services.AddScoped<INewsletterService, NewsletterService>();
             builder.Services.AddMemoryCache();
-
 
             #endregion
 

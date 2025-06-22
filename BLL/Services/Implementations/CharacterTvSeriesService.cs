@@ -1,19 +1,18 @@
-﻿using BLL.Services.Interfaces.Admin;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Implementations.Admin
+namespace BLL.Services.Implementations
 {
-    public class AdminCharacterTvSeriesService : IAdminCharacterTvSeriesService
+    public class CharacterTvSeriesService : ICharacterTvSeriesService
     {
         private readonly IGenericRepository<Character> _characterRepository;
         private readonly IGenericRepository<TvSeries> _tvSeriesRepository;
         private readonly IGenericRepository<CharacterTvSeries> _characterTvSeriesRepository;
 
-        public AdminCharacterTvSeriesService(
+        public CharacterTvSeriesService(
             IGenericRepository<Character> characterRepository,
             IGenericRepository<TvSeries> tvSeriesRepository,
             IGenericRepository<CharacterTvSeries> characterTvSeriesRepository)

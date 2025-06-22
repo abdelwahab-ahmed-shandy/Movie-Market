@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Interfaces.Admin
+namespace BLL.Services.Interfaces
 {
-    public interface IAdminEpisodeService
+    public interface IEpisodeService
     {
         Task<EpisodeAdminListVM> GetAllEpisodesAsync(int page, int pageSize, Guid seasonId, string? query = null);
         Task<EpisodeAdminDetailsVM> GetEpisodeDetailsAsync(Guid id);

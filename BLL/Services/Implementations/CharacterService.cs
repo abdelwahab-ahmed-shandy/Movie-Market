@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Implementations.Admin
+namespace BLL.Services.Implementations
 {
     public class CharacterService : ICharacterService
     {
@@ -51,7 +51,7 @@ namespace BLL.Services.Implementations.Admin
             {
                 charactersQuery = charactersQuery.Where(c =>
                     c.Name.Contains(query) ||
-                    (c.Description != null && c.Description.Contains(query)));
+                    c.Description != null && c.Description.Contains(query));
             }
 
             var paginatedList = await PaginatedList<Character>.CreateAsync(charactersQuery, page, pageSize);

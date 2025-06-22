@@ -1,5 +1,4 @@
-﻿using BLL.Services.Interfaces.Customer;
-using Castle.Core.Smtp;
+﻿using Castle.Core.Smtp;
 using DAL.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

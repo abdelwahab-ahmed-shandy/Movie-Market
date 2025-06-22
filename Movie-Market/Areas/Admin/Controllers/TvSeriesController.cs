@@ -8,9 +8,9 @@ namespace Movie_Market.Areas.Admin.Controllers
     //[Authorize(Roles = "Admin,SuperAdmin")]
     public class TvSeriesController : BaseController
     {
-        private readonly IAdminTvSeriesService _tvSeriesService;
+        private readonly ITvSeriesService _tvSeriesService;
         private readonly ILogger<TvSeriesController> _logger;
-        public TvSeriesController(IAdminTvSeriesService tvSeriesService, ILogger<TvSeriesController> logger)
+        public TvSeriesController(ITvSeriesService tvSeriesService, ILogger<TvSeriesController> logger)
         {
             _tvSeriesService = tvSeriesService;
             _logger = logger;

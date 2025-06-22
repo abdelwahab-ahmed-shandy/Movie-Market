@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Interfaces.Customer
+namespace BLL.Services.Interfaces
 {
     public interface ISubscriberService
     {

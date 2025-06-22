@@ -1,13 +1,12 @@
-﻿using BLL.Services.Interfaces.Customer;
-using DAL.Context;
+﻿using DAL.Context;
 
 namespace Movie_Market.Areas.Customer.ViewComponents
 {
     public class CategoriesDropdownViewComponent : ViewComponent
     {
-        private readonly ICustomerCategoryService _categoryService;
+        private readonly ICategoryService _categoryService;
 
-        public CategoriesDropdownViewComponent(ICustomerCategoryService categoryService)
+        public CategoriesDropdownViewComponent(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }

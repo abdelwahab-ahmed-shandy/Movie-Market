@@ -1,12 +1,11 @@
-﻿using BLL.Services.Interfaces.Customer;
-
+﻿
 namespace Movie_Market.Areas.Customer.ViewComponents
 {
     public class PopularCategoriesViewComponent : ViewComponent
     {
-        private readonly ICustomerCategoryService _categoryService;
+        private readonly ICategoryService _categoryService;
 
-        public PopularCategoriesViewComponent(ICustomerCategoryService categoryService)
+        public PopularCategoriesViewComponent(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }

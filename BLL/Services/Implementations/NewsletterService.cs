@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Implementations.Admin
+namespace BLL.Services.Implementations
 {
     public class NewsletterService : INewsletterService
     {

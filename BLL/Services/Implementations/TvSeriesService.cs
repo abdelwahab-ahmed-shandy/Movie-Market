@@ -1,5 +1,4 @@
-﻿using BLL.Services.Interfaces;
-using BLL.Services.Interfaces.Admin;
+﻿using DAL.ViewModels.Season;
 using DAL.ViewModels.TvSeries;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -10,32 +9,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Implementations.Admin
+namespace BLL.Services.Implementations
 {
-    public class AdminTvSeriesService : IAdminTvSeriesService
+    public class TvSeriesService : ITvSeriesService
     {
-        private readonly IGenericRepository<TvSeries> _tvSeriesRepository;
+        private readonly IGenericRepository<TvSeries> _tvSeriesRepo;
         private readonly IGenericRepository<Season> _seasonRepo;
         private readonly IGenericRepository<Character> _characterRepo;
         private readonly IHttpContextAccessor _HttpContextAccessor;
         private readonly IFileService _fileService;
-        private readonly ILogger<AdminTvSeriesService> _logger;
-        public AdminTvSeriesService(IGenericRepository<TvSeries> tvSeriesRepo, IHttpContextAccessor HttpContextAccessor,
+        private readonly ILogger<TvSeriesService> _logger;
+        public TvSeriesService(IGenericRepository<TvSeries> tvSeriesRepo, IHttpContextAccessor HttpContextAccessor,
                                          IGenericRepository<Season> seasonRepo , IGenericRepository<Character> characterRepo,
-                                            IFileService fileService , ILogger<AdminTvSeriesService> logger)
+                                            IFileService fileService , ILogger<TvSeriesService> logger)
         {
             _HttpContextAccessor = HttpContextAccessor;
-            _tvSeriesRepository = tvSeriesRepo;
+            _tvSeriesRepo = tvSeriesRepo;
             _seasonRepo = seasonRepo;
             _characterRepo = characterRepo;
             _fileService = fileService;
             _logger = logger;
         }
 
-
+        #region Admin Methods
         public async Task<TvSeriesAdminListVM> GetAllTvSeriesAsync(int page, int pageSize, string? query = null)
         {
-            var tvSeriesQuery = _tvSeriesRepository.GetAllWithDeleted()
+            var tvSeriesQuery = _tvSeriesRepo.GetAllWithDeleted()
                                         .Include(t => t.Seasons.Where(s => !s.IsDeleted)).AsQueryable();
 
             if (!string.IsNullOrEmpty(query))
@@ -69,10 +68,9 @@ namespace BLL.Services.Implementations.Admin
             };
         }
 
-
         public async Task<TvSeriesAdminDetailsVM> GetTvSeriesDetailsAsync(Guid id)
         {
-            var tvSeries = await _tvSeriesRepository.GetAllWithDeleted()
+            var tvSeries = await _tvSeriesRepo.GetAllWithDeleted()
                 .Include(t => t.Seasons)
                     .ThenInclude(s => s.Episodes)
                 .Include(t => t.Characters)
@@ -125,7 +123,6 @@ namespace BLL.Services.Implementations.Admin
             };
         }
 
-
         public async Task<TvSeries> CreateTvSeriesAsync(TvSeriesAdminCreateVM viewModel)
         {
             var userName = _HttpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
@@ -148,13 +145,12 @@ namespace BLL.Services.Implementations.Admin
                 CreatedBy = userName
             };
 
-            return await _tvSeriesRepository.Add(tvSeries);
+            return await _tvSeriesRepo.Add(tvSeries);
         }
-
 
         public async Task UpdateTvSeriesAsync(Guid id, TvSeriesAdminEditVM viewModel)
         {
-            var tvSeries = await _tvSeriesRepository.GetByIdAsync(id);
+            var tvSeries = await _tvSeriesRepo.GetByIdAsync(id);
             
             if (tvSeries == null) throw new KeyNotFoundException("TV Series not found");
             
@@ -178,19 +174,17 @@ namespace BLL.Services.Implementations.Admin
             tvSeries.UpdatedBy = userName;
             tvSeries.UpdatedDateUtc = DateTime.UtcNow;
 
-            await _tvSeriesRepository.Update(tvSeries);
+            await _tvSeriesRepo.Update(tvSeries);
         }
-
 
         public async Task SoftDelete(Guid Id)
         {
-            await _tvSeriesRepository.SoftDeleteAsync(Id);
+            await _tvSeriesRepo.SoftDeleteAsync(Id);
         }
-
 
         public async Task Delete(Guid Id)
         {
-            var tvSeries = await _tvSeriesRepository.GetByIdAsync(Id);
+            var tvSeries = await _tvSeriesRepo.GetByIdAsync(Id);
 
             if (tvSeries == null)
             {
@@ -211,15 +205,77 @@ namespace BLL.Services.Implementations.Admin
             }
 
 
-            await _tvSeriesRepository.DeleteInDB(Id);
+            await _tvSeriesRepo.DeleteInDB(Id);
         }
-
 
         public async Task RestoreAsync(Guid Id)
         {
-            await _tvSeriesRepository.RestoreAsync(Id);
+            await _tvSeriesRepo.RestoreAsync(Id);
+        }
+        #endregion
+
+        #region Customer Methods
+
+        public async Task<IEnumerable<TvSeriesVM>> GetAllTvSeriesAsync()
+        {
+            var tvSeries = await _tvSeriesRepo.Get(t => !t.IsDeleted && t.CurrentState.Value == CurrentState.Active)
+                .OrderByDescending(t => t.ReleaseYear)
+                .ToListAsync();
+
+            return tvSeries.Select(t => new TvSeriesVM
+            {
+                Id = t.Id,
+                Title = t.Title,
+                Description = t.Description,
+                Author = t.Author,
+                ImgUrl = t.ImgUrl,
+                ReleaseYear = t.ReleaseYear,
+                Rating = t.Rating
+            });
         }
 
+        public async Task<TvSeriesDetailsVM?> GetTvSeriesWithDetailsAsync(Guid id)
+        {
+            var tvSeries = await _tvSeriesRepo.Get(t => t.Id == id)
+                .Include(t => t.Seasons)
+                .Include(t => t.Characters)
+                .ThenInclude(ct => ct.Character)
+                .FirstOrDefaultAsync();
+
+            if (tvSeries == null) return null;
+
+            return new TvSeriesDetailsVM
+            {
+                TvSeries = new TvSeriesVM
+                {
+                    Id = tvSeries.Id,
+                    Title = tvSeries.Title,
+                    Description = tvSeries.Description,
+                    Author = tvSeries.Author,
+                    ImgUrl = tvSeries.ImgUrl,
+                    ReleaseYear = tvSeries.ReleaseYear,
+                    Rating = tvSeries.Rating
+                },
+                Seasons = tvSeries.Seasons
+                    .OrderBy(s => s.SeasonNumber)
+                    .Select(s => new SeasonVM
+                    {
+                        Id = s.Id,
+                        Title = s.Title,
+                        ReleaseYear = s.ReleaseYear,
+                        SeasonNumber = s.SeasonNumber
+                    }).ToList(),
+                Characters = tvSeries.Characters
+                    .Select(ct => new CharacterVM
+                    {
+                        Id = ct.Character.Id,
+                        Name = ct.Character.Name,
+                        Description = ct.Character.Description
+                    }).ToList()
+            };
+        }
+
+        #endregion
 
     }
 }

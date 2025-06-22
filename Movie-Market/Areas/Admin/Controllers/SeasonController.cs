@@ -8,9 +8,9 @@ namespace Movie_Market.Areas.Admin.Controllers
     //[Authorize(Roles = "Admin,SuperAdmin")]
     public class SeasonController : BaseController
     {
-        private readonly IAdminSeasonService _seasonService;
+        private readonly ISeasonService _seasonService;
 
-        public SeasonController(IAdminSeasonService seasonService)
+        public SeasonController(ISeasonService seasonService)
         {
             _seasonService = seasonService;
         }

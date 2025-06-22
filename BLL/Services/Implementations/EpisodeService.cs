@@ -1,25 +1,25 @@
-﻿using BLL.Services.Interfaces.Admin;
-using DAL.ViewModels.Episode;
+﻿using DAL.ViewModels.Episode;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Implementations.Admin
+namespace BLL.Services.Implementations
 {
-    public class AdminEpisodeService : IAdminEpisodeService
+    public class EpisodeService : IEpisodeService
     {
         private readonly IGenericRepository<Episode> _episodeRepository;
         private readonly IGenericRepository<Season> _seasonRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public AdminEpisodeService(IGenericRepository<Episode> episodeRepository,
+        public EpisodeService(IGenericRepository<Episode> episodeRepository,
             IGenericRepository<Season> seasonRepository , IHttpContextAccessor httpContextAccessor)
         {
             _episodeRepository = episodeRepository;
             _seasonRepository = seasonRepository;
             _httpContextAccessor = httpContextAccessor;
         }
+
 
         public async Task<EpisodeAdminListVM> GetAllEpisodesAsync(int page, int pageSize, Guid seasonId, string? query = null)
         {
@@ -57,7 +57,6 @@ namespace BLL.Services.Implementations.Admin
             };
         }
 
-
         public async Task<EpisodeAdminDetailsVM> GetEpisodeDetailsAsync(Guid id)
         {
             var episode = await _episodeRepository.GetAllWithDeleted()
@@ -93,7 +92,6 @@ namespace BLL.Services.Implementations.Admin
             };
         }
 
-
         public async Task<Episode> CreateEpisodeAsync(EpisodeAdminCreateVM viewModel)
         {
             var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
@@ -121,7 +119,6 @@ namespace BLL.Services.Implementations.Admin
             return await _episodeRepository.Add(episode);
         }
 
-
         public async Task UpdateEpisodeAsync(Guid id, EpisodeAdminEditVM viewModel)
         {
             var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
@@ -146,18 +143,15 @@ namespace BLL.Services.Implementations.Admin
             await _episodeRepository.Update(episode);
         }
 
-
         public async Task SoftDeleteEpisodeAsync(Guid id)
         {
             await _episodeRepository.SoftDeleteAsync(id);
         }
 
-
         public async Task DeleteEpisodeAsync(Guid id)
         {
             await _episodeRepository.DeleteInDB(id);
         }
-
 
         public async Task RestoreEpisodeAsync(Guid id)
         {

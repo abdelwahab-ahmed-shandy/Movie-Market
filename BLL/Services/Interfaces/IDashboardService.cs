@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services.Interfaces.Admin
+namespace BLL.Services.Interfaces
 {
-    public interface IAdminDashboardService
+    public interface IDashboardService
     {
+
+        #region Admin Methods
+
         Task<List<Subscriber>> GetTotalSubscriberAsync(int count);
-        Task<AdminDashboardVM> GetDashboardDataAsync();
+        Task<AdminDashboardVM> GetAdminDashboardDataAsync();
         Task<int> GetTotalActiveSpecialsAsync();
         Task<int> GetTotalCharactersAsync();
         Task<int> GetTotalCategoriesAsync();
@@ -19,5 +22,12 @@ namespace BLL.Services.Interfaces.Admin
         Task<int> GetTotalTvSeriesAsync();
         Task<int> GetTotalOrdersAsync();
         //Task<int> GetTotalUsersAsync();
+
+        #endregion
+
+        #region Customer Methods
+        Task<DashboardVM> GetDashboardDataAsync();
+        #endregion
+
     }
 }
