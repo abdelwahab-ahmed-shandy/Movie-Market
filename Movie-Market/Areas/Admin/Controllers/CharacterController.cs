@@ -25,17 +25,15 @@ namespace Movie_Market.Areas.Admin.Controllers
 
         #region Character Views
 
-        // GET: Admin/Character
         public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 10, string searchTerm = null)
         {
-            var characters = await _characterService.GetCharacterAll(pageNumber, pageSize, searchTerm);
+            var characters = await _characterService.GetCharacterAllAsync(pageNumber, pageSize, searchTerm);
             return View(characters);
         }
 
-        // GET: Admin/Character/Details/5
         public async Task<IActionResult> Details(Guid id)
         {
-            var character = await _characterService.GetCharacterById(id);
+            var character = await _characterService.GetCharacterByIdAsync(id);
             if (character == null)
             {
                 return NotFound();
@@ -44,7 +42,6 @@ namespace Movie_Market.Areas.Admin.Controllers
         }
 
         #endregion
-
 
 
         #region Create 
@@ -61,7 +58,7 @@ namespace Movie_Market.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _characterService.CreateCharacter(model);
+                var result = await _characterService.CreateCharacterAsync(model);
                 if (result)
                 {
                     TempData["notification"] = "Character created successfully!";
@@ -79,11 +76,10 @@ namespace Movie_Market.Areas.Admin.Controllers
         #endregion
 
 
-
         #region Edit
         public async Task<IActionResult> Edit(Guid id)
         {
-            var character = await _characterService.GetCharacterById(id);
+            var character = await _characterService.GetCharacterByIdAsync(id);
             if (character == null)
             {
                 return NotFound();
@@ -111,7 +107,7 @@ namespace Movie_Market.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _characterService.UpdateCharacter(model);
+                var result = await _characterService.UpdateCharacterAsync(model);
                 if (result)
                 {
                     TempData["notification"] = "Character Is Updated !";
@@ -129,7 +125,6 @@ namespace Movie_Market.Areas.Admin.Controllers
         #endregion
 
 
-
         #region Add To TvSeries
 
         [HttpGet]
@@ -137,7 +132,7 @@ namespace Movie_Market.Areas.Admin.Controllers
         {
             try
             {
-                var model = await _characterTvSeriesService.GetAddCharactersViewModel(tvSeriesId);
+                var model = await _characterTvSeriesService.GetAddCharactersViewModelAsync(tvSeriesId);
                 return View(model);
             }
             catch (KeyNotFoundException)
@@ -154,7 +149,7 @@ namespace Movie_Market.Areas.Admin.Controllers
             {
                 try
                 {
-                    await _characterTvSeriesService.AddCharacterToTvSeries(model.TvSeriesId, model.CharacterId);
+                    await _characterTvSeriesService.AddCharacterToTvSeriesAsync(model.TvSeriesId, model.CharacterId);
 
                     TempData["notification"] = "Character added successfully!";
                     TempData["MessageType"] = "success";
@@ -175,13 +170,11 @@ namespace Movie_Market.Areas.Admin.Controllers
                 }
             }
 
-            // If we got this far, something failed; reload the available characters
-            model.AvailableCharacters = (await _characterTvSeriesService.GetAddCharactersViewModel(model.TvSeriesId)).AvailableCharacters;
+            model.AvailableCharacters = (await _characterTvSeriesService.GetAddCharactersViewModelAsync(model.TvSeriesId)).AvailableCharacters;
             return View(model);
         }
 
         #endregion
-
 
 
         #region Delete
@@ -190,7 +183,7 @@ namespace Movie_Market.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var result = await _characterService.DeleteCharacter(id);
+            var result = await _characterService.DeleteCharacterAsync(id);
             if (!result)
             {
                 return NotFound();
@@ -205,7 +198,7 @@ namespace Movie_Market.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SoftDelete(Guid id)
         {
-            var result = await _characterService.SoftDeleteCharacter(id);
+            var result = await _characterService.SoftDeleteCharacterAsync(id);
             if (!result)
             {
                 return NotFound();

@@ -38,7 +38,7 @@ namespace BLL.Services.Implementations
 
 
         #region Admin Methods
-        public async Task<CharacterAdminListVM> GetCharacterAll(int page, int pageSize, string? query = null)
+        public async Task<CharacterAdminListVM> GetCharacterAllAsync(int page, int pageSize, string? query = null)
         {
             var charactersQuery = _characterRepo.GetAllWithDeleted()
                 .Include(c => c.CharacterMovies)
@@ -76,7 +76,7 @@ namespace BLL.Services.Implementations
             };
         }
 
-        public async Task<CharacterAdminVM?> GetCharacterById(Guid id)
+        public async Task<CharacterAdminVM?> GetCharacterByIdAsync(Guid id)
         {
             var character = await _characterRepo.GetAllWithDeleted()
                 .Include(c => c.CharacterMovies)
@@ -101,7 +101,7 @@ namespace BLL.Services.Implementations
             };
         }
 
-        public async Task<bool> CreateCharacter(CreateCharacterVM model)
+        public async Task<bool> CreateCharacterAsync(CreateCharacterVM model)
         {
             var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
 
@@ -134,7 +134,7 @@ namespace BLL.Services.Implementations
             }
         }
 
-        public async Task<bool> UpdateCharacter(EditCharacterVM model)
+        public async Task<bool> UpdateCharacterAsync(EditCharacterVM model)
         {
             var userName = _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "System";
 
@@ -169,7 +169,7 @@ namespace BLL.Services.Implementations
             }
         }
 
-        public async Task<bool> SoftDeleteCharacter(Guid id)
+        public async Task<bool> SoftDeleteCharacterAsync(Guid id)
         {
             try
             {
@@ -182,7 +182,7 @@ namespace BLL.Services.Implementations
             }
         }
 
-        public async Task<bool> RestoreCharacter(Guid id)
+        public async Task<bool> RestoreCharacterAsync(Guid id)
         {
             try
             {
@@ -195,7 +195,7 @@ namespace BLL.Services.Implementations
             }
         }
 
-        public async Task<bool> DeleteCharacter(Guid id)
+        public async Task<bool> DeleteCharacterAsync(Guid id)
         {
             try
             {

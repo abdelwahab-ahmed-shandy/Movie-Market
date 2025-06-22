@@ -10,13 +10,13 @@ namespace BLL.Services.Interfaces
     {
 
         #region Admin Methods
-        Task<CharacterAdminListVM> GetCharacterAll(int page, int pageSize, string? query = null);
-        Task<CharacterAdminVM> GetCharacterById(Guid id);
-        Task<bool> CreateCharacter(CreateCharacterVM model);
-        Task<bool> UpdateCharacter(EditCharacterVM model);
-        Task<bool> SoftDeleteCharacter(Guid id);
-        Task<bool> RestoreCharacter(Guid id); 
-        Task<bool> DeleteCharacter(Guid id);
+        Task<CharacterAdminListVM> GetCharacterAllAsync(int page, int pageSize, string? query = null);
+        Task<CharacterAdminVM> GetCharacterByIdAsync(Guid id);
+        Task<bool> CreateCharacterAsync(CreateCharacterVM model);
+        Task<bool> UpdateCharacterAsync(EditCharacterVM model);
+        Task<bool> SoftDeleteCharacterAsync(Guid id);
+        Task<bool> RestoreCharacterAsync(Guid id); 
+        Task<bool> DeleteCharacterAsync(Guid id);
         #endregion
 
 

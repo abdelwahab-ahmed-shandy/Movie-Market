@@ -22,7 +22,7 @@ namespace BLL.Services.Implementations
             _characterTvSeriesRepository = characterTvSeriesRepository;
         }
 
-        public async Task<CharacterTvSeriesAddVM> GetAddCharactersViewModel(Guid tvSeriesId)
+        public async Task<CharacterTvSeriesAddVM> GetAddCharactersViewModelAsync(Guid tvSeriesId)
         {
             var tvSeries = await _tvSeriesRepository.GetByIdAsync(tvSeriesId);
             if (tvSeries == null)
@@ -30,7 +30,6 @@ namespace BLL.Services.Implementations
                 throw new KeyNotFoundException("TV Series not found");
             }
 
-            // Get all characters not already associated with this TV series
             var existingCharacterIds = tvSeries.Characters.Select(c => c.CharacterId).ToList();
 
             var availableCharacters = await _characterRepository.GetAll()
@@ -51,9 +50,8 @@ namespace BLL.Services.Implementations
             };
         }
 
-        public async Task AddCharacterToTvSeries(Guid tvSeriesId, Guid characterId)
+        public async Task AddCharacterToTvSeriesAsync(Guid tvSeriesId, Guid characterId)
         {
-            // Check if the association already exists
             var exists = await _characterTvSeriesRepository.GetAll()
                 .AnyAsync(cts => cts.TvSeriesId == tvSeriesId && cts.CharacterId == characterId);
 
@@ -70,5 +68,6 @@ namespace BLL.Services.Implementations
 
             await _characterTvSeriesRepository.Add(characterTvSeries);
         }
+   
     }
 }

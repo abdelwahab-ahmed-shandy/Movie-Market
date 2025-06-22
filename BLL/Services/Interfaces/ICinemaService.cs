@@ -20,6 +20,7 @@ namespace BLL.Services.Interfaces
         Task DeleteAsync(Guid id);
         #endregion
 
+
         #region Customer Methods
 
         Task<IEnumerable<CinemaIndexVM>> GetActiveCinemaAsync();
