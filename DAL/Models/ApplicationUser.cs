@@ -12,7 +12,7 @@ namespace DAL.Models
         // User-specific properties
         public DateTime? PasswordChangedDate { get; set; }
         public DateTime? LastLogin { get; set; }
-        public DateTime RegistrationDate { get; set; } = DateTime.UtcNow;
+        public DateTime RegistrationDate { get; set; } 
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string? Address { get; set; }

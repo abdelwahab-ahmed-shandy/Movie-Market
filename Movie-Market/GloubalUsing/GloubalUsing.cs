@@ -25,7 +25,6 @@ global using DAL.ViewModels.Movie;
 global using DAL.ViewModels.Cinema;
 global using DAL.ViewModels.Special;
 global using BLL.Services.Interfaces;
-global using DAL.ViewModels.Identity;
 global using DAL.ViewModels.Category;
 global using DAL.ViewModels.Subscriber;
 global using BLL.Services.Implementations;
