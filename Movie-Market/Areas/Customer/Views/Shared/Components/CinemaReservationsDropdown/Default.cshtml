@@ -1,0 +1,27 @@
+﻿@model IEnumerable<DAL.ViewModels.Cinema.CinemaReservationVM>
+
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        Your Reservations
+    </button>
+    <ul class="dropdown-menu">
+        @if (!Model.Any())
+        {
+            <li><span class="dropdown-item text-muted">No reservations found.</span></li>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <li>
+                    <a class="dropdown-item" href="#">
+                        🎬 @item.MovieTitle <br />
+                        🏢 @item.CinemaName <br />
+                        🕒 @item.ShowTime.ToShortTimeString() <br />
+                        💰 @item.Price EGP
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+</div>

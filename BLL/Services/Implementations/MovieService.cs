@@ -42,6 +42,7 @@ namespace BLL.Services.Implementations
             _httpContextAccessor = httpContextAccessor;
         }
 
+
         #region Admin Methodes
 
         public async Task<MovieAdminListResultVM> GetAllMoviesAsync(int page, int pageSize, string? query = null)
@@ -415,6 +416,7 @@ namespace BLL.Services.Implementations
         }
 
         #endregion
+
 
         #region Customer Methods
 

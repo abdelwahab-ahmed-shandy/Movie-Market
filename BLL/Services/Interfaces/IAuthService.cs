@@ -14,7 +14,7 @@ namespace BLL.Services.Interfaces
         Task LogoutAsync();
         Task<string> GenerateEmailConfirmationTokenAsync(ApplicationUser user);
         Task<IdentityResult> ConfirmEmailAsync(string userId, string token);
-        Task ForgotPasswordAsync(ForgotPasswordVM forgotPasswordVM);
+        Task ForgotPasswordAsync(ForgetPasswordVM forgotPasswordVM);
         Task<IdentityResult> ResetPasswordAsync(ResetPasswordVM resetPasswordVM);
     }
 }

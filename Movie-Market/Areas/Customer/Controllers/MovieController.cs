@@ -7,7 +7,6 @@ namespace Movie_Market.Areas.Customer.Controllers
     public class MovieController : BaseController
     {
         private readonly IMovieService _movieService;
-
         public MovieController(IMovieService movieService)
         {
             _movieService = movieService;
@@ -21,7 +20,7 @@ namespace Movie_Market.Areas.Customer.Controllers
 
         public async Task<IActionResult> Details(Guid id)
         {
-            var movie = await _movieService.GetMovieDetailsAsync(id);
+            var movie = await _movieService.GetMovieWithDetailsAsync(id);
             if (movie == null)
             {
                 return NotFound();

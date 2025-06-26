@@ -25,5 +25,9 @@ namespace DAL.ViewModels.User
 
         [Required]
         public string LastName { get; set; }
+
+        public string Address { get; set; }
+        public DateTime? BirthDay { get; set; }
+
     }
 }

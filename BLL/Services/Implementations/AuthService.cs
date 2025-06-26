@@ -89,7 +89,7 @@ namespace BLL.Services.Implementations
             return await _userManager.ConfirmEmailAsync(user, token);
         }
 
-        public async Task ForgotPasswordAsync(ForgotPasswordVM model)
+        public async Task ForgotPasswordAsync(ForgetPasswordVM model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))

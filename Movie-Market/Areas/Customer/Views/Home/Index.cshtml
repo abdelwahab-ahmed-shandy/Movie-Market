@@ -91,9 +91,11 @@
             {
                 <div class="col-md-2 mb-4">
                     <div class="card h-100">
+                        <img src="@Url.Content("~/" + cinema.ImgUrl)" class="card-img-top" alt="@cinema.Name">
                         <div class="card-body">
                             <h5 class="card-title">@cinema.Name</h5>
                             <p class="card-text text-muted">@cinema.Location</p>
+                            <p class="card-text text-muted">@cinema.Description</p>
                         </div>
                         <div class="card-footer bg-transparent">
                             <a asp-area="Customer" asp-controller="Cinema" asp-action="Details"

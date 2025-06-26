@@ -10,7 +10,7 @@ namespace Movie_Market.Areas.Admin.Controllers
     public class HomeController : BaseController
     {
         private readonly IDashboardService _dashboardService;
-        public HomeController(DashboardService dashboardService)
+        public HomeController(IDashboardService dashboardService)
         {
             _dashboardService = dashboardService;
         }
@@ -18,7 +18,7 @@ namespace Movie_Market.Areas.Admin.Controllers
         #region Admin DashBord
         public async Task<IActionResult> Index()
         {
-            var dashboardData = await _dashboardService.GetDashboardDataAsync();
+            var dashboardData = await _dashboardService.GetAdminDashboardDataAsync();
             return View(dashboardData);
         }
         #endregion

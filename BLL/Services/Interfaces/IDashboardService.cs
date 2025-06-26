@@ -10,6 +10,7 @@ namespace BLL.Services.Interfaces
     public interface IDashboardService
     {
 
+
         #region Admin Methods
 
         Task<List<Subscriber>> GetTotalSubscriberAsync(int count);
@@ -25,9 +26,11 @@ namespace BLL.Services.Interfaces
 
         #endregion
 
+
         #region Customer Methods
         Task<DashboardVM> GetDashboardDataAsync();
         #endregion
+
 
     }
 }

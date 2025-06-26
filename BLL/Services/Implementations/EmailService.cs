@@ -17,7 +17,7 @@ namespace BLL.Services.Implementations
             {
                 EnableSsl = true,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("abdelwahabshandy@gmail.com", "yrlt nmgm yxdy wiye")
+                Credentials = new NetworkCredential("abdelwahabshandy@gmail.com", "tgef hkdn enjv gdey")
             };
 
             var mailMessage = new MailMessage

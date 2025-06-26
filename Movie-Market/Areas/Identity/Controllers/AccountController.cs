@@ -3,8 +3,10 @@ using DAL.ViewModels.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Movie_Market.GloubalUsing;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 
 namespace Movie_Market.Areas.Identity.Controllers
 {
@@ -12,157 +14,280 @@ namespace Movie_Market.Areas.Identity.Controllers
     [AllowAnonymous]
     public class AccountController : BaseController
     {
-        private readonly IAuthService _authService;
+        //private readonly IAuthService _authService;
         private readonly ILogger<AccountController> _logger;
-        public AccountController(IAuthService authService, ILogger<AccountController> logger)
+        private readonly IEmailService _emailService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
+        public AccountController(ILogger<AccountController> logger , IEmailService emailService ,
+                                    IWebHostEnvironment webHostEnvironment , UserManager<ApplicationUser> userManager ,
+                                        SignInManager<ApplicationUser> signInManager , RoleManager<IdentityRole<Guid>> roleManager)
         {
-            _authService = authService;
             _logger = logger;
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _emailService = emailService;
+            _signInManager = signInManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
 
         #region Register
-        [HttpGet("Register")]
-        public IActionResult Register()
-        {
-            return View();
-        }
 
-        [HttpPost("Register")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterVM VM)
+        [HttpGet]
+        public async Task<IActionResult> Register()
         {
-            if (ModelState.IsValid)
+            if (_roleManager.Roles.IsNullOrEmpty())
             {
-                var result = await _authService.RegisterAsync(VM);
-                if (result.Succeeded)
-                {
-                    TempData["notification"] = "Registration successful. Please check your email to confirm your account.";
-                    TempData["MessageType"] = "success";
-                    return RedirectToAction("Login");
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                await _roleManager.CreateAsync(role: new IdentityRole<Guid>("SuperAdmin"));
+                await _roleManager.CreateAsync(role: new IdentityRole<Guid>("Admin"));
+                await _roleManager.CreateAsync(role: new IdentityRole<Guid>("Customer"));
             }
 
-            return View(VM);
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                TempData["notification"] = "Your account has been created! Please check your email to confirm the account before logging in";
+                TempData["MessageType"] = "Information";
+
+                return RedirectToAction("Index", "Home", new { area = "Customer" });
+            }
+            return View(new RegisterVM());
         }
 
-        #endregion
-
-
-        #region Login
-        [HttpGet("Login")]
-        public IActionResult Login(string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
-
-        [HttpPost("Login")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginVM VM, string returnUrl = null)
+        public async Task<IActionResult> Register(RegisterVM registerVM)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-
             if (ModelState.IsValid)
             {
-                var result = await _authService.LoginAsync(VM);
-                if (result.Succeeded)
+                ApplicationUser applicationUser = new ApplicationUser
                 {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl ?? "/");
-                }
-                if (result.RequiresTwoFactor)
+                    FirstName = registerVM.FirstName,
+                    LastName = registerVM.LastName,
+                    Address = registerVM.Address,
+                    UserName = registerVM.FirstName,
+                    Email = registerVM.Email,
+                    RegistrationDate = DateTime.UtcNow,
+                    BirthDay = registerVM.BirthDay,
+                    AccountStateType = AccountStateType.PendingActivation,
+                    IsActive = true,
+                    EmailConfirmed = false
+                };
+
+                var newUser = await _userManager.CreateAsync(applicationUser, registerVM.Password);
+
+                if (newUser.Succeeded)
                 {
-                    return RedirectToAction("LoginWith2fa", new { returnUrl });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToAction("Lockout");
+                    var userId = applicationUser.Id;
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
+                    var returnUrl = Url.Content("~/");
+
+                    var callbackUrl = Url.Action( "ConfirmEmail", "Account",
+                    new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                    protocol: Request.Scheme );
+
+                    await _emailService.SendEmailAsync(registerVM.Email, "Confirm your email",
+                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+
+                    TempData["notification"] = "Your account has been created! Please check your email to confirm the account before logging in";
+                    TempData["MessageType"] = "Success";
+
+                    await _userManager.AddToRoleAsync(applicationUser, "Customer");
+
+                    if (applicationUser.EmailConfirmed)
+                    {
+                        await _signInManager.SignInAsync(applicationUser, isPersistent: false);
+                        return RedirectToAction("Index", "Home", new { area = "Customer" });
+                    }
+
+                    return RedirectToAction("Login", "Account", new { area = "Identity" });
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(VM);
+                    foreach (var error in newUser.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
                 }
+
             }
 
-            return View(VM);
+            return View(registerVM);
         }
 
         #endregion
 
 
         #region LogOut
-        [HttpPost("Logout")]
-        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Logout()
         {
-            await _authService.LogoutAsync();
+            await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+
             return RedirectToAction("Index", "Home", new { area = "Customer" });
         }
+
         #endregion
 
 
-        #region Forgot Password
-        [HttpGet("ForgotPassword")]
-        public IActionResult ForgotPassword()
+        #region Login
+
+        [HttpGet]
+        public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home", new { area = "Customer" });
+            }
             return View();
         }
 
-        [HttpPost("ForgotPassword")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordVM model)
+        public async Task<IActionResult> Login(LoginVM loginVM)
         {
             if (ModelState.IsValid)
             {
-                await _authService.ForgotPasswordAsync(model);
-                TempData["notification"] = "If your email exists in our system, you will receive a password reset link.";
-                TempData["MessageType"] = "success";
-                return RedirectToAction("ForgotPasswordConfirmation");
-            }
+                var user = await _userManager.FindByEmailAsync(loginVM.Email);
 
-            return View(model);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return View(loginVM);
+                }
+
+                if (user.IsBlocked)
+                {
+                    ModelState.AddModelError(string.Empty, "Account blocked. Contact support.");
+                    return View(loginVM);
+                }
+
+                var result = await _signInManager.PasswordSignInAsync(user.UserName!, loginVM.Password, loginVM.RememberMe,lockoutOnFailure: false);
+
+                if (result.Succeeded)
+                {
+                    user.LastLogin = DateTime.UtcNow;
+                    await _userManager.UpdateAsync(user);
+
+                    var roles = await _userManager.GetRolesAsync(user);
+
+                    if (await _userManager.IsInRoleAsync(user, "Admin") ||
+                        await _userManager.IsInRoleAsync(user, "SuperAdmin"))
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
+                    else 
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Customer" });
+                    }
+                }
+
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            }
+            return View(loginVM);
         }
         #endregion
 
 
-        #region Forgot Password Confirmation
-        [HttpGet("ForgotPasswordConfirmation")]
-        public IActionResult ForgotPasswordConfirmation()
+        #region Forget Password
+
+        [HttpGet]
+        public IActionResult ForgetPassword()
         {
             return View();
         }
-        #endregion
 
-
-        #region Reset Password
-        [HttpGet("ResetPassword")]
-        public IActionResult ResetPassword(string code = null)
-        {
-            return code == null ? View("Error") : View();
-        }
-
-        [HttpPost("ResetPassword")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ResetPassword(ResetPasswordVM model)
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordVM model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var result = await _authService.ResetPasswordAsync(model);
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                TempData["notification"] = "If your email is registered, you'll receive a password reset link";
+                TempData["MessageType"] = "info";
+                return RedirectToAction("ForgetPasswordConfirmation");
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var callbackUrl = Url.Action("ResetPassword", "Account",
+                new { email = model.Email, token = token }, protocol: HttpContext.Request.Scheme);
+
+            await _emailService.SendEmailAsync(
+                model.Email,
+                "Reset your MovieMart password",
+                $"Please reset your password by <a href='{callbackUrl}'>clicking here</a>.");
+
+            TempData["notification"] = "Password reset link has been sent to your email";
+            TempData["MessageType"] = "success";
+            return RedirectToAction("ForgetPasswordConfirmation");
+        }
+
+        #endregion
+
+
+        #region Forget Password Confirmation
+
+        [HttpGet]
+        public IActionResult ForgetPasswordConfirmation()
+        {
+            return View();
+        }
+
+        #endregion
+
+
+        #region Reset Password
+
+        [HttpGet]
+        public IActionResult ResetPassword(string token, string email)
+        {
+            if (token == null || email == null)
+            {
+                ModelState.AddModelError("", "Invalid password reset token");
+            }
+
+            var forgetPassword = new ForgetPasswordVM
+            {
+                Email = email,
+                ResetToken = token
+            };
+
+            return View(forgetPassword);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ForgetPasswordVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
+            {
+                TempData["notification"] = "Password has been reset successfully";
+                TempData["MessageType"] = "success";
+                return RedirectToAction("ResetPasswordConfirmation");
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, model.ResetToken, model.NewPassword);
             if (result.Succeeded)
             {
-                TempData["notification"] = "Your password has been reset.";
+                TempData["notification"] = "Password has been reset successfully";
                 TempData["MessageType"] = "success";
                 return RedirectToAction("ResetPasswordConfirmation");
             }
@@ -175,192 +300,172 @@ namespace Movie_Market.Areas.Identity.Controllers
             return View(model);
         }
 
+
         #endregion
 
 
         #region Reset Password Confirmation
-        [HttpGet("ResetPasswordConfirmation")]
+
+        [HttpGet]
         public IActionResult ResetPasswordConfirmation()
         {
             return View();
         }
 
-        [HttpGet("ConfirmEmail")]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        #endregion
+
+
+        #region External Login
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
-            if (userId == null || code == null)
+            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { ReturnUrl = returnUrl });
+
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+
+            return Challenge(properties, provider);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+        {
+            returnUrl ??= Url.Content("~/");
+
+            if (!string.IsNullOrEmpty(remoteError))
             {
-                return RedirectToAction("Index", "Home");
+
+                TempData["notification"] = $"Service provider error: {remoteError}";
+                TempData["MessageType"] = "error";
+                return RedirectToAction(nameof(Login));
             }
 
-            var result = await _authService.ConfirmEmailAsync(userId, code);
-            if (result.Succeeded)
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
             {
-                TempData["notification"] = "Thank you for confirming your email.";
+
+                TempData["notification"] = "Failed to retrieve login information from Google.";
+                TempData["MessageType"] = "error";
+                return RedirectToAction(nameof(Login));
+            }
+
+            var signInResult = await _signInManager.ExternalLoginSignInAsync( info.LoginProvider, info.ProviderKey,
+                                                                                isPersistent: false,
+                                                                                    bypassTwoFactor: true);
+
+            // If the login process was successful
+            if (signInResult.Succeeded)
+            {
+                TempData["notification"] = "Successfully logged in with Google.";
                 TempData["MessageType"] = "success";
-                return View();
+                return LocalRedirect(returnUrl);
             }
 
-            TempData["notification"] = "Error confirming your email.";
-            TempData["MessageType"] = "error";
-            return View("Error");
+            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+
+            if (email == null)
+            {
+                TempData["notification"] = "Email not retrieved from Google account.";
+                TempData["MessageType"] = "error";
+                return RedirectToAction(nameof(Login));
+            }
+
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user != null)
+            {
+                var addLoginResult = await _userManager.AddLoginAsync(user, info);
+                if (addLoginResult.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    TempData["notification"] = "Google account linked and login successful.";
+                    TempData["MessageType"] = "success";
+                    return LocalRedirect(returnUrl);
+                }
+
+                foreach (var error in addLoginResult.Errors)
+                    ModelState.AddModelError(string.Empty, error.Description);
+
+                TempData["notification"] = "An error occurred while linking the Google account.";
+                TempData["MessageType"] = "error";
+                return RedirectToAction(nameof(Login));
+            }
+
+            user = new ApplicationUser
+            {
+                UserName = email,
+                Email = email,
+                EmailConfirmed = true,
+                FirstName = info.Principal.FindFirstValue(ClaimTypes.GivenName),
+                LastName = info.Principal.FindFirstValue(ClaimTypes.Surname),
+                Address = info.Principal.FindFirstValue(ClaimTypes.StreetAddress),
+                IsBlocked = false
+
+
+                //BirthDay = info.Principal.FindFirstValue(ClaimTypes.DateOfBirth),
+            };
+
+            var createResult = await _userManager.CreateAsync(user);
+            if (createResult.Succeeded)
+            {
+                var addLoginResult = await _userManager.AddLoginAsync(user, info);
+                if (addLoginResult.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    TempData["notification"] = "Account created and successful sign-in via Google.";
+                    TempData["MessageType"] = "success";
+                    return LocalRedirect(returnUrl);
+                }
+
+                TempData["notification"] = "Account created, but Google account linking failed.";
+                TempData["MessageType"] = "error";
+            }
+            else
+            {
+                TempData["notification"] = "Account creation failed.";
+                TempData["MessageType"] = "error";
+                foreach (var error in createResult.Errors)
+                    ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return RedirectToAction(nameof(Login));
         }
 
         #endregion
 
 
+        #region ConfirmEmail (Beginning of the email confirmation section )
 
-        //#region External Login
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return NotFound("Invalid email confirmation request.");
+            }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult ExternalLogin(string provider, string returnUrl = null)
-        //{
-        //    var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { ReturnUrl = returnUrl });
+            var user = await _userManager.FindByIdAsync(userId);
 
-        //    var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{userId}'.");
+            }
 
-        //    return Challenge(properties, provider);
-        //}
+            var result = await _userManager.ConfirmEmailAsync(user, code);
 
-        //[HttpGet]
-        //public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
-        //{
-        //    returnUrl ??= Url.Content("~/");
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
 
-        //    if (!string.IsNullOrEmpty(remoteError))
-        //    {
+                TempData["notification"] = "Your email has been successfully confirmed! You have been automatically logged in.";
+                TempData["MessageType"] = "Success";
 
-        //        TempData["notification"] = $"Service provider error: {remoteError}";
-        //        TempData["MessageType"] = "error";
-        //        return RedirectToAction(nameof(Login));
-        //    }
+                return RedirectToAction("Profile", "Settings", new { area = "Identity" });
+            }
 
-        //    var info = await _signInManager.GetExternalLoginInfoAsync();
-        //    if (info == null)
-        //    {
-
-        //        TempData["notification"] = "Failed to retrieve login information from Google.";
-        //        TempData["MessageType"] = "error";
-        //        return RedirectToAction(nameof(Login));
-        //    }
-
-        //    var signInResult = await _signInManager.ExternalLoginSignInAsync(
-        //    info.LoginProvider,
-        //    info.ProviderKey,
-        //    isPersistent: false,
-        //    bypassTwoFactor: true
-        //    );
-
-        //    // If the login process was successful
-        //    if (signInResult.Succeeded)
-        //    {
-        //        TempData["notification"] = "Successfully logged in with Google.";
-        //        TempData["MessageType"] = "success";
-        //        return LocalRedirect(returnUrl);
-        //    }
-
-        //    var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-
-        //    if (email == null)
-        //    {
-        //        TempData["notification"] = "Email not retrieved from Google account.";
-        //        TempData["MessageType"] = "error";
-        //        return RedirectToAction(nameof(Login));
-        //    }
-
-        //    var user = await _userManager.FindByEmailAsync(email);
-
-        //    if (user != null)
-        //    {
-        //        var addLoginResult = await _userManager.AddLoginAsync(user, info);
-        //        if (addLoginResult.Succeeded)
-        //        {
-        //            await _signInManager.SignInAsync(user, isPersistent: false);
-        //            TempData["notification"] = "Google account linked and login successful.";
-        //            TempData["MessageType"] = "success";
-        //            return LocalRedirect(returnUrl);
-        //        }
-
-        //        foreach (var error in addLoginResult.Errors)
-        //            ModelState.AddModelError(string.Empty, error.Description);
-
-        //        TempData["notification"] = "An error occurred while linking the Google account.";
-        //        TempData["MessageType"] = "error";
-        //        return RedirectToAction(nameof(Login));
-        //    }
-
-        //    user = new ApplicationUser
-        //    {
-        //        UserName = email,
-        //        Email = email,
-        //        EmailConfirmed = true,
-        //        FirstName = info.Principal.FindFirstValue(ClaimTypes.GivenName),
-        //        LastName = info.Principal.FindFirstValue(ClaimTypes.Surname),
-        //        Address = info.Principal.FindFirstValue(ClaimTypes.StreetAddress),
-        //        IsBlocked = false
-
-        //    };
-
-        //    var createResult = await _userManager.CreateAsync(user);
-        //    if (createResult.Succeeded)
-        //    {
-        //        var addLoginResult = await _userManager.AddLoginAsync(user, info);
-        //        if (addLoginResult.Succeeded)
-        //        {
-        //            await _signInManager.SignInAsync(user, isPersistent: false);
-        //            TempData["notification"] = "Account created and successful sign-in via Google.";
-        //            TempData["MessageType"] = "success";
-        //            return LocalRedirect(returnUrl);
-        //        }
-
-        //        TempData["notification"] = "Account created, but Google account linking failed.";
-        //        TempData["MessageType"] = "error";
-        //    }
-        //    else
-        //    {
-        //        TempData["notification"] = "Account creation failed.";
-        //        TempData["MessageType"] = "error";
-        //        foreach (var error in createResult.Errors)
-        //            ModelState.AddModelError(string.Empty, error.Description);
-        //    }
-
-        //    return RedirectToAction(nameof(Login));
-        //}
-
-        //#endregion
-
-
-        //#region ConfirmEmail (Beginning of the email confirmation section )
-        //public async Task<IActionResult> ConfirmEmail(string userId, string code)
-        //{
-        //    if (userId == null || code == null)
-        //    {
-        //        return NotFound("Invalid email confirmation request.");
-        //    }
-
-        //    var user = await _userManager.FindByIdAsync(userId);
-
-        //    if (user == null)
-        //    {
-        //        return NotFound($"Unable to load user with ID '{userId}'.");
-        //    }
-
-        //    var result = await _userManager.ConfirmEmailAsync(user, code);
-
-        //    if (result.Succeeded)
-        //    {
-        //        await _signInManager.SignInAsync(user, isPersistent: false);
-
-        //        TempData["notification"] = "Your email has been successfully confirmed! You have been automatically logged in.";
-        //        TempData["MessageType"] = "Success";
-
-        //        return RedirectToAction("Profile", "Settings", new { area = "Identity" });
-        //    }
-
-        //    return View("Error");
-        //}
-        //#endregion 
+            return View("Error");
+        }
+        #endregion 
 
 
     }

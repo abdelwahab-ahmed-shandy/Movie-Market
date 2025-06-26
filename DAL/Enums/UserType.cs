@@ -8,7 +8,7 @@ namespace DAL.Enums
 {
     public enum UserType
     {
-        User = 0,
+        Customer = 0,
         Admin = 1,
         SuperAdmin = 2
     }

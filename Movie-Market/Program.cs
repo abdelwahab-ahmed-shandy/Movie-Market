@@ -44,10 +44,13 @@ namespace Movie_Market
             builder.Services.AddScoped<ICharacterTvSeriesService, CharacterTvSeriesService>();
             builder.Services.AddScoped<IDashboardService, DashboardService>();
 
+
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<ISearchService, SearchService>();
             builder.Services.AddScoped<ISubscriberService, SubscriberService>();
             builder.Services.AddScoped<INewsletterService, NewsletterService>();
+            builder.Services.AddScoped<ICartService, CartService>();
+
             builder.Services.AddMemoryCache();
 
             #endregion
