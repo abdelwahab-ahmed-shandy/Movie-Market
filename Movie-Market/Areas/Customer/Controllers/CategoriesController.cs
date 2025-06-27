@@ -9,7 +9,7 @@ namespace Movie_Market.Areas.Customer.Controllers
         private readonly ICategoryService _categoryService;
         private readonly ILogger<CategoriesController> _logger;
 
-        public CategoriesController(ICategoryService categoryService, ILogger<CategoriesController> logger)
+        public CategoriesController(ICategoryService categoryService, ILogger<CategoriesController> logger, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _categoryService = categoryService;
             _logger = logger;

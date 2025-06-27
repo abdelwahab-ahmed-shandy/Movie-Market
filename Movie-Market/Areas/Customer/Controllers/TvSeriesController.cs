@@ -8,7 +8,7 @@ namespace Movie_Market.Areas.Customer.Controllers
     {
         private readonly ITvSeriesService _tvSeriesService;
 
-        public TvSeriesController(ITvSeriesService tvSeriesService)
+        public TvSeriesController(ITvSeriesService tvSeriesService, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _tvSeriesService = tvSeriesService;
         }

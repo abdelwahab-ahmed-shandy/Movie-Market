@@ -1,37 +1,27 @@
 ﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
+    <!-- Meta Tags -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="MovieMart - Your Ultimate Movie Experience" />
     <meta name="author" content="Abdelwahab Shandy" />
+    <meta name="theme-color" content="#6c5ce7"> <!-- Added theme color for PWA -->
     <title>@ViewData["Title"] - MovieMart</title>
 
     <!-- Favicon -->
     <link rel="icon" href="~/Assets/Customer/imag/favicon.png" type="image/png">
-
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
-
-    <!-- Favicon with multiple sizes -->
     <link rel="icon" type="image/png" sizes="32x32" href="~/assets/Customer/imag/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="~/assets/Customer/imag/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="~/assets/Customer/imag/apple-touch-icon.png">
     <link rel="manifest" href="~/assets/Customer/imag/site.webmanifest">
 
-    <!-- CSS with fallbacks and proper ordering -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true">
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
 
-    <!-- Non-critical CSS (load asynchronously) -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></noscript>
-
-    <!-- Inline Critical CSS -->
+    <!-- Critical CSS (Inlined) -->
     <style>
         :root {
             --primary-color: #6c5ce7;
@@ -42,64 +32,76 @@
         }
 
         body {
-            background: url('/Assets/Customer/imag/cinema-bg.jpg') no-repeat center center fixed;
-            background-size: cover;
             font-family: 'Poppins', system-ui, -apple-system, sans-serif;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             background-color: var(--bs-body-bg);
+            position: relative;
         }
 
+            /* Background with progressive enhancement */
+            body::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url('/Assets/Customer/imag/cinema-bg.jpg') no-repeat center center;
+                background-size: cover;
+                z-index: -2;
+                opacity: 0.4;
+            }
+
         .overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
-            z-index: 0;
+            z-index: -1;
         }
 
-        .login-container {
-            position: relative;
-            z-index: 1;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .login-card {
-            background-color: rgba(0, 0, 0, 0.85);
-            color: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 0 30px rgba(0,0,0,0.8);
-            max-width: 400px;
-            width: 100%;
-        }
-
-        .navbar-brand {
-            font-weight: 700;
-            letter-spacing: 0.5px;
+        /* Navigation */
+        .navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(33, 37, 41, 0.9) !important;
         }
 
         .nav-link {
             transition: all 0.2s ease;
+            position: relative;
         }
 
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-        }
+            .nav-link:hover {
+                color: var(--secondary-color) !important;
+            }
 
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: var(--accent-color);
+                transition: width 0.3s ease;
+            }
+
+            .nav-link:hover::after {
+                width: 100%;
+            }
+
+        /* Main Content */
         main {
             flex: 1;
+            padding-top: 1rem;
+            padding-bottom: 2rem;
         }
 
-        /* Animation for better UX */
+        /* Animations */
         @@keyframes fadeIn {
             from {
                 opacity: 0;
@@ -115,12 +117,49 @@
         .animate-fade-in {
             animation: fadeIn 0.3s ease forwards;
         }
+
+        /* Footer */
+        footer {
+            backdrop-filter: blur(5px);
+            background-color: rgba(33, 37, 41, 0.9) !important;
+        }
+
+        /* Loading State */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @@keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
     </style>
+
+    <!-- Non-critical CSS -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"></noscript>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true">
+
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></noscript>
+
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable position-absolute top-0 start-0 p-2 bg-dark text-white" style="z-index: 9999;">Skip to main content</a>
+
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2">
+        <nav class="navbar navbar-expand-lg navbar-dark py-2">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" asp-area="Customer" asp-controller="Home" asp-action="Index" aria-label="MovieMart Home">
                     <i class="bi bi-camera-reels-fill me-2" aria-hidden="true"></i>
@@ -160,20 +199,26 @@
                             <li class="nav-item dropdown animate-fade-in" style="animation-delay: 0.4s">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/Assets/Users/user.png" alt="User Avatar" class="user-avatar rounded-circle me-2">
+                                    <img src="@Url.Content("~/" + (ViewBag.ProfileImagePath ?? "assets/identity/user.png"))"
+                                         alt="User Avatar"
+                                         class="user-avatar rounded-circle me-2"
+                                         style="width: 40px; height: 40px; object-fit: cover;" />
                                     <span class="d-none d-lg-inline">@User.Identity.Name</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+
                                     <li>
-                                        <a class="dropdown-item" asp-area="Identity" asp-controller="Account" asp-action="Index">
-                                            <i class="bi bi-person me-2" aria-hidden="true"></i> Profile
+                                        <a class="dropdown-item" asp-area="Identity" asp-controller="Profile" asp-action="Details">
+                                            <i class="fas fa-user me-2"></i> Profile
                                         </a>
                                     </li>
+                                    
                                     <li>
-                                        <a class="dropdown-item" asp-area="Identity" asp-controller="Account" asp-action="Email">
-                                            <i class="bi bi-gear me-2" aria-hidden="true"></i> Settings
+                                        <a class="dropdown-item" asp-area="Identity" asp-controller="Profile" asp-action="Index">
+                                            <i class="fas fa-user-edit me-2"></i> Settings
                                         </a>
                                     </li>
+                                    
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <form class="form-inline" asp-area="Identity" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "Customer" })">
@@ -188,33 +233,58 @@
                         else
                         {
                             <li class="nav-item animate-fade-in" style="animation-delay: 0.4s">
-                                <a class="btn btn-primary" asp-area="Identity" asp-controller="Account" asp-action="Login">
-                                    <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i>
-                                    <span>Login</span>
-                                </a>
+                                @{
+                                    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+                                    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+                                    var currentArea = ViewContext.RouteData.Values["area"]?.ToString();
+
+                                    bool isLoginPage = currentAction == "Login" && currentController == "Account" && currentArea == "Identity";
+                                    bool isRegisterPage = currentAction == "Register" && currentController == "Account" && currentArea == "Identity";
+                                }
+
+                                @if (isLoginPage)
+                                {
+                                    <a class="btn btn-outline-primary" asp-area="Identity" asp-controller="Account" asp-action="Register">
+                                        <i class="bi bi-person-plus me-1" aria-hidden="true"></i>
+                                        <span>Create Account</span>
+                                    </a>
+                                }
+                                else if (isRegisterPage)
+                                {
+                                    <a class="btn btn-outline-primary" asp-area="Identity" asp-controller="Account" asp-action="Login">
+                                        <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i>
+                                        <span>Sign In</span>
+                                    </a>
+                                }
+                                else if (!User.Identity.IsAuthenticated)
+                                {
+                                    <a class="btn btn-primary" asp-area="Identity" asp-controller="Account" asp-action="Login">
+                                        <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i>
+                                        <span>Login</span>
+                                    </a>
+                                }
                             </li>
                         }
+                        
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
-
-    <main class="container py-4">
+    <main id="main-content" class="container">
         @await Html.PartialAsync("_Notification")
-
         @RenderBody()
     </main>
 
-    <footer class="bg-dark text-white py-4 mt-auto">
+    <footer class="py-4">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 mb-3 mb-md-0">
                     <p class="mb-0">
                         &copy; @DateTime.Now.Year <strong>MovieMart</strong> — Created with
-                        <i class="fas fa-heart text-danger" aria-hidden="true"></i> by
-                        <a href="https://github.com/abdelwahab-ahmed-shandy" class="text-decoration-none">Abdelwahab Shandy</a>
+                        <i class="bi bi-heart-fill text-danger" aria-hidden="true"></i> by
+                        <a href="https://github.com/abdelwahab-ahmed-shandy" class="text-decoration-none hover-accent">Abdelwahab Shandy</a>
                     </p>
                 </div>
                 <div class="col-md-6 text-md-end">
@@ -224,8 +294,11 @@
                             <i class="bi bi-linkedin fs-5"></i>
                         </a>
                         <a href="https://github.com/abdelwahab-ahmed-shandy" target="_blank" rel="noopener noreferrer"
-                           class="text-white" aria-label="GitHub Profile">
+                           class="text-white me-3" aria-label="GitHub Profile">
                             <i class="bi bi-github fs-5"></i>
+                        </a>
+                        <a href="mailto:abdelwahabshandy@gmail.com" class="text-white" aria-label="Email">
+                            <i class="bi bi-envelope-fill fs-5"></i>
                         </a>
                     </div>
                 </div>
@@ -234,20 +307,69 @@
     </footer>
 
     <!-- Scripts with proper ordering and defer/async where possible -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // Improved script loading with error handling
+        function loadScript(src, integrity, crossorigin, callback) {
+            return new Promise((resolve, reject) => {
+                var script = document.createElement('script');
+                script.src = src;
+                if (integrity) script.integrity = integrity;
+                if (crossorigin) script.crossOrigin = crossorigin;
+                script.onload = () => {
+                    if (callback) callback();
+                    resolve();
+                };
+                script.onerror = () => {
+                    console.error('Failed to load script: ' + src);
+                    reject();
+                };
+                document.body.appendChild(script);
+            });
+        }
+
+        // Load jQuery with fallback
+        loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js',
+            'sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==',
+            'anonymous')
+            .catch(() => {
+                console.log('Loading local jQuery fallback');
+                loadScript('/lib/jquery/dist/jquery.min.js');
+            });
+
+        // Show skip to content link on focus for better accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                const skipLink = document.querySelector('.visually-hidden-focusable');
+                skipLink.style.opacity = '1';
+                skipLink.addEventListener('blur', function() {
+                    this.style.opacity = '0';
+                }, { once: true });
+            }
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous" defer></script>
 
-    <!-- Non-critical scripts (load after DOM) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
             integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 
     <script src="~/js/site.min.js" asp-append-version="true" defer></script>
+
+    <!-- Service Worker Registration (for PWA) -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

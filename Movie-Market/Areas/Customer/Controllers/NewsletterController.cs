@@ -9,7 +9,7 @@ namespace Movie_Market.Areas.Customer.Controllers
         private readonly ISubscriberService _subscriberService;
         private readonly ILogger<NewsletterController> _logger;
         public NewsletterController(ISubscriberService subscriberService
-                                        , ILogger<NewsletterController> logger)
+                                        , ILogger<NewsletterController> logger, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _logger = logger;
             _subscriberService = subscriberService;

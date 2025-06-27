@@ -3,12 +3,12 @@
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin,SuperAdmin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class SpecialsController : BaseController
     {
         private readonly ISpecialService _specialService;
 
-        public SpecialsController(ISpecialService specialService)
+        public SpecialsController(ISpecialService specialService, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _specialService = specialService;
         }

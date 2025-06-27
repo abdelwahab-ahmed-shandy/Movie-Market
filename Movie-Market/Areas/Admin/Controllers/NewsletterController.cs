@@ -4,13 +4,13 @@ using Movie_Market.GloubalUsing;
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin,SuperAdmin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class NewsletterController : BaseController
     {
         private readonly INewsletterService _newsletterService;
         private readonly ILogger<NewsletterController> _logger;
 
-        public NewsletterController(INewsletterService newsletterService, ILogger<NewsletterController> logger)
+        public NewsletterController(INewsletterService newsletterService, ILogger<NewsletterController> logger, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _newsletterService = newsletterService;
             _logger = logger;

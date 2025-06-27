@@ -5,12 +5,12 @@ using Movie_Market.GloubalUsing;
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin,SuperAdmin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class TvSeriesController : BaseController
     {
         private readonly ITvSeriesService _tvSeriesService;
         private readonly ILogger<TvSeriesController> _logger;
-        public TvSeriesController(ITvSeriesService tvSeriesService, ILogger<TvSeriesController> logger)
+        public TvSeriesController(ITvSeriesService tvSeriesService, ILogger<TvSeriesController> logger, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _tvSeriesService = tvSeriesService;
             _logger = logger;

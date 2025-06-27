@@ -8,7 +8,7 @@ namespace Movie_Market.Areas.Customer.Controllers
     {
         private readonly ICharacterService _characterService;
 
-        public CharacterController(ICharacterService characterService)
+        public CharacterController(ICharacterService characterService, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _characterService = characterService;
         }

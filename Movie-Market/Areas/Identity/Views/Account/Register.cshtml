@@ -4,69 +4,198 @@
     ViewData["Title"] = "Register";
 }
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                <h3 class="card-title">Create a new account</h3>
+<div class="row justify-content-center py-5">
+    <div class="col-lg-6 col-md-8">
+        <div class="card shadow-lg border-0 rounded-lg overflow-hidden">
+            <div class="card-header bg-gradient-primary py-4">
+                <h3 class="text-center font-weight-light text-white mb-0">
+                    <i class="bi bi-person-plus me-2"></i>Create a new account
+                </h3>
             </div>
-            <div class="card-body">
-                <form asp-area="Identity" asp-controller="Account" asp-action="Register" method="post">
-                    <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="card-body p-5">
+                <form asp-area="Identity" asp-controller="Account" asp-action="Register" method="post" class="needs-validation" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
-                    <div class="form-group">
-                        <label asp-for="Email"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input asp-for="FirstName" class="form-control" placeholder="First Name" required />
+                                <label asp-for="FirstName">First Name</label>
+                                <span asp-validation-for="FirstName" class="text-danger small"></span>
+                                <div class="invalid-feedback">
+                                    Please provide your first name.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input asp-for="LastName" class="form-control" placeholder="Last Name" required />
+                                <label asp-for="LastName">Last Name</label>
+                                <span asp-validation-for="LastName" class="text-danger small"></span>
+                                <div class="invalid-feedback">
+                                    Please provide your last name.
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label asp-for="FirstName"></label>
-                        <input asp-for="FirstName" class="form-control" />
-                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Email" class="form-control" placeholder="name@example.com" required />
+                        <label asp-for="Email">Email address</label>
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                        <div class="invalid-feedback">
+                            Please provide a valid email address.
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label asp-for="LastName"></label>
-                        <input asp-for="LastName" class="form-control" />
-                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Address" class="form-control" placeholder="Your Address" />
+                        <label asp-for="Address">Address</label>
+                        <span asp-validation-for="Address" class="text-danger small"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label asp-for="Address"></label>
-                        <input asp-for="Address" class="form-control" />
-                        <span asp-validation-for="Address" class="text-danger"></span>
+                    <div class="form-floating mb-3">
+                        <input asp-for="BirthDay" class="form-control" type="date" placeholder="Birthday" />
+                        <label asp-for="BirthDay">Birthday</label>
+                        <span asp-validation-for="BirthDay" class="text-danger small"></span>
                     </div>
 
-
-                    <div class="form-group">
-                        <label asp-for="BirthDay"></label>
-                        <input asp-for="BirthDay" class="form-control" />
-                        <span asp-validation-for="BirthDay" class="text-danger"></span>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Password" class="form-control" placeholder="Password" required />
+                        <label asp-for="Password">Password</label>
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                        <div class="invalid-feedback">
+                            Please enter a password.
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label asp-for="Password"></label>
-                        <input asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
+                    <div class="form-floating mb-4">
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" required />
+                        <label asp-for="ConfirmPassword">Confirm Password</label>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                        <div class="invalid-feedback">
+                            Please confirm your password.
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label asp-for="ConfirmPassword"></label>
-                        <input asp-for="ConfirmPassword" class="form-control" />
-                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill py-3">
+                            <i class="bi bi-person-plus me-2"></i>Register
+                        </button>
                     </div>
-
-                    <button type="submit" class="btn btn-primary btn-block">Register</button>
                 </form>
             </div>
-            <div class="card-footer text-center">
-                <p>Already have an account? <a asp-action="Login">Sign in</a></p>
+
+            <div class="card-footer bg-transparent py-3 text-center">
+                <p class="mb-0">
+                    Already have an account?
+                    <a class="text-decoration-none fw-bold" asp-action="Login">Sign in</a>
+                </p>
+            </div>
+
+            <!-- Social Login Divider -->
+            <div class="position-relative my-4 px-5">
+                <hr class="border-2 border-secondary opacity-25">
+                <div class="position-absolute top-50 start-50 translate-middle bg-dark px-3">
+                    <span class="text-white-50 small">OR REGISTER WITH</span>
+                </div>
+            </div>
+
+            <!-- Social Login Buttons -->
+            <div class="row justify-content-center px-5 pb-4">
+                <div class="col-md-8">
+                    <form asp-action="ExternalLogin" asp-controller="Account" method="post" class="w-100">
+                        <input type="hidden" name="provider" value="Google" />
+                        <input type="hidden" name="returnUrl" value="/" />
+                        <button type="submit" class="btn btn-outline-danger rounded-pill py-2 w-100">
+                            <i class="fab fa-google me-2"></i> Continue with Google
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+@section Styles {
+    <style>
+        .card {
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+            }
+
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+        }
+
+        .form-floating label {
+            color: #6c757d;
+        }
+
+        .form-control:focus {
+            border-color: #6c5ce7;
+            box-shadow: 0 0 0 0.25rem rgba(108, 92, 231, 0.25);
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.5);
+            cursor: pointer;
+        }
+    </style>
+}
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Enhanced form validation
+        (function () {
+            'use strict'
+
+            var forms = document.querySelectorAll('.needs-validation')
+
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
+        // Add animation to form elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const formElements = document.querySelectorAll('.form-floating, .d-grid');
+            formElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.1}s`;
+            });
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @@keyframes fadeInUp {
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
 }

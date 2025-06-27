@@ -14,7 +14,6 @@ namespace Movie_Market.Areas.Identity.Controllers
     [AllowAnonymous]
     public class AccountController : BaseController
     {
-        //private readonly IAuthService _authService;
         private readonly ILogger<AccountController> _logger;
         private readonly IEmailService _emailService;
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -23,7 +22,7 @@ namespace Movie_Market.Areas.Identity.Controllers
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         public AccountController(ILogger<AccountController> logger , IEmailService emailService ,
                                     IWebHostEnvironment webHostEnvironment , UserManager<ApplicationUser> userManager ,
-                                        SignInManager<ApplicationUser> signInManager , RoleManager<IdentityRole<Guid>> roleManager)
+                                        SignInManager<ApplicationUser> signInManager , RoleManager<IdentityRole<Guid>> roleManager) : base(userManager)
         {
             _logger = logger;
             _userManager = userManager;
@@ -32,6 +31,18 @@ namespace Movie_Market.Areas.Identity.Controllers
             _signInManager = signInManager;
             _webHostEnvironment = webHostEnvironment;
         }
+
+        #region Private Methods
+
+        private bool IsOnLoginPage =>
+                ControllerContext.ActionDescriptor.ActionName == "Login" &&
+                    ControllerContext.ActionDescriptor.ControllerName == "Account";
+
+        private bool IsOnRegisterPage =>
+                ControllerContext.ActionDescriptor.ActionName == "Register" &&
+                    ControllerContext.ActionDescriptor.ControllerName == "Account";
+
+        #endregion
 
 
         #region Register
@@ -48,11 +59,14 @@ namespace Movie_Market.Areas.Identity.Controllers
 
             if (User.Identity?.IsAuthenticated == true)
             {
-                TempData["notification"] = "Your account has been created! Please check your email to confirm the account before logging in";
+                TempData["notification"] = "You are already registered";
                 TempData["MessageType"] = "Information";
 
                 return RedirectToAction("Index", "Home", new { area = "Customer" });
             }
+
+            // To ensure that the login button appears on the registration page
+            ViewData["ShowLoginButton"] = true;
             return View(new RegisterVM());
         }
 
@@ -67,11 +81,12 @@ namespace Movie_Market.Areas.Identity.Controllers
                     FirstName = registerVM.FirstName,
                     LastName = registerVM.LastName,
                     Address = registerVM.Address,
-                    UserName = registerVM.FirstName,
+                    UserName = $"{registerVM.FirstName}.{registerVM.LastName}.{Guid.NewGuid().ToString().Substring(0, 4)}",
                     Email = registerVM.Email,
                     RegistrationDate = DateTime.UtcNow,
                     BirthDay = registerVM.BirthDay,
                     AccountStateType = AccountStateType.PendingActivation,
+                    
                     IsActive = true,
                     EmailConfirmed = false
                 };
@@ -92,8 +107,9 @@ namespace Movie_Market.Areas.Identity.Controllers
                     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
 
-                    TempData["notification"] = "Your account has been created! Please check your email to confirm the account before logging in";
+                    TempData["notification"] = "Registration successful! Please check your email to verify your account.";
                     TempData["MessageType"] = "Success";
+                    await Task.Delay(2000);
 
                     await _userManager.AddToRoleAsync(applicationUser, "Customer");
 
@@ -121,28 +137,20 @@ namespace Movie_Market.Areas.Identity.Controllers
         #endregion
 
 
-        #region LogOut
-
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
-
-            return RedirectToAction("Index", "Home", new { area = "Customer" });
-        }
-
-        #endregion
-
-
-        #region Login
+        #region Log-in
 
         [HttpGet]
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
             {
+                TempData["notification"] = "You are already logged in";
+                TempData["MessageType"] = "Information";
                 return RedirectToAction("Index", "Home", new { area = "Customer" });
             }
+
+            // the registration button appears on the Login page
+            ViewData["ShowRegisterButton"] = true;
             return View();
         }
 
@@ -193,6 +201,20 @@ namespace Movie_Market.Areas.Identity.Controllers
         #endregion
 
 
+        #region Log-Out
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+
+            return RedirectToAction("Index", "Home", new { area = "Customer" });
+        }
+
+        #endregion
+
+
+
         #region Forget Password
 
         [HttpGet]
@@ -215,7 +237,7 @@ namespace Movie_Market.Areas.Identity.Controllers
             {
                 TempData["notification"] = "If your email is registered, you'll receive a password reset link";
                 TempData["MessageType"] = "info";
-                return RedirectToAction("ForgetPasswordConfirmation");
+                return RedirectToAction(nameof(ForgetPasswordConfirmation));
             }
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -230,7 +252,7 @@ namespace Movie_Market.Areas.Identity.Controllers
 
             TempData["notification"] = "Password reset link has been sent to your email";
             TempData["MessageType"] = "success";
-            return RedirectToAction("ForgetPasswordConfirmation");
+            return RedirectToAction(nameof(ForgetPasswordConfirmation));
         }
 
         #endregion
@@ -281,15 +303,18 @@ namespace Movie_Market.Areas.Identity.Controllers
             {
                 TempData["notification"] = "Password has been reset successfully";
                 TempData["MessageType"] = "success";
-                return RedirectToAction("ResetPasswordConfirmation");
+                return RedirectToAction(nameof(ResetPasswordConfirmation));
             }
 
             var result = await _userManager.ResetPasswordAsync(user, model.ResetToken, model.NewPassword);
             if (result.Succeeded)
             {
+                user.PasswordChangedDate = DateTime.UtcNow;
+                await _userManager.UpdateAsync(user);
+
                 TempData["notification"] = "Password has been reset successfully";
                 TempData["MessageType"] = "success";
-                return RedirectToAction("ResetPasswordConfirmation");
+                return RedirectToAction(nameof(ResetPasswordConfirmation));
             }
 
             foreach (var error in result.Errors)
@@ -397,13 +422,12 @@ namespace Movie_Market.Areas.Identity.Controllers
                 UserName = email,
                 Email = email,
                 EmailConfirmed = true,
+                RegistrationDate = DateTime.UtcNow,
+                AccountStateType = AccountStateType.Active,
                 FirstName = info.Principal.FindFirstValue(ClaimTypes.GivenName),
                 LastName = info.Principal.FindFirstValue(ClaimTypes.Surname),
                 Address = info.Principal.FindFirstValue(ClaimTypes.StreetAddress),
                 IsBlocked = false
-
-
-                //BirthDay = info.Principal.FindFirstValue(ClaimTypes.DateOfBirth),
             };
 
             var createResult = await _userManager.CreateAsync(user);
@@ -470,3 +494,4 @@ namespace Movie_Market.Areas.Identity.Controllers
 
     }
 }
+

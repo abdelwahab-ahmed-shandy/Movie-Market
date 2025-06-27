@@ -5,7 +5,7 @@ using Movie_Market.GloubalUsing;
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin,SuperAdmin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class CharacterController : BaseController
     {
         private readonly ICharacterService _characterService;
@@ -14,7 +14,8 @@ namespace Movie_Market.Areas.Admin.Controllers
         private readonly ICharacterTvSeriesService _characterTvSeriesService;
 
         public CharacterController(ICharacterService characterService,IGenericRepository<Movie> movieRepo,
-                                        IGenericRepository<TvSeries> tvSeriesRepo , ICharacterTvSeriesService characterTvSeriesService)
+                                        IGenericRepository<TvSeries> tvSeriesRepo , ICharacterTvSeriesService characterTvSeriesService
+                                            , UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _characterService = characterService;
             _movieRepo = movieRepo;

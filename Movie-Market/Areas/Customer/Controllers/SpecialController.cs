@@ -8,7 +8,7 @@ namespace Movie_Market.Areas.Customer.Controllers
     {
         private readonly ISpecialService _customerSpecialService;
 
-        public SpecialController(ISpecialService customerSpecialService)
+        public SpecialController(ISpecialService customerSpecialService, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _customerSpecialService = customerSpecialService;
         }

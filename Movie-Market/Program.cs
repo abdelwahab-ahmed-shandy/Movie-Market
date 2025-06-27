@@ -30,6 +30,8 @@ namespace Movie_Market
 
             // Repository Services
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository > ();
+
             builder.Services.AddScoped<IFileService, FileService>();
             builder.Services.AddTransient<IEmailService, EmailService>();
             builder.Services.AddScoped<IAuditService, AuditService>();
@@ -43,9 +45,9 @@ namespace Movie_Market
             builder.Services.AddScoped<IEpisodeService, EpisodeService>();
             builder.Services.AddScoped<ICharacterTvSeriesService, CharacterTvSeriesService>();
             builder.Services.AddScoped<IDashboardService, DashboardService>();
+            builder.Services.AddScoped<IProfileService, ProfileService>();
 
 
-            builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<ISearchService, SearchService>();
             builder.Services.AddScoped<ISubscriberService, SubscriberService>();
             builder.Services.AddScoped<INewsletterService, NewsletterService>();

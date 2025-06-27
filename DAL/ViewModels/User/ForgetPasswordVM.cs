@@ -24,5 +24,8 @@ namespace DAL.ViewModels.User
         [Display(Name = "Confirm Password")]
         [Compare("NewPassword", ErrorMessage = "Passwords don't match")]
         public string? ConfirmPassword { get; set; }
+
+        public DateTime? PasswordChangedDate { get; set; }
+
     }
 }

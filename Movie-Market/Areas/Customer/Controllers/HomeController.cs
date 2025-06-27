@@ -15,7 +15,7 @@ namespace Movie_Market.Areas.Customer.Controllers
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ISearchService searchService , IMovieService movieService,
-                                 ILogger<HomeController> logger, IDashboardService dashboardService )
+                                 ILogger<HomeController> logger, IDashboardService dashboardService, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _searchService = searchService;
             _logger = logger;

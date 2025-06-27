@@ -1,0 +1,287 @@
+﻿@using DAL.ViewModels.User
+@model ProfileVM
+
+@{
+    ViewData["Title"] = "Profile Settings - MovieMart";
+}
+
+<div class="container py-5 animate__animated animate__fadeIn">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                <!-- Card Header with Gradient Background -->
+                <div class="card-header bg-gradient-primary-to-secondary text-white py-4">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-gear-fill fs-1 me-3"></i>
+                        <div>
+                            <h2 class="mb-0 fw-bold">Profile Settings</h2>
+                            <p class="mb-0 opacity-75">Manage your account information</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body p-4 p-md-5">
+
+                    <form asp-action="Index" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger alert-dismissible fade show mb-4">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="row">
+                            <!-- First Column -->
+                            <div class="col-md-6">
+                                <div class="form-floating mb-4 animate__animated animate__fadeInLeft">
+                                    <input asp-for="FirstName" class="form-control" placeholder=" " required />
+                                    <label asp-for="FirstName">First Name</label>
+                                    <div class="invalid-feedback">
+                                        Please provide your first name
+                                    </div>
+                                    <span asp-validation-for="FirstName" class="text-danger small"></span>
+                                </div>
+
+                                <div class="form-floating mb-4 animate__animated animate__fadeInLeft animate__delay-1s">
+                                    <input asp-for="LastName" class="form-control" placeholder=" " required />
+                                    <label asp-for="LastName">Last Name</label>
+                                    <div class="invalid-feedback">
+                                        Please provide your last name
+                                    </div>
+                                    <span asp-validation-for="LastName" class="text-danger small"></span>
+                                </div>
+
+                                <div class="form-floating mb-4 animate__animated animate__fadeInLeft animate__delay-2s">
+                                    <input asp-for="Email" class="form-control" placeholder=" " required />
+                                    <label asp-for="Email">Email Address</label>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid email
+                                    </div>
+                                    <span asp-validation-for="Email" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <!-- Second Column -->
+                            <div class="col-md-6">
+                                <div class="form-floating mb-4 animate__animated animate__fadeInRight">
+                                    <input asp-for="PhoneNumber" class="form-control" placeholder=" " />
+                                    <label asp-for="PhoneNumber">Phone Number</label>
+                                    <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                                </div>
+
+                                <div class="form-floating mb-4 animate__animated animate__fadeInRight animate__delay-1s">
+                                    <input asp-for="Address" class="form-control" placeholder=" " />
+                                    <label asp-for="Address">Address</label>
+                                    <span asp-validation-for="Address" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-4 animate__animated animate__fadeInRight animate__delay-2s">
+                                    <label asp-for="BirthDay" class="form-label">Date of Birth</label>
+                                    <input asp-for="BirthDay" type="date" class="form-control" />
+                                    <span asp-validation-for="BirthDay" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Profile Image -->
+                        <div class="mb-4 animate__animated animate__fadeInUp animate__delay-3s">
+
+                            @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
+                            {
+                                <div class="mt-3 d-flex align-items-center">
+                                    <img src="@Url.Content("~/" + Model.ProfileImagePath)"
+                                         class="img-thumbnail rounded-circle me-3 profile-image-preview"
+                                         style="width: 120px; height: 120px; object-fit: cover;"
+                                         alt="Current Profile Picture" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="mt-3">
+                                    <div class="bg-light rounded-circle d-flex align-items-center justify-content-center profile-image-preview"
+                                         style="width: 120px; height: 120px;">
+                                        <i class="bi bi-person-circle text-secondary" style="font-size: 3rem;"></i>
+                                    </div>
+                                </div>
+                            }
+
+                            <label asp-for="ProfileImageFile" class="form-label">Profile Image</label>
+                            <input asp-for="ProfileImageFile" type="file" class="form-control" accept="image/*"
+                                   onchange="previewImage(this)" />
+                            <span asp-validation-for="ProfileImageFile" class="text-danger small"></span>
+
+
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-between mt-5 animate__animated animate__fadeInUp animate__delay-4s">
+                            <div>
+                                <button type="submit" class="btn btn-primary px-4 py-2 rounded-pill">
+                                    <i class="bi bi-save me-2"></i> Save Changes
+                                </button>
+                                <a asp-action="Details" class="btn btn-outline-secondary px-4 py-2 rounded-pill ms-2">
+                                    <i class="bi bi-x-circle me-2"></i> Cancel
+                                </a>
+                            </div>
+
+                            <div>
+                                <a asp-area="Identity" asp-controller="Update" asp-action="ChangePassword"
+                                   class="btn btn-warning px-4 py-2 rounded-pill me-2">
+                                    <i class="bi bi-key me-2"></i> Change Password
+                                </a>
+
+                                <a asp-area="Identity" asp-controller="Update" asp-action="DeleteAccount"
+                                   class="btn btn-outline-danger px-4 py-2 rounded-pill">
+                                    <i class="bi bi-trash me-2"></i> Delete Account
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <style>
+        .bg-gradient-primary-to-secondary {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+        }
+
+        .card {
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+            .form-control:focus {
+                background-color: rgba(255, 255, 255, 0.1);
+                border-color: #6c5ce7;
+                box-shadow: 0 0 0 0.25rem rgba(108, 92, 231, 0.25);
+                color: white;
+            }
+
+        .btn-primary {
+            background-color: #6c5ce7;
+            border-color: #6c5ce7;
+            transition: all 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #5a4bd6;
+                border-color: #5a4bd6;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+            }
+
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            transition: all 0.3s ease;
+        }
+
+            .btn-warning:hover {
+                background-color: #e0a800;
+                border-color: #e0a800;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+            }
+
+        .profile-image-preview {
+            transition: all 0.3s ease;
+            border: 3px solid rgba(108, 92, 231, 0.3);
+        }
+
+            .profile-image-preview:hover {
+                transform: scale(1.05);
+                border-color: #6c5ce7;
+            }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.5);
+            cursor: pointer;
+        }
+
+        @@media (max-width: 768px) {
+            .d-flex.justify-content-between {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Form validation
+        (function () {
+            'use strict'
+
+            var forms = document.querySelectorAll('.needs-validation')
+
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+
+                            // Add shake animation to invalid fields
+                            const invalidFields = form.querySelectorAll(':invalid');
+                            invalidFields.forEach(field => {
+                                field.classList.add('animate__animated', 'animate__headShake');
+                                setTimeout(() => {
+                                    field.classList.remove('animate__animated', 'animate__headShake');
+                                }, 1000);
+                            });
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
+        // Image preview functionality
+        function previewImage(input) {
+            const preview = document.querySelector('.profile-image-preview');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    if (preview.tagName === 'IMG') {
+                        preview.src = e.target.result;
+                    } else {
+                        // Replace placeholder div with image
+                        const newPreview = document.createElement('img');
+                        newPreview.src = e.target.result;
+                        newPreview.className = 'img-thumbnail rounded-circle profile-image-preview';
+                        newPreview.style.width = '120px';
+                        newPreview.style.height = '120px';
+                        newPreview.style.objectFit = 'cover';
+                        preview.parentNode.replaceChild(newPreview, preview);
+                    }
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}

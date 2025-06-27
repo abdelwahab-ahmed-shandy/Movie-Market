@@ -5,12 +5,12 @@ using Movie_Market.GloubalUsing;
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin,SuperAdmin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class SeasonController : BaseController
     {
         private readonly ISeasonService _seasonService;
 
-        public SeasonController(ISeasonService seasonService)
+        public SeasonController(ISeasonService seasonService, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _seasonService = seasonService;
         }

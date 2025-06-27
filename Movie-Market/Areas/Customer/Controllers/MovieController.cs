@@ -7,7 +7,7 @@ namespace Movie_Market.Areas.Customer.Controllers
     public class MovieController : BaseController
     {
         private readonly IMovieService _movieService;
-        public MovieController(IMovieService movieService)
+        public MovieController(IMovieService movieService, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _movieService = movieService;
         }

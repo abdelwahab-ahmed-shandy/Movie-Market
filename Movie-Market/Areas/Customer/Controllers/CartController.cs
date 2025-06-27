@@ -10,7 +10,7 @@ namespace Movie_Market.Areas.Customer.Controllers
         private readonly ICartService _cartService;
         private readonly IGenericRepository<Movie> _movieRepo;
 
-        public CartController(ICartService cartService, IGenericRepository<Movie> movieRepo)
+        public CartController(ICartService cartService, IGenericRepository<Movie> movieRepo, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _cartService = cartService;
             _movieRepo = movieRepo;

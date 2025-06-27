@@ -6,12 +6,12 @@ using Movie_Market.GloubalUsing;
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin,SuperAdmin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class SearchController : BaseController
     {
         private readonly ISearchService _searchService;
 
-        public SearchController(ISearchService searchService)
+        public SearchController(ISearchService searchService, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _searchService = searchService;
         }

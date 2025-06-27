@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DAL.Repositories
+{
+    public class ApplicationUserRepository : IApplicationUserRepository
+    {
+        private readonly ApplicationdbContext _context;
+
+        public ApplicationUserRepository(ApplicationdbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<ApplicationUser> GetByIdAsync(Guid Id)
+        {
+            return await _context.Users.AsTracking().FirstOrDefaultAsync(u => u.Id == Id);
+        }
+
+        public async Task<ApplicationUser?> GetOneAsync(Expression<Func<ApplicationUser, bool>> predicate)
+        {
+            return await _context.Users.AsTracking().FirstOrDefaultAsync(predicate);
+        }
+
+        public async Task Update(ApplicationUser user)
+        {
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+        }
+
+    }
+}

@@ -4,59 +4,161 @@
     ViewData["Title"] = "Log in";
 }
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                <h3 class="card-title">Sign in to your account</h3>
+<div class="row justify-content-center py-5">
+    <div class="col-lg-5 col-md-8">
+        <div class="card shadow-lg border-0 rounded-lg overflow-hidden">
+            <div class="card-header bg-gradient-primary py-4">
+                <h3 class="text-center font-weight-light text-white mb-0">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Sign in to your account
+                </h3>
             </div>
-            <div class="card-body">
-                <form asp-area="Identity" asp-controller="Account" asp-action="Login" method="post">
-                    <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="card-body p-5">
+                <form asp-area="Identity" asp-controller="Account" asp-action="Login" method="post" class="needs-validation" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
-                    <div class="form-group">
-                        <label asp-for="Email"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="Password"></label>
-                        <input asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label asp-for="RememberMe">
-                                <input asp-for="RememberMe" />
-                                @Html.DisplayNameFor(m => m.RememberMe)
-                            </label>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Email" class="form-control" placeholder="name@example.com" required />
+                        <label asp-for="Email">Email address</label>
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                        <div class="invalid-feedback">
+                            Please provide a valid email address.
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Password" class="form-control" placeholder="Password" required />
+                        <label asp-for="Password">Password</label>
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                        <div class="invalid-feedback">
+                            Please enter your password.
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" asp-for="RememberMe" />
+                        <label class="form-check-label" asp-for="RememberMe">
+                            Remember me
+                        </label>
+                    </div>
+
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill py-3">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Log in
+                        </button>
+                    </div>
+
+                    <div class="text-center mb-4">
+                        <a class="small text-decoration-none" asp-action="ForgetPassword">Forgot your password?</a>
+                    </div>
+
+                    <div class="text-center">
+                        <p class="mb-0">
+                            Don't have an account?
+                            <a class="text-decoration-none fw-bold" asp-action="Register">Register now</a>
+                        </p>
+                    </div>
                 </form>
-
-                <hr />
-
-                <div class="text-center">
-                    <a asp-action="ForgetPassword">Forgot your password?</a>
-                </div>
             </div>
-            <div class="card-footer text-center">
-                <p>Don't have an account? <a asp-action="Register">Register now</a></p>
-                <!-- External login providers -->
-                <form asp-action="ExternalLogin" method="post" class="mt-2">
-                    <button type="submit" name="provider" value="Google" class="btn btn-outline-danger">
-                        <i class="fab fa-google"></i> Sign in with Google
-                    </button>
-                </form>
+
+            <div class="card-footer bg-transparent py-4">
+                <div class="text-center position-relative my-4">
+                    <hr class="my-0 border-secondary" />
+                    <span class="px-3 bg-dark text-white-50 position-absolute start-50 top-50 translate-middle font-small">
+                        OR CONTINUE WITH
+                    </span>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <form asp-action="ExternalLogin" asp-controller="Account" method="post" class="w-100" style="max-width: 300px;">
+                        <input type="hidden" name="provider" value="Google" />
+                        <input type="hidden" name="returnUrl" value="/" />
+                        <button type="submit" class="btn btn-outline-danger rounded-pill py-2 w-100">
+                            <i class="fab fa-google me-2"></i> Sign in with Google
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+@section Styles {
+    <style>
+        .card {
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+            }
+
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+        }
+
+        .form-floating label {
+            color: #6c757d;
+        }
+
+        .form-control:focus {
+            border-color: #6c5ce7;
+            box-shadow: 0 0 0 0.25rem rgba(108, 92, 231, 0.25);
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+}
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Enhanced form validation
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
+        // Add animation to form elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const formElements = document.querySelectorAll('.form-floating, .form-check, .d-grid');
+            formElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.1}s`;
+            });
+
+            // Add stylesheet for animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @@keyframes fadeInUp {
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
 }

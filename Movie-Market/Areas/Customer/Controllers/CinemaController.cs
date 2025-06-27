@@ -8,7 +8,7 @@ namespace Movie_Market.Areas.Customer.Controllers
     {
         private readonly ICinemaService _cinemaService;
 
-        public CinemaController(ICinemaService cinemaService)
+        public CinemaController(ICinemaService cinemaService, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _cinemaService = cinemaService;
         }

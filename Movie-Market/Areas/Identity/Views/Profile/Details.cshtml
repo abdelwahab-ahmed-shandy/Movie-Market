@@ -1,0 +1,185 @@
+﻿@using DAL.ViewModels.User
+@model ProfileVM
+
+@{
+    ViewData["Title"] = "My Profile - MovieMart";
+}
+
+<div class="container py-5 animate__animated animate__fadeIn">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                <!-- Card Header with Gradient Background -->
+                <div class="card-header bg-gradient-primary-to-secondary text-white py-4">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-person-circle fs-1 me-3"></i>
+                        <div>
+                            <h2 class="mb-0 fw-bold">My Profile</h2>
+                            <p class="mb-0 opacity-75">Member since @Model.RegistrationDate?.ToString("MMMM yyyy")</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body p-4 p-md-5">
+                    <div class="row align-items-center">
+                        <!-- Profile Photo -->
+                        <div class="col-md-4 text-center mb-4 mb-md-0 animate__animated animate__fadeInLeft">
+                            @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
+                            {
+                                <img src="@Url.Content("~/" + Model.ProfileImagePath)"
+                                     class="img-thumbnail rounded-circle shadow profile-picture"
+                                     style="width: 220px; height: 220px; object-fit: cover;"
+                                     alt="Profile Picture" />
+                            }
+                            else
+                            {
+                                <div class="profile-picture-placeholder rounded-circle shadow d-flex align-items-center justify-content-center mx-auto"
+                                     style="width: 220px; height: 220px; background: rgba(108, 92, 231, 0.1);">
+                                    <i class="bi bi-person-circle text-primary" style="font-size: 5rem;"></i>
+                                </div>
+                            }
+                            <div class="mt-3">
+                                <a asp-action="Index" class="btn btn-primary rounded-pill px-4">
+                                    <i class="bi bi-pencil-fill me-2"></i>Edit Profile
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Personal Information -->
+                        <div class="col-md-8 animate__animated animate__fadeInRight">
+                            <div class="profile-details">
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="bi bi-person-fill me-2 text-primary"></i>Full Name</span>
+                                    <span class="detail-value">@Model.FirstName @Model.LastName</span>
+                                </div>
+
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="bi bi-envelope-fill me-2 text-primary"></i>Email</span>
+                                    <span class="detail-value">@Model.Email</span>
+                                </div>
+
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="bi bi-telephone-fill me-2 text-primary"></i>Phone</span>
+                                    <span class="detail-value">@(Model.PhoneNumber ?? "Not provided")</span>
+                                </div>
+
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="bi bi-geo-alt-fill me-2 text-primary"></i>Address</span>
+                                    <span class="detail-value">@(Model.Address ?? "Not provided")</span>
+                                </div>
+
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="bi bi-calendar-event-fill me-2 text-primary"></i>Date of Birth</span>
+                                    <span class="detail-value">@(Model.BirthDay?.ToString("MMMM dd, yyyy") ?? "Not provided")</span>
+                                </div>
+
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="bi bi-calendar-check-fill me-2 text-primary"></i>Member Since</span>
+                                    <span class="detail-value">@Model.RegistrationDate?.ToString("MMMM dd, yyyy")</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <style>
+        .bg-gradient-primary-to-secondary {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+        }
+
+        .card {
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            }
+
+        .profile-picture {
+            transition: all 0.3s ease;
+            border: 3px solid rgba(108, 92, 231, 0.3);
+        }
+
+            .profile-picture:hover {
+                transform: scale(1.05);
+                border-color: #6c5ce7;
+            }
+
+        .profile-picture-placeholder {
+            transition: all 0.3s ease;
+        }
+
+            .profile-picture-placeholder:hover {
+                transform: scale(1.05);
+                background: rgba(108, 92, 231, 0.2) !important;
+            }
+
+        .profile-details {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+            .detail-item:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+
+        .detail-label {
+            flex: 0 0 40%;
+            font-weight: 600;
+            color: #a29bfe;
+        }
+
+        .detail-value {
+            flex: 1;
+            color: #f8f9fa;
+        }
+
+        .btn-primary {
+            background-color: #6c5ce7;
+            border-color: #6c5ce7;
+            transition: all 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #5a4bd6;
+                border-color: #5a4bd6;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+            }
+
+        @@media (max-width: 768px) {
+            .profile-details {
+                margin-top: 2rem;
+            }
+
+            .detail-item {
+                flex-direction: column;
+            }
+
+            .detail-label {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+}

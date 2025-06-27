@@ -2,8 +2,30 @@
 
 namespace Movie_Market.GloubalUsing
 {
-    public class BaseController : Controller
+    public abstract class BaseController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        protected BaseController(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
+        public override void OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext context)
+        {
+            base.OnActionExecuting(context);
+
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                var userId = _userManager.GetUserId(User);
+                var user = _userManager.FindByIdAsync(userId).Result;
+
+                ViewBag.ProfileImagePath = string.IsNullOrEmpty(user?.ProfileImage)
+                    ? "Assets/identity/user.png"
+                    : user.ProfileImage;
+            }
+        }
+
         protected IActionResult NotFound(string? message = null)
         {
             Response.StatusCode = 404;

@@ -96,21 +96,29 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/Assets/Users/user.png" alt="User Avatar"
-                                         class="rounded-circle me-2 border border-2 border-primary" width="36" height="36">
+
+                                <img src="@Url.Content("~/" + (ViewBag.ProfileImagePath ?? "assets/identity/user.png"))"
+                                         alt="User Avatar"
+                                         class="user-avatar rounded-circle me-2"
+                                         style="width: 40px; height: 40px; object-fit: cover;" />
+
                                     <span class="d-none d-lg-inline">@User.Identity.Name</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end shadow-lg mt-2" aria-labelledby="userDropdown">
+
                                     <li>
-                                        <a class="dropdown-item" asp-area="Identity" asp-controller="Settings" asp-action="Profile">
-                                            <i class="fas fa-user-circle me-2"></i> Profile
+                                        <a class="dropdown-item" asp-area="Identity" asp-controller="Profile" asp-action="Details">
+                                            <i class="fas fa-user me-2"></i> Profile
                                         </a>
                                     </li>
+                                    
                                     <li>
-                                        <a class="dropdown-item" asp-area="Identity" asp-controller="Settings" asp-action="Manage">
-                                            <i class="fas fa-cog me-2"></i> Settings
+                                        <a class="dropdown-item" asp-area="Identity" asp-controller="Profile" asp-action="Index">
+                                            <i class="fas fa-user-edit me-2"></i> Settings
                                         </a>
                                     </li>
+
+
                                     <li><hr class="dropdown-divider"></li>
                                     @if (User.IsInRole("Admin"))
                                     {

@@ -6,13 +6,13 @@ using Movie_Market.GloubalUsing;
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin,SuperAdmin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class CategoriesController : BaseController
     {
         private readonly ILogger<CategoriesController> _logger;
         private readonly ICategoryService _categoryService;
         public CategoriesController(ILogger<CategoriesController> logger,
-                                     ICategoryService categoryService)
+                                     ICategoryService categoryService, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _logger = logger;
             _categoryService = categoryService;

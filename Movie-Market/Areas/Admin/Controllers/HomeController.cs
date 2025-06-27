@@ -6,11 +6,11 @@ using Movie_Market.GloubalUsing;
 namespace Movie_Market.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin,SuperAdmin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class HomeController : BaseController
     {
         private readonly IDashboardService _dashboardService;
-        public HomeController(IDashboardService dashboardService)
+        public HomeController(IDashboardService dashboardService, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _dashboardService = dashboardService;
         }

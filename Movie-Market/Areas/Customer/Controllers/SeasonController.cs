@@ -7,7 +7,7 @@ namespace Movie_Market.Areas.Customer.Controllers
     public class SeasonController : BaseController
     {
         private readonly ISeasonService _seasonService;
-        public SeasonController(ISeasonService seasonService)
+        public SeasonController(ISeasonService seasonService, UserManager<ApplicationUser> userManager) : base(userManager)
         {
             _seasonService = seasonService;
         }
