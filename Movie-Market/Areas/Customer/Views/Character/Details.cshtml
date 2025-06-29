@@ -1,4 +1,4 @@
-﻿@model DAL.ViewModels.Character.CharacterIndexVM
+﻿@model Character
 
 @{
     ViewData["Title"] = Model.Name;
@@ -17,9 +17,9 @@
 
             <div class="row align-items-center">
                 <div class="col-lg-4">
-                    @if (!string.IsNullOrEmpty(Model.Img))
+                    @if (!string.IsNullOrEmpty(Model.ImgUrl))
                     {
-                        <img src="@Url.Content("~/" + Model.Img)" class="img-fluid rounded-3 shadow-lg" alt="@Model.Name" style="max-height: 400px; object-fit: cover;">
+                        <img src="@Url.Content("~/" + Model.ImgUrl)" class="img-fluid rounded-3 shadow-lg" alt="@Model.Name" style="max-height: 400px; object-fit: cover;">
                     }
                     else
                     {
@@ -40,11 +40,11 @@
 
                     <div class="character-stats d-flex flex-wrap gap-3">
                         <div class="stat-card">
-                            <div class="stat-value">@Model.Movies.Count</div>
+                            <div class="stat-value">@Model.CharacterMovies.Count</div>
                             <div class="stat-label">Movies</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-value">@Model.TvSeries.Count</div>
+                            <div class="stat-value">@Model.CharacterTvSeries.Count</div>
                             <div class="stat-label">TV Shows</div>
                         </div>
                     </div>
@@ -65,10 +65,10 @@
                     <div class="section-divider"></div>
                 </div>
 
-                @if (Model.Movies.Any())
+                @if (Model.CharacterTvSeries.Any())
                 {
                     <div class="row g-3">
-                        @foreach (var movie in Model.Movies)
+                        @foreach (var movie in Model.CharacterMovies.Select(cm => cm.Movie))
                         {
                             <div class="col-md-6">
                                 <div class="movie-card card border-0 shadow-sm h-100">
@@ -84,12 +84,12 @@
                                     <div class="card-body">
                                         <h5 class="card-title fw-bold">@movie.Title</h5>
                                         <div class="d-flex justify-content-between mb-2">
-                                            <span class="badge bg-primary">@movie.CategoryName</span>
+                                            <span class="badge bg-primary">@movie.Category.Name</span>
                                             <span class="text-muted">@movie.ReleaseYear</span>
                                         </div>
-                                        @if (!string.IsNullOrEmpty(movie.ShortDescription))
+                                        @if (!string.IsNullOrEmpty(movie.Description))
                                         {
-                                            <p class="card-text text-muted small">@movie.ShortDescription</p>
+                                            <p class="card-text text-muted small">@movie.Description</p>
                                         }
                                     </div>
                                     <div class="card-footer bg-transparent border-0">
@@ -121,15 +121,15 @@
                     <div class="section-divider"></div>
                 </div>
 
-                @if (Model.TvSeries.Any())
+                @if (Model.CharacterTvSeries.Any())
                 {
                     <div class="row g-3">
-                        @foreach (var tvShow in Model.TvSeries)
+                        @foreach (var tvShow in Model.CharacterTvSeries.Select(ct => ct.TvSeries) )
                         {
                             <div class="col-md-6">
                                 <div class="tvshow-card card border-0 shadow-sm h-100">
                                     <div class="tvshow-poster" style="height: 200px;">
-                                        <img src="@tvShow.ImgUrl" class="card-img-top h-100" alt="@tvShow.Title" style="object-fit: cover;">
+                                        <img src="@Url.Content("~/" + tvShow.ImgUrl)" class="card-img-top h-100" alt="@tvShow.Title" style="object-fit: cover;">
                                         @if (tvShow.Rating.HasValue)
                                         {
                                             <div class="tvshow-rating">
@@ -146,9 +146,9 @@
                                                 <span class="text-muted">by @tvShow.Author</span>
                                             }
                                         </div>
-                                        @if (!string.IsNullOrEmpty(tvShow.ShortDescription))
+                                        @if (!string.IsNullOrEmpty(tvShow.Description))
                                         {
-                                            <p class="card-text text-muted small">@tvShow.ShortDescription</p>
+                                            <p class="card-text text-muted small">@tvShow.Description</p>
                                         }
                                     </div>
                                     <div class="card-footer bg-transparent border-0">

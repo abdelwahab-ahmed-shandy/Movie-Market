@@ -237,64 +237,35 @@ namespace BLL.Services.Implementations
             }).ToList();
         }
 
-
-        public async Task<CharacterIndexVM?> GetCharacterDetailsAsync(Guid id)
+        public async Task<Character?> GetCharacterDetailsAsync(Guid id)
         {
-            try
-            {
-                var character = await _characterRepo.GetByIdAsync(id);
-                if (character == null || character.IsDeleted)
-                    return null;
-
-                var characterMovies = await _characterMovieRepo
-                    .Get(cm => cm.CharacterId == id && cm.CurrentState == CurrentState.Active)
-                    .Include(cm => cm.Movie)
-                    .ThenInclude(m => m.Category) 
-                    .ToListAsync();
-
-                var characterTvSeries = await _characterTvSeriesRepo
-                    .Get(ct => ct.CharacterId == id && ct.CurrentState == CurrentState.Active)
-                    .Include(ct => ct.TvSeries)
-                    .ToListAsync();
-
-                return new CharacterIndexVM
-                {
-                    Id = character.Id,
-                    Name = character.Name,
-                    Description = character.Description,
-                    Img = character.ImgUrl,
-                    Movies = characterMovies.Select(cm => new MovieCharacterIndexVM
-                    {
-                        Id = cm.Movie.Id,
-                        Title = cm.Movie.Title,
-                        ImgUrl = cm.Movie.ImgUrl,
-                        Price = cm.Movie.Price,
-                        Rating = cm.Movie.Rating,
-                        CategoryName = cm.Movie.Category?.Name ?? "Unknown",
-                        ReleaseYear = cm.Movie.ReleaseYear,
-                        ShortDescription = cm.Movie.Description?.Length > 100 ?
-                            cm.Movie.Description.Substring(0, 100) + "..." :
-                            cm.Movie.Description
-                    }).ToList(),
-                    TvSeries = characterTvSeries.Select(ct => new TvSeriesCharacterVM
-                    {
-                        Id = ct.TvSeries.Id,
-                        Title = ct.TvSeries.Title,
-                        Description = ct.TvSeries.Description,
-                        Author = ct.TvSeries.Author,
-                        ImgUrl = ct.TvSeries.ImgUrl,
-                        ReleaseYear = ct.TvSeries.ReleaseYear,
-                        Rating = ct.TvSeries.Rating
-                    }).ToList()
-                };
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Error retrieving character details for ID: {id}");
-                throw;
-            }
+            return await _characterRepo.GetAll()
+                .Include(c => c.CharacterMovies)
+                    .ThenInclude(cm => cm.Movie)
+                .Include(c => c.CharacterTvSeries)
+                    .ThenInclude(ct => ct.TvSeries)
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
+
+
+        //public async Task<IEnumerable<Movie>> GetMoviesForCharacterAsync(Guid characterId)
+        //{
+        //    return await _characterMovieRepo.GetAll()
+        //        .Where(cm => cm.CharacterId == characterId)
+        //        .Select(cm => cm.Movie)
+        //        .ToListAsync();
+        //}
+
+
+        //public async Task<IEnumerable<TvSeries>> GetTvSeriesForCharacterAsync(Guid characterId)
+        //{
+        //    return await _characterTvSeriesRepo.GetAll()
+        //        .Where(ct => ct.CharacterId == characterId)
+        //        .Select(ct => ct.TvSeries)
+        //        .ToListAsync();
+        //}
         
+
         #endregion
 
 

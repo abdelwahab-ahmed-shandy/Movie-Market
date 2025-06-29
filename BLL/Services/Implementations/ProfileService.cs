@@ -22,6 +22,7 @@ namespace BLL.Services.Implementations
             _signInManager = signInManager;
         }
 
+
         public async Task<ProfileVM> GetProfileAsync(Guid userId)
         {
             var user = await _userRepository.GetByIdAsync(userId);
@@ -41,6 +42,7 @@ namespace BLL.Services.Implementations
                 ProfileImagePath = user.ProfileImage
             };
         }
+
 
         public async Task UpdateProfileAsync(ProfileVM model)
         {
@@ -73,6 +75,7 @@ namespace BLL.Services.Implementations
             await _userRepository.Update(user);
         }
 
+
         public async Task<IdentityResult> ChangePasswordAsync(Guid userId, ChangePasswordVM model)
         {
             if (model == null)
@@ -88,6 +91,7 @@ namespace BLL.Services.Implementations
 
             return await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
         }
+
 
         public async Task<IdentityResult> DeleteAccountAsync(Guid userId)
         {
@@ -106,6 +110,7 @@ namespace BLL.Services.Implementations
             await _userManager.UpdateSecurityStampAsync(user);
             return await _userManager.DeleteAsync(user);
         }
+
 
     }
 }

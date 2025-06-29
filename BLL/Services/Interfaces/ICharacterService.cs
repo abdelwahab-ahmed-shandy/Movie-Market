@@ -23,8 +23,12 @@ namespace BLL.Services.Interfaces
         #region Customer Methods
 
         Task<List<CharacterIndexVM>> GetAllCharactersAsync();
-        Task<CharacterIndexVM?> GetCharacterDetailsAsync(Guid id);
+       
+        Task<Character?> GetCharacterDetailsAsync(Guid id);
+        //Task<IEnumerable<Movie>> GetMoviesForCharacterAsync(Guid characterId);
+        //Task<IEnumerable<TvSeries>> GetTvSeriesForCharacterAsync(Guid characterId);
+        
         #endregion
-    
+
     }
 }
