@@ -103,9 +103,9 @@
                         <div class="col-md-6">
                             <div class="character-card card border-0 shadow-sm h-100 overflow-hidden">
                                 <div class="character-image-container position-relative" style="height: 180px;">
-                                    @if (!string.IsNullOrEmpty(character.PosterUrl))
+                                    @if (!string.IsNullOrEmpty(character.ImgUrl))
                                     {
-                                        <img src="@Url.Content("~/" + character.PosterUrl)" class="character-image" alt="@character.Name">
+                                        <img src="@Url.Content("~/" + character.ImgUrl)" class="character-image" alt="@character.Name">
                                     }
                                     else
                                     {

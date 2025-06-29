@@ -13,7 +13,7 @@ namespace DAL.ViewModels.Character
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public string? Img { get; set; }
-        public List<MovieIndexVM> Movies { get; set; } = new List<MovieIndexVM>();
-        public List<TvSeriesVM> TvSeries { get; set; } = new List<TvSeriesVM>();
+        public List<MovieCharacterIndexVM> Movies { get; set; } = new List<MovieCharacterIndexVM>();
+        public List<TvSeriesCharacterVM> TvSeries { get; set; } = new List<TvSeriesCharacterVM>();
     }
 }

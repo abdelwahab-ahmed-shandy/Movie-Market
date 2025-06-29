@@ -11,8 +11,8 @@ namespace DAL.ViewModels.TvSeries
 {
     public class TvSeriesDetailsVM
     {
-        public TvSeriesVM TvSeries { get; set; } = null!;
+        public TvSeriesCharacterVM TvSeries { get; set; } = null!;
         public List<SeasonVM> Seasons { get; set; } = new();
-        public List<CharacterVM> Characters { get; set; } = new();
+        public List<CharacterTvSeriesCustomerVM> Characters { get; set; } = new();
     }
 }

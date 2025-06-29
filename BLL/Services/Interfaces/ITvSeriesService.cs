@@ -22,7 +22,7 @@ namespace BLL.Services.Interfaces
 
         #region Customer
 
-        Task<IEnumerable<TvSeriesVM>> GetAllTvSeriesAsync();
+        Task<IEnumerable<TvSeriesCharacterVM>> GetAllTvSeriesAsync();
         Task<TvSeriesDetailsVM?> GetTvSeriesWithDetailsAsync(Guid id);
 
         #endregion

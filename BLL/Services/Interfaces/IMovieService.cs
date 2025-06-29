@@ -22,11 +22,11 @@ namespace BLL.Services.Interfaces
 
         #region Customer Methods
 
-        Task<IEnumerable<MovieIndexVM>> GetActiveMoviesAsync();
+        Task<IEnumerable<MovieCharacterIndexVM>> GetActiveMoviesAsync();
         Task<List<MovieDetailsVM>> GetMoviesNewReleasesAsync(int count);
         Task<MovieDetailsVM?> GetMovieWithDetailsAsync(Guid id);
-        Task<IEnumerable<MovieIndexVM>> GetPopularMoviesAsync(int count);
-        Task<IEnumerable<MovieIndexVM>> GetMoviesByCategoryAsync(Guid categoryId);
+        Task<IEnumerable<MovieCharacterIndexVM>> GetPopularMoviesAsync(int count);
+        Task<IEnumerable<MovieCharacterIndexVM>> GetMoviesByCategoryAsync(Guid categoryId);
 
         #endregion
         

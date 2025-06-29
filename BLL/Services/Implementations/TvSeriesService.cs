@@ -216,13 +216,13 @@ namespace BLL.Services.Implementations
 
         #region Customer Methods
 
-        public async Task<IEnumerable<TvSeriesVM>> GetAllTvSeriesAsync()
+        public async Task<IEnumerable<TvSeriesCharacterVM>> GetAllTvSeriesAsync()
         {
             var tvSeries = await _tvSeriesRepo.Get(t => !t.IsDeleted && t.CurrentState.Value == CurrentState.Active)
                 .OrderByDescending(t => t.ReleaseYear)
                 .ToListAsync();
 
-            return tvSeries.Select(t => new TvSeriesVM
+            return tvSeries.Select(t => new TvSeriesCharacterVM
             {
                 Id = t.Id,
                 Title = t.Title,
@@ -246,7 +246,7 @@ namespace BLL.Services.Implementations
 
             return new TvSeriesDetailsVM
             {
-                TvSeries = new TvSeriesVM
+                TvSeries = new TvSeriesCharacterVM
                 {
                     Id = tvSeries.Id,
                     Title = tvSeries.Title,
@@ -266,11 +266,12 @@ namespace BLL.Services.Implementations
                         SeasonNumber = s.SeasonNumber
                     }).ToList(),
                 Characters = tvSeries.Characters
-                    .Select(ct => new CharacterVM
+                    .Select(ct => new CharacterTvSeriesCustomerVM
                     {
                         Id = ct.Character.Id,
                         Name = ct.Character.Name,
-                        Description = ct.Character.Description
+                        Description = ct.Character.Description,
+                        ImgUrl = ct.Character.ImgUrl
                     }).ToList()
             };
         }

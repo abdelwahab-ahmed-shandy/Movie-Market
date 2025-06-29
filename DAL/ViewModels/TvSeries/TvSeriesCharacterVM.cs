@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.ViewModels.TvSeries
 {
-    public class TvSeriesVM
+    public class TvSeriesCharacterVM
     {
         public Guid Id { get; set; }
         public string Title { get; set; } = null!;

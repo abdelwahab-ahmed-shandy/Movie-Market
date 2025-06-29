@@ -15,7 +15,7 @@ namespace DAL.ViewModels.Season
         public int ReleaseYear { get; set; }
         public string TvSeriesTitle { get; set; }
         public Guid TvSeriesId { get; set; }
-        public List<TvSeriesVM> tvSeriesVMs { get; set; } = new List<TvSeriesVM>();
+        public List<TvSeriesCharacterVM> tvSeriesVMs { get; set; } = new List<TvSeriesCharacterVM>();
         public List<EpisodeCustomerVM> Episodes { get; set; } = new List<EpisodeCustomerVM>();
     }
 }

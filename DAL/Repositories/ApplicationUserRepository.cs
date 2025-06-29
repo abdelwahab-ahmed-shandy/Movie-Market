@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,23 @@ namespace DAL.Repositories
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<ApplicationUser>> GetAllAsync()
+        {
+            return await _context.Users.AsTracking().ToListAsync();
+        }
+
+        public async Task Create(ApplicationUser user)
+        {
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+        }
+
+        public void Delete(ApplicationUser user)
+        {
+            _context.Users.Remove(user);
+        }
+
 
     }
 }

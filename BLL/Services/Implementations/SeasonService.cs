@@ -213,9 +213,9 @@ namespace BLL.Services.Implementations
                             : season.TvSeries.ImgUrl, 
                     }).ToList();
 
-                var tvSeriesVMs = new List<TvSeriesVM>
+                var tvSeriesVMs = new List<TvSeriesCharacterVM>
         {
-            new TvSeriesVM
+            new TvSeriesCharacterVM
             {
                 Id = season.TvSeries.Id,
                 Title = season.TvSeries.Title,

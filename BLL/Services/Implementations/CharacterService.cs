@@ -237,6 +237,7 @@ namespace BLL.Services.Implementations
             }).ToList();
         }
 
+
         public async Task<CharacterIndexVM?> GetCharacterDetailsAsync(Guid id)
         {
             try
@@ -262,7 +263,7 @@ namespace BLL.Services.Implementations
                     Name = character.Name,
                     Description = character.Description,
                     Img = character.ImgUrl,
-                    Movies = characterMovies.Select(cm => new MovieIndexVM
+                    Movies = characterMovies.Select(cm => new MovieCharacterIndexVM
                     {
                         Id = cm.Movie.Id,
                         Title = cm.Movie.Title,
@@ -275,7 +276,7 @@ namespace BLL.Services.Implementations
                             cm.Movie.Description.Substring(0, 100) + "..." :
                             cm.Movie.Description
                     }).ToList(),
-                    TvSeries = characterTvSeries.Select(ct => new TvSeriesVM
+                    TvSeries = characterTvSeries.Select(ct => new TvSeriesCharacterVM
                     {
                         Id = ct.TvSeries.Id,
                         Title = ct.TvSeries.Title,

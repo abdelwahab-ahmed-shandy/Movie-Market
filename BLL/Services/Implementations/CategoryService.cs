@@ -210,7 +210,7 @@ namespace BLL.Services.Implementations
                 Name = category.Name,
                 Description = category.Description,
                 //IconUrl = category.ImgUrl,
-                Movies = category.Movies.Select(m => new MovieIndexVM
+                Movies = category.Movies.Select(m => new MovieCharacterIndexVM
                 {
                     Id = m.Id,
                     Title = m.Title,

@@ -10,6 +10,9 @@ namespace DAL.Repositories.IRepositories
     {
         Task<ApplicationUser> GetByIdAsync(Guid Id);
         Task<ApplicationUser?> GetOneAsync(Expression<Func<ApplicationUser, bool>> predicate);
+        Task<List<ApplicationUser>> GetAllAsync();
+        Task Create(ApplicationUser user);
         Task Update(ApplicationUser user);
+        void Delete(ApplicationUser user);
     }
 }

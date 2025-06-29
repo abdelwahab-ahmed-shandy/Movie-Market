@@ -420,7 +420,7 @@ namespace BLL.Services.Implementations
 
         #region Customer Methods
 
-        public async Task<IEnumerable<MovieIndexVM>> GetActiveMoviesAsync()
+        public async Task<IEnumerable<MovieCharacterIndexVM>> GetActiveMoviesAsync()
         {
             var now = DateTime.UtcNow;
 
@@ -431,7 +431,7 @@ namespace BLL.Services.Implementations
                 .OrderByDescending(m => m.Rating)
                 .ToListAsync();
 
-            return movies.Select(m => new MovieIndexVM
+            return movies.Select(m => new MovieCharacterIndexVM
             {
                 Id = m.Id,
                 Title = m.Title,
@@ -499,7 +499,7 @@ namespace BLL.Services.Implementations
             };
         }
 
-        public async Task<IEnumerable<MovieIndexVM>> GetPopularMoviesAsync(int count)
+        public async Task<IEnumerable<MovieCharacterIndexVM>> GetPopularMoviesAsync(int count)
         {
             var movies = await _movieRepo.GetAll()
                 .Where(m => !m.IsDeleted)
@@ -508,7 +508,7 @@ namespace BLL.Services.Implementations
                 .Include(m => m.Category)
                 .ToListAsync();
 
-            return movies.Select(m => new MovieIndexVM
+            return movies.Select(m => new MovieCharacterIndexVM
             {
                 Id = m.Id,
                 Title = m.Title,
@@ -519,7 +519,7 @@ namespace BLL.Services.Implementations
             });
         }
 
-        public async Task<IEnumerable<MovieIndexVM>> GetMoviesByCategoryAsync(Guid categoryId)
+        public async Task<IEnumerable<MovieCharacterIndexVM>> GetMoviesByCategoryAsync(Guid categoryId)
         {
             var movies = await _movieRepo.Get(m =>
                 !m.IsDeleted &&
@@ -527,7 +527,7 @@ namespace BLL.Services.Implementations
                 .Include(m => m.Category)
                 .ToListAsync();
 
-            return movies.Select(m => new MovieIndexVM
+            return movies.Select(m => new MovieCharacterIndexVM
             {
                 Id = m.Id,
                 Title = m.Title,
