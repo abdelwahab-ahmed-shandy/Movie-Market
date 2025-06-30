@@ -1,62 +1,123 @@
 ﻿@{
     ViewData["Title"] = "Unauthorized";
-    Layout = "~/Areas/Customer/Views/Shared/_LayoutCustomer.cshtml";
+    Layout = "~/Areas/Identity/Views/Shared/_Layout.cshtml";
 }
 
 @section Styles {
     <style>
-        .error-page {
-            height: 100vh;
+        .unauthorized-container {
             display: flex;
+            justify-content: center;
             align-items: center;
-            background-color: #f8f9fa;
-        }
-
-        .error-card {
-            max-width: 600px;
-            margin: 0 auto;
+            min-height: calc(100vh - 200px);
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            background: white;
         }
 
-        .error-icon {
-            font-size: 4rem;
+        .unauthorized-card {
+            max-width: 650px;
+            width: 100%;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(33, 37, 41, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .unauthorized-icon {
+            font-size: 5rem;
             margin-bottom: 1.5rem;
+            color: var(--bs-warning);
+            animation: pulse 2s infinite;
         }
 
-        .error-actions {
+        .unauthorized-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--bs-warning);
+        }
+
+        .unauthorized-description {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .unauthorized-actions {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
             margin-top: 2rem;
+            flex-wrap: wrap;
         }
 
-        @@media (max-width: 576px) {
-            .error-actions {
-                flex-direction: column;
+        @@keyframes pulse {
+            0% {
+                transform: scale(1);
             }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .unauthorized-card {
+                padding: 2rem 1.5rem;
+                margin: 0 1rem;
+            }
+
+            .unauthorized-title {
+                font-size: 2rem;
+            }
+
+            .unauthorized-icon {
+                font-size: 4rem;
+            }
+
+            .unauthorized-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+                .unauthorized-actions .btn {
+                    width: 100%;
+                }
         }
     </style>
 }
 
+<div class="unauthorized-container">
+    <div class="unauthorized-card">
+        <div class="unauthorized-icon">
+            <i class="bi bi-shield-lock"></i>
+        </div>
+        <h1 class="unauthorized-title">401 - Unauthorized</h1>
+        <p class="unauthorized-description">
+            You need to be authenticated to access this resource.<br>
+            Please sign in or create an account to continue.
+        </p>
 
-<div class="error-card text-center">
-    <div class="error-icon text-warning">
-        <i class="fas fa-lock"></i>
-    </div>
-    <h1>401 - Unauthorized</h1>
-    <p class="lead">Please authenticate to access this resource.</p>
+        <div class="unauthorized-actions">
+            <a href="@Url.Action("Login", "Account", new { returnUrl = Context.Request.Path })"
+               class="btn btn-warning text-dark">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+            </a>
+            <a href="@Url.Action("Register", "Account", new { returnUrl = Context.Request.Path })"
+               class="btn btn-outline-warning">
+                <i class="bi bi-person-plus me-2"></i>Create Account
+            </a>
+        </div>
 
-    <div class="error-actions">
-        <a href="@Url.Action("Login", "Account", new { returnUrl = Context.Request.Path })"
-           class="btn btn-primary">
-            <i class="fas fa-sign-in-alt me-2"></i>Login
-        </a>
-        <a href="@Url.Action("Register", "Account")"
-           class="btn btn-success">
-            <i class="fas fa-user-plus me-2"></i>Register
-        </a>
+        <div class="mt-4 text-muted small">
+            <p>Don't have access? <a href="@Url.Action("Contact", "Support")" class="text-warning">Request access</a></p>
+        </div>
     </div>
 </div>

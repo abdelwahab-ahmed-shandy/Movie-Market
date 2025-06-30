@@ -1,65 +1,185 @@
 ﻿@{
     ViewData["Title"] = "Maintenance Mode";
-    Layout = "~/Areas/Customer/Views/Shared/_LayoutCustomer.cshtml";
+    Layout = "~/Areas/Identity/Views/Shared/_Layout.cshtml";
+    var estimatedCompletion = DateTime.Now.AddHours(2);
 }
 
 @section Styles {
     <style>
-        .error-page {
-            height: 100vh;
+        .maintenance-container {
             display: flex;
+            justify-content: center;
             align-items: center;
-            background-color: #f8f9fa;
-        }
-
-        .error-card {
-            max-width: 600px;
-            margin: 0 auto;
+            min-height: calc(100vh - 200px);
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            background: white;
         }
 
-        .error-icon {
-            font-size: 4rem;
+        .maintenance-card {
+            max-width: 650px;
+            width: 100%;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(33, 37, 41, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .maintenance-icon {
+            font-size: 5rem;
             margin-bottom: 1.5rem;
+            color: #4a90e2;
+            animation: pulse 2s infinite;
         }
 
-        .error-actions {
+        .maintenance-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #4a90e2;
+        }
+
+        .maintenance-description {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .progress-container {
+            margin: 2.5rem 0;
+        }
+
+        .progress-bar {
+            background-color: #4a90e2;
+        }
+
+        .time-estimate {
+            background: rgba(74, 144, 226, 0.15);
+            border: 1px solid #4a90e2;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .countdown {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4a90e2;
+            margin: 1rem 0;
+            font-family: monospace;
+        }
+
+        .maintenance-actions {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
             margin-top: 2rem;
         }
 
-        @@media (max-width: 576px) {
-            .error-actions {
+        @@keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .maintenance-card {
+                padding: 2rem 1.5rem;
+                margin: 0 1rem;
+            }
+
+            .maintenance-title {
+                font-size: 2rem;
+            }
+
+            .maintenance-icon {
+                font-size: 4rem;
+            }
+
+            .maintenance-actions {
                 flex-direction: column;
             }
+
+                .maintenance-actions .btn {
+                    width: 100%;
+                }
         }
     </style>
 }
 
-<div class="error-card text-center">
-    <div class="error-icon text-info">
-        <i class="fas fa-tools"></i>
-    </div>
-    <h1>Maintenance Mode</h1>
-    <p class="lead">We're performing scheduled maintenance. We'll be back soon!</p>
+<div class="maintenance-container">
+    <div class="maintenance-card">
+        <div class="maintenance-icon">
+            <i class="bi bi-tools"></i>
+        </div>
+        <h1 class="maintenance-title">Maintenance Mode</h1>
+        <p class="maintenance-description">
+            We're upgrading our systems to serve you better. <br>
+            The site will be available shortly with exciting new improvements!
+        </p>
 
-    <div class="progress my-4" style="height: 10px;">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
-    </div>
+        <div class="progress-container">
+            <div class="progress" style="height: 10px;">
+                <div class="progress-bar progress-bar-striped progress-bar-animated"
+                     style="width: 75%; background-color: #4a90e2;"></div>
+            </div>
+        </div>
 
-    <div class="alert alert-info text-start">
-        <h5><i class="fas fa-clock me-2"></i> Estimated Time</h5>
-        <p>We expect to be back online by @DateTime.Now.AddHours(2).ToString("f")</p>
-    </div>
+        <div class="time-estimate">
+            <h5><i class="bi bi-clock-history me-2"></i> Estimated Completion</h5>
+            <p class="mb-1">We expect to complete maintenance by:</p>
+            <div class="countdown" id="estimatedTime">
+                @estimatedCompletion.ToString("f")
+            </div>
+            <p class="small text-muted mt-2">Time remaining: <span id="countdown"></span></p>
+        </div>
 
-    <div class="error-actions">
-        <a href="javascript:location.reload()" class="btn btn-primary">
-            <i class="fas fa-sync-alt me-2"></i>Refresh
-        </a>
+        <div class="maintenance-actions">
+            <a href="javascript:location.reload()" class="btn btn-primary">
+                <i class="bi bi-arrow-clockwise me-2"></i> Check Status
+            </a>
+            <a href="mailto:support@moviemart.com" class="btn btn-outline-info">
+                <i class="bi bi-envelope me-2"></i> Contact Us
+            </a>
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        // Countdown to estimated completion time
+        const endTime = new Date("@estimatedCompletion.ToString("O")");
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = endTime - now;
+
+            if (diff <= 0) {
+                document.getElementById("countdown").innerHTML = "Maintenance should be complete now!";
+                return;
+            }
+
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                `${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        // Update every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+}

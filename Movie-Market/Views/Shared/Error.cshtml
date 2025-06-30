@@ -1,0 +1,124 @@
+﻿@model MovieMart.Models.ErrorViewModel
+@{
+    ViewData["Title"] = "Error " + Model.StatusCode;
+    Layout = "~/Areas/Identity/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <style>
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 200px);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .error-content {
+            max-width: 700px;
+            width: 100%;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(33, 37, 41, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .error-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--light-color);
+        }
+
+        .error-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 1.5rem;
+        }
+
+        .error-details {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1.5rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            word-break: break-word;
+        }
+
+        @@media (max-width: 768px) {
+            .error-content {
+                padding: 1.5rem;
+            }
+
+            .error-title {
+                font-size: 2rem;
+            }
+
+            .error-icon {
+                font-size: 3rem;
+            }
+        }
+    </style>
+}
+
+<div class="error-container">
+    <div class="error-content">
+        @switch (Model.StatusCode)
+        {
+            case 404:
+                <partial name="/Views/Shared/NotFound.cshtml" model="Model" />
+                break;
+            case 403:
+                <partial name="/Views/Shared/AccessDenied.cshtml" model="Model" />
+                break;
+            case 401:
+                <partial name="/Views/Shared/Unauthorized.cshtml" model="Model" />
+                break;
+            case 500:
+                <partial name="/Views/Shared/GenericError.cshtml" model="Model" />
+                break;
+            case 503:
+                <partial name="/Views/Shared/Maintenance.cshtml" model="Model" />
+                break;
+            case 202:
+                <partial name="/Views/Shared/ComingSoon.cshtml" model="Model" />
+                break;
+
+            // Default error template for other status codes
+            default:
+                <div class="error-icon">
+                    <i class="bi bi-exclamation-octagon-fill"></i>
+                </div>
+                <h1 class="error-title">Error @Model.StatusCode</h1>
+                <p class="error-description">An error occurred while processing your request.</p>
+
+                @if (Model.ShowRequestId)
+                {
+                    <div class="error-details">
+                        <p>Request ID: <code>@Model.RequestId</code></p>
+                        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                        {
+                            <p class="mt-2">Details: <code>@Model.ErrorMessage</code></p>
+                        }
+                    </div>
+                }
+                break;
+        }
+    </div>
+
+    <a href="/" class="btn btn-primary">
+        <i class="bi bi-house-door me-2"></i> Return Home
+    </a>
+</div>

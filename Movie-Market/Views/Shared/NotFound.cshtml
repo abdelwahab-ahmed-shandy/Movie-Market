@@ -1,68 +1,207 @@
 ﻿@{
     ViewData["Title"] = "Page Not Found";
-    Layout = "~/Areas/Customer/Views/Shared/_LayoutCustomer.cshtml";
+    Layout = "~/Areas/Identity/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8 text-center">
-            <div class="error-container p-5 rounded shadow">
-                <h1 class="display-1 text-primary mb-4">404</h1>
-                <h2 class="mb-4">Oops! Page Not Found</h2>
-                <p class="lead mb-4">
-                    @ViewBag.Message
-                </p>
+@section Styles {
+    <style>
+        .not-found-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 200px);
+            padding: 2rem;
+        }
 
-                <div class="d-flex justify-content-center gap-3 mb-4">
-                    <a href="/" class="btn btn-primary btn-lg px-4">
-                        <i class="fas fa-home me-2"></i>Go to Homepage
-                    </a>
-                    <a href="javascript:history.back()" class="btn btn-outline-primary btn-lg px-4">
-                        <i class="fas fa-arrow-left me-2"></i>Go Back
-                    </a>
-                </div>
+        .not-found-card {
+            max-width: 700px;
+            width: 100%;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(33, 37, 41, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
 
-                <div class="search-box mt-5">
-                    <form class="d-flex me-3 search-form" role="search" method="get" action="/Customer/Home/GlobalSearch">
-                        <div class="input-group">
-                            <input class="form-control search-input" type="search" placeholder="Search movies, series..."
-                                   aria-label="Search" id="globalSearch" name="query">
-                            <button class="btn btn-primary search-btn" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                        <div class="search-results dropdown-menu w-100 p-2 d-none"></div>
-                    </form>
+        .error-code {
+            font-size: 6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+        }
+
+        .error-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-color);
+        }
+
+        .error-message {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .search-form {
+            position: relative;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+            background: rgba(33, 37, 41, 0.98);
+            border: 1px solid rgba(108, 92, 231, 0.5);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .search-result-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .search-result-item:hover {
+                background: rgba(108, 92, 231, 0.2);
+            }
+
+        @@media (max-width: 768px) {
+            .not-found-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .error-code {
+                font-size: 4rem;
+            }
+
+            .error-title {
+                font-size: 2rem;
+            }
+
+            .error-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+                .error-actions .btn {
+                    width: 100%;
+                }
+        }
+    </style>
+}
+
+<div class="not-found-container">
+    <div class="not-found-card">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page Not Found</h1>
+        <p class="error-message">
+            @(ViewBag.Message ?? "The page you're looking for doesn't exist or has been moved.")
+        </p>
+
+        <div class="error-actions">
+            <a href="/" class="btn btn-primary btn-lg">
+                <i class="bi bi-house-door me-2"></i>Go to Homepage
+            </a>
+            <a href="javascript:history.back()" class="btn btn-outline-primary btn-lg">
+                <i class="bi bi-arrow-left me-2"></i>Go Back
+            </a>
+        </div>
+
+        <div class="search-container">
+            <form class="search-form" role="search" method="get" action="/Customer/Home/GlobalSearch">
+                <div class="input-group">
+                    <input class="form-control bg-dark text-white border-secondary"
+                           type="search"
+                           placeholder="Search movies, series..."
+                           aria-label="Search"
+                           id="globalSearch"
+                           name="query"
+                           autocomplete="off">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
                 </div>
-            </div>
+                <div class="search-results" id="searchResults"></div>
+            </form>
         </div>
     </div>
 </div>
 
-<style>
-    .error-container {
-        background-color: #f8f9fa;
-        border: 1px solid #dee2e6;
-    }
+@section Scripts {
+    <script>
+        // Live search functionality
+        const searchInput = document.getElementById('globalSearch');
+        const searchResults = document.getElementById('searchResults');
 
-    .display-1 {
-        font-weight: 700;
-        color: #0d6efd;
-    }
+        searchInput.addEventListener('input', async function() {
+            const query = this.value.trim();
 
-    .search-box {
-        max-width: 500px;
-        margin: 0 auto;
-    }
+            if (query.length < 2) {
+                searchResults.style.display = 'none';
+                return;
+            }
 
-    @@media (max-width: 576px) {
-        .d-flex {
-            flex-direction: column;
-            gap: 1rem !important;
-        }
+            try {
+                const response = await fetch(`/Customer/Home/SearchSuggestions?query=${encodeURIComponent(query)}`);
+                const results = await response.json();
 
-        .btn {
-            width: 100%;
-        }
-    }
-</style>
+                if (results.length > 0) {
+                    searchResults.innerHTML = results.map(item => `
+                        <div class="search-result-item" onclick="window.location.href='${item.url}'">
+                            <div class="d-flex align-items-center">
+                                <img src="${item.image}" alt="${item.title}"
+                                     style="width: 40px; height: 60px; object-fit: cover; margin-right: 10px;">
+                                <div>
+                                    <div class="text-truncate">${item.title}</div>
+                                    <small class="text-muted">${item.type}</small>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                    searchResults.style.display = 'block';
+                } else {
+                    searchResults.innerHTML = '<div class="search-result-item text-muted p-3">No results found</div>';
+                    searchResults.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Search error:', error);
+                searchResults.style.display = 'none';
+            }
+        });
+
+        // Hide results when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
+    </script>
+}

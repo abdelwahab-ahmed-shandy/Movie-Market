@@ -7,7 +7,6 @@ namespace Movie_Market.Areas.Identity.Controllers
 {
     [Area("Identity")]
     [Authorize]
-    [Route("Identity/Settings/[controller]")]
     public class ProfileController : BaseController
     {
         private readonly IProfileService _profileService;

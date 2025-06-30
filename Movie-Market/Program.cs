@@ -1,6 +1,7 @@
 using AutoMapper;
 using DAL.Repositories;
 using DAL.Repositories.IRepositories;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace Movie_Market
 {
@@ -13,7 +14,16 @@ namespace Movie_Market
 
 
             #region Add services to the container
-            builder.Services.AddControllersWithViews();
+
+            builder.Services.AddControllersWithViews()
+                .AddRazorOptions(options =>
+                {
+                    options.AreaViewLocationFormats.Add("/Areas/{2}/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
+                    options.AreaViewLocationFormats.Add("/Areas/{2}/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
+                    options.ViewLocationFormats.Add("/Views/{1}/{0}" + RazorViewEngine.ViewExtension);
+                    options.ViewLocationFormats.Add("/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
+                });
+
             #endregion
 
 
@@ -46,6 +56,7 @@ namespace Movie_Market
             builder.Services.AddScoped<ICharacterTvSeriesService, CharacterTvSeriesService>();
             builder.Services.AddScoped<IDashboardService, DashboardService>();
             builder.Services.AddScoped<IProfileService, ProfileService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
 
             builder.Services.AddScoped<ISearchService, SearchService>();
@@ -54,6 +65,45 @@ namespace Movie_Market
             builder.Services.AddScoped<ICartService, CartService>();
 
             builder.Services.AddMemoryCache();
+
+
+            #endregion
+
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.LoginPath = "/Identity/Account/Login";
+                options.LogoutPath = "/Identity/Account/Logout";
+            });
+
+
+
+            #region Permissions Policy
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("BlockUserPolicy", policy =>
+                    policy.RequireAssertion(context =>
+                    {
+                        var httpContext = context.Resource as HttpContext;
+                        var userId = httpContext.Request.RouteValues["id"]?.ToString();
+
+                        if (httpContext.User.Identity.Name == userId)
+                            return false;
+
+                        if (httpContext.User.IsInRole("SuperAdmin"))
+                            return true;
+
+                        var userService = httpContext.RequestServices.GetRequiredService<IUserService>();
+                        var user = userService.GetUserDetailsAsync(Guid.Parse(userId)).GetAwaiter().GetResult();
+
+                        return user?.UserType == "Customer";
+                    }));
+
+                options.AddPolicy("ChangeRolePolicy", policy =>
+                    policy.RequireRole("SuperAdmin"));
+            });
 
             #endregion
 
@@ -123,9 +173,19 @@ namespace Movie_Market
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseExceptionHandler("/GloubalUsing/Common/Error");
+                app.UseStatusCodePagesWithReExecute("/GloubalUsing/Common/Error", "?statusCode={0}");
+
                 app.UseHsts();
+
+                app.Use(async (context, next) =>
+                {
+                    await next();
+                    if (context.Response.StatusCode >= 400)
+                    {
+                        context.Items["originalPath"] = context.Request.Path;
+                    }
+                });
             }
 
 
@@ -142,28 +202,36 @@ namespace Movie_Market
 
             #region Setting up top-level routes
 
-            // Enable routing requests to the appropriate paths
             app.UseRouting();
 
-            // Route for the "Admin" area
             app.MapControllerRoute(
             name: "Admin",
             pattern: "{area:exists}/{controller=Home}/{action=Dashboard}/{id?}"
             );
 
-            // Route for the "Customer" area
             app.MapControllerRoute(
             name: "Customer",
             pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
             );
 
-            // Default Route
-            // If no area is specified, the area will be assumed to be "Customer"
+
             app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}",
             defaults: new { area = "Customer" }
             );
+
+            app.MapAreaControllerRoute(
+                name: "Identity",
+                areaName: "Identity",
+                pattern: "{controller=Account}/{action=Login}/{id?}");
+
+            app.MapAreaControllerRoute(
+                name: "GloubalUsing",
+                areaName: "GloubalUsing",
+                pattern: "GloubalUsing/{controller=Common}/{action=Error}/{id?}");
+
+            app.MapFallbackToController("NotFound", "Common", "GloubalUsing");
 
             #endregion
 

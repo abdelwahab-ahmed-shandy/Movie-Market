@@ -1,87 +1,163 @@
 ﻿@{
     ViewData["Title"] = "Coming Soon";
-    Layout = "~/Areas/Customer/Views/Shared/_LayoutCustomer.cshtml";
+    Layout = "~/Areas/Identity/Views/Shared/_Layout.cshtml";
 }
 
 @section Styles {
     <style>
-        .error-page {
-            height: 100vh;
+        .coming-soon-container {
             display: flex;
-            align-items: center;
-            background-color: #f8f9fa;
-        }
-
-        .error-card {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            background: white;
-        }
-
-        .error-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .error-actions {
-            display: flex;
-            gap: 1rem;
             justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+        }
+
+        .coming-soon-card {
+            max-width: 650px;
+            width: 100%;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(33, 37, 41, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .coming-soon-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            animation: pulse 2s infinite;
+        }
+
+        .coming-soon-card h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--light-color);
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .coming-soon-card p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2rem;
+        }
+
+        #countdown {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 2rem 0;
+            color: var(--secondary-color);
+            font-family: monospace;
+        }
+
+        .notify-box {
+            background: rgba(108, 92, 231, 0.15);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 1.5rem;
             margin-top: 2rem;
         }
 
-        @@media (max-width: 576px) {
-            .error-actions {
-                flex-direction: column;
+        .input-group {
+            margin-top: 1rem;
+        }
+
+        @@keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .coming-soon-card {
+                padding: 2rem 1.5rem;
+                margin: 0 1rem;
+            }
+
+                .coming-soon-card h1 {
+                    font-size: 2.2rem;
+                }
+
+            #countdown {
+                font-size: 1.5rem;
             }
         }
     </style>
 }
 
+<div class="coming-soon-container">
+    <div class="coming-soon-card">
+        <div class="coming-soon-icon">
+            <i class="bi bi-rocket-takeoff-fill"></i>
+        </div>
+        <h1>Coming Soon!</h1>
+        <p>We're working on something amazing. Stay tuned for the big reveal!</p>
 
-<div class="error-card text-center">
-    <div class="error-icon text-primary">
-        <i class="fas fa-rocket"></i>
-    </div>
-    <h1>Coming Soon!</h1>
-    <p class="lead">We're working on something awesome. Stay tuned!</p>
+        <div id="countdown" class="my-4"></div>
 
-    <div id="countdown" class="my-4" style="font-size: 1.5rem; font-weight: bold;"></div>
-
-    <div class="alert alert-primary">
-        <h5><i class="fas fa-bell me-2"></i> Notify Me</h5>
-        <div class="input-group">
-            <input type="email" class="form-control" placeholder="Your email address">
-            <button class="btn btn-primary" type="button">Subscribe</button>
+        <div class="notify-box">
+            <h5><i class="bi bi-bell-fill me-2"></i> Get Notified</h5>
+            <p class="small text-muted">We'll let you know when we launch</p>
+            <div class="input-group">
+                <input type="email" class="form-control bg-dark text-white"
+                       placeholder="Your email address" aria-label="Email address">
+                <button class="btn btn-primary" type="button">
+                    <i class="bi bi-envelope-arrow-up me-1"></i> Subscribe
+                </button>
+            </div>
         </div>
     </div>
 </div>
 
 @section Scripts {
     <script>
-        // Countdown to 7 days from now
+        // Countdown to 7 days from now with better formatting
         const countdownDate = new Date();
         countdownDate.setDate(countdownDate.getDate() + 7);
 
-        const timer = setInterval(function() {
+        function updateCountdown() {
             const now = new Date();
             const diff = countdownDate - now;
+
+            if (diff <= 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML =
+                    '<span class="text-success">Launching Now!</span>';
+                return;
+            }
 
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-            document.getElementById("countdown").innerHTML =
-                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            // Format with leading zeros
+            const format = (num) => num < 10 ? `0${num}` : num;
 
-            if (diff <= 0) {
-                clearInterval(timer);
-                document.getElementById("countdown").innerHTML = "Coming Any Moment Now!";
-            }
-        }, 1000);
+            document.getElementById("countdown").innerHTML =
+                `${format(days)} <small>days</small> ${format(hours)} <small>hours</small><br>
+                 ${format(minutes)} <small>minutes</small> ${format(seconds)} <small>seconds</small>`;
+        }
+
+        // Initial call
+        updateCountdown();
+
+        // Update every second
+        const timer = setInterval(updateCountdown, 1000);
     </script>
 }

@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace Movie_Market.GloubalUsing
 {
     public abstract class BaseController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-
         protected BaseController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
@@ -33,21 +31,24 @@ namespace Movie_Market.GloubalUsing
             return View("~/Views/Shared/NotFound.cshtml");
         }
 
-        protected IActionResult AccessDenied()
+        protected IActionResult AccessDenied(string returnUrl = null)
         {
             Response.StatusCode = 403;
+            ViewBag.ReturnUrl = returnUrl;
             return View("~/Views/Shared/AccessDenied.cshtml");
         }
 
-        protected IActionResult ServerError()
+        protected IActionResult ServerError(string? message = null)
         {
             Response.StatusCode = 500;
+            ViewBag.Message = message ?? "An unexpected error occurred.";
             return View("~/Views/Shared/GenericError.cshtml");
         }
 
-        protected IActionResult Unauthorized()
+        protected IActionResult Unauthorized(string? message = null)
         {
             Response.StatusCode = 401;
+            ViewBag.Message = message ?? "You need to authenticate to access this resource.";
             return View("~/Views/Shared/Unauthorized.cshtml");
         }
 
@@ -59,8 +60,24 @@ namespace Movie_Market.GloubalUsing
 
         protected IActionResult ComingSoon()
         {
-            Response.StatusCode = 202; // HTTP 202 Accepted for Coming Soon
+            Response.StatusCode = 202; 
             return View("~/Views/Shared/ComingSoon.cshtml");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Error(int statusCode)
+        {
+            var model = new ErrorViewModel
+            {
+                StatusCode = statusCode,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                OriginalPath = HttpContext.Items["originalPath"]?.ToString(),
+                ErrorMessage = statusCode == 500 ? "An internal server error occurred." : null
+            };
+
+
+            return View("~/Views/Shared/Error.cshtml", model);
         }
 
     }

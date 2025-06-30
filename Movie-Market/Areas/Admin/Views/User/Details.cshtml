@@ -1,0 +1,149 @@
+﻿@using DAL.ViewModels.User
+@model UserDetailsVM
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">User Details</h6>
+        <div>
+            @if (Model.AccountStatus == "Blocked")
+            {
+                <form asp-action="UnblockUser" method="post">
+                    <input type="hidden" name="userId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-success">Unblock User</button>
+                </form>
+            }
+            else
+            {
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#blockModal">
+                    Block User
+                </button>
+            }
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                @if (!string.IsNullOrEmpty(Model.ProfileImage))
+                {
+                    <img src="@Url.Content("~/" + Model.ProfileImage)" class="img-fluid rounded" alt="Profile Image" />
+                }
+                else
+                {
+                    <div class="text-center py-4 bg-light rounded">
+                        <i class="fas fa-user-circle fa-5x text-gray-300"></i>
+                    </div>
+                }
+            </div>
+            <div class="col-md-8">
+                <dl class="row">
+                    <dt class="col-sm-3">Full Name</dt>
+                    <dd class="col-sm-9">@Model.FullName</dd>
+
+                    <dt class="col-sm-3">Email</dt>
+                    <dd class="col-sm-9">@Model.Email</dd>
+
+                    <dt class="col-sm-3">User Type</dt>
+                    <dd class="col-sm-9">
+                        @if (Model.UserType == "SuperAdmin")
+                        {
+                            <span class="badge badge-danger">@Model.UserType</span>
+                        }
+                        else if (Model.UserType == "Admin")
+                        {
+                            <span class="badge badge-warning">@Model.UserType</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-primary">@Model.UserType</span>
+                        }
+                    </dd>
+
+                    <dt class="col-sm-3">Account Status</dt>
+                    <dd class="col-sm-9">@Model.AccountStatus</dd>
+
+                    <dt class="col-sm-3">Registration Date</dt>
+                    <dd class="col-sm-9">@Model.RegistrationDate.ToString("f")</dd>
+
+                    <dt class="col-sm-3">Last Login</dt>
+                    <dd class="col-sm-9">@(Model.LastLogin?.ToString("f") ?? "Never")</dd>
+
+                    @if (Model.BirthDay.HasValue)
+                    {
+                        <dt class="col-sm-3">Birth Date</dt>
+                        <dd class="col-sm-9">@Model.BirthDay.Value.ToString("d")</dd>
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.Address))
+                    {
+                        <dt class="col-sm-3">Address</dt>
+                        <dd class="col-sm-9">@Model.Address</dd>
+                    }
+
+                    @if (Model.AccountStatus == "Blocked" && !string.IsNullOrEmpty(Model.BlockReason))
+                    {
+                        <dt class="col-sm-3">Block Reason</dt>
+                        <dd class="col-sm-9">@Model.BlockReason</dd>
+                    }
+
+                    @if (User.IsInRole("SuperAdmin") && Model.AccountStatus != "Blocked")
+                    {
+                        <a asp-action="ChangeRole" asp-route-id="@Model.Id" class="btn btn-warning">
+                            Change Role
+                        </a>
+                    }
+
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Block Modal -->
+<div class="modal fade" id="blockModal" tabindex="-1" role="dialog" aria-labelledby="blockModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="blockModalLabel">Block User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="BlockUser" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="UserId" value="@Model.Id" />
+                    <div class="form-group">
+                        <label for="BlockReason">Reason for blocking:</label>
+                        <textarea class="form-control" id="BlockReason" name="BlockReason" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Confirm Block</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@* @section Scripts {
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var currentUserEmail = "@User.Identity.Name";
+        var userEmails = document.querySelectorAll('.user-email');
+
+        userEmails.forEach(function(emailElement) {
+            if (emailElement.textContent.trim() === currentUserEmail) {
+                var blockButton = document.querySelector('[data-target="#blockModal"]');
+                if (blockButton) {
+                    blockButton.disabled = true;
+                    blockButton.title = "You cannot block yourself";
+                }
+            }
+        });
+    });
+</script>
+} *@

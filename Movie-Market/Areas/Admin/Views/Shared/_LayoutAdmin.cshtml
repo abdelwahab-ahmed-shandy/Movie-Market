@@ -317,7 +317,7 @@
                             <div class="sb-sidenav-menu-heading">User Management</div>
                             @if (User.IsInRole("SuperAdmin"))
                             {
-                                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "SuperAdmins" ? "active" : "")" asp-area="Admin" asp-controller="SuperAdmins" asp-action="AllSuperAdmins">
+                                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "User" ? "active" : "")" asp-area="Admin" asp-controller="User" asp-action="SuperAdmins">
                                     <div class="sb-nav-link-icon">
                                         <i class="fas fa-crown text-warning"> </i>
 
@@ -325,13 +325,13 @@
                                     Super Admins
                                 </a>
 
-                                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Admins" ? "active" : "")" asp-area="Admin" asp-controller="Admins" asp-action="AllAdmins">
+                                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "User" ? "active" : "")" asp-area="Admin" asp-controller="User" asp-action="Admins">
                                     <div class="sb-nav-link-icon"><i class="fas fa-user-shield"></i></div>
                                     Admins
                                 </a>
                             }
 
-                            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Customers" ? "active" : "")" asp-area="Admin" asp-controller="Customers" asp-action="AllCustomers">
+                            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "User" ? "active" : "")" asp-area="Admin" asp-controller="User" asp-action="Customers">
                                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 Customers
                             </a>

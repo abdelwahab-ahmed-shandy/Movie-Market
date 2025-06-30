@@ -1,0 +1,50 @@
+﻿@using DAL.ViewModels.User
+@model List<UserIndexVM>
+@{
+    ViewData["Title"] = ViewData["Title"] ?? "Users Management";
+    var userType = ViewData["UserType"]?.ToString() ?? "Users";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">@userType List</h6>
+        <div>
+            <a asp-action="Admins" class="btn btn-outline-primary @(userType == "Admins" ? "active" : "")">Admins</a>
+            <a asp-action="SuperAdmins" class="btn btn-outline-primary @(userType == "Super Admins" ? "active" : "")">Super Admins</a>
+            <a asp-action="Customers" class="btn btn-outline-primary @(userType == "Customers" ? "active" : "")">Customers</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Registered</th>
+                        <th>Last Login</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.FullName</td>
+                            <td>@user.Email</td>
+                            <td>@user.UserType</td>
+                            <td>@user.AccountStatus</td>
+                            <td>@user.RegistrationDate.ToString("d")</td>
+                            <td>@(user.LastLogin?.ToString("d") ?? "Never")</td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@user.Id" class="btn btn-info btn-sm">Details</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

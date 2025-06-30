@@ -1,0 +1,57 @@
+﻿@using DAL.ViewModels.User
+@model ChangeUserRoleVM
+@{
+    ViewData["Title"] = "Change User Role";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Change User Role</h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="ChangeRole" method="post">
+            <input type="hidden" asp-for="UserId" />
+
+            <div class="form-group">
+                <label>Current Email:</label>
+                <input asp-for="CurrentEmail" class="form-control" readonly />
+            </div>
+
+            <div class="form-group">
+                <label>Current Role:</label>
+                <input asp-for="CurrentRole" class="form-control" readonly />
+            </div>
+
+            <div class="form-group">
+                <label>New Role:</label>
+                <select asp-for="NewRole" asp-items="Html.GetEnumSelectList<UserType>()"
+                        class="form-control" id="roleSelect">
+                    <option value="">-- Select Role --</option>
+                </select>
+                <span asp-validation-for="NewRole" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Role</button>
+            <a asp-action="Details" asp-route-id="@Model.UserId" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var isSuperAdmin = "@User.IsInRole("SuperAdmin")" === "True";
+            var roleSelect = document.getElementById('roleSelect');
+
+            if (!isSuperAdmin) {
+                var options = roleSelect.options;
+                for (var i = 0; i < options.length; i++) {
+                    if (options[i].text === "SuperAdmin") {
+                        options[i].disabled = true;
+                        break;
+                    }
+                }
+            }
+        });
+    </script>
+}

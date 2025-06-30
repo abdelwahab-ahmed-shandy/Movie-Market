@@ -86,9 +86,10 @@ namespace Movie_Market.Areas.Identity.Controllers
                     RegistrationDate = DateTime.UtcNow,
                     BirthDay = registerVM.BirthDay,
                     AccountStateType = AccountStateType.PendingActivation,
+                    UserType = UserType.Customer,
+                    IsActive = false,
+                    EmailConfirmed = false,
                     
-                    IsActive = true,
-                    EmailConfirmed = false
                 };
 
                 var newUser = await _userManager.CreateAsync(applicationUser, registerVM.Password);
@@ -470,6 +471,7 @@ namespace Movie_Market.Areas.Identity.Controllers
 
             var user = await _userManager.FindByIdAsync(userId);
 
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{userId}'.");
@@ -479,6 +481,11 @@ namespace Movie_Market.Areas.Identity.Controllers
 
             if (result.Succeeded)
             {
+                user.AccountStateType = AccountStateType.Active;
+                user.EmailConfirmed = true;
+                user.IsActive = true;
+                user.IsBlocked = false;
+
                 await _signInManager.SignInAsync(user, isPersistent: false);
 
                 TempData["notification"] = "Your email has been successfully confirmed! You have been automatically logged in.";
@@ -489,7 +496,42 @@ namespace Movie_Market.Areas.Identity.Controllers
 
             return View("Error");
         }
-        #endregion 
+        #endregion
+
+
+        #region Error Pages inhert in BaseController :
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied(string returnUrl = null)
+        {
+            Response.StatusCode = StatusCodes.Status403Forbidden;
+            ViewBag.ReturnUrl = returnUrl;
+            _logger.LogWarning($"Access denied for user {User.Identity?.Name} attempting to access {returnUrl}");
+            return View("~/Views/Shared/AccessDenied.cshtml");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult NotFound() => base.NotFound();
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Unauthorized() => base.Unauthorized();
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ServerError() => base.ServerError();
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Maintenance() => base.Maintenance();
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ComingSoon() => base.ComingSoon();
+
+        #endregion
 
 
     }
