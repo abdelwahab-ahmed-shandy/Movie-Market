@@ -45,7 +45,16 @@ Movie-Market/
 │ ├── Controllers/
 │ └── Views/
 │ └── GloubalUsing/               # GloubalUsing
-│
+│ └── Views/
+     └── Shared/
+|      ├── AccessDenied.cshtml
+|      ├── Error.cshtml
+|      ├── NotFound.cshtml
+|      ├── Unauthorized.cshtml
+|      ├── GenericError.cshtml
+|      ├── Maintenance.cshtml
+|      └── ComingSoon.cshtml
+|
 ├── 📂 Business Logic Layer (BLL) # Business logic (services, rules, transformations)
 │ ├── Services/
 │ │ ├── Interfaces/                # Service interfaces
