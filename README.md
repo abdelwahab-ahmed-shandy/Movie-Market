@@ -44,7 +44,8 @@ Movie-Market/
 │ └── Identity/                   # Login and registration
 │ ├── Controllers/
 │ └── Views/
-│ └── GloubalUsing/               # GloubalUsing
+│ └── GloubalUsing/              # GloubalUsing
+|     └── BaseController.cs
 │ └── Views/
 |    └── Shared/
 |      ├── AccessDenied.cshtml
@@ -60,6 +61,7 @@ Movie-Market/
 │ │ ├── Interfaces/                # Service interfaces
 │ │ └── Implementations/           # Service implementations
 │ ├── Utilities/                   # Any logic-specific helper functions
+|      └── PaginatedList.cs
 │ └── GloubalUsing/                # GloubalUsing
 │
 ├── 📂 Data Access Layer (DAL)    # Data access layer
