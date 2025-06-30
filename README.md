@@ -46,7 +46,7 @@ Movie-Market/
 │ └── Views/
 │ └── GloubalUsing/               # GloubalUsing
 │ └── Views/
-     └── Shared/
+|    └── Shared/
 |      ├── AccessDenied.cshtml
 |      ├── Error.cshtml
 |      ├── NotFound.cshtml
