@@ -1,50 +1,271 @@
-﻿@using DAL.ViewModels.User
-@model List<UserIndexVM>
+﻿@using BLL.Utilities
+@using DAL.ViewModels.User
+@model PaginatedList<DAL.ViewModels.User.UserIndexVM>
 @{
     ViewData["Title"] = ViewData["Title"] ?? "Users Management";
     var userType = ViewData["UserType"]?.ToString() ?? "Users";
+    var searchTerm = ViewData["Search"]?.ToString();
 }
 
 <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <h6 class="m-0 font-weight-bold text-primary">@userType List</h6>
-        <div>
-            <a asp-action="Admins" class="btn btn-outline-primary @(userType == "Admins" ? "active" : "")">Admins</a>
-            <a asp-action="SuperAdmins" class="btn btn-outline-primary @(userType == "Super Admins" ? "active" : "")">Super Admins</a>
-            <a asp-action="Customers" class="btn btn-outline-primary @(userType == "Customers" ? "active" : "")">Customers</a>
+    <div class="card-header py-3 d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">@userType Management</h6>
+        <div class="mt-2 mt-md-0">
+            <div class="btn-group" role="group">
+                <a asp-action="Admins" class="btn btn-outline-primary @(userType == "Admins" ? "active" : "")">Admins</a>
+                <a asp-action="SuperAdmins" class="btn btn-outline-primary @(userType == "Super Admins" ? "active" : "")">Super Admins</a>
+                <a asp-action="Customers" class="btn btn-outline-primary @(userType == "Customers" ? "active" : "")">Customers</a>
+            </div>
         </div>
     </div>
+
     <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form method="get" class="form-inline">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search by name or email"
+                               value="@searchTerm" />
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                            @if (!string.IsNullOrEmpty(searchTerm))
+                            {
+                                <a asp-action="@ViewContext.RouteData.Values["Action"]" class="btn btn-outline-secondary">
+                                    <i class="fas fa-times"></i> Clear
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 text-md-right mt-2 mt-md-0">
+                <span class="text-muted">Total @userType.ToLower(): @Model.TotalCount</span>
+            </div>
+        </div>
+
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
+            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <thead class="thead-light">
                     <tr>
-                        <th>Name</th>
+                        <th>
+                            <a asp-action="@ViewContext.RouteData.Values["Action"]"
+                               asp-route-sortOrder="@ViewData["NameSortParam"]"
+                               asp-route-search="@searchTerm">
+                                Name
+                                @if (ViewData["CurrentSort"]?.ToString() == "name_desc")
+                                {
+                                    <i class="fas fa-sort-down"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-sort-up"></i>
+                                }
+                            </a>
+                        </th>
                         <th>Email</th>
                         <th>Type</th>
                         <th>Status</th>
-                        <th>Registered</th>
+                        <th>
+                            <a asp-action="@ViewContext.RouteData.Values["Action"]"
+                               asp-route-sortOrder="@ViewData["DateSortParam"]"
+                               asp-route-search="@searchTerm">
+                                Registered
+                                @if (ViewData["CurrentSort"]?.ToString() == "date_desc")
+                                {
+                                    <i class="fas fa-sort-down"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-sort-up"></i>
+                                }
+                            </a>
+                        </th>
                         <th>Last Login</th>
-                        <th>Actions</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var user in Model)
+                    @if (Model.Any())
+                    {
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.FullName</td>
+                                <td>@user.Email</td>
+                                <td>
+                                    <span class="badge badge-@(user.UserType == "Admin" ? "warning" : user.UserType == "Super Admin" ? "danger" : "info")">
+                                        @user.UserType
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-@(user.AccountStatus == "Active" ? "success" : "secondary")">
+                                        @user.AccountStatus
+                                    </span>
+                                </td>
+                                <td>@user.RegistrationDate.ToString("d")</td>
+                                <td>@(user.LastLogin?.ToString("g") ?? "Never")</td>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Details" asp-route-id="@user.Id"
+                                           class="btn btn-sm btn-info" title="Details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@user.Id"
+                                           class="btn btn-sm btn-primary" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button class="btn btn-sm btn-danger" title="Deactivate"
+                                                onclick="confirmDeactivate('@user.Id', '@user.FullName')">
+                                            <i class="fas fa-user-slash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
                     {
                         <tr>
-                            <td>@user.FullName</td>
-                            <td>@user.Email</td>
-                            <td>@user.UserType</td>
-                            <td>@user.AccountStatus</td>
-                            <td>@user.RegistrationDate.ToString("d")</td>
-                            <td>@(user.LastLogin?.ToString("d") ?? "Never")</td>
-                            <td>
-                                <a asp-action="Details" asp-route-id="@user.Id" class="btn btn-info btn-sm">Details</a>
-                            </td>
+                            <td colspan="7" class="text-center">No @userType.ToLower() found</td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
+
+        <!-- Pagination -->
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <p class="text-muted">
+                    Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalCount entries
+                    @if (!string.IsNullOrEmpty(searchTerm))
+                    {
+                        <span>(filtered from @Model.Count total)</span>
+                    }
+                </p>
+            </div>
+            <div class="col-md-6">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-end mb-0">
+                        <li class="page-item @(!Model.HasPreviousPage ? "disabled" : "")">
+                            <a class="page-link"
+                               asp-action="@ViewContext.RouteData.Values["Action"]"
+                               asp-route-page="1"
+                               asp-route-search="@searchTerm"
+                               asp-route-sortOrder="@ViewData["CurrentSort"]">
+                                <i class="fas fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item @(!Model.HasPreviousPage ? "disabled" : "")">
+                            <a class="page-link"
+                               asp-action="@ViewContext.RouteData.Values["Action"]"
+                               asp-route-page="@(Model.PageIndex - 1)"
+                               asp-route-search="@searchTerm"
+                               asp-route-sortOrder="@ViewData["CurrentSort"]">
+                                <i class="fas fa-angle-left"></i>
+                            </a>
+                        </li>
+
+                        @{
+                            int startPage = Math.Max(1, Model.PageIndex - 2);
+                            int endPage = Math.Min(Model.TotalPages, Model.PageIndex + 2);
+
+                            if (startPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       asp-action="@ViewContext.RouteData.Values["Action"]"
+                                       asp-route-page="1"
+                                       asp-route-search="@searchTerm"
+                                       asp-route-sortOrder="@ViewData["CurrentSort"]">
+                                        1
+                                    </a>
+                                </li>
+                                if (startPage > 2)
+                                {
+                                    <li class="page-item disabled">
+                                        <span class="page-link">...</span>
+                                    </li>
+                                }
+                            }
+
+                            for (var i = startPage; i <= endPage; i++)
+                            {
+                                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                                    <a class="page-link"
+                                       asp-action="@ViewContext.RouteData.Values["Action"]"
+                                       asp-route-page="@i"
+                                       asp-route-search="@searchTerm"
+                                       asp-route-sortOrder="@ViewData["CurrentSort"]">
+                                        @i
+                                    </a>
+                                </li>
+                            }
+
+                            if (endPage < Model.TotalPages)
+                            {
+                                if (endPage < Model.TotalPages - 1)
+                                {
+                                    <li class="page-item disabled">
+                                        <span class="page-link">...</span>
+                                    </li>
+                                }
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       asp-action="@ViewContext.RouteData.Values["Action"]"
+                                       asp-route-page="@Model.TotalPages"
+                                       asp-route-search="@searchTerm"
+                                       asp-route-sortOrder="@ViewData["CurrentSort"]">
+                                        @Model.TotalPages
+                                    </a>
+                                </li>
+                            }
+                        }
+
+                        <li class="page-item @(!Model.HasNextPage ? "disabled" : "")">
+                            <a class="page-link"
+                               asp-action="@ViewContext.RouteData.Values["Action"]"
+                               asp-route-page="@(Model.PageIndex + 1)"
+                               asp-route-search="@searchTerm"
+                               asp-route-sortOrder="@ViewData["CurrentSort"]">
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="page-item @(!Model.HasNextPage ? "disabled" : "")">
+                            <a class="page-link"
+                               asp-action="@ViewContext.RouteData.Values["Action"]"
+                               asp-route-page="@Model.TotalPages"
+                               asp-route-search="@searchTerm"
+                               asp-route-sortOrder="@ViewData["CurrentSort"]">
+                                <i class="fas fa-angle-double-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        function confirmDeactivate(userId, userName) {
+            Swal.fire({
+                title: 'Confirm Deactivation',
+                html: `Are you sure you want to deactivate <b>${userName}</b>?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, deactivate!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Add your deactivation logic here
+                    window.location.href = `@Url.Action("Deactivate", "Users")/${userId}`;
+                }
+            });
+        }
+    </script>
+}

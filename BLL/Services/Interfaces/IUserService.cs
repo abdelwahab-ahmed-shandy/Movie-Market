@@ -9,14 +9,18 @@ namespace BLL.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<List<UserIndexVM>> GetAllUsersAsync();
-        Task<List<UserIndexVM>> GetAdminsAsync();
-        Task<List<UserIndexVM>> GetSuperAdminsAsync();
-        Task<List<UserIndexVM>> GetCustomersAsync();
+        Task<PaginatedList<UserIndexVM>> GetAllUsersAsync(int pageIndex = 1, string search = null);
+            
+        Task<PaginatedList<UserIndexVM>> GetAdminsAsync(int pageIndex = 1, int pageSize = 10 , string search = null);
+
+        Task<PaginatedList<UserIndexVM>> GetSuperAdminsAsync(int pageIndex = 1, int pageSize = 10, string search = null);
+        
+        Task<PaginatedList<UserIndexVM>> GetCustomersAsync(int pageIndex = 1, int pageSize = 10, string search = null);
 
         Task<UserDetailsVM> GetUserDetailsAsync(Guid id);
         Task BlockUserAsync(Guid userId, string blockReason, string blockedBy);
         Task UnblockUserAsync(Guid userId, string unblockedBy);
+
 
         Task ChangeUserRoleAsync(ChangeUserRoleVM model, string changedBy);
         Task<ChangeUserRoleVM> GetUserRoleInfoAsync(Guid userId);

@@ -11,6 +11,6 @@ namespace DAL.ViewModels.User
         public Guid UserId { get; set; }
         public string CurrentEmail { get; set; }
         public string CurrentRole { get; set; }
-        public UserType NewRole { get; set; }
+        public string NewRole { get; set; }
     }
 }

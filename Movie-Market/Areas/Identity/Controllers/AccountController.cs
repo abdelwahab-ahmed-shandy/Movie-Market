@@ -50,7 +50,7 @@ namespace Movie_Market.Areas.Identity.Controllers
         [HttpGet]
         public async Task<IActionResult> Register()
         {
-            if (_roleManager.Roles.IsNullOrEmpty())
+            if (!await _roleManager.RoleExistsAsync("SuperAdmin"))
             {
                 await _roleManager.CreateAsync(role: new IdentityRole<Guid>("SuperAdmin"));
                 await _roleManager.CreateAsync(role: new IdentityRole<Guid>("Admin"));
@@ -85,8 +85,7 @@ namespace Movie_Market.Areas.Identity.Controllers
                     Email = registerVM.Email,
                     RegistrationDate = DateTime.UtcNow,
                     BirthDay = registerVM.BirthDay,
-                    AccountStateType = AccountStateType.PendingActivation,
-                    UserType = UserType.Customer,
+                    AccountStateType = AccountStateType.Active,
                     IsActive = false,
                     EmailConfirmed = false,
                     
@@ -96,6 +95,8 @@ namespace Movie_Market.Areas.Identity.Controllers
 
                 if (newUser.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(applicationUser, "Customer");
+
                     var userId = applicationUser.Id;
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
                     var returnUrl = Url.Content("~/");
@@ -105,7 +106,7 @@ namespace Movie_Market.Areas.Identity.Controllers
                     protocol: Request.Scheme );
 
                     await _emailService.SendEmailAsync(registerVM.Email, "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    $"MovieMart : Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
 
                     TempData["notification"] = "Registration successful! Please check your email to verify your account.";
@@ -175,7 +176,7 @@ namespace Movie_Market.Areas.Identity.Controllers
                     return View(loginVM);
                 }
 
-                var result = await _signInManager.PasswordSignInAsync(user.UserName!, loginVM.Password, loginVM.RememberMe,lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(user.UserName!, loginVM.Password, loginVM.RememberMe,lockoutOnFailure: true);
 
                 if (result.Succeeded)
                 {
@@ -183,19 +184,19 @@ namespace Movie_Market.Areas.Identity.Controllers
                     await _userManager.UpdateAsync(user);
 
                     var roles = await _userManager.GetRolesAsync(user);
-
-                    if (await _userManager.IsInRoleAsync(user, "Admin") ||
-                        await _userManager.IsInRoleAsync(user, "SuperAdmin"))
-                    {
+                    if (roles.Contains("Admin") || roles.Contains("SuperAdmin"))
                         return RedirectToAction("Index", "Home", new { area = "Admin" });
-                    }
-                    else 
-                    {
+                    else
                         return RedirectToAction("Index", "Home", new { area = "Customer" });
-                    }
                 }
-
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                else if (result.IsLockedOut)
+                {
+                    ModelState.AddModelError(string.Empty, "Your account is temporarily locked due to multiple failed login attempts. Please try again later.");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                }
             }
             return View(loginVM);
         }
@@ -234,26 +235,25 @@ namespace Movie_Market.Areas.Identity.Controllers
             }
 
             var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user == null)
+
+
+            if (user != null && user.EmailConfirmed)
             {
-                TempData["notification"] = "If your email is registered, you'll receive a password reset link";
-                TempData["MessageType"] = "info";
-                return RedirectToAction(nameof(ForgetPasswordConfirmation));
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var callbackUrl = Url.Action("ResetPassword", "Account",
+                    new { email = model.Email, token = token }, protocol: Request.Scheme);
+
+                await _emailService.SendEmailAsync(
+                    model.Email,
+                    "Reset your MovieMart password",
+                    $"Please reset your password by <a href='{callbackUrl}'>clicking here</a>.");
             }
 
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-            var callbackUrl = Url.Action("ResetPassword", "Account",
-                new { email = model.Email, token = token }, protocol: HttpContext.Request.Scheme);
-
-            await _emailService.SendEmailAsync(
-                model.Email,
-                "Reset your MovieMart password",
-                $"Please reset your password by <a href='{callbackUrl}'>clicking here</a>.");
-
-            TempData["notification"] = "Password reset link has been sent to your email";
-            TempData["MessageType"] = "success";
+            TempData["notification"] = "If your email is registered, you'll receive a password reset link.";
+            TempData["MessageType"] = "info";
+            
             return RedirectToAction(nameof(ForgetPasswordConfirmation));
+
         }
 
         #endregion
@@ -420,20 +420,27 @@ namespace Movie_Market.Areas.Identity.Controllers
 
             user = new ApplicationUser
             {
-                UserName = email,
+                UserName = $"{email.Split('@')[0]}_{Guid.NewGuid().ToString().Substring(0, 6)}",
                 Email = email,
                 EmailConfirmed = true,
                 RegistrationDate = DateTime.UtcNow,
                 AccountStateType = AccountStateType.Active,
-                FirstName = info.Principal.FindFirstValue(ClaimTypes.GivenName),
-                LastName = info.Principal.FindFirstValue(ClaimTypes.Surname),
+                FirstName = info.Principal.FindFirstValue(ClaimTypes.GivenName) ?? "Google",
+                LastName = info.Principal.FindFirstValue(ClaimTypes.Surname) ?? "User",
                 Address = info.Principal.FindFirstValue(ClaimTypes.StreetAddress),
-                IsBlocked = false
+                IsBlocked = false,
+                IsActive = true
             };
+
 
             var createResult = await _userManager.CreateAsync(user);
             if (createResult.Succeeded)
             {
+                if (!await _roleManager.RoleExistsAsync("Customer"))
+                    await _roleManager.CreateAsync(new IdentityRole<Guid>("Customer"));
+
+                await _userManager.AddToRoleAsync(user, "Customer");
+
                 var addLoginResult = await _userManager.AddLoginAsync(user, info);
                 if (addLoginResult.Succeeded)
                 {
@@ -444,11 +451,6 @@ namespace Movie_Market.Areas.Identity.Controllers
                 }
 
                 TempData["notification"] = "Account created, but Google account linking failed.";
-                TempData["MessageType"] = "error";
-            }
-            else
-            {
-                TempData["notification"] = "Account creation failed.";
                 TempData["MessageType"] = "error";
                 foreach (var error in createResult.Errors)
                     ModelState.AddModelError(string.Empty, error.Description);
@@ -491,7 +493,7 @@ namespace Movie_Market.Areas.Identity.Controllers
                 TempData["notification"] = "Your email has been successfully confirmed! You have been automatically logged in.";
                 TempData["MessageType"] = "Success";
 
-                return RedirectToAction("Profile", "Settings", new { area = "Identity" });
+                return RedirectToAction("Index", "Profile", new { area = "Identity" });
             }
 
             return View("Error");

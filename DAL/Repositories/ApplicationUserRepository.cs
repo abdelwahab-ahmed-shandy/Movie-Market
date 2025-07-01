@@ -32,6 +32,11 @@ namespace DAL.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public IQueryable<ApplicationUser> GetAll()
+        {
+            return _context.Users.AsNoTracking();
+        }
+
         public async Task<List<ApplicationUser>> GetAllAsync()
         {
             return await _context.Users.AsTracking().ToListAsync();

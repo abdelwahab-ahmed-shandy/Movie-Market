@@ -27,12 +27,21 @@ namespace Movie_Market
             #endregion
 
 
-
             #region Register ApplicationDbContext with Dependency Injection 
             // Configured to use SQL Server with the connection string from app settings.
             builder.Services.AddDbContext<ApplicationdbContext>(option =>
                         option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            #endregion
+
+
+            #region Locked Out
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+            });
             #endregion
 
 
@@ -76,7 +85,6 @@ namespace Movie_Market
                 options.LoginPath = "/Identity/Account/Login";
                 options.LogoutPath = "/Identity/Account/Logout";
             });
-
 
 
             #region Permissions Policy
@@ -133,7 +141,6 @@ namespace Movie_Market
             #endregion
 
 
-
             #region Authentication Configuration
 
             builder.Services.AddAuthentication(options =>
@@ -158,12 +165,10 @@ namespace Movie_Market
             #endregion
 
 
-
             #region Confige Stripe Setting
             //builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
             //StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
             #endregion
-
 
 
             #region Configure the HTTP request 
@@ -196,8 +201,6 @@ namespace Movie_Market
             app.UseAuthorization();
 
             #endregion
-
-
 
 
             #region Setting up top-level routes
@@ -234,8 +237,6 @@ namespace Movie_Market
             app.MapFallbackToController("NotFound", "Common", "GloubalUsing");
 
             #endregion
-
-
 
 
             app.Run();

@@ -15,39 +15,41 @@ namespace Movie_Market.Areas.Admin.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, string search = null)
         {
-            var users = await _userService.GetAllUsersAsync();
+            var users = await _userService.GetAllUsersAsync(page, search);
+            ViewData["Search"] = search;
             return View(users);
         }
 
-
-        public async Task<IActionResult> Admins()
+        [Authorize(Roles = "SuperAdmin")]
+        public async Task<IActionResult> Admins(int page = 1, string search = null)
         {
-            var admins = await _userService.GetAdminsAsync();
+            var admins = await _userService.GetAdminsAsync(page, 10, search);
             ViewData["Title"] = "Admins Management";
             ViewData["UserType"] = "Admins";
+            ViewData["Search"] = search;
             return View("Index", admins);
         }
 
-
-        public async Task<IActionResult> SuperAdmins()
+        [Authorize(Roles = "SuperAdmin")]
+        public async Task<IActionResult> SuperAdmins(int page = 1, string search = null)
         {
-            var superAdmins = await _userService.GetSuperAdminsAsync();
+            var superAdmins = await _userService.GetSuperAdminsAsync(page, 10, search);
             ViewData["Title"] = "Super Admins Management";
             ViewData["UserType"] = "Super Admins";
+            ViewData["Search"] = search;
             return View("Index", superAdmins);
         }
 
-
-        public async Task<IActionResult> Customers()
+        public async Task<IActionResult> Customers(int page = 1, string search = null)
         {
-            var customers = await _userService.GetCustomersAsync();
+            var customers = await _userService.GetCustomersAsync(page, 10, search);
             ViewData["Title"] = "Customers Management";
             ViewData["UserType"] = "Customers";
+            ViewData["Search"] = search;
             return View("Index", customers);
         }
-
 
         public async Task<IActionResult> Details(Guid id)
         {

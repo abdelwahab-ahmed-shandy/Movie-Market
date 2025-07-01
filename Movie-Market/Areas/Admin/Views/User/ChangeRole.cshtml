@@ -24,11 +24,11 @@
 
             <div class="form-group">
                 <label>New Role:</label>
-                <select asp-for="NewRole" asp-items="Html.GetEnumSelectList<UserType>()"
-                        class="form-control" id="roleSelect">
-                    <option value="">-- Select Role --</option>
+                <select asp-for="NewRole" class="form-control" id="roleSelect">
+                    <option value="Customer">Customer</option>
+                    <option value="Admin">Admin</option>
+                    <option value="SuperAdmin">SuperAdmin</option>
                 </select>
-                <span asp-validation-for="NewRole" class="text-danger"></span>
             </div>
 
             <button type="submit" class="btn btn-primary">Update Role</button>
