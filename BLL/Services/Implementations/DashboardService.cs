@@ -121,7 +121,7 @@ namespace BLL.Services.Implementations
 
 
                 // Movies
-                RecentMovies = await _movieRepo.Get(m => !m.IsDeleted)
+                RecentMovies = await _movieRepo.Get(m => !m.IsDeleted && m.CurrentState == CurrentState.Active)
                     .OrderByDescending(m => m.CreatedDateUtc)
                     .Take(6)
                     .ToListAsync(),
@@ -132,30 +132,30 @@ namespace BLL.Services.Implementations
                         .Take(6)
                         .ToListAsync(),
 
-                TopRated = await _movieRepo.Get(m => !m.IsDeleted)
+                TopRated = await _movieRepo.Get(m => !m.IsDeleted && m.CurrentState == CurrentState.Active)
                     .OrderByDescending(m => m.Rating)
                     .Take(6)
                     .ToListAsync(),
 
                 // Cinemas
-                RecentCinemas = await _cinemaRepo.Get(c => !c.IsDeleted)
+                RecentCinemas = await _cinemaRepo.Get(c => !c.IsDeleted && c.CurrentState == CurrentState.Active)
                     .OrderByDescending(c => c.CreatedDateUtc)
                     .Take(6)
                     .ToListAsync(),
 
                 // TV Series
-                RecentTvSeries = await _tvSeriesRepo.Get(t => !t.IsDeleted)
+                RecentTvSeries = await _tvSeriesRepo.Get(t => !t.IsDeleted && t.CurrentState == CurrentState.Active)
                     .OrderByDescending(t => t.CreatedDateUtc)
                     .Take(6)
                     .ToListAsync(),
 
-                PopularSeries = await _tvSeriesRepo.Get(t => !t.IsDeleted)
+                PopularSeries = await _tvSeriesRepo.Get(t => !t.IsDeleted && t.CurrentState == CurrentState.Active)
                     .OrderByDescending(t => t.Rating)
                     .Take(6)
                     .ToListAsync(),
 
                 // Categories
-                MovieCategories = await _categoryRepo.GetAll()
+                MovieCategories = await _categoryRepo.GetAll().Where(e => !e.IsDeleted && e.CurrentState == CurrentState.Active)
                     .OrderBy(c => c.Name)
                     .Take(8)
                     .ToListAsync()

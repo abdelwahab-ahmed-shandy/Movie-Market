@@ -22,7 +22,7 @@ namespace Movie_Market.Areas.Customer.Controllers
 
         public async Task<IActionResult> Details(Guid id)
         {
-            var season = await _seasonService.GetSeasonDetailsAsync(id);
+            var season = await _seasonService.GetSeasonWithDetailsAsync(id);
             if (season == null)
             {
                 return NotFound();
