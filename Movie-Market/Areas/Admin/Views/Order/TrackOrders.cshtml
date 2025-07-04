@@ -30,7 +30,7 @@
                             <tr>
                                 <td>@order.Id.ToString().Substring(0, 8)</td>
                                 <td>@order.ApplicationUser?.FirstName @order.ApplicationUser?.LastName</td>
-                                <td>@order.UpdatedDateUtc?.ToString("g")</td>
+                                <td>@order.CreatedDateUtc.ToString("g")</td>
                                 <td>@order.Carrier</td>
                                 <td>@order.TrackingNumber</td>
                                 <td>

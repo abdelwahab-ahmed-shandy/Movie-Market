@@ -53,7 +53,8 @@
                                     <h5>@item.Movie.Title</h5>
                                     <div class="item-meta">
                                         <span class="cinema">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Cinema
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            @item.Movie.CinemaMovies.FirstOrDefault()?.Cinema?.Name
                                         </span>
                                         
                                     </div>
@@ -79,7 +80,7 @@
                             </a>
                             @if (order.Status == OrderStatus.Completed)
                             {
-                                <button class="btn-reorder">
+                                <button class="btn-reorder" data-order-id="@order.Id">
                                     <i class="fas fa-redo me-2"></i>Reorder
                                 </button>
                             }
@@ -406,5 +407,71 @@
                 }, 100);
             });
         });
+
+                document.addEventListener('DOMContentLoaded', function() {
+            // Animation for order cards
+            const orderCards = document.querySelectorAll('.order-card');
+            orderCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `all 0.3s ease ${index * 0.1}s`;
+
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            });
+
+            // Reorder functionality
+            document.querySelectorAll('.btn-reorder').forEach(button => {
+                button.addEventListener('click', function() {
+                    const orderId = this.getAttribute('data-order-id');
+                    reorderOrder(orderId);
+                });
+            });
+
+            async function reorderOrder(orderId) {
+                try {
+                    // Show loading indicator
+                    const button = document.querySelector(`.btn-reorder[data-order-id="${orderId}"]`);
+                    const originalText = button.innerHTML;
+                    button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+                    button.disabled = true;
+
+                    // Send request to server
+                    const response = await fetch(`/Customer/Order/Reorder/${orderId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                        }
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.success) {
+                            // Show success message
+                            toastr.success('Order has been recreated successfully!', 'Success');
+
+                            // Redirect to new order or refresh page
+                            window.location.href = `/Customer/Order/OrderDetails/${result.newOrderId}`;
+                        } else {
+                            toastr.error(result.message || 'Failed to reorder', 'Error');
+                        }
+                    } else {
+                        toastr.error('Failed to process reorder request', 'Error');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    toastr.error('An error occurred while processing your request', 'Error');
+                } finally {
+                    if (button) {
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                    }
+                }
+            }
+        });
+
     </script>
 }

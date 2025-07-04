@@ -18,7 +18,6 @@ namespace DAL.ViewModels.Category
         [Display(Name = "Status")]
         public CurrentState CurrentState { get; set; }
 
-        [Display(Name = "Category Icon")]
         [DataType(DataType.Upload)]
         public IFormFile IconFile { get; set; }
     }

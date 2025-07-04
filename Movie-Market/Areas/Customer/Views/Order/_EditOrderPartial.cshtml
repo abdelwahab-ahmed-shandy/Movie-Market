@@ -1,0 +1,38 @@
+﻿@model Order
+
+<form id="editOrderForm">
+    @Html.AntiForgeryToken()
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Movie</th>
+                    <th>Current Quantity</th>
+                    <th>New Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var orderItemsList = Model.OrderItems.ToList();
+                }
+                @for (int i = 0; i < orderItemsList.Count; i++)
+                {
+                    <tr data-itemid="@orderItemsList[i].Id">
+                        <td>
+                            <input type="hidden" class="item-id" value="@orderItemsList[i].Id" />
+                            <input type="hidden" class="movie-id" value="@orderItemsList[i].MovieId" />
+                            @orderItemsList[i].Movie.Title
+                        </td>
+                        <td>@orderItemsList[i].Count</td>
+                        <td>
+                            <input type="number" class="form-control quantity-input"
+                                   value="@orderItemsList[i].Count"
+                                   min="1" max="10" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>
+

@@ -18,8 +18,8 @@ namespace BLL.Services.Interfaces
         Task<PaginatedList<UserIndexVM>> GetCustomersAsync(int pageIndex = 1, int pageSize = 10, string search = null);
 
         Task<UserDetailsVM> GetUserDetailsAsync(Guid id);
-        Task BlockUserAsync(Guid userId, string blockReason, string blockedBy);
-        Task UnblockUserAsync(Guid userId, string unblockedBy);
+        Task BlockUserAsync(Guid userId, string blockReason);
+        Task UnblockUserAsync(Guid userId);
 
 
         Task ChangeUserRoleAsync(ChangeUserRoleVM model, string changedBy);

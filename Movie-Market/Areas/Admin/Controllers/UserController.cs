@@ -71,11 +71,7 @@ namespace Movie_Market.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    await _userService.BlockUserAsync(
-                        model.UserId,
-                        model.BlockReason,
-                        User.Identity.Name);
-
+                    await _userService.BlockUserAsync(model.UserId, model.BlockReason);
                     return RedirectToAction(nameof(Details), new { id = model.UserId });
                 }
 
@@ -87,10 +83,8 @@ namespace Movie_Market.Areas.Admin.Controllers
             }
             catch (InvalidOperationException ex)
             {
-
                 TempData["notification"] = ex.Message;
                 TempData["MessageType"] = "error";
-
                 return RedirectToAction(nameof(Details), new { id = model.UserId });
             }
             catch (UnauthorizedAccessException ex)
@@ -101,14 +95,14 @@ namespace Movie_Market.Areas.Admin.Controllers
             }
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UnblockUser(Guid userId)
         {
-            await _userService.UnblockUserAsync(userId, User.Identity.Name);
+            await _userService.UnblockUserAsync(userId);
             return RedirectToAction(nameof(Details), new { id = userId });
         }
+
 
 
         [HttpGet]

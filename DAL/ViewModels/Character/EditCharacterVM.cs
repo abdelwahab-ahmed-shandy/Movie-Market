@@ -13,7 +13,7 @@ namespace DAL.ViewModels.Character
         [Required]
         public string Name { get; set; } = null!;
 
-        public string? Description { get; set; }
+        public string? Description { get; set; } 
 
         [DataType(DataType.Upload)]
         public IFormFile? Img { get; set; }

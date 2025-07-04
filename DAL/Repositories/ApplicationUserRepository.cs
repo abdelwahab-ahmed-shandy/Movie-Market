@@ -53,6 +53,10 @@ namespace DAL.Repositories
             _context.Users.Remove(user);
         }
 
+        public async Task<int> GetTotalUsersAsync()
+        {
+            return await _context.Users.CountAsync();
+        }
 
     }
 }

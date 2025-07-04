@@ -8,7 +8,7 @@ namespace DAL.ViewModels.Payment
 {
     public class PaymentSuccessVM
     {
-        public Order Order { get; set; }
+        public DAL.Models.Order Order { get; set; }
         public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }
         public string PaymentMethod { get; set; } = "Credit Card";

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,16 +15,21 @@ namespace BLL.Services.Implementations
         private readonly IApplicationUserRepository _userRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UserService(IApplicationUserRepository userRepository,UserManager<ApplicationUser> userManager,
-                                RoleManager<IdentityRole<Guid>> roleManager)
+                                RoleManager<IdentityRole<Guid>> roleManager, IHttpContextAccessor httpContextAccessor)
         {
             _userRepository = userRepository;
             _userManager = userManager;
             _roleManager = roleManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-
+        private string GetCurrentUserEmail()
+        {
+            return _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value;
+        }
 
         public async Task<PaginatedList<UserIndexVM>> GetAllUsersAsync(int pageIndex = 1, string search = null)
         {
@@ -146,8 +152,6 @@ namespace BLL.Services.Implementations
             return PaginatedList<UserIndexVM>.Create(userVMs, pageIndex, pageSize);
         }
 
-
-
         public async Task<UserDetailsVM> GetUserDetailsAsync(Guid id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
@@ -175,15 +179,18 @@ namespace BLL.Services.Implementations
             };
         }
 
-        public async Task BlockUserAsync(Guid userId, string blockReason, string blockedBy)
+
+
+        public async Task BlockUserAsync(Guid userId, string blockReason)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
             if (user == null) return;
 
-            if (user.Email == blockedBy)
+            var currentEmail = GetCurrentUserEmail();
+            if (user.Email == currentEmail)
                 throw new InvalidOperationException("You cannot block yourself!");
 
-            var currentUser = await _userManager.FindByEmailAsync(blockedBy);
+            var currentUser = await _userManager.FindByEmailAsync(currentEmail);
             if (currentUser == null)
                 throw new UnauthorizedAccessException("Current user not found.");
 
@@ -203,8 +210,7 @@ namespace BLL.Services.Implementations
             await _userManager.UpdateAsync(user);
         }
 
-
-        public async Task UnblockUserAsync(Guid userId, string unblockedBy)
+        public async Task UnblockUserAsync(Guid userId)
         {
             var user = await _userRepository.GetByIdAsync(userId);
             if (user != null)

@@ -21,7 +21,7 @@ namespace BLL.Services.Implementations
         private readonly IGenericRepository<Special> _specialRepo;
         private readonly IGenericRepository<Order> _orderRepo;
 
-        //private readonly IGenericRepository<ApplicationUser> _userRepo;
+        private readonly IApplicationUserRepository _userRepo;
 
         public DashboardService(IGenericRepository<Movie> movieRepo,IGenericRepository<TvSeries> tvSeriesRepo,
             IGenericRepository<Cinema> cinemaRepo,
@@ -31,10 +31,8 @@ namespace BLL.Services.Implementations
             IGenericRepository<Season> seasonRepo,
             IGenericRepository<Subscriber> subscriberRepo,
             IGenericRepository<Special> specialRepo,
-            IGenericRepository<Order> orderRepo
-
-            //IGenericRepository<ApplicationUser> userRepo,
-            )
+            IGenericRepository<Order> orderRepo,
+            IApplicationUserRepository userRepo)
         {
             _movieRepo = movieRepo;
             _tvSeriesRepo = tvSeriesRepo;
@@ -46,6 +44,7 @@ namespace BLL.Services.Implementations
             _subscriberRepo = subscriberRepo;
             _specialRepo = specialRepo;
             _orderRepo = orderRepo;
+            _userRepo = userRepo;
         }
 
         #region Admin Methods
@@ -62,8 +61,8 @@ namespace BLL.Services.Implementations
                 TotalTvSeries = await GetTotalTvSeriesAsync(),
                 TotalOrders = await GetTotalOrdersAsync(),
                 RecentSubscriber = await GetTotalSubscriberAsync(5),
-                RecentOrders = await GetRecentOrdersAsync(5)
-                //TotalUsers = await GetTotalUsersAsync(),
+                RecentOrders = await GetRecentOrdersAsync(5),
+                TotalUsers = await GetTotalUsersAsync()
             };
         }
 
@@ -96,8 +95,8 @@ namespace BLL.Services.Implementations
                 .Take(count)
                 .ToListAsync();
 
-        //public async Task<int> GetTotalUsersAsync()
-        //    => await _userRepo.GetAll().CountAsync();
+        public async Task<int> GetTotalUsersAsync()
+            => await _userRepo.GetTotalUsersAsync();
 
         private async Task<List<Order>> GetRecentOrdersAsync(int count)
     => await _orderRepo.GetAll()

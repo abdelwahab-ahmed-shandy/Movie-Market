@@ -83,15 +83,15 @@ namespace Movie_Market
             #endregion
 
 
+
+            #region Permissions Policy
+
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.LoginPath = "/Identity/Account/Login";
                 options.LogoutPath = "/Identity/Account/Logout";
             });
-
-
-            #region Permissions Policy
 
             builder.Services.AddAuthorization(options =>
             {

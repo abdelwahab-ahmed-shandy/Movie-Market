@@ -8,13 +8,13 @@
 }
 
 <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-column flex-md-row justify-content-between align-items-center">
-        <h6 class="m-0 font-weight-bold text-primary">@userType Management</h6>
+    <div class="card-header py-3 d-flex flex-column flex-md-row justify-content-between align-items-center bg-primary text-white">
+        <h6 class="m-0 font-weight-bold">@userType Management</h6>
         <div class="mt-2 mt-md-0">
             <div class="btn-group" role="group">
-                <a asp-action="Admins" class="btn btn-outline-primary @(userType == "Admins" ? "active" : "")">Admins</a>
-                <a asp-action="SuperAdmins" class="btn btn-outline-primary @(userType == "Super Admins" ? "active" : "")">Super Admins</a>
-                <a asp-action="Customers" class="btn btn-outline-primary @(userType == "Customers" ? "active" : "")">Customers</a>
+                <a asp-action="Admins" class="btn btn-outline-light @(userType == "Admins" ? "active" : "")">Admins</a>
+                <a asp-action="SuperAdmins" class="btn btn-outline-light @(userType == "Super Admins" ? "active" : "")">Super Admins</a>
+                <a asp-action="Customers" class="btn btn-outline-light @(userType == "Customers" ? "active" : "")">Customers</a>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="col-md-6">
                 <form method="get" class="form-inline">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="Search by name or email"
+                        <input type="text" name="search" class="form-control border-primary" placeholder="Search by name or email"
                                value="@searchTerm" />
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary">
@@ -41,49 +41,51 @@
                 </form>
             </div>
             <div class="col-md-6 text-md-right mt-2 mt-md-0">
-                <span class="text-muted">Total @userType.ToLower(): @Model.TotalCount</span>
+                <span class="badge badge-primary p-2">Total @userType.ToLower(): @Model.TotalCount</span>
             </div>
         </div>
 
         <div class="table-responsive">
             <table class="table table-bordered table-hover" width="100%" cellspacing="0">
-                <thead class="thead-light">
+                <thead class="thead-dark">
                     <tr>
                         <th>
                             <a asp-action="@ViewContext.RouteData.Values["Action"]"
                                asp-route-sortOrder="@ViewData["NameSortParam"]"
-                               asp-route-search="@searchTerm">
+                               asp-route-search="@searchTerm"
+                               class="text-white">
                                 Name
                                 @if (ViewData["CurrentSort"]?.ToString() == "name_desc")
                                 {
-                                    <i class="fas fa-sort-down"></i>
+                                    <i class="fas fa-sort-down ml-1"></i>
                                 }
                                 else
                                 {
-                                    <i class="fas fa-sort-up"></i>
+                                    <i class="fas fa-sort-up ml-1"></i>
                                 }
                             </a>
                         </th>
-                        <th>Email</th>
-                        <th>Type</th>
-                        <th>Status</th>
+                        <th class="text-white">Email</th>
+                        <th class="text-white">Type</th>
+                        <th class="text-white">Status</th>
                         <th>
                             <a asp-action="@ViewContext.RouteData.Values["Action"]"
                                asp-route-sortOrder="@ViewData["DateSortParam"]"
-                               asp-route-search="@searchTerm">
+                               asp-route-search="@searchTerm"
+                               class="text-white">
                                 Registered
                                 @if (ViewData["CurrentSort"]?.ToString() == "date_desc")
                                 {
-                                    <i class="fas fa-sort-down"></i>
+                                    <i class="fas fa-sort-down ml-1"></i>
                                 }
                                 else
                                 {
-                                    <i class="fas fa-sort-up"></i>
+                                    <i class="fas fa-sort-up ml-1"></i>
                                 }
                             </a>
                         </th>
-                        <th>Last Login</th>
-                        <th class="text-center">Actions</th>
+                        <th class="text-white">Last Login</th>
+                        <th class="text-center text-white">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -91,35 +93,45 @@
                     {
                         @foreach (var user in Model)
                         {
-                            <tr>
+                            <tr class="hover-effect">
                                 <td>@user.FullName</td>
                                 <td>@user.Email</td>
                                 <td>
-                                    <span class="badge badge-@(user.UserType == "Admin" ? "warning" : user.UserType == "Super Admin" ? "danger" : "info")">
+                                    <span class="badge badge-pill @(user.UserType == "Admin" ? "bg-warning" : user.UserType == "Super Admin" ? "bg-danger" : "bg-info")">
                                         @user.UserType
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="badge badge-@(user.AccountStatus == "Active" ? "success" : "secondary")">
+                                    <span class="badge badge-pill @(user.AccountStatus == "Active" ? "bg-success" : "bg-secondary")">
                                         @user.AccountStatus
                                     </span>
                                 </td>
                                 <td>@user.RegistrationDate.ToString("d")</td>
                                 <td>@(user.LastLogin?.ToString("g") ?? "Never")</td>
                                 <td class="text-center">
-                                    <div class="btn-group" role="group">
+                                    <div class="btn-group btn-group-sm" role="group">
                                         <a asp-action="Details" asp-route-id="@user.Id"
-                                           class="btn btn-sm btn-info" title="Details">
+                                           class="btn btn-info" title="Details">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a asp-action="Edit" asp-route-id="@user.Id"
-                                           class="btn btn-sm btn-primary" title="Edit">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <button class="btn btn-sm btn-danger" title="Deactivate"
-                                                onclick="confirmDeactivate('@user.Id', '@user.FullName')">
-                                            <i class="fas fa-user-slash"></i>
-                                        </button>
+
+                                        @if (user.AccountStatus == "Active")
+                                        {
+                                            <button class="btn btn-danger" title="Block"
+                                                    onclick="confirmDeactivate('@user.Id', '@user.FullName')">
+                                                <i class="fas fa-user-slash"></i>
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <form asp-action="UnblockUser" asp-controller="User" method="post" style="display:inline;">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="userId" value="@user.Id" />
+                                                <button type="submit" class="btn btn-success" title="Unblock">
+                                                    <i class="fas fa-user-check"></i>
+                                                </button>
+                                            </form>
+                                        }
                                     </div>
                                 </td>
                             </tr>
@@ -128,7 +140,18 @@
                     else
                     {
                         <tr>
-                            <td colspan="7" class="text-center">No @userType.ToLower() found</td>
+                            <td colspan="7" class="text-center py-4">
+                                <div class="empty-state">
+                                    <i class="fas fa-users-slash fa-3x text-muted mb-3"></i>
+                                    <h5 class="text-muted">No @userType.ToLower() found</h5>
+                                    @if (!string.IsNullOrEmpty(searchTerm))
+                                    {
+                                        <a asp-action="@ViewContext.RouteData.Values["Action"]" class="btn btn-primary mt-2">
+                                            Clear Search
+                                        </a>
+                                    }
+                                </div>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -136,7 +159,7 @@
         </div>
 
         <!-- Pagination -->
-        <div class="row mt-3">
+        <div class="row mt-4">
             <div class="col-md-6">
                 <p class="text-muted">
                     Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalCount entries
@@ -249,21 +272,99 @@
     </div>
 </div>
 
+<form id="blockForm" asp-action="BlockUser" asp-controller="User" method="post" style="display:none;">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="UserId" />
+    <input type="hidden" name="BlockReason" />
+</form>
+
+@section Styles {
+    <style>
+        .card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            border-bottom: none;
+        }
+
+        .hover-effect:hover {
+            background-color: #f8f9fa;
+            transform: scale(1.005);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+
+        .badge {
+            padding: 0.5em 0.8em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .empty-state {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .btn-group .btn {
+            border-radius: 4px;
+            margin: 0 2px;
+        }
+
+        .form-control:focus {
+            border-color: #4e73df;
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            background-color: #4e73df !important;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .page-item.active .page-link {
+            background-color: #4e73df;
+            border-color: #4e73df;
+        }
+
+        .page-link {
+            color: #4e73df;
+        }
+    </style>
+}
+
 @section Scripts {
     <script>
         function confirmDeactivate(userId, userName) {
             Swal.fire({
-                title: 'Confirm Deactivation',
-                html: `Are you sure you want to deactivate <b>${userName}</b>?`,
+                title: 'Confirm Blocking',
+                html: `Are you sure you want to block <b>${userName}</b>?`,
                 icon: 'warning',
+                input: 'text',
+                inputLabel: 'Reason for blocking',
+                inputPlaceholder: 'Enter reason',
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You must provide a reason!';
+                    }
+                },
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, deactivate!'
+                confirmButtonText: 'Yes, block!',
+                backdrop: 'rgba(0,0,0,0.4)'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Add your deactivation logic here
-                    window.location.href = `@Url.Action("Deactivate", "Users")/${userId}`;
+                    const form = document.getElementById('blockForm');
+                    form.querySelector('input[name="UserId"]').value = userId;
+                    form.querySelector('input[name="BlockReason"]').value = result.value;
+                    form.submit();
                 }
             });
         }

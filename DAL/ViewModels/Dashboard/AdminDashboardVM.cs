@@ -11,7 +11,7 @@ namespace DAL.ViewModels.Dashboard
         public int TotalCinemas { get; set; }
         public int TotalTvSeries { get; set; }
         public int TotalOrders { get; set; }
-        public List<Order> RecentOrders { get; set; } = new List<Order>();
+        public List<DAL.Models.Order> RecentOrders { get; set; } = new List<DAL.Models.Order>();
         public List<MovieMart.Models.Subscriber> RecentSubscriber { get; set; } = new List<MovieMart.Models.Subscriber>();
     }
 }

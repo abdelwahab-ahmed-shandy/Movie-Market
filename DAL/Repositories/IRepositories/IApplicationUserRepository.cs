@@ -16,5 +16,7 @@ namespace DAL.Repositories.IRepositories
         Task Create(ApplicationUser user);
         Task Update(ApplicationUser user);
         void Delete(ApplicationUser user);
+
+        Task<int> GetTotalUsersAsync();
     }
 }

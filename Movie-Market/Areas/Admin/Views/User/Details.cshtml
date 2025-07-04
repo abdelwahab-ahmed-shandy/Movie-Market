@@ -10,16 +10,26 @@
         <div>
             @if (Model.AccountStatus == "Blocked")
             {
-                <form asp-action="UnblockUser" method="post">
-                    <input type="hidden" name="userId" value="@Model.Id" />
-                    <button type="submit" class="btn btn-success">Unblock User</button>
-                </form>
+            <button type="button" class="btn btn-success" onclick="confirmUnblock('@Model.Id')">
+                Unblock User
+            </button>
+            
+            <form id="unblockForm" asp-action="UnblockUser" method="post" style="display:none;">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="userId" value="@Model.Id" />
+            </form>
             }
             else
             {
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#blockModal">
-                    Block User
-                </button>
+            <button type="button" class="btn btn-danger" onclick="confirmBlock('@Model.Id', '@Model.FullName')">
+                Block User
+            </button>
+            
+            <form id="blockForm" asp-action="BlockUser" method="post" style="display:none;">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="UserId" value="@Model.Id" />
+                <input type="hidden" name="BlockReason" />
+            </form>
             }
         </div>
     </div>
@@ -128,22 +138,49 @@
     </div>
 </div>
 
-@* @section Scripts {
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var currentUserEmail = "@User.Identity.Name";
-        var userEmails = document.querySelectorAll('.user-email');
-
-        userEmails.forEach(function(emailElement) {
-            if (emailElement.textContent.trim() === currentUserEmail) {
-                var blockButton = document.querySelector('[data-target="#blockModal"]');
-                if (blockButton) {
-                    blockButton.disabled = true;
-                    blockButton.title = "You cannot block yourself";
+@section Scripts {
+    <script>
+        function confirmUnblock(userId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you really want to unblock this user?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Unblock!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('unblockForm').submit();
                 }
+            });
+        }
+
+        function confirmBlock(userId, userName) {
+    Swal.fire({
+        title: 'Confirm Blocking',
+        html: `Are you sure you want to block <b>${userName}</b>?`,
+        icon: 'warning',
+        input: 'text',
+        inputLabel: 'Reason for blocking',
+        inputPlaceholder: 'Enter reason',
+        inputValidator: (value) => {
+            if (!value) {
+                return 'You must provide a reason!';
             }
-        });
+        },
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, block!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = document.getElementById('blockForm');
+            form.querySelector('input[name="BlockReason"]').value = result.value;
+            form.submit();
+        }
     });
-</script>
-} *@
+}
+
+    </script>
+}

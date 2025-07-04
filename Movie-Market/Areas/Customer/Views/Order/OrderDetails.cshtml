@@ -84,7 +84,7 @@
                                 <h6>@item.Movie.Title</h6>
                                 <div class="movie-meta">
                                     <span class="cinema-name">
-                                        <i class="fas fa-map-marker-alt"></i> @item.Cinema
+                                        <i class="fas fa-map-marker-alt"></i> @item.Cinema.Name
                                     </span>
                                 </div>
                             </div>
@@ -107,22 +107,55 @@
         <!-- Order Actions -->
         <div class="order-actions">
             <a asp-action="CustomerOrders" class="btn-back">
+
                 <i class="fas fa-arrow-left me-2"></i> Back to Orders
             </a>
+            @Html.AntiForgeryToken()
 
             <div class="action-buttons">
                 @if (Model.Status == OrderStatus.Pending)
                 {
-                    <button type="button" class="btn-edit" data-bs-toggle="modal" data-bs-target="#editOrderModal">
-                        <i class="fas fa-pencil-alt me-2"></i> Edit Order
-                    </button>
-                    <button type="button" class="btn-cancel" onclick="confirmCancel()">
-                        <i class="fas fa-times me-2"></i> Cancel Order
-                    </button>
+                <button type="button" class="btn-edit" data-bs-toggle="modal" data-bs-target="#editOrderModal" 
+                        data-order-id="@Model.Id">
+                    <i class="fas fa-pencil-alt me-2"></i> Edit Order
+                </button>
+                
+                <!-- Edit Order Modal -->
+                <div class="modal fade" id="editOrderModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Order #<span id="modalOrderId"></span></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="editOrderContent">
+
+                                    <div class="text-center py-4">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="saveOrderChanges">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-cancel" onclick="confirmCancel('@Model.Id')" 
+                    @(Model.Status != OrderStatus.Pending ? "disabled" : "")>
+                    <i class="fas fa-times me-2"></i> Cancel Order
+                </button>
+
+
                 }
                 else if (Model.Status == OrderStatus.Completed)
                 {
-                    <button type="button" class="btn-reorder">
+                    <button type="button" class="btn-reorder" onclick="reorder('@Model.Id')">
                         <i class="fas fa-redo me-2"></i> Reorder
                     </button>
                 }
@@ -562,11 +595,30 @@
                 font-size: 1.25rem;
             }
         }
+
+        .btn-reorder:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        }
+
+        .fa-spinner {
+            animation: spin 1s linear infinite;
+        }
+        
+        @@keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
     </style>
 }
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @section Scripts {
     <script>
+
+
         document.addEventListener('DOMContentLoaded', function() {
             // Add data-label attributes for responsive table
             const headers = ['Movie', 'Price', 'Quantity', 'Subtotal'];
@@ -591,27 +643,204 @@
                     item.style.transform = 'translateY(0)';
                 }, 100);
             });
+
+            // Handle Edit Order Modal
+            const editOrderModal = document.getElementById('editOrderModal');
+            if (editOrderModal) {
+                editOrderModal.addEventListener('show.bs.modal', function(event) {
+                    const button = event.relatedTarget;
+                    const orderId = button.getAttribute('data-order-id');
+                    document.getElementById('modalOrderId').textContent = orderId;
+                    
+                    // Load edit form content
+                    fetch(`/Customer/Order/GetEditForm/${orderId}`)
+                        .then(response => response.text())
+                        .then(html => {
+                            document.getElementById('editOrderContent').innerHTML = html;
+                        })
+                        .catch(error => {
+                            console.error('Error loading edit form:', error);
+                            document.getElementById('editOrderContent').innerHTML = 
+                                '<div class="alert alert-danger">Error loading form</div>';
+                        });
+                });
+            }
+
+            // Handle Save Changes
+            document.getElementById('saveOrderChanges')?.addEventListener('click', saveOrderChanges);
         });
 
-        function confirmCancel() {
-            Swal.fire({
-                title: 'Cancel Order',
-                text: 'Are you sure you want to cancel this order?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#dc3545',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Yes, cancel it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Add cancel order logic here
-                    Swal.fire(
-                        'Cancelled!',
-                        'Your order has been cancelled.',
-                        'success'
-                    );
+        async function saveOrderChanges() {
+            const orderId = document.getElementById('modalOrderId').textContent;
+            
+            // Validate and collect data
+            const orderItems = [];
+            let isValid = true;
+
+            document.querySelectorAll('tr[data-itemid]').forEach(row => {
+                const input = row.querySelector('.quantity-input');
+                const value = parseInt(input.value);
+                
+                if (isNaN(value) || value < 1 || value > 10) {
+                    input.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    input.classList.remove('is-invalid');
+                    orderItems.push({
+                        Id: row.getAttribute('data-itemid'),
+                        Count: value
+                    });
                 }
             });
+
+            if (!isValid) {
+                toastr.error('Please enter valid quantities (1-10)');
+                return;
+            }
+
+            try {
+                // Show loading state
+                const saveBtn = document.getElementById('saveOrderChanges');
+                const originalHtml = saveBtn.innerHTML;
+                saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Saving...';
+                saveBtn.disabled = true;
+
+                const response = await fetch(`/Customer/Order/UpdateOrder/${orderId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: JSON.stringify({
+                        OrderItems: orderItems
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    toastr.success(result.message);
+                    $('#editOrderModal').modal('hide');
+                    setTimeout(() => window.location.reload(), 1500);
+                } else {
+                    toastr.error(result.message || 'Failed to update order');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                toastr.error('An error occurred while saving changes');
+            } finally {
+                const saveBtn = document.getElementById('saveOrderChanges');
+                if (saveBtn) {
+                    saveBtn.innerHTML = originalHtml;
+                    saveBtn.disabled = false;
+                }
+            }
         }
+
+        
+        async function reorder(orderId) {
+            try {
+                const btn = document.querySelector(`.btn-reorder`);
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Processing...';
+                btn.disabled = true;
+
+                const response = await fetch(`/Customer/Order/Reorder/${orderId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    toastr.success('New order created successfully!', 'Success');
+                    setTimeout(() => {
+                        window.location.href = `/Customer/Order/OrderDetails/${result.newOrderId}`;
+                    }, 1500);
+                } else {
+                    toastr.error(result.message || 'Failed to create reorder', 'Error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                toastr.error('An error occurred while processing your request', 'Error');
+            } finally {
+                const btn = document.querySelector(`.btn-reorder`);
+                if (btn) {
+                    btn.innerHTML = originalHtml;
+                    btn.disabled = false;
+                }
+            }
+        }
+
+        async function confirmCancel(orderId) {
+    try {
+        const cancelBtn = document.querySelector('.btn-cancel');
+        
+        // Check if button is disabled
+        if (cancelBtn.disabled) {
+            return;
+        }
+
+        // Disable button during processing
+        cancelBtn.disabled = true;
+        const originalHtml = cancelBtn.innerHTML;
+        cancelBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Processing...';
+
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, cancel it!'
+        });
+
+        if (result.isConfirmed) {
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            
+            const response = await fetch(`/Customer/Order/CancelOrder/${orderId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': token
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+                await Swal.fire(
+                    'Cancelled!',
+                    'Your order has been cancelled.',
+                    'success'
+                );
+                window.location.reload();
+            } else {
+                throw new Error(data.message || 'Failed to cancel order');
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        Swal.fire(
+            'Error!',
+            error.message || 'There was an error cancelling the order.',
+            'error'
+        );
+    } finally {
+        const cancelBtn = document.querySelector('.btn-cancel');
+        if (cancelBtn) {
+            cancelBtn.disabled = false;
+            cancelBtn.innerHTML = originalHtml;
+        }
+    }
+}    
     </script>
 }
