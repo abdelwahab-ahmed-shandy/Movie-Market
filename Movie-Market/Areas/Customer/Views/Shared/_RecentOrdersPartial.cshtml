@@ -1,0 +1,63 @@
+﻿@model List<Order>
+
+@if (Model.Any())
+{
+    <div class="orders-list">
+        @foreach (var order in Model)
+        {
+            <div class="order-item mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <strong>Order #@order.Id.ToString().Substring(0, 8)</strong>
+                    <span class="order-status status-@order.Status.ToString().ToLower()">
+                        @order.Status
+                    </span>
+                </div>
+                <small class="text-muted d-block mb-2">@order.OrderDate.ToString("MMM dd, yyyy")</small>
+
+                @foreach (var item in order.OrderItems.Take(2))
+                {
+                    <div class="d-flex align-items-center mb-2">
+                        <img src="@Url.Content("~/" + item.Movie.ImgUrl)"
+                             class="img-thumbnail me-2"
+                             style="width: 40px; height: 40px;">
+                        <div>
+                            <div>@item.Movie.Title</div>
+                            <small class="text-muted">@item.Count × $@item.Price.ToString("0.00")</small>
+                        </div>
+                    </div>
+                }
+
+                @if (order.OrderItems.Count > 2)
+                {
+                    <div class="text-center">
+                        <small class="text-muted">+ @(order.OrderItems.Count - 2) more items</small>
+                    </div>
+                }
+
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                    <a href="@Url.Action("OrderDetails", "Order", new { id = order.Id })"
+                       class="btn btn-sm btn-outline-primary">
+                        Details
+                    </a>
+                    <strong>$@order.OrderTotal.ToString("0.00")</strong>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="text-center mt-3">
+        <a href="@Url.Action("CustomerOrders", "Order")" class="btn btn-sm btn-primary">
+            View All Orders
+        </a>
+    </div>
+}
+else
+{
+    <div class="text-center py-4">
+        <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+        <p class="mb-3">You don't have any orders yet</p>
+        <a href="@Url.Action("Index", "Movie")" class="btn btn-outline-primary">
+            Browse Movies
+        </a>
+    </div>
+}

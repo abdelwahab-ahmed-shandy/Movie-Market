@@ -1,0 +1,41 @@
+﻿@model string
+
+@{
+    ViewData["Title"] = "Processing Your Order";
+}
+
+<div class="container text-center py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <i class="fas fa-spinner fa-spin fa-4x text-primary"></i>
+                    </div>
+                    <h2 class="mb-3">Processing Your Order</h2>
+                    <p class="lead">We're finalizing your purchase. This may take a few moments.</p>
+
+                    <div class="alert alert-info mt-4">
+                        <p>If this page doesn't update automatically, please refresh in a few seconds.</p>
+                        <p class="small">Reference: @Model</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="/Payment/Success?sessionId=@Model" class="btn btn-primary">
+                            <i class="fas fa-sync-alt me-2"></i> Refresh Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-refresh after 5 seconds
+        setTimeout(function() {
+            window.location.href = '/Payment/Success?sessionId=@Model';
+        }, 5000);
+    </script>
+}

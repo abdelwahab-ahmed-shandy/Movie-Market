@@ -1,4 +1,6 @@
 ﻿
+using System.Security.Claims;
+
 namespace Movie_Market.GloubalUsing
 {
     public abstract class BaseController : Controller
@@ -24,6 +26,11 @@ namespace Movie_Market.GloubalUsing
             }
         }
 
+        protected Guid? GetCurrentUserId()
+        {
+            var userId = User?.FindFirstValue(ClaimTypes.NameIdentifier);
+            return userId != null ? Guid.Parse(userId) : null;
+        }
         protected IActionResult NotFound(string? message = null)
         {
             Response.StatusCode = 404;

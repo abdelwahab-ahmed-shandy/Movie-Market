@@ -1,0 +1,166 @@
+﻿@model DAL.ViewModels.Payment.PaymentSuccessVM
+
+@{
+    ViewData["Title"] = "Payment Successful";
+    var firstItem = Model.Order.OrderItems.FirstOrDefault();
+    var showTime = firstItem?.Movie.CinemaMovies.FirstOrDefault()?.ShowTime;
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="card-title mb-0">
+                            <i class="fas fa-check-circle me-2"></i> Payment Successful
+                        </h3>
+                        <span class="badge bg-light text-dark fs-6">Order #@Model.Order.Id.ToString().Substring(0, 8)</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success d-flex align-items-center">
+                        <i class="fas fa-check-circle fa-2x me-3"></i>
+                        <div>
+                            <h4 class="alert-heading">Thank you, @Model.CustomerName!</h4>
+                            <p class="mb-0">Your payment of @Model.Order.OrderTotal.ToString("C") has been processed successfully.</p>
+                            @if (showTime.HasValue)
+                            {
+                                <p class="mb-0 mt-2"><i class="fas fa-calendar-alt me-2"></i>Show time: @showTime.Value.ToString("f")</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0"><i class="fas fa-receipt me-2"></i>Order Summary</h5>
+                                </div>
+                                <div class="card-body">
+                                    <dl class="row">
+                                        <dt class="col-sm-5">Order Date:</dt>
+                                        <dd class="col-sm-7">@Model.Order.OrderDate.ToString("f")</dd>
+
+                                        <dt class="col-sm-5">Status:</dt>
+                                        <dd class="col-sm-7">
+                                            <span class="badge bg-success">@Model.Order.Status</span>
+                                        </dd>
+
+                                        <dt class="col-sm-5">Payment Method:</dt>
+                                        <dd class="col-sm-7">@Model.PaymentMethod</dd>
+
+                                        <dt class="col-sm-5">Email:</dt>
+                                        <dd class="col-sm-7">@Model.CustomerEmail</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0"><i class="fas fa-ticket-alt me-2"></i>Tickets</h5>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Movie</th>
+                                                    <th>Cinema</th>
+                                                    <th class="text-end">Price</th>
+                                                    <th class="text-end">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.Order.OrderItems)
+                                                {
+                                                    var cinema = item.Movie.CinemaMovies.FirstOrDefault(cm => cm.MovieId == item.MovieId)?.Cinema;
+                                                    <tr>
+                                                        <td>
+                                                            <strong>@item.Movie.Title</strong><br>
+                                                            <small class="text-muted">@item.Count x @item.Price.ToString("C")</small>
+                                                        </td>
+                                                        <td>@cinema?.Name</td>
+                                                        <td class="text-end">@item.Price.ToString("C")</td>
+                                                        <td class="text-end">@((item.Price * item.Count).ToString("C"))</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                            <tfoot class="table-light">
+                                                <tr>
+                                                    <th colspan="3" class="text-end">Total:</th>
+                                                    <th class="text-end">@Model.Order.OrderTotal.ToString("C")</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-3 d-md-flex justify-content-md-between mt-4">
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary btn-lg">
+                            <i class="fas fa-home me-2"></i> Back to Home
+                        </a>
+                        <div class="d-flex gap-2">
+                            <a href="@Url.Action("OrderDetails", "Order", new { id = Model.Order.Id })" class="btn btn-primary btn-lg">
+                                <i class="fas fa-receipt me-2"></i> View Order
+                            </a>
+                            <button class="btn btn-success btn-lg" onclick="window.print()">
+                                <i class="fas fa-print me-2"></i> Print Receipt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <style>
+        .card {
+            border: none;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        
+        .card-header {
+            border-radius: 0 !important;
+            padding: 1rem 1.5rem;
+        }
+        
+        .table th {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .alert-success {
+            background-color: #d1e7dd;
+            border-color: #badbcc;
+        }
+        
+        .badge {
+            font-size: 0.85em;
+            font-weight: 500;
+            padding: 0.35em 0.65em;
+        }
+        
+    </style>
+
+
+@section Scripts {
+    <script>
+        // Add any client-side functionality if needed
+        document.addEventListener('DOMContentLoaded', function() {
+            // Example: Add animation to the success alert
+            const alert = document.querySelector('.alert-success');
+            alert.classList.add('animate__animated', 'animate__fadeIn');
+        });
+    </script>
+}

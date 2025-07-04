@@ -1,0 +1,410 @@
+﻿@model List<Order>
+
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<div class="orders-container">
+    <div class="orders-header">
+        <h1><i class="fas fa-history me-3"></i>Order History</h1>
+        <p class="text-muted">View and manage your previous orders</p>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="empty-orders">
+            <div class="empty-icon">
+                <i class="fas fa-ticket-alt"></i>
+            </div>
+            <h3>No Orders Yet</h3>
+            <p>You haven't placed any orders with us yet.</p>
+            <a asp-controller="Movie" asp-action="Index" class="btn btn-primary">
+                <i class="fas fa-film me-2"></i>Browse Movies
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="orders-list">
+            @foreach (var order in Model)
+            {
+                <div class="order-card">
+                    <div class="order-header">
+                        <div class="order-meta">
+                            <span class="order-number">Order #@order.Id</span>
+                            <span class="order-date">
+                                <i class="far fa-calendar-alt me-1"></i>
+                                @order.OrderDate.ToString("MMMM dd, yyyy")
+                            </span>
+                        </div>
+                        <div class="order-status @order.Status.ToString().ToLower()">
+                            @order.Status
+                        </div>
+                    </div>
+
+                    <div class="order-items">
+                        @foreach (var item in order.OrderItems)
+                        {
+                            <div class="order-item">
+                                <img src="@Url.Content("~/" + item.Movie.ImgUrl)"
+                                     class="movie-poster"
+                                     alt="@item.Movie.Title">
+                                <div class="item-details">
+                                    <h5>@item.Movie.Title</h5>
+                                    <div class="item-meta">
+                                        <span class="cinema">
+                                            <i class="fas fa-map-marker-alt"></i> @item.Cinema
+                                        </span>
+                                        
+                                    </div>
+                                </div>
+                                <div class="item-quantity">
+                                    <span>@item.Count x @item.Price.ToString("C")</span>
+                                </div>
+                                <div class="item-subtotal">
+                                    @((item.Price * item.Count).ToString("C"))
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="order-footer">
+                        <div class="order-total">
+                            <span>Total:</span>
+                            <span>@order.OrderTotal.ToString("C")</span>
+                        </div>
+                        <div class="order-actions">
+                            <a asp-action="OrderDetails" asp-route-id="@order.Id" class="btn-details">
+                                <i class="fas fa-eye me-2"></i>View Details
+                            </a>
+                            @if (order.Status == OrderStatus.Completed)
+                            {
+                                <button class="btn-reorder">
+                                    <i class="fas fa-redo me-2"></i>Reorder
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@section Styles {
+    <style>
+        /* Main Container */
+        .orders-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        .orders-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+            .orders-header h1 {
+                font-weight: 700;
+                color: #2c3e50;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .orders-header p {
+                font-size: 1.1rem;
+                color: #6c757d;
+            }
+
+        /* Empty State */
+        .empty-orders {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            color: #adb5bd;
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-orders h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .empty-orders p {
+            color: #6c757d;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Order Card */
+        .order-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        /* Order Header */
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .order-number {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .order-date {
+            color: #6c757d;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .order-status {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+            .order-status.pending {
+                background-color: #fff3cd;
+                color: #856404;
+            }
+
+            .order-status.completed {
+                background-color: #d1e7dd;
+                color: #0f5132;
+            }
+
+            .order-status.cancelled {
+                background-color: #f8d7da;
+                color: #842029;
+            }
+
+        /* Order Items */
+        .order-items {
+            padding: 1.25rem;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+            .order-item:last-child {
+                border-bottom: none;
+            }
+
+        .movie-poster {
+            width: 80px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+            .item-details h5 {
+                font-weight: 600;
+                color: #2c3e50;
+                margin-bottom: 0.5rem;
+            }
+
+        .item-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+
+            .item-meta i {
+                margin-right: 0.25rem;
+            }
+
+        .item-quantity {
+            min-width: 100px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .item-subtotal {
+            min-width: 100px;
+            text-align: right;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Order Footer */
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+
+        .order-total {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+            .order-total span:first-child {
+                color: #6c757d;
+            }
+
+            .order-total span:last-child {
+                color: #4e54c8;
+            }
+
+        .order-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-details {
+            padding: 0.75rem 1.5rem;
+            background-color: #4e54c8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+            .btn-details:hover {
+                background-color: #3a40b1;
+                transform: translateY(-2px);
+            }
+
+        .btn-reorder {
+            padding: 0.75rem 1.5rem;
+            background-color: #198754;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+            .btn-reorder:hover {
+                background-color: #157347;
+                transform: translateY(-2px);
+            }
+
+        /* Responsive Styles */
+        @@media (max-width: 992px) {
+            .order-item {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .item-details {
+                min-width: 100%;
+            }
+
+            .item-quantity,
+            .item-subtotal {
+                text-align: left;
+                min-width: auto;
+                flex: 1;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .order-footer {
+                flex-direction: column;
+                gap: 1.5rem;
+                align-items: stretch;
+            }
+
+            .order-actions {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .btn-details,
+            .btn-reorder {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .movie-poster {
+                width: 60px;
+                height: 90px;
+                margin-right: 1rem;
+            }
+
+            .item-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation for order cards
+            const orderCards = document.querySelectorAll('.order-card');
+            orderCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `all 0.3s ease ${index * 0.1}s`;
+
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
+}

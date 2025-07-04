@@ -65,6 +65,10 @@
             "Microsoft.AspNetCore.Mvc.Abstractions": {
               "target": "Package",
               "version": "[2.3.0, )"
+            },
+            "Stripe.net": {
+              "target": "Package",
+              "version": "[48.3.0, )"
             }
           },
           "imports": [
@@ -164,6 +168,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.5, )"
+            },
+            "Stripe.net": {
+              "target": "Package",
+              "version": "[48.3.0, )"
             }
           },
           "imports": [

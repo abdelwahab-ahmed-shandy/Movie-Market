@@ -1,0 +1,140 @@
+﻿@model DAL.ViewModels.Payment.PaymentCancelVM
+
+@{
+    ViewData["Title"] = "Payment Cancelled";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-lg">
+                <div class="card-header bg-warning text-dark">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="card-title mb-0">
+                            <i class="fas fa-exclamation-triangle me-2"></i> Payment Cancelled
+                        </h3>
+                        <span class="badge bg-light text-dark fs-6">Order Not Completed</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning d-flex align-items-center">
+                        <i class="fas fa-exclamation-circle fa-2x me-3"></i>
+                        <div>
+                            <h4 class="alert-heading">Payment Process Interrupted</h4>
+                            <p class="mb-0">@Model.Message</p>
+                            @if (!string.IsNullOrEmpty(Model.SessionId))
+                            {
+                                <p class="mb-0 mt-2">
+                                    <small class="text-muted">Reference: @Model.SessionId</small>
+                                </p>
+                            }
+                        </div>
+                    </div>
+
+                    @if (Model.CartItemsCount > 0)
+                    {
+                        <div class="cart-summary bg-light p-4 rounded mb-4">
+                            <h5 class="mb-3">
+                                <i class="fas fa-shopping-cart me-2"></i>Your Cart Items (@Model.CartItemsCount)
+                            </h5>
+                            <p>Your selected items are still saved in your cart.</p>
+                            <ul class="list-group list-group-flush">
+                                @foreach (var item in Model.SampleCartItems.Take(3))
+                                {
+                                    <li class="list-group-item bg-transparent">
+                                        <div class="d-flex justify-content-between">
+                                            <span>@item.MovieTitle</span>
+                                            <span>@item.Price.ToString("C")</span>
+                                        </div>
+                                    </li>
+                                }
+                                @if (Model.CartItemsCount > 3)
+                                {
+                                    <li class="list-group-item bg-transparent text-center">
+                                        + @(Model.CartItemsCount - 3) more items...
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    <div class="d-grid gap-3 d-md-flex justify-content-md-between mt-4">
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary btn-lg">
+                            <i class="fas fa-home me-2"></i> Back to Home
+                        </a>
+                        <div class="d-flex gap-2">
+                            @if (Model.CartItemsCount > 0)
+                            {
+                                <a href="@Url.Action("Index", "Cart")" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-shopping-cart me-2"></i> Return to Cart
+                                </a>
+                            }
+                            <a href="@Url.Action("Contact", "Home")" class="btn btn-outline-warning btn-lg">
+                                <i class="fas fa-question-circle me-2"></i> Need Help?
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .card {
+            border: none;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            border-radius: 0 !important;
+            padding: 1.25rem 1.75rem;
+        }
+
+        .alert-warning {
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+            border-left: 5px solid #ffc107;
+        }
+
+        .cart-summary {
+            border-left: 4px solid #ffc107;
+        }
+
+        .list-group-item {
+            padding: 0.75rem 1.25rem;
+            border-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .badge {
+            font-size: 0.85em;
+            font-weight: 500;
+            padding: 0.4em 0.7em;
+        }
+
+        .btn-lg {
+            padding: 0.5rem 1.5rem;
+            font-size: 1.05rem;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any client-side functionality here
+            console.log('Payment cancelled page loaded');
+
+            // Example: Track cancellation event
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'payment_cancelled', {
+                    'event_category': 'payment',
+                    'event_label': '@Model.SessionId'
+                });
+            }
+        });
+    </script>
+}

@@ -1,0 +1,597 @@
+﻿@model List<DAL.Models.Cart>
+
+@{
+    ViewData["Title"] = "Your Shopping Cart";
+}
+
+<div class="shopping-cart-container">
+    <div class="cart-header">
+        <h2 class="cart-title">
+            <i class="fas fa-shopping-cart me-2"></i> Your Movie Cart
+        </h2>
+        <a asp-action="Index" asp-controller="Movie" class="btn btn-outline-primary btn-add-more">
+            <i class="fas fa-plus me-1"></i> Add More Movies
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i> @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i> @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (Model.Any())
+    {
+        <div class="cart-items-container">
+            <div class="table-responsive">
+                <table class="cart-items-table">
+                    <thead>
+                        <tr>
+                            <th class="movie-column">Movie</th>
+                            <th class="cinema-column">Cinema</th>
+                            <th class="price-column">Price</th>
+                            <th class="quantity-column">Quantity</th>
+                            <th class="total-column">Total</th>
+                            <th class="actions-column">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="cart-item">
+                                <td class="movie-info">
+                                    <div class="movie-poster-container">
+                                        @if (!string.IsNullOrEmpty(item.Movie.ImgUrl))
+                                        {
+                                            <img src="@Url.Content("~/" + item.Movie.ImgUrl)"
+                                                 class="movie-poster"
+                                                 alt="@item.Movie.Title">
+                                        }
+                                        <div class="movie-details">
+                                            <h6 class="movie-title">@item.Movie.Title</h6>
+                                            <div class="movie-meta">
+                                                <span class="duration">
+                                                    <i class="fas fa-clock"></i> @item.Movie.Duration.ToString(@"h\:mm")
+                                                </span>
+                                                @if (item.Movie.Rating.HasValue)
+                                                {
+                                                    <span class="rating">
+                                                        <i class="fas fa-star"></i> @item.Movie.Rating?.ToString("0.0")
+                                                    </span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="cinema-info">
+                                    <div class="cinema-name">@item.Cinema.Name</div>
+                                    <div class="cinema-location">
+                                        <i class="fas fa-map-marker-alt"></i> @item.Cinema.Location
+                                    </div>
+                                </td>
+                                <td class="price-info">@item.Movie.Price.ToString("C")</td>
+                                <td class="quantity-controls">
+                                    <div class="quantity-selector">
+                                        <form asp-action="UpdateQuantity" method="post" style="display:inline">
+                                            <input type="hidden" name="cartId" value="@item.Id" />
+                                            <input type="hidden" name="change" value="-1" />
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="quantity-btn decrease">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </form>
+
+                                        <span class="quantity">@item.Count</span>
+
+                                        <form asp-action="UpdateQuantity" method="post" style="display:inline">
+                                            <input type="hidden" name="cartId" value="@item.Id" />
+                                            <input type="hidden" name="change" value="1" />
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="quantity-btn increase">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                                <td class="total-price">@((item.Movie.Price * item.Count).ToString("C"))</td>
+                                <td class="item-actions">
+
+                                    <form asp-area="Customer" asp-controller="Cart" asp-action="RemoveFromCart" method="post">
+                                        <input type="hidden" name="cartId" value="@item.Id" />
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn-remove">
+                                            <i class="fas fa-trash-alt"></i> Remove
+                                        </button>
+                                    </form>
+
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr class="cart-summary">
+                            <td colspan="4" class="summary-label">Subtotal:</td>
+                            <td colspan="2" class="summary-value">
+                                @Model.Sum(item => item.Movie.Price * item.Count).ToString("C")
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="cart-actions">
+                <form asp-action="ClearCart" method="post">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn-clear-cart"
+                            onclick="return confirm('Are you sure you want to clear your entire cart?')">
+                        <i class="fas fa-trash me-1"></i> Clear Cart
+                    </button>
+                </form>
+
+                <a asp-area="Customer" asp-controller="Payment" asp-action="Checkout"
+                   class="btn-checkout">
+                    <i class="fas fa-credit-card me-1"></i> Proceed to Checkout
+                </a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="empty-cart">
+            <div class="empty-cart-icon">
+                <i class="fas fa-ticket-alt"></i>
+            </div>
+            <h3 class="empty-cart-title">Your Movie Cart is Empty</h3>
+            <p class="empty-cart-message">Looks like you haven't added any movies to your cart yet.</p>
+            <a asp-action="Index" asp-controller="Movie" class="btn-browse-movies">
+                <i class="fas fa-film me-1"></i> Browse Movies
+            </a>
+        </div>
+    }
+</div>
+
+@section Styles {
+    <style>
+        /* Main Container */
+        .shopping-cart-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Cart Header */
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .cart-title {
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-add-more {
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-add-more:hover {
+                background-color: #f8f9fa;
+                transform: translateY(-2px);
+            }
+
+        /* Alerts */
+        .alert {
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Cart Items Container */
+        .cart-items-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        /* Table Styles */
+        .cart-items-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .cart-items-table thead {
+                background-color: #f8f9fa;
+            }
+
+            .cart-items-table th {
+                padding: 1rem;
+                text-align: left;
+                font-weight: 600;
+                color: #495057;
+                border-bottom: 2px solid #e9ecef;
+            }
+
+            .cart-items-table td {
+                padding: 1rem;
+                vertical-align: middle;
+                border-bottom: 1px solid #e9ecef;
+            }
+
+        /* Movie Column */
+        .movie-info {
+            width: 30%;
+        }
+
+        .movie-poster-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .movie-poster {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 1rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-details {
+            flex: 1;
+        }
+
+        .movie-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+
+        .movie-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+
+            .movie-meta i {
+                margin-right: 0.25rem;
+            }
+
+        /* Cinema Column */
+        .cinema-info {
+            width: 20%;
+        }
+
+        .cinema-name {
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+
+        .cinema-location {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+
+            .cinema-location i {
+                margin-right: 0.25rem;
+            }
+
+        /* Price Column */
+        .price-info {
+            width: 15%;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        /* Quantity Column */
+        .quantity-controls {
+            width: 15%;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            color: #495057;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+            .quantity-btn:hover {
+                background-color: #e9ecef;
+                color: #2c3e50;
+            }
+
+        .decrease {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-right: none;
+        }
+
+        .increase {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-left: none;
+        }
+
+        .quantity {
+            width: 40px;
+            text-align: center;
+            border-top: 1px solid #dee2e6;
+            border-bottom: 1px solid #dee2e6;
+            padding: 0.25rem;
+        }
+
+        /* Total Column */
+        .total-price {
+            width: 15%;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Actions Column */
+        .item-actions {
+            width: 15%;
+        }
+
+        .btn-remove {
+            color: #dc3545;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+            .btn-remove:hover {
+                background-color: #f8d7da;
+                color: #b02a37;
+            }
+
+        /* Cart Summary */
+        .cart-summary {
+            background-color: #f8f9fa;
+        }
+
+        .summary-label {
+            font-weight: 600;
+            text-align: right;
+            padding-right: 1rem;
+        }
+
+        .summary-value {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        /* Cart Actions */
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn-clear-cart {
+            background-color: #f8f9fa;
+            color: #dc3545;
+            border: 1px solid #dc3545;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+            .btn-clear-cart:hover {
+                background-color: #dc3545;
+                color: white;
+            }
+
+        .btn-checkout {
+            background-color: #4e54c8;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+            .btn-checkout:hover {
+                background-color: #3a40b1;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(78, 84, 200, 0.3);
+            }
+
+        /* Empty Cart */
+        .empty-cart {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .empty-cart-icon {
+            font-size: 4rem;
+            color: #adb5bd;
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-cart-title {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .empty-cart-message {
+            color: #6c757d;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn-browse-movies {
+            background-color: #4e54c8;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+            .btn-browse-movies:hover {
+                background-color: #3a40b1;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(78, 84, 200, 0.3);
+            }
+
+        /* Responsive Styles */
+        @@media (max-width: 992px) {
+            .movie-info {
+                width: 25%;
+            }
+
+            .cinema-info {
+                width: 25%;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .cart-items-table thead {
+                display: none;
+            }
+
+            .cart-items-table tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid #e9ecef;
+                border-radius: 8px;
+            }
+
+            .cart-items-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding: 0.75rem;
+                border-bottom: 1px solid #e9ecef;
+            }
+
+                .cart-items-table td::before {
+                    content: attr(data-label);
+                    font-weight: 600;
+                    color: #495057;
+                    margin-right: 1rem;
+                }
+
+            .movie-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .movie-poster-container {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            .quantity-selector {
+                justify-content: flex-end;
+            }
+
+            .cart-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-clear-cart,
+            .btn-checkout {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .cart-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .movie-poster {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add data-label attributes for responsive table
+            const headers = ['Movie', 'Cinema', 'Price', 'Quantity', 'Total', 'Actions'];
+            const cells = document.querySelectorAll('.cart-items-table td');
+
+            cells.forEach((cell, index) => {
+                const headerIndex = index % headers.length;
+                cell.setAttribute('data-label', headers[headerIndex]);
+            });
+
+            // Animation for cart items
+            const cartItems = document.querySelectorAll('.cart-item');
+            cartItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = `all 0.3s ease ${index * 0.1}s`;
+
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
+}

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    [PrimaryKey(nameof(MovieId), nameof(CinemaId), nameof(ApplicationUserId))]
-    public class Cart
+    //[PrimaryKey(nameof(MovieId), nameof(CinemaId), nameof(ApplicationUserId))]
+    public class Cart : BaseModel
     {
         public Guid ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }

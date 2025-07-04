@@ -1,91 +1,127 @@
 ﻿@model DAL.ViewModels.Movie.MovieDetailsVM
 
 @{
-    ViewData["Title"] = "Details Movie";
+    ViewData["Title"] = Model.Title;
 }
 
 <div class="container py-5">
     <div class="row g-5">
-        <div class="col-lg-5">
-            <div class="position-relative">
-                <img src="@Url.Content("~/" + Model.ImgUrl)"  class="img-fluid rounded-3 shadow-lg w-100" alt="@Model.Title" style="max-height: 600px; object-fit: cover;">
+        <!-- Movie Poster Column -->
+        <div class="col-lg-5 col-xxl-4">
+            <div class="movie-poster-container">
+                <img src="@Url.Content("~/" + Model.ImgUrl)" class="movie-poster" alt="@Model.Title">
+
                 @if (Model.Rating.HasValue)
                 {
-                    <div class="position-absolute top-0 end-0 bg-warning text-dark p-3 fw-bold rounded-bottom-left-3" style="box-shadow: 0 2px 5px rgba(0,0,0,0.2); border-radius: 80%;">
-                        @Model.Rating?.ToString("0.0")/10
-                        <i class="fas fa-star ms-1"></i>
+                    <div class="rating-badge">
+                        <span>@Model.Rating?.ToString("0.0")</span>
+                        <i class="fas fa-star"></i>
                     </div>
                 }
+
+                <div class="back-button-container">
+                    <a asp-action="Index" class="btn btn-outline-light">
+                        <i class="fas fa-arrow-left me-2"></i> Back to Movies
+                    </a>
+                </div>
             </div>
         </div>
 
-        <div class="col-lg-7">
-            <div class="movie-details">
-                <h1 class="display-4 fw-bold mb-4">@Model.Title</h1>
-                <p class="lead text-muted mb-4">@Model.Description</p>
-
-                <div class="movie-meta mb-5">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-tag me-3 text-primary" style="font-size: 1.2rem;"></i>
-                                <div>
-                                    <h6 class="mb-0 text-muted">Category</h6>
-                                    <p class="mb-0 fw-bold">@Model.CategoryName</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-dollar-sign me-3 text-success" style="font-size: 1.2rem;"></i>
-                                <div>
-                                    <h6 class="mb-0 text-muted">Price</h6>
-                                    <p class="mb-0 fw-bold">$@Model.Price</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-clock me-3 text-info" style="font-size: 1.2rem;"></i>
-                                <div>
-                                    <h6 class="mb-0 text-muted">Duration</h6>
-                                    <p class="mb-0 fw-bold">@Model.Duration.ToString(@"hh\:mm")</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-calendar-alt me-3 text-danger" style="font-size: 1.2rem;"></i>
-                                <div>
-                                    <h6 class="mb-0 text-muted">Release Year</h6>
-                                    <p class="mb-0 fw-bold">@Model.ReleaseYear</p>
-                                </div>
-                            </div>
-                        </div>
-                        @if (!string.IsNullOrEmpty(Model.Author))
-                        {
-                            <div class="col-md-6">
-                                <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-user me-3 text-secondary" style="font-size: 1.2rem;"></i>
-                                    <div>
-                                        <h6 class="mb-0 text-muted">Author</h6>
-                                        <p class="mb-0 fw-bold">@Model.Author</p>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
+        <!-- Movie Details Column -->
+        <div class="col-lg-7 col-xxl-8">
+            <div class="movie-details-card">
+                <!-- Movie Title and Description -->
+                <div class="movie-header">
+                    <h1 class="movie-title">@Model.Title</h1>
+                    <p class="movie-description">@Model.Description</p>
                 </div>
 
+                <!-- Movie Metadata -->
+                <div class="movie-meta-grid">
+                    <div class="meta-item">
+                        <div class="meta-icon bg-primary">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <div class="meta-content">
+                            <span class="meta-label">Category</span>
+                            <span class="meta-value">@Model.CategoryName</span>
+                        </div>
+                    </div>
+
+                    <div class="meta-item">
+                        <div class="meta-icon bg-success">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="meta-content">
+                            <span class="meta-label">Price</span>
+                            <span class="meta-value">$@Model.Price</span>
+                        </div>
+                    </div>
+
+                    <div class="meta-item">
+                        <div class="meta-icon bg-info">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="meta-content">
+                            <span class="meta-label">Duration</span>
+                            <span class="meta-value">@Model.Duration.ToString(@"hh\:mm")</span>
+                        </div>
+                    </div>
+
+                    <div class="meta-item">
+                        <div class="meta-icon bg-danger">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="meta-content">
+                            <span class="meta-label">Release Year</span>
+                            <span class="meta-value">@Model.ReleaseYear</span>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Author))
+                    {
+                        <div class="meta-item">
+                            <div class="meta-icon bg-secondary">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="meta-content">
+                                <span class="meta-label">Author</span>
+                                <span class="meta-value">@Model.Author</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- Characters Section -->
                 @if (Model.Characters.Any())
                 {
-                    <div class="mb-4">
-                        <h4 class="mb-3"><i class="fas fa-users me-2"></i> Characters</h4>
-                        <div class="d-flex flex-wrap gap-2">
+                    <div class="detail-section">
+                        <h5 class="section-title">
+                            <i class="fas fa-users me-2"></i>Characters
+                        </h5>
+                        <div class="tag-cloud">
                             @foreach (var character in Model.Characters)
                             {
-                                <span class="badge bg-primary bg-opacity-10 text-primary py-2 px-3 rounded-pill">
+                                <span class="tag">
                                     <i class="fas fa-user me-1"></i> @character
+                                </span>
+                            }
+                        </div>
+                    </div>
+                }
+
+                <!-- Specials Section -->
+                @if (Model.Specials.Any())
+                {
+                    <div class="detail-section">
+                        <h5 class="section-title">
+                            <i class="fas fa-star me-2"></i>Specials
+                        </h5>
+                        <div class="tag-cloud">
+                            @foreach (var special in Model.Specials)
+                            {
+                                <span class="tag">
+                                    <i class="fas fa-certificate me-1"></i> @special
                                 </span>
                             }
                         </div>
@@ -94,65 +130,464 @@
 
                 @if (Model.Cinemas.Any())
                 {
-                    <div class="mb-4">
-                        <h4 class="mb-3"><i class="fas fa-film me-2"></i> Available in Cinemas</h4>
-                        <div class="d-flex flex-wrap gap-2">
+                    <div class="detail-section">
+                        <h5 class="section-title">
+                            <i class="fas fa-film me-2"></i>Available in Cinemas
+                        </h5>
+
+                        <form asp-area="Customer" asp-controller="Cart" asp-action="AddToCart" method="post" class="booking-form needs-validation" novalidate>
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="movieId" value="@Model.Id" />
+
+                            <div class="row g-3 align-items-end">
+                                <div class="col-md-8">
+                                    <div class="form-floating">
+                                        <select name="cinemaId" class="form-select" id="cinemaSelect" required>
+                                            <option value="">Select a cinema</option>
+                                            @foreach (var cinema in Model.Cinemas)
+                                            {
+                                                <option value="@cinema.Id" data-location="@cinema.Location">
+                                                    @cinema.Name - @cinema.Location
+                                                </option>
+                                            }
+                                        </select>
+                                        <label for="cinemaSelect">Choose Cinema</label>
+                                        <div class="invalid-feedback">
+                                            Please select a cinema
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="quantity-selector">
+                                        <button type="button" class="quantity-btn" id="decrement-qty">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="number" name="quantity" value="1" min="1" max="10"
+                                               class="form-control quantity-input" aria-label="Quantity">
+                                        <button type="button" class="quantity-btn" id="increment-qty">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-add-to-cart w-100 py-3">
+                                        <i class="fas fa-ticket-alt me-2"></i> Book Tickets
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="cinema-list mt-4">
                             @foreach (var cinema in Model.Cinemas)
                             {
-                                <span class="badge bg-info bg-opacity-10 text-info py-2 px-3 rounded-pill">
-                                    <i class="fas fa-map-marker-alt me-1"></i> @cinema
-                                </span>
+                                <div class="cinema-card">
+                                    <div class="cinema-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="cinema-info">
+                                        <h6 class="cinema-name">@cinema.Name</h6>
+                                        <p class="cinema-location">@cinema.Location</p>
+                                    </div>
+                                </div>
                             }
                         </div>
                     </div>
                 }
-
-                @if (Model.Specials.Any())
+                else
                 {
-                    <div class="mb-4">
-                        <h4 class="mb-3"><i class="fas fa-star me-2"></i> Specials</h4>
-                        <div class="d-flex flex-wrap gap-2">
-                            @foreach (var special in Model.Specials)
-                            {
-                                <span class="badge bg-success bg-opacity-10 text-success py-2 px-3 rounded-pill">
-                                    <i class="fas fa-certificate me-1"></i> @special
-                                </span>
-                            }
-                        </div>
+                    <div class="alert alert-warning mt-4">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        This movie is not currently available in any cinemas.
                     </div>
                 }
-
-                <div class="mt-5">
-                    <a asp-action="Index" class="btn btn-outline-primary px-4 py-2 fw-bold">
-                        <i class="fas fa-arrow-left me-2"></i> Back to Movies
-                    </a>
-                </div>
             </div>
         </div>
     </div>
 </div>
 
-<style>
-    .movie-details {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        padding: 2rem;
-        border-radius: 10px;
-    }
-
-    .movie-meta {
-        background: rgba(248, 249, 250, 0.7);
-        padding: 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-    }
-
-    .badge {
-        transition: all 0.3s ease;
-    }
-
-        .badge:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+@section Styles {
+    <style>
+        /* Movie Poster Styles */
+        .movie-poster-container {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
         }
-</style>
+
+            .movie-poster-container:hover {
+                transform: translateY(-5px);
+            }
+
+        .movie-poster {
+            width: 100%;
+            height: 650px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Rating Badge */
+        .rating-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 193, 7, 0.95);
+            color: #212529;
+            padding: 8px 12px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+            .rating-badge i {
+                margin-left: 5px;
+                font-size: 1rem;
+            }
+
+        /* Back Button */
+        .back-button-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            text-align: center;
+        }
+
+        /* Movie Details Card */
+        .movie-details-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Movie Header */
+        .movie-header {
+            margin-bottom: 25px;
+        }
+
+        .movie-title {
+            font-weight: 800;
+            color: #212529;
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .movie-description {
+            color: #6c757d;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Meta Grid */
+        .movie-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+
+            .meta-item:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+        .meta-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: white;
+        }
+
+        .meta-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        .meta-value {
+            font-weight: 600;
+            color: #212529;
+        }
+
+        /* Detail Sections */
+        .detail-section {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+            .detail-section:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+
+        .section-title {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Tag Cloud */
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: #e9ecef;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #495057;
+            display: flex;
+            align-items: center;
+        }
+
+            .tag i {
+                margin-right: 5px;
+                font-size: 0.7rem;
+            }
+
+        /* Booking Form */
+        .booking-form {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        /* Quantity Selector */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #dee2e6;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+            .quantity-btn:first-child {
+                border-radius: 8px 0 0 8px;
+                border-right: none;
+            }
+
+            .quantity-btn:last-child {
+                border-radius: 0 8px 8px 0;
+                border-left: none;
+            }
+
+            .quantity-btn:hover {
+                background: #f1f1f1;
+            }
+
+        .quantity-input {
+            width: 50px;
+            height: 40px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            border-left: none;
+            border-right: none;
+        }
+
+        /* Add to Cart Button */
+        .btn-add-to-cart {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+        }
+
+            .btn-add-to-cart:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(78, 84, 200, 0.3);
+            }
+
+        /* Cinema List */
+        .cinema-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .cinema-card {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+            .cinema-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+        .cinema-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f0f5ff;
+            color: #4e54c8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .cinema-info {
+            flex-grow: 1;
+        }
+
+        .cinema-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: #212529;
+        }
+
+        .cinema-location {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        /* Responsive Adjustments */
+        @@media (max-width: 992px) {
+            .movie-poster {
+                height: 500px;
+            }
+
+            .movie-title {
+                font-size: 2rem;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .movie-meta-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .movie-poster {
+                height: 400px;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .movie-poster {
+                height: 350px;
+            }
+
+            .movie-title {
+                font-size: 1.8rem;
+            }
+
+            .movie-meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Quantity controls
+            const decrementBtn = document.getElementById('decrement-qty');
+            const incrementBtn = document.getElementById('increment-qty');
+            const quantityInput = document.querySelector('.quantity-input');
+
+            decrementBtn.addEventListener('click', () => {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                }
+            });
+
+            incrementBtn.addEventListener('click', () => {
+                let value = parseInt(quantityInput.value);
+                if (value < 10) {
+                    quantityInput.value = value + 1;
+                }
+            });
+
+            // Form validation
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+
+            // Cinema selection feedback
+            const cinemaSelect = document.getElementById('cinemaSelect');
+            if (cinemaSelect) {
+                cinemaSelect.addEventListener('change', function() {
+                    if (this.value) {
+                        this.classList.remove('is-invalid');
+                    }
+                });
+            }
+
+            // Smooth scroll to booking form when clicking on cinema cards
+            document.querySelectorAll('.cinema-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const cinemaId = this.getAttribute('data-cinema-id');
+                    if (cinemaId) {
+                        document.getElementById('cinemaSelect').value = cinemaId;
+                        document.querySelector('.booking-form').scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

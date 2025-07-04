@@ -1,7 +1,9 @@
 using AutoMapper;
+using BLL.Utilities;
 using DAL.Repositories;
 using DAL.Repositories.IRepositories;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Stripe;
 
 namespace Movie_Market
 {
@@ -51,7 +53,7 @@ namespace Movie_Market
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository > ();
 
-            builder.Services.AddScoped<IFileService, FileService>();
+            builder.Services.AddScoped<IFileService, BLL.Services.Implementations.FileService>();
             builder.Services.AddTransient<IEmailService, EmailService>();
             builder.Services.AddScoped<IAuditService, AuditService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -72,6 +74,8 @@ namespace Movie_Market
             builder.Services.AddScoped<ISubscriberService, SubscriberService>();
             builder.Services.AddScoped<INewsletterService, NewsletterService>();
             builder.Services.AddScoped<ICartService, CartService>();
+            builder.Services.AddScoped<IPaymentService, PaymentService>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
 
             builder.Services.AddMemoryCache();
 
@@ -166,8 +170,8 @@ namespace Movie_Market
 
 
             #region Confige Stripe Setting
-            //builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
-            //StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+            builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+            StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
             #endregion
 
 

@@ -1,4 +1,6 @@
 ﻿
+using MovieMart.Models;
+
 namespace DAL.ViewModels.Movie
 {
     public class MovieDetailsVM
@@ -18,7 +20,14 @@ namespace DAL.ViewModels.Movie
 
         // Additional details
         public IEnumerable<string> Characters { get; set; } = new List<string>();
-        public IEnumerable<string> Cinemas { get; set; } = new List<string>();
+        public IEnumerable<CinemaMovieDetailsVM> Cinemas { get; set; } = new List<CinemaMovieDetailsVM>();
         public IEnumerable<string> Specials { get; set; } = new List<string>();
+    }
+
+    public class CinemaMovieDetailsVM
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Location { get; set; }
     }
 }

@@ -1,0 +1,617 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<div class="order-details-container">
+    <div class="order-card">
+        <!-- Order Header -->
+        <div class="order-header">
+            <div class="order-title">
+                <i class="fas fa-receipt me-2"></i>
+                <h2>Order #@Model.Id</h2>
+            </div>
+            <div class="order-status-badge @Model.Status.ToString().ToLower()">
+                @Model.Status
+            </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <div class="summary-section">
+                <h5><i class="fas fa-info-circle me-2"></i>Order Information</h5>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">Order Date:</span>
+                        <span class="summary-value">@Model.OrderDate.ToString("f")</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Order Status:</span>
+                        <span class="summary-value status-badge @Model.Status.ToString().ToLower()">
+                            @Model.Status
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-section">
+                <h5><i class="fas fa-credit-card me-2"></i>Payment Information</h5>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">Payment Status:</span>
+                        <span class="summary-value @(Model.PaymentStatus ? "text-success" : "text-warning")">
+                            @(Model.PaymentStatus ? "Paid" : "Pending")
+                        </span>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.PaymentStripeId))
+                    {
+                        <div class="summary-item">
+                            <span class="summary-label">Transaction ID:</span>
+                            <span class="summary-value">@Model.PaymentStripeId</span>
+                        </div>
+                    }
+                    <div class="summary-item">
+                        <span class="summary-label">Total Amount:</span>
+                        <span class="summary-value text-primary fw-bold">
+                            @Model.OrderTotal.ToString("C")
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Items -->
+        <div class="order-items">
+            <h5><i class="fas fa-ticket-alt me-2"></i>Order Items</h5>
+
+            <div class="items-table">
+                <div class="table-header">
+                    <div class="header-item movie-header">Movie</div>
+                    <div class="header-item price-header">Price</div>
+                    <div class="header-item qty-header">Qty</div>
+                    <div class="header-item subtotal-header">Subtotal</div>
+                </div>
+
+                @foreach (var item in Model.OrderItems)
+                {
+                    <div class="table-row">
+                        <div class="row-item movie-info">
+                            <img src="@Url.Content("~/" + item.Movie.ImgUrl)"
+                                 class="movie-poster"
+                                 alt="@item.Movie.Title">
+                            <div class="movie-details">
+                                <h6>@item.Movie.Title</h6>
+                                <div class="movie-meta">
+                                    <span class="cinema-name">
+                                        <i class="fas fa-map-marker-alt"></i> @item.Cinema
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-item price-info">@item.Price.ToString("C")</div>
+                        <div class="row-item qty-info">@item.Count</div>
+                        <div class="row-item subtotal-info">@((item.Price * item.Count).ToString("C"))</div>
+                    </div>
+                }
+
+                <div class="table-footer">
+                    <div class="footer-item"></div>
+                    <div class="footer-item"></div>
+                    <div class="footer-item total-label">Total:</div>
+                    <div class="footer-item total-amount">@Model.OrderTotal.ToString("C")</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Actions -->
+        <div class="order-actions">
+            <a asp-action="CustomerOrders" class="btn-back">
+                <i class="fas fa-arrow-left me-2"></i> Back to Orders
+            </a>
+
+            <div class="action-buttons">
+                @if (Model.Status == OrderStatus.Pending)
+                {
+                    <button type="button" class="btn-edit" data-bs-toggle="modal" data-bs-target="#editOrderModal">
+                        <i class="fas fa-pencil-alt me-2"></i> Edit Order
+                    </button>
+                    <button type="button" class="btn-cancel" onclick="confirmCancel()">
+                        <i class="fas fa-times me-2"></i> Cancel Order
+                    </button>
+                }
+                else if (Model.Status == OrderStatus.Completed)
+                {
+                    <button type="button" class="btn-reorder">
+                        <i class="fas fa-redo me-2"></i> Reorder
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Order Modal -->
+<div class="modal fade" id="editOrderModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Order editing functionality will be implemented here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        /* Main Container */
+        .order-details-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Order Card */
+        .order-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* Order Header */
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            color: white;
+        }
+
+        .order-title {
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+
+            .order-title h2 {
+                font-weight: 700;
+                margin: 0;
+                font-size: 1.5rem;
+            }
+
+            .order-title i {
+                font-size: 1.5rem;
+            }
+
+        .order-status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .order-status-badge.pending {
+                background-color: #ffc107;
+                color: #212529;
+            }
+
+            .order-status-badge.completed {
+                background-color: #198754;
+                color: white;
+            }
+
+            .order-status-badge.cancelled {
+                background-color: #dc3545;
+                color: white;
+            }
+
+        /* Order Summary */
+        .order-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-section h5 {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .summary-section i {
+            margin-right: 0.5rem;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .summary-label {
+            font-weight: 500;
+            color: #6c757d;
+        }
+
+        .summary-value {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+            .status-badge.pending {
+                background-color: #fff3cd;
+                color: #856404;
+            }
+
+            .status-badge.completed {
+                background-color: #d1e7dd;
+                color: #0f5132;
+            }
+
+            .status-badge.cancelled {
+                background-color: #f8d7da;
+                color: #842029;
+            }
+
+        /* Order Items */
+        .order-items {
+            padding: 1.5rem;
+        }
+
+            .order-items h5 {
+                font-weight: 600;
+                color: #2c3e50;
+                margin-bottom: 1.5rem;
+                display: flex;
+                align-items: center;
+            }
+
+        .items-table {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: flex;
+            background-color: #f8f9fa;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            color: #495057;
+            border-bottom: 1px solid #eee;
+        }
+
+        .header-item {
+            padding: 0 0.5rem;
+        }
+
+        .movie-header {
+            flex: 3;
+        }
+
+        .price-header, .qty-header, .subtotal-header {
+            flex: 1;
+            text-align: center;
+        }
+
+        .subtotal-header {
+            text-align: right;
+        }
+
+        .table-row {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s;
+        }
+
+            .table-row:last-child {
+                border-bottom: none;
+            }
+
+            .table-row:hover {
+                background-color: #f8f9fa;
+            }
+
+        .row-item {
+            padding: 0 0.5rem;
+        }
+
+        .movie-info {
+            flex: 3;
+            display: flex;
+            align-items: center;
+        }
+
+        .movie-poster {
+            width: 60px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-details h6 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #2c3e50;
+        }
+
+        .movie-meta {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+
+        .cinema-name i {
+            margin-right: 0.25rem;
+        }
+
+        .price-info, .qty-info, .subtotal-info {
+            flex: 1;
+        }
+
+        .price-info, .subtotal-info {
+            font-weight: 500;
+        }
+
+        .qty-info {
+            text-align: center;
+        }
+
+        .subtotal-info {
+            text-align: right;
+        }
+
+        .table-footer {
+            display: flex;
+            background-color: #f8f9fa;
+            padding: 1rem;
+            font-weight: 600;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-item {
+            flex: 1;
+            padding: 0 0.5rem;
+        }
+
+        .total-label {
+            text-align: right;
+            color: #495057;
+        }
+
+        .total-amount {
+            text-align: right;
+            color: #4e54c8;
+        }
+
+        /* Order Actions */
+        .order-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+            background-color: #f8f9fa;
+        }
+
+        .btn-back {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.25rem;
+            background-color: #f8f9fa;
+            color: #495057;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+            .btn-back:hover {
+                background-color: #e9ecef;
+                color: #2c3e50;
+            }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-edit, .btn-cancel, .btn-reorder {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-edit {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+            .btn-edit:hover {
+                background-color: #ffca2c;
+                transform: translateY(-2px);
+            }
+
+        .btn-cancel {
+            background-color: #dc3545;
+            color: white;
+        }
+
+            .btn-cancel:hover {
+                background-color: #bb2d3b;
+                transform: translateY(-2px);
+            }
+
+        .btn-reorder {
+            background-color: #198754;
+            color: white;
+        }
+
+            .btn-reorder:hover {
+                background-color: #157347;
+                transform: translateY(-2px);
+            }
+
+        /* Responsive Styles */
+        @@media (max-width: 992px) {
+            .order-summary {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .table-header {
+                display: none;
+            }
+
+            .table-row {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.5rem;
+                gap: 1rem;
+            }
+
+            .row-item {
+                width: 100%;
+                padding: 0;
+                display: flex;
+                justify-content: space-between;
+            }
+
+                .row-item::before {
+                    content: attr(data-label);
+                    font-weight: 500;
+                    color: #6c757d;
+                    margin-right: 1rem;
+                }
+
+            .movie-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+                .movie-info::before {
+                    content: none;
+                }
+
+            .movie-poster {
+                width: 100%;
+                height: auto;
+                max-height: 200px;
+            }
+
+            .order-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .action-buttons {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .btn-back, .btn-edit, .btn-cancel, .btn-reorder {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .order-title h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add data-label attributes for responsive table
+            const headers = ['Movie', 'Price', 'Quantity', 'Subtotal'];
+            const rows = document.querySelectorAll('.table-row');
+
+            rows.forEach(row => {
+                const items = row.querySelectorAll('.row-item:not(.movie-info)');
+                items.forEach((item, index) => {
+                    item.setAttribute('data-label', headers[index]);
+                });
+            });
+
+            // Animation for order items
+            const orderItems = document.querySelectorAll('.table-row');
+            orderItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = `all 0.3s ease ${index * 0.1}s`;
+
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+
+        function confirmCancel() {
+            Swal.fire({
+                title: 'Cancel Order',
+                text: 'Are you sure you want to cancel this order?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, cancel it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Add cancel order logic here
+                    Swal.fire(
+                        'Cancelled!',
+                        'Your order has been cancelled.',
+                        'success'
+                    );
+                }
+            });
+        }
+    </script>
+}

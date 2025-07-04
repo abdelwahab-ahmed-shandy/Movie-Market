@@ -11,12 +11,11 @@ namespace BLL.Services.Interfaces
 {
     public interface ICartService
     {
-        void AddToCart(Movie movie, int quantity = 1);
         Task AddToCartAsync(Movie movie, int quantity = 1);
-        void RemoveFromCart(Guid movieId);
-        List<CartItem> GetCartItems();
+        Task AddToCartAsync(Guid movieId, Guid cinemaId, int quantity = 1);
+        Task<bool> RemoveFromCartAsync(Guid cartId);
         Task<List<CartItem>> GetCartItemsAsync();
-        decimal CalculateTotal();
-        string GetCurrentUserId();
+        Task<decimal> CalculateTotalAsync();
+        Task<bool> ClearCartAsync();
     }
 }

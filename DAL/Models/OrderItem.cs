@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    public class OrderItem
+    public class OrderItem : BaseModel
     {
         public Guid Id { get; set; }
 
@@ -19,5 +19,8 @@ namespace DAL.Models
 
         public int Count { get; set; }
         public double Price { get; set; }
+
+        [NotMapped] // This prevents EF from trying to map it to the database
+        public Cinema Cinema { get; set; }
     }
 }

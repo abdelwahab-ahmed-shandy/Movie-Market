@@ -494,8 +494,13 @@ namespace BLL.Services.Implementations
                 Rating = movie.Rating,
                 CategoryName = movie.Category.Name,
                 Characters = movie.CharacterMovies.Select(cm => cm.Character.Name),
-                Cinemas = movie.CinemaMovies.Select(cm => cm.Cinema.Name),
-                Specials = movie.MovieSpecials.Select(ms => ms.Special.Name)
+                Specials = movie.MovieSpecials.Select(ms => ms.Special.Name),
+                Cinemas = movie.CinemaMovies.Select(cm => new CinemaMovieDetailsVM
+                {
+                    Id = cm.Cinema.Id,
+                    Name = cm.Cinema.Name,
+                    Location = cm.Cinema.Location
+                })
             };
         }
 

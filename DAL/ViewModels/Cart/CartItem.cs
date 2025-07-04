@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.ViewModels.Cart
 {
-    public class CartItem
+    public class CartItem : BaseModel
     {
         public Guid MovieId { get; set; }
         public string Title { get; set; } = string.Empty;

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DAL.Models.Order>
+
+@{
+    ViewData["Title"] = "Cancel Requests";
+}
+
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">@ViewData["Title"]</h1>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="cancelRequestsTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Order Date</th>
+                            <th>Total</th>
+                            <th>Request Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@order.Id.ToString().Substring(0, 8)</td>
+                                <td>@order.ApplicationUser?.FirstName @order.ApplicationUser?.LastName</td>
+                                <td>@order.OrderDate.ToString("g")</td>
+                                <td>@order.OrderTotal.ToString("C")</td>
+                                <td>@order.UpdatedDateUtc?.ToString("g")</td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <form asp-action="ApproveCancel" method="post">
+                                            <input type="hidden" name="orderId" value="@order.Id" />
+                                            <button type="submit" class="btn btn-sm btn-success"
+                                                    onclick="return confirm('Approve this cancellation request?')">
+                                                <i class="fas fa-check"></i> Approve
+                                            </button>
+                                        </form>
+                                        <form asp-action="RejectCancel" method="post">
+                                            <input type="hidden" name="orderId" value="@order.Id" />
+                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Reject this cancellation request?')">
+                                                <i class="fas fa-times"></i> Reject
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm btn-info mt-1">
+                                        <i class="fas fa-eye"></i> Details
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
