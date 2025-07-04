@@ -1,13 +1,4 @@
-﻿using Castle.Core.Smtp;
-using DAL.Repositories.IRepositories;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BLL.Services.Implementations
 {
     public class SubscriberService : ISubscriberService
@@ -26,8 +17,6 @@ namespace BLL.Services.Implementations
             _sentEmailRepo = sentEmailRepo;
             _logger = logger;
         }
-
-
 
         public async Task<(bool Success, string Message)> SubscribeAsync(string email)
         {
@@ -61,6 +50,7 @@ namespace BLL.Services.Implementations
                 return (false, "An error occurred. Please try again.");
             }
         }
+
 
     }
 }

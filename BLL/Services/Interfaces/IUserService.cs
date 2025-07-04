@@ -1,10 +1,4 @@
-﻿using DAL.ViewModels.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BLL.Services.Interfaces
 {
     public interface IUserService
@@ -22,7 +16,7 @@ namespace BLL.Services.Interfaces
         Task UnblockUserAsync(Guid userId);
 
 
-        Task ChangeUserRoleAsync(ChangeUserRoleVM model, string changedBy);
+        Task ChangeUserRoleAsync(ChangeUserRoleVM model);
         Task<ChangeUserRoleVM> GetUserRoleInfoAsync(Guid userId);
     }
 }

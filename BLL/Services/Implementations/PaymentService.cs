@@ -31,7 +31,7 @@ namespace BLL.Services.Implementations
         }
 
 
-        public async Task<Session> CreateCheckoutSessionAsync(Guid userId, List<Cart> cartItems)
+        public async Task<Stripe.Checkout.Session> CreateCheckoutSessionAsync(Guid userId, List<Cart> cartItems)
         {
             if (cartItems == null || !cartItems.Any())
             {
@@ -43,7 +43,7 @@ namespace BLL.Services.Implementations
                 // Create order first to reserve the items
                 var order = await CreatePendingOrder(userId, cartItems);
 
-                var options = new SessionCreateOptions
+                var options = new Stripe.Checkout.SessionCreateOptions
                 {
                     PaymentMethodTypes = new List<string> { "card" },
                     LineItems = cartItems.Select(item => new SessionLineItemOptions
@@ -71,7 +71,7 @@ namespace BLL.Services.Implementations
                     }
                 };
 
-                var service = new SessionService();
+                var service = new Stripe.Checkout.SessionService();
                 var session = await service.CreateAsync(options);
 
                 // Update order with session ID
@@ -89,7 +89,6 @@ namespace BLL.Services.Implementations
                 throw;
             }
         }
-
 
         private async Task<Order> CreatePendingOrder(Guid userId, List<Cart> cartItems)
         {
@@ -123,12 +122,11 @@ namespace BLL.Services.Implementations
             return order;
         }
 
-
         public async Task<Order> HandlePaymentSuccess(string sessionId)
         {
             try
             {
-                var service = new SessionService();
+                var service = new Stripe.Checkout.SessionService();
                 var session = await service.GetAsync(sessionId);
 
                 // Get the order from database
@@ -197,7 +195,6 @@ namespace BLL.Services.Implementations
                 throw ex;
             }
         }
-
 
         public async Task<Order> ProcessOrder(Guid userId, string sessionId, string paymentIntentId)
         {

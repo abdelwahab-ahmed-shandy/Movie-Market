@@ -16,7 +16,7 @@ namespace DAL.ViewModels.Season
         public CurrentState CurrentState { get; set; }
         public string TvSeriesTitle { get; set; }
         public Guid TvSeriesId { get; set; }
-        public List<EpisodeAdminVM> Episodes { get; set; } = new List<EpisodeAdminVM>();
+        public List<EpisodeSeasonAdminVM> Episodes { get; set; } = new List<EpisodeSeasonAdminVM>();
         public DateTime CreatedDateUtc { get; set; }
         public string? CreatedBy { get; set; }
         public DateTime? LastModifiedDateUtc { get; set; }

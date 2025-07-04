@@ -1,12 +1,4 @@
-﻿using DAL.ViewModels.Season;
-using DAL.ViewModels.TvSeries;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BLL.Services.Implementations
 {
     public class SeasonService : ISeasonService
@@ -27,6 +19,7 @@ namespace BLL.Services.Implementations
         }
 
         #region Admin Methods
+
         public async Task<SeasonAdminListVM> GetAllSeasonsAsync(int page, int pageSize, Guid tvSeriesId, string? query = null)
         {
             var seasonsQuery = _seasonRepository.GetAllWithDeleted()
@@ -77,7 +70,7 @@ namespace BLL.Services.Implementations
             var episodesVM = season.Episodes
                 .Where(e => !e.IsDeleted)
                 .OrderBy(e => e.EpisodeNumber)
-                .Select(e => new EpisodeAdminVM
+                .Select(e => new EpisodeSeasonAdminVM
                 {
                     Id = e.Id,
                     Title = e.Title,
@@ -161,6 +154,7 @@ namespace BLL.Services.Implementations
             await _seasonRepository.RestoreAsync(id);
         }
         #endregion
+
 
         #region Customer Methods
         public async Task<List<SeasonCustomerVM>> GetAllSeasonAsync()
@@ -247,6 +241,7 @@ namespace BLL.Services.Implementations
         }
 
         #endregion
+
 
     }
 }

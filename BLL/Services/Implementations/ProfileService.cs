@@ -1,10 +1,4 @@
-﻿using DAL.ViewModels.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BLL.Services.Implementations
 {
     public class ProfileService : IProfileService
@@ -43,7 +37,6 @@ namespace BLL.Services.Implementations
             };
         }
 
-
         public async Task UpdateProfileAsync(ProfileVM model)
         {
             var user = await _userRepository.GetByIdAsync(model.Id);
@@ -75,7 +68,6 @@ namespace BLL.Services.Implementations
             await _userRepository.Update(user);
         }
 
-
         public async Task<IdentityResult> ChangePasswordAsync(Guid userId, ChangePasswordVM model)
         {
             if (model == null)
@@ -91,7 +83,6 @@ namespace BLL.Services.Implementations
 
             return await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
         }
-
 
         public async Task<IdentityResult> DeleteAccountAsync(Guid userId)
         {

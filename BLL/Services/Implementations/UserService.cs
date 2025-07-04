@@ -1,13 +1,4 @@
-﻿using DAL.ViewModels.User;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BLL.Services.Implementations
 {
     public class UserService : IUserService
@@ -26,11 +17,15 @@ namespace BLL.Services.Implementations
             _httpContextAccessor = httpContextAccessor;
         }
 
+        #region Private Method
         private string GetCurrentUserEmail()
         {
             return _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value;
         }
+        #endregion
 
+
+        #region View All Users And Details
         public async Task<PaginatedList<UserIndexVM>> GetAllUsersAsync(int pageIndex = 1, string search = null)
         {
             var users = _userRepository.GetAll(); // IQueryable
@@ -92,7 +87,6 @@ namespace BLL.Services.Implementations
             //  Paginate
             return await PaginatedList<UserIndexVM>.CreateAsync(userVMs, pageIndex, pageSize);
         }
-
 
         public async Task<PaginatedList<UserIndexVM>> GetSuperAdminsAsync(int pageIndex = 1, int pageSize = 10, string search = null)
         {
@@ -179,8 +173,10 @@ namespace BLL.Services.Implementations
             };
         }
 
+        #endregion
 
 
+        #region Block And UnBlock
         public async Task BlockUserAsync(Guid userId, string blockReason)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
@@ -222,15 +218,20 @@ namespace BLL.Services.Implementations
                 await _userRepository.Update(user);
             }
         }
+        #endregion
 
 
-        public async Task ChangeUserRoleAsync(ChangeUserRoleVM model, string changedBy)
+        #region Change Role
+
+        public async Task ChangeUserRoleAsync(ChangeUserRoleVM model)
         {
             var user = await _userManager.FindByIdAsync(model.UserId.ToString());
             if (user == null)
                 throw new ArgumentException("User not found");
 
-            var currentUser = await _userManager.FindByEmailAsync(changedBy);
+            var changedByEmail = GetCurrentUserEmail();
+
+            var currentUser = await _userManager.FindByEmailAsync(changedByEmail);
             if (currentUser == null || !(await _userManager.IsInRoleAsync(currentUser, "SuperAdmin")))
                 throw new UnauthorizedAccessException("Only SuperAdmins can change user roles");
 
@@ -266,6 +267,7 @@ namespace BLL.Services.Implementations
             };
         }
 
+        #endregion
 
     }
 }

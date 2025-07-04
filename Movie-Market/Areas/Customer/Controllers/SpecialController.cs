@@ -20,6 +20,7 @@ namespace Movie_Market.Areas.Customer.Controllers
             return View(specials);
         }
 
+
         public async Task<IActionResult> Details(Guid id)
         {
             var special = await _customerSpecialService.GetSpecialDetailsAsync(id);

@@ -1,14 +1,4 @@
-﻿using DAL.ViewModels.Season;
-using DAL.ViewModels.TvSeries;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-using MovieMart.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BLL.Services.Implementations
 {
     public class TvSeriesService : ITvSeriesService
@@ -30,6 +20,7 @@ namespace BLL.Services.Implementations
             _fileService = fileService;
             _logger = logger;
         }
+
 
         #region Admin Methods
         public async Task<TvSeriesAdminListVM> GetAllTvSeriesAsync(int page, int pageSize, string? query = null)
@@ -214,6 +205,7 @@ namespace BLL.Services.Implementations
         }
         #endregion
 
+
         #region Customer Methods
 
         public async Task<IEnumerable<TvSeriesCharacterVM>> GetAllTvSeriesAsync()
@@ -277,6 +269,7 @@ namespace BLL.Services.Implementations
         }
 
         #endregion
+
 
     }
 }

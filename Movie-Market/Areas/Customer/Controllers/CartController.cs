@@ -28,6 +28,7 @@ namespace Movie_Market.Areas.Customer.Controllers
             _cartRepo = cartRepo;
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddToCart(Guid movieId, Guid cinemaId, int quantity = 1)
@@ -218,7 +219,6 @@ namespace Movie_Market.Areas.Customer.Controllers
                 return Json(new { success = false, message = "An error occurred" });
             }
         }
-
 
 
     }

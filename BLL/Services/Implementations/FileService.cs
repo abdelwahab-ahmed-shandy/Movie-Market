@@ -48,6 +48,7 @@ namespace BLL.Services.Implementations
             return NormalizePath(Path.Combine(folderPath, fileName));
         }
 
+
         public async Task<List<string>> SaveFilesAsync(List<IFormFile> files, string folderPath)
         {
             var savedPaths = new List<string>();
@@ -68,16 +69,17 @@ namespace BLL.Services.Implementations
             return savedPaths;
         }
 
+
         public bool DeleteFile(string filePath)
         {
             if (string.IsNullOrEmpty(filePath))
                 return false;
 
             var fullPath = Path.Combine(_env.ContentRootPath, "wwwroot", filePath);
-            if (!File.Exists(fullPath))
+            if (!System.IO.File.Exists(fullPath))
                 return false;
 
-            File.Delete(fullPath);
+            System.IO.File.Delete(fullPath);
             return true;
         }
 

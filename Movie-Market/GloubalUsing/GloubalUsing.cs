@@ -20,12 +20,21 @@ global using DAL.Models;
 global using DAL.Context;
 global using MovieMart.Models;
 global using DAL.Repositories;
+global using DAL.ViewModels.User;
 global using DAL.ViewModels.Cart;
 global using DAL.ViewModels.Movie;
+global using DAL.ViewModels.Search;
+global using DAL.ViewModels.Season;
 global using DAL.ViewModels.Cinema;
+global using DAL.ViewModels.Episode;
+global using DAL.ViewModels.Payment;
 global using DAL.ViewModels.Special;
 global using BLL.Services.Interfaces;
 global using DAL.ViewModels.Category;
+global using DAL.ViewModels.TvSeries;
 global using DAL.ViewModels.Subscriber;
+global using DAL.ViewModels.Character;
 global using BLL.Services.Implementations;
 global using DAL.Repositories.IRepositories;
+
+

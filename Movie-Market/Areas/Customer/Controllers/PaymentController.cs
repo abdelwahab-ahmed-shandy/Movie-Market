@@ -28,7 +28,6 @@ namespace Movie_Market.Areas.Customer.Controllers
         }
 
 
-
         public async Task<IActionResult> Checkout()
         {
             var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
@@ -140,6 +139,7 @@ namespace Movie_Market.Areas.Customer.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+       
         public async Task<IActionResult> Cancel(string sessionId)
         {
             try
@@ -178,9 +178,6 @@ namespace Movie_Market.Areas.Customer.Controllers
                 return RedirectToAction("Index", "Cart");
             }
         }
-
-
-
 
     }
 }

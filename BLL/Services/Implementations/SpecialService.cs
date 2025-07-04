@@ -110,8 +110,8 @@ namespace BLL.Services.Implementations
                 Description = model.Description,
                 DiscountPercentage = model.DiscountPercentage,
                 StartDate = model.StartDate,
-                EndDate = model.EndDate,
-                CurrentState = model.IsActive ? CurrentState.Active : CurrentState.Inactive,
+                EndDate = model.EndDate,               
+                CurrentState = model.IsActive ? CurrentState.Active : CurrentState.Active,
                 CreatedBy = userName,
                 CreatedDateUtc = DateTime.UtcNow
             };
@@ -178,6 +178,7 @@ namespace BLL.Services.Implementations
             await _specialRepo.DeleteInDB(id);
         }
         #endregion
+
 
         #region Customer Methods
 
@@ -254,6 +255,7 @@ namespace BLL.Services.Implementations
 
 
         #endregion
+
 
     }
 }

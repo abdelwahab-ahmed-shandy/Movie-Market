@@ -18,6 +18,7 @@ namespace Movie_Market.Areas.Customer.Controllers
             _orderRepository = orderRepository;
         }
 
+
         #region Views
         public async Task<IActionResult> CustomerOrders()
         {
@@ -132,6 +133,7 @@ namespace Movie_Market.Areas.Customer.Controllers
             }
         }
 
+
         [HttpGet]
         public async Task<IActionResult> GetEditForm(Guid id)
         {
@@ -193,6 +195,7 @@ namespace Movie_Market.Areas.Customer.Controllers
             }
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Customer/Order/CancelOrder/{id}")]
@@ -228,6 +231,7 @@ namespace Movie_Market.Areas.Customer.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
+
 
     }
 }

@@ -104,7 +104,6 @@ namespace Movie_Market.Areas.Admin.Controllers
         }
 
 
-
         [HttpGet]
         public async Task<IActionResult> ChangeRole(Guid id)
         {
@@ -123,7 +122,7 @@ namespace Movie_Market.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    await _userService.ChangeUserRoleAsync(model, User.Identity.Name);
+                    await _userService.ChangeUserRoleAsync(model);
 
                     TempData["notification"] = "User role updated successfully";
                     TempData["MessageType"] = "Success";
@@ -140,6 +139,7 @@ namespace Movie_Market.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Details), new { id = model.UserId });
             }
         }
+
 
     }
 }

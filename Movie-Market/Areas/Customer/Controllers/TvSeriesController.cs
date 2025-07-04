@@ -34,6 +34,5 @@ namespace Movie_Market.Areas.Customer.Controllers
         }
 
 
-
     }
 }
