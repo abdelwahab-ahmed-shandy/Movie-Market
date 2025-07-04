@@ -14,23 +14,45 @@ namespace Movie_Market.Areas.Admin.Controllers
             _orderService = orderService;
         }
 
-        public async Task<IActionResult> AllOrders()
+        public async Task<IActionResult> AllOrders(int pageNumber = 1, string sortOrder = "date_desc", string searchString = "")
         {
-            var orders = await _orderService.GetAllOrdersAsync();
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["CurrentFilter"] = searchString;
+
+            // Add all sort parameters
+            ViewData["IdSortParm"] = sortOrder == "Id" ? "Id_desc" : "Id";
+            ViewData["CustomerSortParm"] = sortOrder == "Customer" ? "Customer_desc" : "Customer";
+            ViewData["DateSortParm"] = sortOrder == "date" ? "date_desc" : "date";
+            ViewData["TotalSortParm"] = sortOrder == "total" ? "total_desc" : "total";
+            ViewData["StatusSortParm"] = sortOrder == "Status" ? "Status_desc" : "Status";
+
+            var orders = await _orderService.GetAllOrdersAsync(pageNumber, sortOrder, searchString);
             return View(orders);
         }
 
-        public async Task<IActionResult> TrackOrders()
+        public async Task<IActionResult> TrackOrders(int pageNumber = 1, string sortOrder = "date_desc")
         {
-            var orders = await _orderService.GetShippedOrdersAsync();
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["DateSortParm"] = sortOrder == "date" ? "date_desc" : "date";
+            ViewData["UserSortParm"] = sortOrder == "user" ? "user_desc" : "user";
+            ViewData["TotalSortParm"] = sortOrder == "total" ? "total_desc" : "total";
+
+            var orders = await _orderService.GetShippedOrdersAsync(pageNumber, sortOrder);
             return View(orders);
         }
 
-        public async Task<IActionResult> CancelRequests()
+        public async Task<IActionResult> CancelRequests(int pageNumber = 1, string sortOrder = "date_desc")
         {
-            var orders = await _orderService.GetCancelRequestsAsync();
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["DateSortParm"] = sortOrder == "date" ? "date_desc" : "date";
+            ViewData["UserSortParm"] = sortOrder == "user" ? "user_desc" : "user";
+            ViewData["TotalSortParm"] = sortOrder == "total" ? "total_desc" : "total";
+
+            var orders = await _orderService.GetCancelRequestsAsync(pageNumber, sortOrder);
             return View(orders);
         }
+
+
 
         public async Task<IActionResult> Details(Guid id)
         {
