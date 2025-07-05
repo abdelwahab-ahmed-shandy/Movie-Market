@@ -2,28 +2,100 @@
 
 [![Visit My Blog](https://img.shields.io/badge/Visit%20My%20Blog-2962FF?style=flat-square&logo=hashnode&logoColor=white)](https://abdelwahabshandy.hashnode.dev)
 
-## 📖 Overview
+# 🎬 Movie Market - Cinema Ticketing Platform
 
-**Movie Market** is a full-featured web application built using **ASP.NET Core** and **Entity Framework Core**. It allows users to explore a curated library of movies, manage their personal watchlists, and enables administrators to control content and user access through a powerful admin dashboard.
+A full-featured web platform for cinema ticket booking built with ASP.NET Core MVC, following a clean architecture with layered separation (Presentation, BLL, DAL).
+This system supports a complete movie experience: cinema management, series and seasons, user and admin areas, and flexible service-based logic.
 
 ---
 
-## 🚀 Features
+## 📌 Project Overview
 
-- 🏷️ **Movie Management**  
-  Create, update, and remove movie entries with full CRUD support.
+Movie Market is a **cinema ticket booking system** that allows:
+- Users to browse and book movie tickets.
+- Admins to manage cinemas, movies, users, and more.
+- A global search functionality for both users and admins.
+- Managing both **Movies** and **TV Series**, where:
+  - Series contain Seasons.
+  - Seasons contain Episodes.
+- Each movie is linked with:
+  - **Category**
+  - **Characters**
+  - **Cinema & Showtimes**
 
-- 🔍 **Search & Filter**  
-  Quickly find movies by title, genre, or release year.
+---
 
-- 👥 **User Accounts**  
-  Users can register, log in, and maintain personal watchlists.
+## 🛠️ Tech Stack
 
-- 📊 **Admin Dashboard**  
-  Role-based access to manage movies, users, and content efficiently.
+- **ASP.NET Core MVC**
+- **Entity Framework Core** (Code First)
+- **SQL Server**
+- **Razor Views**
+- **Stripe Integration** for payment handling
+- **Session-based authentication & Authorization**
+- **Service and Repository Pattern**
+- **Pagination and File Upload Services**
 
-- 🌐 **(Upcoming)** External API Integration  
-  Integrate third-party APIs to auto-fetch movie data and updates.
+---
+
+## 🎯 Key Features
+
+### 🎟️ Ticket Booking & Cinema Management
+- Users can book tickets directly for available movies in specific cinemas.
+- Admins can manage:
+  -    Category
+  - 🎬 Movies
+  - 🏢 Cinemas
+  - 📺 Series, Seasons, and Episodes
+  - 🎭 Characters
+
+### 👥 User Management System
+- Complete CRUD operations for users.
+- Role-based access ( Customer / Admin / Customer).
+- Block & Unblock users with reason tracking.
+
+### 📂 File Upload System
+- Centralized **file and multiple files upload service** that handles all file-related operations across the app.
+
+### 🌐 Global Search
+- Available in both Admin and Customer areas.
+- Search across movies, series, episodes, and characters.
+
+### 📑 Pagination
+- Implemented using a reusable **PaginatedList** helper.
+- Applied to all listings: movies, users, cinemas, etc.
+
+---
+
+## 🔐 Authentication & Authorization
+
+### The system follows Area-based architecture:
+- /Admin/ → for Admin and Super Admin users.
+- /Customer/ → for regular users (Customers).
+- Login/Register is handled using ASP.NET Core Identity.
+
+### Role-based access using claims and policies:
+- Customer: Can manage their own account, upload a profile image, and delete their account.
+- Admin: Has access to admin area with limited privileges (cannot delete Super Admin, cannot view sensitive logs).
+- Super Admin: Has full control (manage movies, series, users, pricing, and block/unblock users).
+- ❗ Super Admin account cannot be deleted.
+
+### Access Restrictions:
+- Admin and Super Admin accounts cannot be deleted for security purposes.
+- Regular users (Customers) can fully manage their accounts including profile picture updates and account deletion.
+
+### Global Shared Pages:
+- Access Denied, Not Found, Error, Unauthorized, Maintenance, and Coming Soon pages are included to handle various states across the app.
+
+---
+
+## 🖼️ Series & Characters System
+
+- Movies and Series contain linked **Characters**.
+- Series consist of:
+  - Multiple **Seasons**
+  - Each season includes **Episodes**
+- All relationships managed through the admin interface.
 
 ---
 
@@ -32,7 +104,7 @@
 
 Movie-Market/
 │
-├── 📂 Presentation Layer         # Responsible for the User Interface (UI)
+├── 📂 Presentation Layer         # UI - MVC Areas (Admin, Customer, Identity)
 │ └── Areas/
 │ ├── Admin/                      # Admin Dashboard
 │ │ ├── Controllers/
@@ -57,7 +129,7 @@ Movie-Market/
 |      ├── Maintenance.cshtml
 |      └── ComingSoon.cshtml
 |
-├── 📂 Business Logic Layer (BLL) # Business logic (services, rules, transformations)
+├── 📂 Business Logic Layer (BLL) # Services & Logic (with interfaces)
 │ ├── Services/
 │ │ ├── Interfaces/                # Service interfaces
 │ │ └── Implementations/           # Service implementations
@@ -81,6 +153,9 @@ Movie-Market/
 └── Movie-Market.sln              # Solution File
 
 ```
+> 🔹 Each layer is modular and loosely coupled.  
+> 🔹 The project uses **Generic Services** and **Generic Repositories** for reusability and scalability.
+
 ---
 
 ## 🛠️ Technologies Used
@@ -91,8 +166,33 @@ Movie-Market/
 - **Identity Framework** – User authentication and authorization.
 - **Bootstrap** **Html** **CSS** **JS** – Responsive front-end UI.
                
+---
+
+## 🚀 Getting Started
+
+1. Clone the repository:
+```bash
+git clone https://github.com/abdelwahab-ahmed-shandy/Movie-Market
+```
+
+2. Apply Migrations and Seed Data:
+```bash
+Update-Database
+```
+
+3. Run the project using Visual Studio or:
+```bash
+dotnet run
+```
 
 ---
+
+## 🤝 Contribution
+
+Feel free to fork the project and submit PRs. Contributions are welcome!
+
+---
+
 ## 📞 Contact
 
 If you have any questions or feedback, feel free to reach out:
