@@ -45,6 +45,7 @@ Movie-Market/
 │ ├── Controllers/
 │ └── Views/
 │ └── GloubalUsing/              # GloubalUsing
+|     ├── BaseController.cs
 |     └── BaseController.cs
 │ └── Views/
 |    └── Shared/
@@ -61,7 +62,8 @@ Movie-Market/
 │ │ ├── Interfaces/                # Service interfaces
 │ │ └── Implementations/           # Service implementations
 │ ├── Utilities/                   # Any logic-specific helper functions
-|      └── PaginatedList.cs
+|      ├── PaginatedList.cs
+|      └──  StripeSettings.cs
 │ └── GloubalUsing/                # GloubalUsing
 │
 ├── 📂 Data Access Layer (DAL)    # Data access layer
