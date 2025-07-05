@@ -19,7 +19,7 @@ namespace Movie_Market.Areas.Customer.Controllers
             ViewBag.TvSeriesId = tvSeriesId;
             return View(seasons);
         }
-
+         
         public async Task<IActionResult> Details(Guid id)
         {
             var season = await _seasonService.GetSeasonWithDetailsAsync(id);

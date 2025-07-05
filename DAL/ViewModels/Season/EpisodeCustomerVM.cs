@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DAL.ViewModels.Season
 {
     public class EpisodeCustomerVM
-    {
+    { 
         public Guid Id { get; set; }
         public string Title { get; set; }
         public int EpisodeNumber { get; set; }

@@ -154,7 +154,7 @@ namespace BLL.Services.Implementations
             await _seasonRepository.RestoreAsync(id);
         }
         #endregion
-
+         
 
         #region Customer Methods
         public async Task<List<SeasonCustomerVM>> GetAllSeasonAsync()
@@ -202,15 +202,13 @@ namespace BLL.Services.Implementations
                         EpisodeNumber = e.EpisodeNumber,
                         Description = e.Description,
                         Duration = e.Duration,
-                        ThumbnailUrl = !string.IsNullOrEmpty(e.ThumbnailUrl)
-                            ? e.ThumbnailUrl
-                            : season.TvSeries.ImgUrl, 
+                        ThumbnailUrl = season.TvSeries.ImgUrl
                     }).ToList();
 
                 var tvSeriesVMs = new List<TvSeriesCharacterVM>
-        {
-            new TvSeriesCharacterVM
-            {
+                {
+                new TvSeriesCharacterVM
+                {
                 Id = season.TvSeries.Id,
                 Title = season.TvSeries.Title,
                 Description = season.TvSeries.Description,
@@ -218,8 +216,8 @@ namespace BLL.Services.Implementations
                 ImgUrl = season.TvSeries.ImgUrl,
                 ReleaseYear = season.TvSeries.ReleaseYear,
                 Rating = season.TvSeries.Rating
-            }
-        };
+                 }
+                };
 
                 return new SeasonDetailsVM
                 {

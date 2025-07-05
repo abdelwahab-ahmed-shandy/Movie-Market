@@ -10,12 +10,12 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-4">
-                    @{
-                        var firstEpisodeWithImage = Model.Episodes.FirstOrDefault(e => !string.IsNullOrEmpty(e.ThumbnailUrl));
-                    }
-                    @if (firstEpisodeWithImage != null)
+                    @if (!string.IsNullOrEmpty(Model.tvSeriesVMs.FirstOrDefault()?.ImgUrl))
                     {
-                        <img src="@Url.Content("~/" + firstEpisodeWithImage.ThumbnailUrl)" class="img-fluid rounded-3 shadow" alt="@Model.Title" style="max-height: 300px; object-fit: cover;">
+                        <img src="@Url.Content("~/" + Model.tvSeriesVMs.First().ImgUrl)"
+                             class="img-fluid rounded-3 shadow"
+                             alt="@Model.Title"
+                             style="max-height: 300px; object-fit: cover;">
                     }
                     else
                     {

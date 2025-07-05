@@ -31,6 +31,7 @@ namespace Movie_Market.GloubalUsing
             var userId = User?.FindFirstValue(ClaimTypes.NameIdentifier);
             return userId != null ? Guid.Parse(userId) : null;
         }
+       
         protected IActionResult NotFound(string? message = null)
         {
             Response.StatusCode = 404;
@@ -70,6 +71,7 @@ namespace Movie_Market.GloubalUsing
             Response.StatusCode = 202; 
             return View("~/Views/Shared/ComingSoon.cshtml");
         }
+
 
         [HttpGet]
         [AllowAnonymous]
