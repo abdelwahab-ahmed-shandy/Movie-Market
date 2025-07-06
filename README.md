@@ -7,6 +7,8 @@
 A full-featured web platform for cinema ticket booking built with ASP.NET Core MVC, following a clean architecture with layered separation (Presentation, BLL, DAL).
 This system supports a complete movie experience: cinema management, series and seasons, user and admin areas, and flexible service-based logic.
 
+🚀 This project was built completely from scratch, including the authentication and user management systems.
+
 ---
 
 ## 📌 Project Overview
@@ -31,7 +33,7 @@ Movie Market is a **cinema ticket booking system** that allows:
 - **Entity Framework Core** (Code First)
 - **SQL Server**
 - **Razor Views**
-- **Stripe Integration** for payment handling
+- **Stripe Integration** for payment handling, including redirect to Stripe payment gateway after booking
 - **Session-based authentication & Authorization**
 - **Service and Repository Pattern**
 - **Pagination and File Upload Services**
@@ -51,11 +53,11 @@ Movie Market is a **cinema ticket booking system** that allows:
 
 ### 👥 User Management System
 - Complete CRUD operations for users.
-- Role-based access ( Customer / Admin / Customer).
+- Role-based access (Customer / Admin / Super Admin)
 - Block & Unblock users with reason tracking.
 
 ### 📂 File Upload System
-- Centralized **file and multiple files upload service** that handles all file-related operations across the app.
+- Centralized upload service that handles both **single and multiple file uploads**, used across various parts of the application.
 
 ### 🌐 Global Search
 - Available in both Admin and Customer areas.
@@ -67,18 +69,26 @@ Movie Market is a **cinema ticket booking system** that allows:
 
 ---
 
-## 🔐 Authentication & Authorization
+### 🔐 Authentication & Authorization
 
 ### The system follows Area-based architecture:
 - /Admin/ → for Admin and Super Admin users.
 - /Customer/ → for regular users (Customers).
-- Login/Register is handled using ASP.NET Core Identity.
+
+### Custom Authentication System:
+- A **fully custom-built login, registration, password reset, and account management system** (without using ASP.NET Core Identity scaffolding).
+- Includes:
+  - Manual login and registration logic
+  - Password reset with email verification
+  - New password creation
+  - Edit account details
+  - View account information
+  - Full account deletion flow
 
 ### Role-based access using claims and policies:
-- Customer: Can manage their own account, upload a profile image, and delete their account.
-- Admin: Has access to admin area with limited privileges (cannot delete Super Admin, cannot view sensitive logs).
-- Super Admin: Has full control (manage movies, series, users, pricing, and block/unblock users).
-- ❗ Super Admin account cannot be deleted.
+- Regular users (Customers) can fully manage their accounts, including deleting them.
+- Admin and Super Admin accounts **cannot be deleted** for security and integrity.
+- Super Admin has full privileges and cannot be modified by other roles.
 
 ### Access Restrictions:
 - Admin and Super Admin accounts cannot be deleted for security purposes.
@@ -163,7 +173,7 @@ Movie-Market/
 - **ASP.NET Core MVC** – For structuring the application.
 - **Entity Framework Core** – For ORM and database operations.
 - **SQL Server** – Backend database.
-- **Identity Framework** – User authentication and authorization.
+- **Custom Authentication System** – Built manually without using Identity scaffolding, based on claims and role-based access.
 - **Bootstrap** **Html** **CSS** **JS** – Responsive front-end UI.
                
 ---
